@@ -72,16 +72,25 @@ void main() {
   Timer t = new Timer.periodic(new Duration(milliseconds: 10), (update) {
     gv.update();
     dozer.checkCollision();
+    dozer.update();
   });
 
-  if (t.isActive) {
-    print ("läuft");
-  }
+  // Initialize a stream for the KeyEvents:
+  window.onKeyDown.listen((KeyboardEvent e) {
+    // If the key is not set yet, set it with a timestamp.
+    //Left pressed
+    if (e.keyCode == 37) {
+      dozer.x -= 10;
+    }
+    // Right pressed
+    if (e.keyCode == 39) {
+      dozer.x += 10;
+    }
+  });
 
   //ID Generator
   int id = 1;
   Random r = Random();
-
 
   // Timer to add random elements
   new Timer.periodic(new Duration(milliseconds: 1000), (update) {
@@ -111,16 +120,14 @@ void push(LaneView l, Random r, id, Dot dozer) {
       querySelector("#"+e.id).style.visibility = "hidden";
       (t as Dot).value -= (e as Brick).value;
       (e as Brick).value = 0;
-      (t as Dot).update();
     });
     l.push(b);
   } else {
     Dot d = new Dot("dot$id",200,0,50,50,r.nextInt(20));
     dozer.addCollisionObject(d, (m.Element t, m.Element e) {
       querySelector("#"+e.id).style.visibility = "hidden";
-      (t as Dot).value -= (e as Dot).value;
+      (t as Dot).value += (e as Dot).value;
       (e as Dot).value = 0;
-      (t as Dot).update();
     });
     l.push(d);
   }
