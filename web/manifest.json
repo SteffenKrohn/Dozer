@@ -1,0 +1,19 @@
+{
+  "name": "dartmotion",
+  "short_name": "dartmotion",
+  "description": "A demonstration game to demonstrate device orientation using Dart.",
+  "lang": "en-US",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#ffffff",
+  "background_color": "#111111",
+  "icons": [
+    {
+      "src": "danger.png",
+      "type": "image/png",
+      "sizes": "640x612"
+    }
+  ]
+}
