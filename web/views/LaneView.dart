@@ -8,6 +8,8 @@ class LaneView {
 
   List<m.Element> elements = new List();
 
+  double laneSpeed = 2;
+
   LaneView(String s) {
     this.view = querySelector(s);
   }
@@ -21,7 +23,7 @@ class LaneView {
         return;
       }
       // TODO magic number LaneSpeed
-      e.move(0, 2);
+      e.move(0, laneSpeed.toInt());
       e.update();
     });
   }

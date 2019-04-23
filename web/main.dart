@@ -69,10 +69,25 @@ void main() {
   querySelector("#field").appendHtml(dozer.toString());
   dozer.update();
 
+  int time = 0;
+  double factor = 2;
+
   // Automatic Update
   Timer t = new Timer.periodic(new Duration(milliseconds: 20), (update) {
+    time += 20;
+    gv.speedUp();
     gv.update();
     dozer.checkCollision();
+    if (dozer.value <= 0) {
+      loseView(time ~/ 1000);
+      return;
+    }
+
+    factor += 0.01;
+    if ((time % (2000 / factor)).toInt() < 40) {
+      addElement(gv, time~/20, dozer);
+    }
+
     dozer.update();
   });
 
@@ -106,31 +121,8 @@ void main() {
     }
   });
 
-
-  //ID Generator
-  int id = 1;
-  Random r = Random();
-
-  // Timer to add random elements
-  new Timer.periodic(new Duration(milliseconds: 1000), (update) {
-
-    switch (r.nextInt(4)){
-      case 0:
-        push(gv.lane1, r, id, dozer);
-        break;
-      case 1:
-        push(gv.lane2, r, id, dozer);
-        break;
-      case 2:
-        push(gv.lane3, r, id, dozer);
-        break;
-      case 3:
-        push(gv.lane4, r, id, dozer);
-        break;
-    }
-    id++;
-  });
 }
+
 
 void push(LaneView l, Random r, id, Dozer dozer) {
   if (r.nextInt(4) < 3) {
@@ -139,7 +131,7 @@ void push(LaneView l, Random r, id, Dozer dozer) {
       t.removeCollisionObject(e);
       l.elements.remove(e);
       querySelector("#"+e.id).remove();
-      (t as Dot).value -= (e as Brick).value;
+      (t as Dozer).value -= (e as Brick).value;
       (e as Brick).value = 0;
     });
     l.push(b);
@@ -149,9 +141,33 @@ void push(LaneView l, Random r, id, Dozer dozer) {
       t.removeCollisionObject(e);
       l.elements.remove(e);
       querySelector("#"+e.id).remove();
-      (t as Dot).value += (e as Dot).value;
+      (t as Dozer).value += (e as Dot).value;
       (e as Dot).value = 0;
     });
     l.push(d);
   }
+}
+
+void addElement(GameView gv, int id, Dozer dozer) {
+  Random r = Random();
+
+  switch (r.nextInt(4)) {
+    case 0:
+      push(gv.lane1, r, id, dozer);
+      break;
+    case 1:
+      push(gv.lane2, r, id, dozer);
+      break;
+    case 2:
+      push(gv.lane3, r, id, dozer);
+      break;
+    case 3:
+      push(gv.lane4, r, id, dozer);
+      break;
+  }
+}
+
+void loseView(int seconds) {
+  querySelector("body").setInnerHtml("<h1>You lost with ${seconds} seconds!</h1>");
+  return;
 }

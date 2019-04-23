@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'LaneView.dart';
 
 class GameView {
@@ -9,14 +7,19 @@ class GameView {
   final lane3 = new LaneView('#lane3');
   final lane4 = new LaneView('#lane4');
 
-  GameView() {
-
-  }
+  GameView() {}
 
   void update() {
     lane1.update();
     lane2.update();
     lane3.update();
     lane4.update();
+  }
+
+  void speedUp() {
+    lane1.laneSpeed += 0.01;
+    lane2.laneSpeed += 0.01;
+    lane3.laneSpeed += 0.01;
+    lane4.laneSpeed += 0.01;
   }
 }
