@@ -21,8 +21,13 @@ abstract class HitBox {
 
   void checkCollision() {
     collisionObjects.forEach((e, f) {
-      if (CollisionChecker.collide(this, e)) {
-        f(this, e);
+      try {
+        if (CollisionChecker.collide(this, e)) {
+          f(this, e);
+        }
+      }
+      catch (TypeError) {
+        removeCollisionObject(e);
       }
     });
   }

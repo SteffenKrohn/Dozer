@@ -69,7 +69,7 @@ void main() {
   dozer.update();
 
   // Automatic Update
-  Timer t = new Timer.periodic(new Duration(milliseconds: 10), (update) {
+  Timer t = new Timer.periodic(new Duration(milliseconds: 20), (update) {
     gv.update();
     dozer.checkCollision();
     dozer.update();
@@ -135,8 +135,9 @@ void push(LaneView l, Random r, id, Dot dozer) {
   if (r.nextInt(4) < 3) {
     Brick b = new Brick("brick$id",0,0,50,l.view.getBoundingClientRect().width.toInt(),r.nextInt(20));
     dozer.addCollisionObject(b, (m.Element t, m.Element e) {
-      querySelector("#"+e.id).style.visibility = "hidden";
       t.removeCollisionObject(e);
+      l.elements.remove(e);
+      querySelector("#"+e.id).remove();
       (t as Dot).value -= (e as Brick).value;
       (e as Brick).value = 0;
     });
@@ -144,8 +145,9 @@ void push(LaneView l, Random r, id, Dot dozer) {
   } else {
     Dot d = new Dot("dot$id",0,0,50,50,r.nextInt(20));
     dozer.addCollisionObject(d, (m.Element t, m.Element e) {
-      querySelector("#"+e.id).style.visibility = "hidden";
       t.removeCollisionObject(e);
+      l.elements.remove(e);
+      querySelector("#"+e.id).remove();
       (t as Dot).value += (e as Dot).value;
       (e as Dot).value = 0;
     });

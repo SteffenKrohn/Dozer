@@ -14,6 +14,12 @@ class LaneView {
 
   void update() {
     elements.forEach((e) {
+      if (e.y > view.getBoundingClientRect().bottom) {
+        querySelector("#"+e.id).remove();
+        elements.remove(e);
+        e = null;
+        return;
+      }
       // TODO magic number LaneSpeed
       e.move(0, 2);
       e.update();
