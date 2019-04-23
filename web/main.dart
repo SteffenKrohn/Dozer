@@ -59,8 +59,8 @@ void main() {
   // Dozer
   Dot dozer = new Dot(
       "dozer",
-      querySelector("#field").getBoundingClientRect().bottom - 20,
-      800,
+      querySelector("#field").getBoundingClientRect().right ~/ 2,
+      querySelector("#field").getBoundingClientRect().bottom - 50,
       50,
       50,
       99
@@ -88,6 +88,18 @@ void main() {
     }
   });
 
+  window.onDeviceOrientation.listen((ev) {
+    // No device orientation
+    if (ev.alpha == null && ev.beta == null && ev.gamma == null) {
+    }
+    // Device orientation available
+    else {
+      int dx = ev.gamma.toInt();
+      dozer.move(dx, 0);
+    }
+  });
+
+
   //ID Generator
   int id = 1;
   Random r = Random();
@@ -95,7 +107,7 @@ void main() {
   // Timer to add random elements
   new Timer.periodic(new Duration(milliseconds: 1000), (update) {
 
-    switch (r.nextInt(3)){
+    switch (r.nextInt(4)){
       case 0:
         push(gv.lane1, r, id, dozer);
         break;
@@ -118,14 +130,16 @@ void push(LaneView l, Random r, id, Dot dozer) {
     Brick b = new Brick("brick$id",0,0,50,l.view.getBoundingClientRect().width.toInt(),r.nextInt(20));
     dozer.addCollisionObject(b, (m.Element t, m.Element e) {
       querySelector("#"+e.id).style.visibility = "hidden";
+      t.removeCollisionObject(e);
       (t as Dot).value -= (e as Brick).value;
       (e as Brick).value = 0;
     });
     l.push(b);
   } else {
-    Dot d = new Dot("dot$id",200,0,50,50,r.nextInt(20));
+    Dot d = new Dot("dot$id",0,0,50,50,r.nextInt(20));
     dozer.addCollisionObject(d, (m.Element t, m.Element e) {
       querySelector("#"+e.id).style.visibility = "hidden";
+      t.removeCollisionObject(e);
       (t as Dot).value += (e as Dot).value;
       (e as Dot).value = 0;
     });
