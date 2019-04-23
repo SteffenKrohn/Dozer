@@ -95,6 +95,12 @@ void main() {
     // Device orientation available
     else {
       int dx = ev.gamma.toInt();
+      if (querySelector("#dozer").getBoundingClientRect().left + dx < 0) {
+        dx = querySelector("#dozer").getBoundingClientRect().left * -1;
+      }
+      if (dozer.x + dx + dozer.width > querySelector("#field").getBoundingClientRect().right){
+        dx = querySelector("#field").getBoundingClientRect().right - querySelector("#dozer").getBoundingClientRect().right;
+      }
       dozer.move(dx, 0);
     }
   });
