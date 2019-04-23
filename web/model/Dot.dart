@@ -1,8 +1,8 @@
 import 'dart:html';
 
-import 'Element.dart' as m;
+import 'Element.dart' as elem;
 
-class Dot extends m.Element {
+class Dot extends elem.Element {
 
   int value;
 
@@ -16,10 +16,11 @@ class Dot extends m.Element {
     this.value = value;
   }
 
-  void update() {
+  //wird bei Dot nicht gebraucht
+  /*void update() {
     super.update();
     querySelector('#'+this.id).text = this.value.toString();
-  }
+  }*/
 
   String toString() {
     return "<div class='element dot' id=${this.id}> ${this.value.toString()} </div>";

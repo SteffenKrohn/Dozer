@@ -8,12 +8,13 @@ import 'model/Brick.dart';
 
 import 'MotionView.dart';
 import 'model/Dot.dart';
+import 'model/Dozer.dart';
 import 'views/GameView.dart';
 import 'views/LaneView.dart';
-import 'model/Element.dart' as m;
+import 'model/Element.dart' as elem;
 
 void main() {
-
+/*
   new pwa.Client(); // This makes this game offline playable in your browser using service workers
 
   final qr = querySelector('#qr');       // Html element that shows the QR code of the URL.
@@ -29,7 +30,7 @@ void main() {
 
   view.update(area, ball); // Initial update of the game state
 
-  /*
+
   // Device orientation event handler.
   //
   window.onDeviceOrientation.listen((ev) {
@@ -57,7 +58,7 @@ void main() {
   GameView gv = new GameView();
 
   // Dozer
-  Dot dozer = new Dot(
+  Dozer dozer = new Dozer(
       "dozer",
       querySelector("#field").getBoundingClientRect().right ~/ 2,
       querySelector("#field").getBoundingClientRect().bottom - 50,
@@ -98,10 +99,10 @@ void main() {
       if (querySelector("#dozer").getBoundingClientRect().left + dx < 0) {
         dx = querySelector("#dozer").getBoundingClientRect().left * -1;
       }
-      if (dozer.x + dx + dozer.width > querySelector("#field").getBoundingClientRect().right){
+      if (dozer.x + dx + dozer.width > querySelector("#field").getBoundingClientRect().right) {
         dx = querySelector("#field").getBoundingClientRect().right - querySelector("#dozer").getBoundingClientRect().right;
       }
-      dozer.move(dx, 0);
+      dozer.setDerivation(dx);
     }
   });
 
@@ -131,10 +132,10 @@ void main() {
   });
 }
 
-void push(LaneView l, Random r, id, Dot dozer) {
+void push(LaneView l, Random r, id, Dozer dozer) {
   if (r.nextInt(4) < 3) {
     Brick b = new Brick("brick$id",0,0,50,l.view.getBoundingClientRect().width.toInt(),r.nextInt(20));
-    dozer.addCollisionObject(b, (m.Element t, m.Element e) {
+    dozer.addCollisionObject(b, (elem.Element t, elem.Element e) {
       t.removeCollisionObject(e);
       l.elements.remove(e);
       querySelector("#"+e.id).remove();
@@ -144,7 +145,7 @@ void push(LaneView l, Random r, id, Dot dozer) {
     l.push(b);
   } else {
     Dot d = new Dot("dot$id",0,0,50,50,r.nextInt(20));
-    dozer.addCollisionObject(d, (m.Element t, m.Element e) {
+    dozer.addCollisionObject(d, (elem.Element t, elem.Element e) {
       t.removeCollisionObject(e);
       l.elements.remove(e);
       querySelector("#"+e.id).remove();
