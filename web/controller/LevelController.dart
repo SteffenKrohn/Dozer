@@ -21,7 +21,7 @@ class LevelController {
     lc._gameController = gc;
 
     // TODO Provisional
-    lc._level = new Level(lc, 1, 100, 50, 100, 3);
+    lc._level = new Level(lc, 1, 100, 10, 50, 4);
 
     lc._levelView = new LevelView(lc, lc._level);
 
@@ -35,12 +35,18 @@ class LevelController {
     Timer t;
     // Start the periodic update of the game elements with 50hz
     t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ GameController.framerate), (update) {
-      this._level.changeTimeLimit(-1000 ~/ GameController.framerate);
+      this._level.changeTimeLimit(-1000 / GameController.framerate / 1000);
+
+      if (this._level.getTimeLimit() <= 0) {
+        this.stop(t);
+        return;
+      }
+
       this._levelView.update();
 
       // TODO smart?
       this._level.getDozer().checkCollision();
-      if (this._level.getDozer().score <= 0) {
+      if (this._level.getScore() <= 0 || this._level.getDozer().score >= _level.getTargetScoree()) {
         this.stop(t);
         return;
       }
