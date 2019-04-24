@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+
+    background-color: rgb(75, 75, 75);
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    background-position: center center;
+}
+
+h1 {
+    margin: 30pt;
+    padding: 0pt;
+    font-size: 3em;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(50, 50, 50);
+    text-shadow: 0px 1px 5px rgba(200, 200, 200, 0.7);
+}
+
+#lane {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 0px solid black;
+}
+
+.element {
+    position: fixed;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.dozer {
+    width: 50px;
+    height: 50px;
+    color: white;
+    background-color: green;
+    border-radius: 50%;
+}
+
+.brick {
+    margin-left: 0.5%;
+    width: 24%;
+    height: 10%;
+    background-color: aquamarine;
+    border: 0px solid black;
+}
+
+.dot {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+}

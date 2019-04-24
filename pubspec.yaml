@@ -1,0 +1,16 @@
+name: dartmotion
+description: A demonstration game to demonstrate device orientation using Dart.
+version: 0.3.0
+homepage: https://github.com/nkratzke/dartmotion
+author: Nane Kratzke <nane.kratzke@th-luebeck.de>
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+dependencies:
+  pwa: '>=0.1.2'
+
+dev_dependencies:
+  build_runner: ^1.1.2
+  build_test: ^0.10.3
+  build_web_compilers: ^1.0.0
