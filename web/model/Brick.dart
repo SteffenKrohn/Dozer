@@ -14,12 +14,10 @@ class Brick extends m.Element {
   /**
    * Constructs a new Brick with all necessary information
    */
-  Brick(String id, int x, int y, int height, int width, int value) {
+  Brick(String id, int x, int y, int value) {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.height = height;
-    this.width = width;
     this.value = value;
   }
 

@@ -1,28 +1,38 @@
-
-import 'dart:html';
+import 'dart:html' as html;
 
 import '../widgets/Hitbox.dart';
 
 abstract class Element extends HitBox {
 
+  // TODO should all be private, but results in many getters and setter.
   String id;
+  html.Element _view;
 
-  int x;
-  int y;
+  /** The current movement of the element for the next view update */
+  int dx = 0;
+  int dy = 0;
 
-  int height;
-  int width;
+  int x = 0;
+  int y = 0;
 
   void move(int dx, int dy) {
-    this.x += dx;
-    this.y += dy;
+    this.dx = dx;
+    this.dy = dy;
   }
 
   void update() {
-    querySelector('#'+this.id).style.width = "${this.width}px";
-    querySelector('#'+this.id).style.height = "${this.height}px";
-    querySelector('#'+this.id).style.top = "${this.y}px";
-    querySelector('#'+this.id).style.left = "${this.x}px";
+    this.x += this.dx;
+    this.y += this.dy;
+    this._view.style.left = "${this.x}px";
+    this._view.style.top = "${this.y}px";
+  }
+
+  html.Element getView() {
+    return this._view;
+  }
+
+  void created() {
+    this._view = html.querySelector("#" + this.id);
   }
 
   String toString();

@@ -1,4 +1,4 @@
-import 'controllers/GameController.dart';
+import 'controller/GameController.dart';
 
 void main() {
 

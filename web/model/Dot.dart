@@ -7,12 +7,10 @@ class Dot extends elem.Element {
   int value;
 
 
-  Dot(String id, int x, int y, int height, int width, int value) {
+  Dot(String id, int x, int y, int value) {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.height = height;
-    this.width = width;
     this.value = value;
   }
 
