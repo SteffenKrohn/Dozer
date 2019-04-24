@@ -4,7 +4,6 @@ import '../controller/LevelController.dart';
 import '../model/Element.dart' as m;
 import '../model/Level.dart';
 import '../widgets/LevelGenerator.dart';
-import 'LaneView.dart';
 
 class LevelView {
 

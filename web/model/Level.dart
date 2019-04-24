@@ -29,7 +29,7 @@ class Level {
     this._targetScore = targetScore;
     this._laneSpeed = laneSpeed;
 
-    this._dozer = new Dozer(50);
+    this._dozer = new Dozer(initialScore);
   }
 
   /**
@@ -38,7 +38,7 @@ class Level {
    * Provide a positive change to increase the time limit,
    * a negative change to decrease the time limit.
    */
-  void changeTimeLimit(int change) {
+  void changeTimeLimit(double change) {
     this._timeLimit += change;
   }
 
@@ -74,5 +74,13 @@ class Level {
 
   int getLaneSpeed() {
     return this._laneSpeed;
+  }
+
+  double getTimeLimit() {
+    return this._timeLimit;
+  }
+
+  int getTargetScoree() {
+    return _targetScore;
   }
 }
