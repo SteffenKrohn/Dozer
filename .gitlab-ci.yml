@@ -1,0 +1,17 @@
+image: google/dart:2.1
+
+before_script:
+  - export PATH="$PATH":"$HOME/.pub-cache/bin"
+  - pub global activate webdev
+
+pages:
+  stage: deploy
+  script:
+  - pub get
+  - webdev build --output web:build
+  - mv build public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
