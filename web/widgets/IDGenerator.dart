@@ -1,12 +1,15 @@
+/**
+ * A Generator used to generate unique Ids
+ */
 class IDGenerator {
 
-  int counter = 0;
+  int _id = 0;
 
   /**
    * Creates a new previously unused unique id
    */
   String getnewID(String type) {
-    counter++;
-    return type + counter.toString();
+    _id++;
+    return type + _id.toString();
   }
 }
