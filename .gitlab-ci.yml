@@ -7,8 +7,6 @@ variables:
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
 before_script:
-  - sed -i -e "s,team-XY,$(expr substr $CI_REGISTRY_IMAGE 45 7),g" Dockerfile
-  - cat Dockerfile
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build:
