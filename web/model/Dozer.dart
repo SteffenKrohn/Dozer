@@ -36,7 +36,7 @@ class Dozer extends elem.Element {
    * Changes the score of the dozer
    */
   void changeScore(int change) {
-    // TODO
+    this.score + change;
   }
 
   /**
@@ -44,5 +44,10 @@ class Dozer extends elem.Element {
    */
   String toString() {
     return "<div class='element dozer' id=${this.id}> ${this.score.toString()} </div>";
+  }
+
+  @override
+  void hitBy(elem.Element e) {
+    // TODO: implement hitBy
   }
 }

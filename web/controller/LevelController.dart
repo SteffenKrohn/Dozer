@@ -20,7 +20,7 @@ class LevelController {
     lc._gameController = gc;
 
     // TODO Provisional
-    lc.level = new Level(lc, 1, 100, 10, 50, 4);
+    lc.level = new Level(lc, 100, 10, 50, 4, 1);
 
     lc._levelView = new LevelView(lc, lc.level);
 

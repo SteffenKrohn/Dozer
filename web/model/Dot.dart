@@ -14,4 +14,9 @@ class Dot extends elem.Element {
   String toString() {
     return "<div class='element dot' id=${this.id}> ${this.value.toString()} </div>";
   }
+
+  @override
+  void hitBy(elem.Element e) {
+    // TODO: implement hitBy
+  }
 }

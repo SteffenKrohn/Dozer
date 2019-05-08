@@ -13,4 +13,9 @@ class Barrier extends Element {
   String toString() {
     return "<div class='element barrier' id=${this.id}></div>";
   }
+
+  @override
+  void hitBy(Element e) {
+    // TODO: implement hitBy
+  }
 }

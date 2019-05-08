@@ -26,4 +26,9 @@ class Brick extends m.Element {
   String toString() {
     return "<div class='element brick' id=${this.id}> ${this.value} </div>";
   }
+
+  @override
+  void hitBy(m.Element e) {
+    // TODO: implement hitBy
+  }
 }

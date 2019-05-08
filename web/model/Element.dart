@@ -29,7 +29,5 @@ abstract class Element {
   /**
    * Called when Element e collides with this element
    */
-  void hitBy(Element e) {
-    //TODO
-  }
+  void hitBy(Element e);
 }

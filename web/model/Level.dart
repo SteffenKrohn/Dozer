@@ -2,8 +2,13 @@
 import 'dart:collection';
 
 import '../controller/LevelController.dart';
+import 'Barrier.dart';
+import 'Brick.dart';
+import 'CollisionChecker.dart';
+import 'Dot.dart';
 import 'Dozer.dart';
 import 'Element.dart';
+import 'PowerUp.dart';
 
 class Level {
 
@@ -82,7 +87,7 @@ class Level {
    * <ID of element | element>
    */
   Map<int, Element> getVisibleElements() {
-    //TODO
+    return this.visibleElements;
   }
 
   /**
@@ -90,14 +95,27 @@ class Level {
    * This will probably be called every 50ms
    */
   void update() {
-    //TODO
+    this.visibleElements.forEach((id, e) => e.update());
+    this.checkCollisions();
   }
 
   /**
-   * Checks collision of all visible elements
+   * Checks collision of all visible elements with the dozer
    * This will probably be called every 50ms
    */
   void checkCollisions() {
-    //TODO
+    this.visibleElements.forEach((id, e) {
+      if (e is Brick || e is Barrier) {
+        if(CollisionChecker.recCir(e, this._dozer)) {
+          this._dozer.hitBy(e);
+          e.hitBy(this._dozer);
+        }
+      } else if (e is Dot || e is PowerUp) {
+        if(CollisionChecker.circles(e, this._dozer)) {
+          this._dozer.hitBy(e);
+          e.hitBy(this._dozer);
+        }
+      }
+    });
   }
 }
