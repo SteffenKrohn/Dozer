@@ -27,7 +27,7 @@ class Brick extends m.Element {
    * Returns a string representing as a DOM element of this Brick
    */
   String toString() {
-    return "<div class='element brick' id='e${this.id}'> ${this.value} </div>";
+    return this.value.toString();
   }
 
   @override

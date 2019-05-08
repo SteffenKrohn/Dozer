@@ -67,4 +67,19 @@ class LevelView {
       e.style.left = value.x.toString() + "px";
     });
   }
+
+  String getHtmlRepresentation(elem.Element element) {
+    String type = element.runtimeType.toString();
+    String out;
+
+    if(type == "Dozer" || type == "Dot" || type == "Brick") { // Dozer kommt später raus, da es eine Schlange werden soll
+      out = "<div class='element ${type}' id='e${element.id}'> ${element.toString()} </div>";
+    } /*else if() { // Power ups
+
+    }*/ else { // Brick
+      out = "<div class='element ${type}' id='e${element.id}'></div>";
+    }
+
+    return out;
+  }
 }
