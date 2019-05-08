@@ -12,21 +12,21 @@ class Dozer extends elem.Element {
    * Creates a Dozer object with the id  dozer and the given score
    */
   Dozer(int score) {
-    this.id = "dozer";
+    this.id = 0;
     this.score = score;
   }
 
   void update() {
-    this.getView().text = this.score.toString();
-
     // TODO Make prettier
     dx = this.dx;
     // Left border
-    if (querySelector("#dozer").getBoundingClientRect().left + dx < 0) {
-      dx = querySelector("#dozer").getBoundingClientRect().left * -1;
+
+    if (this.x + dx < 0) {
+      dx = this.x * -1;
     }
-    if (this.x + dx + this.getView().getBoundingClientRect().width > querySelector("#lane").getBoundingClientRect().right) {
-      dx = querySelector("#lane").getBoundingClientRect().right - querySelector("#dozer").getBoundingClientRect().right;
+    // TODO bad querySelector
+    if (this.x + dx + this.width > querySelector("#lane").getBoundingClientRect().right) {
+      dx = querySelector("#lane").getBoundingClientRect().right - this.x + this.width;
     }
     this.dx = dx;
     super.update();

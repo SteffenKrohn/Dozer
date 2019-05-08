@@ -11,10 +11,10 @@ class Level {
   Dozer _dozer;
 
   /** Time limit in seconds */
-  double _timeLimit;
+  double timeLimit;
   int _initialScore;
-  int _targetScore;
-  int _laneSpeed;
+  int targetScore;
+  int laneSpeed;
   int _level;
 
   Map<int, Element> visibleElements = new Map<int, Element>();
@@ -28,10 +28,10 @@ class Level {
   Level(LevelController lc, int timeLimit, int initialScore, int targetScore, int laneSpeed, int level) {
     this._levelController = lc;
     this._level = level;
-    this._timeLimit = timeLimit.toDouble();
+    this.timeLimit = timeLimit.toDouble();
     this._initialScore = initialScore;
-    this._targetScore = targetScore;
-    this._laneSpeed = laneSpeed;
+    this.targetScore = targetScore;
+    this.laneSpeed = laneSpeed;
 
     this._dozer = new Dozer(initialScore);
   }
@@ -43,7 +43,7 @@ class Level {
    * a negative change to decrease the time limit.
    */
   void changeTimeLimit(double change) {
-    this._timeLimit += change;
+    this.timeLimit += change;
   }
 
   /**
@@ -52,7 +52,7 @@ class Level {
    * a negative change to decrease the lane speed.
    */
   void changeLaneSpeed(int change) {
-    this._laneSpeed += change;
+    this.laneSpeed += change;
   }
 
   /**

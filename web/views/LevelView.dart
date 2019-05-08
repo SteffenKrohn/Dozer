@@ -1,9 +1,7 @@
 import 'dart:html';
 
 import '../controller/LevelController.dart';
-import '../model/Element.dart' as m;
 import '../model/Level.dart';
-import '../widgets/LevelGenerator.dart';
 
 class LevelView {
 
@@ -20,23 +18,22 @@ class LevelView {
     querySelector("body").setInnerHtml("<div id='lane'></div>");
     this._view = querySelector("#lane");
     this._view.appendHtml(level.getDozer().toString());
-    level.getDozer().created();
     level.getDozer().y = this._view.getBoundingClientRect().height - 100;
-
-    LevelGenerator lg = new LevelGenerator(this, new List<String>(), level.getDozer());
-    lg.start();
   }
 
   void render() {
-    elements.forEach((e) {
+    List<int> removeObject = new List<int>();
+    
+    _level.getVisibleElements().forEach((id, e) {
       if (e.y > _view.getBoundingClientRect().bottom) {
-        querySelector("#"+e.id).remove();
-        elements.remove(e);
-        e = null;
+        querySelector("#"+id.toString()).remove();
+        removeObject.add(id);
         return;
       }
-      e.move(0, _level.getLaneSpeed());
+      e.move(0, _level.laneSpeed);
       e.update();
     });
+
+    // TODO remove obejcts
   }
 }

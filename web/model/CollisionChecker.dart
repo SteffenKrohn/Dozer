@@ -10,8 +10,8 @@ class CollisionChecker {
    */
   static bool rectangles(m.Element a, m.Element b) {
     // TODO make pretty
-    var av = querySelector("#"+a.id);
-    var bv = querySelector("#"+b.id);
+    var av = querySelector("#"+a.id.toString());
+    var bv = querySelector("#"+b.id.toString());
 
     int aTop = av.getBoundingClientRect().top.toInt();
     int aLeft = av.getBoundingClientRect().left.toInt();

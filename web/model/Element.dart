@@ -22,8 +22,6 @@ abstract class Element {
   void update() {
     this.x += this.dx;
     this.y += this.dy;
-    this._view.style.left = "${this.x}px";
-    this._view.style.top = "${this.y}px";
   }
 
   String toString();

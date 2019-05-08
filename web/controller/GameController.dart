@@ -28,7 +28,7 @@ class GameController {
 
   void showMenu() {
     // TODO magic number for time
-    _menucontroller = MenuController.load(this, _levelController.level.getScore(), (100 - _levelController.level.getTimeLimit()).floor());
+    _menucontroller = MenuController.load(this, _levelController.level.getScore(), (100 - _levelController.level.timeLimit).floor());
     _menucontroller.start();
   }
 }

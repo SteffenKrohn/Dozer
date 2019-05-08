@@ -36,16 +36,16 @@ class LevelController {
     t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ GameController.framerate), (update) {
       this.level.changeTimeLimit(-1000 / GameController.framerate / 1000);
 
-      if (this.level.getTimeLimit() <= 0) {
+      if (this.level.timeLimit <= 0) {
         this.stop(t);
         return;
       }
 
-      this._levelView.update();
+      this._levelView.render();
 
       // TODO smart?
-      this.level.getDozer().checkCollision();
-      if (this.level.getScore() <= 0 || this.level.getDozer().score >= level.getTargetScoree()) {
+      this.level.update();
+      if (this.level.getScore() <= 0 || this.level.getDozer().score >= level.targetScore) {
         this.stop(t);
         return;
       }
