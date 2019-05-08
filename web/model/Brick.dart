@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'Dozer.dart';
 import 'Element.dart' as m;
 
 /**
@@ -31,6 +32,8 @@ class Brick extends m.Element {
 
   @override
   void hitBy(m.Element e) {
-    // TODO: implement hitBy
+    if (e is Dozer) {
+      this.value = 0;
+    }
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'Brick.dart';
+import 'Dot.dart';
 import 'Element.dart' as elem;
 
 class Dozer extends elem.Element {
@@ -52,6 +54,15 @@ class Dozer extends elem.Element {
 
   @override
   void hitBy(elem.Element e) {
-    // TODO: implement hitBy
+    if (e is Brick) {
+      this.score -= e.value;
+      return;
+    }
+    if (e is Dot) {
+      this.score += e.value;
+      return;
+    }
+    //TODO other hitBy behaviour
+    // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
   }
 }

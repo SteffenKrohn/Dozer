@@ -1,3 +1,4 @@
+import 'Dozer.dart';
 import 'Element.dart' as elem;
 
 class Dot extends elem.Element {
@@ -19,6 +20,8 @@ class Dot extends elem.Element {
 
   @override
   void hitBy(elem.Element e) {
-    // TODO: implement hitBy
+    if (e is Dozer) {
+      this.value = 0;
+    }
   }
 }
