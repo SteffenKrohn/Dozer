@@ -22,17 +22,6 @@ class LevelView {
   }
 
   void render() {
-    List<int> removeObject = new List<int>();
-    
-    _level.getVisibleElements().forEach((id, e) {
-      if (e.y > _view.getBoundingClientRect().bottom) {
-        querySelector("#"+id.toString()).remove();
-        removeObject.add(id);
-        return;
-      }
-      e.move(0, _level.laneSpeed);
-      e.update();
-    });
 
     // TODO remove obejcts
   }

@@ -14,6 +14,10 @@ class Dozer extends elem.Element {
   Dozer(int score) {
     this.id = 0;
     this.score = score;
+    this.x = 250;
+    this.y = 500;
+    this.height = 60;
+    this.width = 60;
   }
 
   void update() {

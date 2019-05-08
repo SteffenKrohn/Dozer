@@ -8,6 +8,7 @@ class Barrier extends Element {
     this.id = id;
     this. x = x;
     this.height = height;
+    this.width = 5;
   }
 
   String toString() {

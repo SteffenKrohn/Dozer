@@ -19,13 +19,14 @@ class Level {
   double timeLimit;
   int _initialScore;
   int targetScore;
+  /** Equals the pixel which certain elements (such as Brick, Dot) move per second */
   int laneSpeed;
   int _level;
 
   Map<int, Element> visibleElements = new Map<int, Element>();
   Queue<Element> remainingElements = new Queue<Element>();
 
-
+  int initialTime;
 
   /**
    * Creates a new level
@@ -34,11 +35,15 @@ class Level {
     this._levelController = lc;
     this._level = level;
     this.timeLimit = timeLimit.toDouble();
+    this.initialTime = timeLimit;
     this._initialScore = initialScore;
     this.targetScore = targetScore;
     this.laneSpeed = laneSpeed;
 
     this._dozer = new Dozer(initialScore);
+    this.visibleElements.putIfAbsent(this._dozer.id, () => this._dozer);
+
+    this.initialize(List<String>());
   }
 
   /**
@@ -96,6 +101,7 @@ class Level {
    */
   void update() {
     this.visibleElements.forEach((id, e) => e.update());
+    this.addNewlyVisibleElements();
     this.checkCollisions();
   }
 
@@ -117,5 +123,29 @@ class Level {
         }
       }
     });
+  }
+
+  /**
+   * Initializes the level elements by filling the remainingElements queue
+   */
+  void initialize(List<String> params) {
+    //TODO provisional
+
+    for (int i = 0; i < 20; i++) {
+      Brick b = new Brick(i, 100 + i, 5 + i);
+      b.y = i * -200;
+      remainingElements.add(b);
+    }
+  }
+
+  /**
+   * Adds all elements that became visible since the last update
+   * This will probably be called every 50ms
+   */
+  void addNewlyVisibleElements() {
+    while (remainingElements.length > 0 && remainingElements.first.y + (this.laneSpeed * (this.initialTime - this.timeLimit)) >= 0) {
+      visibleElements.putIfAbsent(remainingElements.first.id, () => remainingElements.first);
+      remainingElements.removeFirst();
+    }
   }
 }

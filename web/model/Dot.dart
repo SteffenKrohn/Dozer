@@ -9,6 +9,8 @@ class Dot extends elem.Element {
     this.x = x;
     this.y = y;
     this.value = value;
+    this.width = 50;
+    this.height = 50;
   }
 
   String toString() {

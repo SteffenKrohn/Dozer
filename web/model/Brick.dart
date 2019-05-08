@@ -18,6 +18,8 @@ class Brick extends m.Element {
     this.id = id;
     this.x = x;
     this.value = value;
+    this.width = 250;
+    this.height= 80;
   }
 
   /**
