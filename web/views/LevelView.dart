@@ -9,6 +9,7 @@ class LevelView {
 
   LevelController _levelController;
   // List<LaneView> _lanes;
+  Level level;
 
   Element _view;
 
@@ -16,6 +17,7 @@ class LevelView {
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
+    this.level = level;
     querySelector("body").setInnerHtml("<div id='lane'></div>");
     this._view = querySelector("#lane");
     this._view.appendHtml(level.getDozer().toString());
@@ -37,5 +39,6 @@ class LevelView {
       e.move(0, _levelController.getLevel().getLaneSpeed());
       e.update();
     });
+    level.getDozer().y = this._view.getBoundingClientRect().height - 100;
   }
 }
