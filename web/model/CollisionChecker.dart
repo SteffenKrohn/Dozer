@@ -11,8 +11,8 @@ class CollisionChecker {
    */
   static bool rectangles(m.Element a, m.Element b) {
     // TODO make pretty
-    var av = querySelector("#"+a.id.toString());
-    var bv = querySelector("#"+b.id.toString());
+    var av = querySelector("#e"+a.id.toString());
+    var bv = querySelector("#e"+b.id.toString());
 
     int aTop = av.getBoundingClientRect().top.toInt();
     int aLeft = av.getBoundingClientRect().left.toInt();
@@ -38,7 +38,7 @@ class CollisionChecker {
     if (aRight >= bLeft && aRight <= bRight) {
       h = true;
     }
-    return v && h;
+    return v;
   }
 
   /**
@@ -78,23 +78,29 @@ class CollisionChecker {
     int x = (circle.x + (circle.width / 2)) as int;
     int y = (circle.y + (circle.height / 2)) as int;
 
-
+    return CollisionChecker.rectangles(rectangle, circle);
+    /*
     // Upper left
-    if (sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)) {
+    if (sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)
+        && !(sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2))) {
       return true;
     }
     // Upper right
-    if (sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)) {
+    if (sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)
+        && !(sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2))) {
       return true;
     }
     // Lower Left
-    if (sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)) {
+    if (sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)
+        && !(sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2))) {
       return true;
     }
     // Lower right
-    if (sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)) {
+    if (sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)
+        && !(sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2))) {
       return true;
     }
     return false;
+     */
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import '../controller/LevelController.dart';
+import '../model/Dozer.dart';
 import '../model/Level.dart';
 import '../model/Element.dart' as elem;
 
@@ -51,6 +52,9 @@ class LevelView {
         e.style.top = dy;
         e.style.left = element.x.toString() + "px";
         visibleElements.remove(id);
+        if (element is Dozer) {
+          e.text = element.score.toString();
+        }
       } else {
         e.remove();
       }

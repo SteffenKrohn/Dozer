@@ -115,6 +115,9 @@ class Level {
         if(CollisionChecker.recCir(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
+          if (e is Brick) {
+            visibleElements.remove(id);
+          }
         }
       } else if (e is Dot || e is PowerUp) {
         if(CollisionChecker.circles(e, this._dozer)) {
