@@ -92,7 +92,7 @@ class Level {
    * <ID of element | element>
    */
   Map<int, Element> getVisibleElements() {
-    return this.visibleElements;
+    return Map<int, Element>.from(this.visibleElements);
   }
 
   /**
@@ -134,6 +134,7 @@ class Level {
     for (int i = 0; i < 20; i++) {
       Brick b = new Brick(i, 100 + i, 5 + i);
       b.y = i * -200;
+      b.move(0, (this.laneSpeed / 50) as int);
       remainingElements.add(b);
     }
   }

@@ -16,6 +16,7 @@ class Dozer extends elem.Element {
   Dozer(int score) {
     this.id = 0;
     this.score = score;
+    this.dy = 0;
     this.x = 250;
     this.y = 500;
     this.height = 60;
@@ -49,7 +50,7 @@ class Dozer extends elem.Element {
    * Returns a string representation of the dozer as an html element
    */
   String toString() {
-    return "<div class='element dozer' id=${this.id}> ${this.score.toString()} </div>";
+    return "<div class='element dozer' id='e${this.id}'> ${this.score.toString()} </div>";
   }
 
   @override
