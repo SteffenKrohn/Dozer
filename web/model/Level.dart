@@ -1,27 +1,31 @@
-import 'dart:html';
+
+import 'dart:collection';
 
 import '../controller/LevelController.dart';
 import 'Dozer.dart';
+import 'Element.dart';
 
 class Level {
 
   LevelController _levelController;
-
-  // Level Params
-  int _level;
+  Dozer _dozer;
 
   /** Time limit in seconds */
   double _timeLimit;
   int _initialScore;
   int _targetScore;
   int _laneSpeed;
+  int _level;
 
-  Dozer _dozer;
+  Map<int, Element> visibleElements = new Map<int, Element>();
+  Queue<Element> remainingElements = new Queue<Element>();
+
+
 
   /**
    * Creates a new level
    */
-  Level(LevelController lc, int level, int timeLimit, int initialScore, int targetScore, int laneSpeed) {
+  Level(LevelController lc, int timeLimit, int initialScore, int targetScore, int laneSpeed, int level) {
     this._levelController = lc;
     this._level = level;
     this._timeLimit = timeLimit.toDouble();
@@ -72,15 +76,28 @@ class Level {
     return this._dozer;
   }
 
-  int getLaneSpeed() {
-    return this._laneSpeed;
+  /**
+   * Returns a map of all currently visible elements
+   * The key value pair of a map entry is:
+   * <ID of element | element>
+   */
+  Map<int, Element> getVisibleElements() {
+    //TODO
   }
 
-  double getTimeLimit() {
-    return this._timeLimit;
+  /**
+   * Updates all necessary elements
+   * This will probably be called every 50ms
+   */
+  void update() {
+    //TODO
   }
 
-  int getTargetScoree() {
-    return _targetScore;
+  /**
+   * Checks collision of all visible elements
+   * This will probably be called every 50ms
+   */
+  void checkCollisions() {
+    //TODO
   }
 }

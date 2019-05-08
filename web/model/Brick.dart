@@ -14,19 +14,10 @@ class Brick extends m.Element {
   /**
    * Constructs a new Brick with all necessary information
    */
-  Brick(String id, int x, int y, int value) {
+  Brick(int id, int x, int value) {
     this.id = id;
     this.x = x;
-    this.y = y;
     this.value = value;
-  }
-
-  /**
-   * Updates the DOM element with current values
-   */
-  void update() {
-    super.update();
-    querySelector('#'+this.id).text = this.value.toString();
   }
 
   /**

@@ -1,16 +1,17 @@
+import '../file/ConfigLoader.dart';
 import 'LevelController.dart';
 import 'MenuController.dart';
 
 class GameController {
 
+  MenuController _menucontroller;
+  LevelController _levelController;
+  ConfigLoader _configLoader;
+
   /** The target framerate in hz */
   static const int framerate = 50;
 
-  // ConfigLoader _configLoader;
-  // LevelLoader _levelloader;
-
-  MenuController _menucontroller;
-  LevelController _levelController;
+  int _highscore = 0;
 
   void startup() {
 
@@ -27,7 +28,7 @@ class GameController {
 
   void showMenu() {
     // TODO magic number for time
-    _menucontroller = MenuController.load(this, _levelController.getLevel().getScore(), (100 - _levelController.getLevel().getTimeLimit()).floor());
+    _menucontroller = MenuController.load(this, _levelController.level.getScore(), (100 - _levelController.level.getTimeLimit()).floor());
     _menucontroller.start();
   }
 }

@@ -5,10 +5,10 @@ import '../model/Element.dart' as m;
 class CollisionChecker {
 
   /**
-   * Checks if two elements overlap or touch
+   * Checks if two elements with rectangle shape overlap or touch
    * by checking the boundaries of both elements
    */
-  static bool collide(m.Element a, m.Element b) {
+  static bool rectangles(m.Element a, m.Element b) {
     // TODO make pretty
     var av = querySelector("#"+a.id);
     var bv = querySelector("#"+b.id);
@@ -38,5 +38,21 @@ class CollisionChecker {
       h = true;
     }
     return v && h;
+  }
+
+  /**
+   * Checks if two elements with circle shape overlap or touch
+   * by checking the boundaries of both elements
+   */
+  static bool circles(m.Element a, m.Element b) {
+    //TODO
+  }
+
+  /**
+   * Checks if two elements with circle and rectangle shape overlap or touch
+   * by checking the boundaries of both elements
+   */
+  static bool recCir(m.Element rectanlge, m.Element circle) {
+    //TODO
   }
 }

@@ -2,17 +2,16 @@ import 'dart:async';
 import 'dart:html';
 
 import '../controller/GameController.dart';
+import '../file/LevelLoader.dart';
 import '../model/Level.dart';
 import '../views/LevelView.dart';
-import '../widgets/IDGenerator.dart';
 
 class LevelController {
 
   GameController _gameController;
-  Level _level;
+  Level level;
   LevelView _levelView;
-
-  // ListenerManager _listenerManager;
+  LevelLoader _levelLoader;
 
   static LevelController load(GameController gc, int level) {
 
@@ -21,9 +20,9 @@ class LevelController {
     lc._gameController = gc;
 
     // TODO Provisional
-    lc._level = new Level(lc, 1, 100, 10, 50, 4);
+    lc.level = new Level(lc, 1, 100, 10, 50, 4);
 
-    lc._levelView = new LevelView(lc, lc._level);
+    lc._levelView = new LevelView(lc, lc.level);
 
     return lc;
   }
@@ -35,9 +34,9 @@ class LevelController {
     Timer t;
     // Start the periodic update of the game elements with 50hz
     t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ GameController.framerate), (update) {
-      this._level.changeTimeLimit(-1000 / GameController.framerate / 1000);
+      this.level.changeTimeLimit(-1000 / GameController.framerate / 1000);
 
-      if (this._level.getTimeLimit() <= 0) {
+      if (this.level.getTimeLimit() <= 0) {
         this.stop(t);
         return;
       }
@@ -45,13 +44,13 @@ class LevelController {
       this._levelView.update();
 
       // TODO smart?
-      this._level.getDozer().checkCollision();
-      if (this._level.getScore() <= 0 || this._level.getDozer().score >= _level.getTargetScoree()) {
+      this.level.getDozer().checkCollision();
+      if (this.level.getScore() <= 0 || this.level.getDozer().score >= level.getTargetScoree()) {
         this.stop(t);
         return;
       }
 
-      this._level.getDozer().update();
+      this.level.getDozer().update();
     });
   }
 
@@ -63,11 +62,11 @@ class LevelController {
     window.onKeyDown.listen((KeyboardEvent e) {
       //Left pressed
       if (e.keyCode == 37) {
-        this._level.getDozer().move(-10, 0);
+        this.level.getDozer().move(-10, 0);
       }
       // Right pressed
       if (e.keyCode == 39) {
-        this._level.getDozer().move(10, 0);
+        this.level.getDozer().move(10, 0);
       }
     });
   }
@@ -85,7 +84,7 @@ class LevelController {
       else {
         // TODO make prettier
         int dx = ev.gamma.toInt();
-        this._level.getDozer().move(dx, 0);
+        this.level.getDozer().move(dx, 0);
       }
     });
   }
@@ -93,9 +92,5 @@ class LevelController {
   void stop(Timer t) {
     t.cancel();
     this._gameController.showMenu();
-  }
-
-  Level getLevel() {
-    return this._level;
   }
 }

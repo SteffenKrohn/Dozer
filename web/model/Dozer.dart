@@ -6,7 +6,6 @@ class Dozer extends elem.Element {
 
   /** The current score / length of the dozer */
   int score;
-
   List<int> tail;
 
   /**
@@ -33,7 +32,13 @@ class Dozer extends elem.Element {
     super.update();
   }
 
-  //TODO right place?
+  /**
+   * Changes the score of the dozer
+   */
+  void changeScore(int change) {
+    // TODO
+  }
+
   /**
    * Returns a string representation of the dozer as an html element
    */
