@@ -33,6 +33,17 @@ class Brick extends m.Element {
    * Returns a string representing as a DOM element of this Brick
    */
   String toString() {
-    return "<div class='element brick' id=${this.id}> ${this.value} </div>";
+    String c = "c1";
+    if (this.value > 15) {
+      c = "c5";
+    } else if (this.value > 10) {
+      c = "c4";
+    } else if (this.value > 6) {
+      c = "c3";
+    } else if (this.value > 3) {
+      c = "c2";
+    }
+
+    return "<div class='${c} element brick' id=${this.id}> ${this.value} </div>";
   }
 }
