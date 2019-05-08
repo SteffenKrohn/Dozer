@@ -17,8 +17,9 @@ class Dozer extends elem.Element {
     this.id = 0;
     this.score = score;
     this.dy = 0;
-    this.x = 250;
-    this.y = 500;
+    // TODO fix this
+    this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
+    this.y = querySelector("body").getBoundingClientRect().height - 50;
     this.height = 60;
     this.width = 60;
   }

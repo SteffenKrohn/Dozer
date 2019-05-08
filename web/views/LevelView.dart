@@ -48,8 +48,7 @@ class LevelView {
 
       if(visibleElements.containsKey(id)) {
         element = visibleElements[id];
-        String dy = element.y.toString() + "px";
-        e.style.top = dy;
+        e.style.top = element.y.toString() + "px";
         e.style.left = element.x.toString() + "px";
         visibleElements.remove(id);
         if (element is Dozer) {

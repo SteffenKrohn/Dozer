@@ -38,7 +38,7 @@ class CollisionChecker {
     if (aRight >= bLeft && aRight <= bRight) {
       h = true;
     }
-    return v;
+    return v && h;
   }
 
   /**
