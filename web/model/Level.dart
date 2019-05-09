@@ -156,13 +156,12 @@ class Level {
    */
   void addNewlyVisibleElements() {
     Element next;
+    double scrolled;
     while (remainingElements.length > 0 &&
-           (next = remainingElements.first).y + next.height +
-           (this.laneSpeed * (this.initialTime - this.timeLimit)) >= 0
+           (scrolled = (next = remainingElements.first).y + next.height +
+           (this.laneSpeed * (this.initialTime - this.timeLimit))) >= 0
           ) {
-      double tmp = (next = remainingElements.first).y + next.height +
-          (this.laneSpeed * (this.initialTime - this.timeLimit));
-      next.y = tmp.floor();
+      next.y = scrolled.floor();
       visibleElements.putIfAbsent(next.id, () => next);
       remainingElements.removeFirst();
     }
