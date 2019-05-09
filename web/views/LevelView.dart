@@ -8,35 +8,27 @@ import '../model/Element.dart' as elem;
 class LevelView {
 
   LevelController _levelController;
-  Level _level;
+  Level level;
 
-  Element _lane;
-
-  //List<m.Element> elements = new List<m.Element>();
+  Element lane;
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
-    this._level = level;
+    this.level = level;
     querySelector("body").setInnerHtml("<div id='lane'></div>");
-    this._lane = querySelector("#lane");
-    this._lane.appendHtml(level.getDozer().toString());
-    level.getDozer().y = this._lane.getBoundingClientRect().height - 100;
-
-    querySelector("body").setInnerHtml("<div id='lane'></div>");
-    this._lane = querySelector("#lane");
+    this.lane = querySelector("#lane");
   }
 
   void render() {
-    Map<int, elem.Element> visibleElements = _level.getVisibleElements();
+    Map<int, elem.Element> visibleElements = level.getVisibleElements();
 
-    _lane.querySelectorAll(".element").forEach((e) {
+    lane.querySelectorAll(".element").forEach((e) {
       int id = int.parse(e.id.substring(1));
       elem.Element element;
 
       if(visibleElements.containsKey(id)) {
         element = visibleElements[id];
-        e.style.top = element.y.toString() + "px";
-        e.style.left = element.x.toString() + "px";
+        updateElement(e, element);
         visibleElements.remove(id);
         if (element is Dozer) {
           e.text = element.score.toString();
@@ -47,11 +39,20 @@ class LevelView {
     });
 
     visibleElements.forEach((id, value) {
-      this._lane.appendHtml(getHtmlRepresentation(value));
+      this.lane.appendHtml(getHtmlRepresentation(value));
       Element e = document.querySelector("#e" + id.toString());
-      e.style.top = value.y.toString() + "px";
-      e.style.left = value.x.toString() + "px";
+      updateElement(e, value);
     });
+  }
+
+  /**
+   * Updates the default view values of a given Element
+   */
+  static void updateElement(Element view, elem.Element model) {
+    view.style.top = model.y.toString() + "px";
+    view.style.left = model.x.toString() + "px";
+    view.style.width = model.width.toString() + "px";
+    view.style.height = model.height.toString() + "px";
   }
 
   String getHtmlRepresentation(elem.Element element) {
@@ -65,7 +66,6 @@ class LevelView {
     }*/ else { // Barrier
       out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'></div>";
     }
-
     return out;
   }
 }
