@@ -173,6 +173,10 @@ class Level {
    * from the visibileElements Map
    */
   void removeInvisibleElements() {
-    //TODO
+    this.getVisibleElements().forEach((id, e) {
+      if (this.viewHeight < e.y) {
+        this.visibleElements.remove(id);
+      }
+    });
   }
 }
