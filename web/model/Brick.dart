@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'Dozer.dart';
 import 'Element.dart' as m;
 
 /**
@@ -14,36 +15,25 @@ class Brick extends m.Element {
   /**
    * Constructs a new Brick with all necessary information
    */
-  Brick(String id, int x, int y, int value) {
+  Brick(int id, int x, int value) {
     this.id = id;
     this.x = x;
-    this.y = y;
     this.value = value;
-  }
-
-  /**
-   * Updates the DOM element with current values
-   */
-  void update() {
-    super.update();
-    querySelector('#'+this.id).text = this.value.toString();
+    this.width = 250;
+    this.height= 80;
   }
 
   /**
    * Returns a string representing as a DOM element of this Brick
    */
   String toString() {
-    String c = "c1";
-    if (this.value > 15) {
-      c = "c5";
-    } else if (this.value > 10) {
-      c = "c4";
-    } else if (this.value > 6) {
-      c = "c3";
-    } else if (this.value > 3) {
-      c = "c2";
-    }
+    return this.value.toString();
+  }
 
-    return "<div class='${c} element brick' id=${this.id}> ${this.value} </div>";
+  @override
+  void hitBy(m.Element e) {
+    if (e is Dozer) {
+      this.value = 0;
+    }
   }
 }

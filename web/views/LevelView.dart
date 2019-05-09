@@ -1,44 +1,71 @@
 import 'dart:html';
 
 import '../controller/LevelController.dart';
-import '../model/Element.dart' as m;
+import '../model/Dozer.dart';
 import '../model/Level.dart';
-import '../widgets/LevelGenerator.dart';
+import '../model/Element.dart' as elem;
 
 class LevelView {
 
   LevelController _levelController;
-  // List<LaneView> _lanes;
-  Level level;
+  Level _level;
 
-  Element _view;
+  Element _lane;
 
-  List<m.Element> elements = new List<m.Element>();
+  //List<m.Element> elements = new List<m.Element>();
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
-    this.level = level;
+    this._level = level;
     querySelector("body").setInnerHtml("<div id='lane'></div>");
-    this._view = querySelector("#lane");
-    this._view.appendHtml(level.getDozer().toString());
-    level.getDozer().created();
-    level.getDozer().y = this._view.getBoundingClientRect().height - 100;
+    this._lane = querySelector("#lane");
+    this._lane.appendHtml(level.getDozer().toString());
+    level.getDozer().y = this._lane.getBoundingClientRect().height - 100;
 
-    LevelGenerator lg = new LevelGenerator(this, new List<String>(), level.getDozer());
-    lg.start();
+    querySelector("body").setInnerHtml("<div id='lane'></div>");
+    this._lane = querySelector("#lane");
   }
 
-  void update() {
-    elements.forEach((e) {
-      if (e.y > _view.getBoundingClientRect().bottom) {
-        querySelector("#"+e.id).remove();
-        elements.remove(e);
-        e = null;
-        return;
+  void render() {
+    Map<int, elem.Element> visibleElements = _level.getVisibleElements();
+
+    _lane.querySelectorAll(".element").forEach((e) {
+      int id = int.parse(e.id.substring(1));
+      elem.Element element;
+
+      if(visibleElements.containsKey(id)) {
+        element = visibleElements[id];
+        e.style.top = element.y.toString() + "px";
+        e.style.left = element.x.toString() + "px";
+        visibleElements.remove(id);
+        if (element is Dozer) {
+          e.text = element.score.toString();
+        }
+      } else {
+        e.remove();
       }
-      e.move(0, _levelController.getLevel().getLaneSpeed());
-      e.update();
     });
-    level.getDozer().y = this._view.getBoundingClientRect().height - 100;
+
+    visibleElements.forEach((id, value) {
+      this._lane.appendHtml(value.toString());
+      Element e = document.querySelector("#e" + id.toString());
+      e.style.top = value.y.toString() + "px";
+      e.style.left = value.x.toString() + "px";
+    });
+  }
+
+  String getHtmlRepresentation(elem.Element element) {
+    String type = element.runtimeType.toString();
+    String out;
+
+    if(type == "Dozer" || type == "Dot" || type == "Brick") { // Dozer kommt später raus, da es eine Schlange werden soll
+      out = "<div class='element ${type}' id='e${element.id}'> ${element.toString()} </div>";
+    } /*else if() { // Power ups
+
+    }*/ else { // Brick
+      out = "<div class='element ${type}' id='e${element.id}'></div>";
+    }
+
+    return out;
   }
 }
