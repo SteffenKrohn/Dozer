@@ -15,8 +15,8 @@ class LevelView {
   //List<m.Element> elements = new List<m.Element>();
 
   LevelView(LevelController lc, Level level) {
-    /*this._levelController = lc;
-    this._level = level;
+    this._levelController = lc;
+    this.level = level;
     querySelector("body").setInnerHtml("<div id='lane'></div>");
     this._view = querySelector("#lane");
     this._view.appendHtml(level.getDozer().toString());

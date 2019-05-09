@@ -46,8 +46,8 @@ h1 {
 }
 
 .dozer {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     color: white;
     background-color: green;
     border-radius: 50%;
@@ -67,4 +67,24 @@ h1 {
     background-color: red;
     color: white;
     border-radius: 50%;
+}
+
+.c1 {
+    background-color: #99ccff;
+}
+
+.c2 {
+    background-color: #6699ff;
+}
+
+.c3 {
+    background-color: #6666ff;
+}
+
+.c4 {
+    background-color: #9966ff;
+}
+
+.c5 {
+    background-color: #9933ff;
 }
