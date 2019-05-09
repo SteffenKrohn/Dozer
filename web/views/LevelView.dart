@@ -47,7 +47,7 @@ class LevelView {
     });
 
     visibleElements.forEach((id, value) {
-      this._lane.appendHtml(value.toString());
+      this._lane.appendHtml(getHtmlRepresentation(value));
       Element e = document.querySelector("#e" + id.toString());
       e.style.top = value.y.toString() + "px";
       e.style.left = value.x.toString() + "px";
@@ -58,12 +58,12 @@ class LevelView {
     String type = element.runtimeType.toString();
     String out;
 
-    if(type == "Dozer" || type == "Dot" || type == "Brick") { // Dozer kommt später raus, da es eine Schlange werden soll
-      out = "<div class='element ${type}' id='e${element.id}'> ${element.toString()} </div>";
+    if(type == "Dozer" || type == "Dot" || type == "Brick") { // TODO Dozer kommt später raus, da es eine Schlange werden soll
+      out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'> ${element.toString()} </div>";
     } /*else if() { // Power ups
 
-    }*/ else { // Brick
-      out = "<div class='element ${type}' id='e${element.id}'></div>";
+    }*/ else { // Barrier
+      out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'></div>";
     }
 
     return out;

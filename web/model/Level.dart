@@ -87,7 +87,7 @@ class Level {
   }
 
   /**
-   * Returns a map of all currently visible elements
+   * Returns an immutable map of all currently visible elements
    * The key value pair of a map entry is:
    * <ID of element | element>
    */
