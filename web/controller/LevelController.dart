@@ -19,11 +19,19 @@ class LevelController {
 
     lc._gameController = gc;
 
-    // TODO Provisional
-    lc.level = new Level(lc, 100, 10, 50, 250, 1);
-
     lc._levelView = new LevelView(lc, lc.level);
-
+    // TODO Provisional
+    lc.level = new Level(
+        lc,
+        100,
+        10,
+        50,
+        250,
+        1,
+        querySelector("#lane").getBoundingClientRect().height,
+        querySelector("#lane").getBoundingClientRect().width
+    );
+    lc._levelView.level = lc.level;
     return lc;
   }
 

@@ -28,10 +28,14 @@ class Level {
 
   int initialTime;
 
+  // TODO probably provisional
+  int viewWidth;
+  int viewHeight;
+
   /**
    * Creates a new level
    */
-  Level(LevelController lc, int timeLimit, int initialScore, int targetScore, int laneSpeed, int level) {
+  Level(LevelController lc, int timeLimit, int initialScore, int targetScore, int laneSpeed, int level, int height, int width) {
     this._levelController = lc;
     this._level = level;
     this.timeLimit = timeLimit.toDouble();
@@ -39,6 +43,8 @@ class Level {
     this._initialScore = initialScore;
     this.targetScore = targetScore;
     this.laneSpeed = laneSpeed;
+    this.viewHeight = height;
+    this.viewWidth = width;
 
     this._dozer = new Dozer(initialScore);
     this.visibleElements.putIfAbsent(this._dozer.id, () => this._dozer);
@@ -102,6 +108,7 @@ class Level {
   void update() {
     this.visibleElements.forEach((id, e) => e.update());
     this.addNewlyVisibleElements();
+    this.removeInvisibleElements();
     this.checkCollisions();
   }
 
@@ -136,6 +143,7 @@ class Level {
 
     for (int i = 0; i < 20; i++) {
       Brick b = new Brick(i, 100 + i, 5 + i);
+      b.width = this.viewWidth ~/ 4 - 10;
       b.y = i * -200;
       b.move(0, (this.laneSpeed / 50) as int);
       remainingElements.add(b);
@@ -147,9 +155,28 @@ class Level {
    * This will probably be called every 50ms
    */
   void addNewlyVisibleElements() {
-    while (remainingElements.length > 0 && remainingElements.first.y + (this.laneSpeed * (this.initialTime - this.timeLimit)) >= 0) {
-      visibleElements.putIfAbsent(remainingElements.first.id, () => remainingElements.first);
+    Element next;
+    while (remainingElements.length > 0 &&
+           (next = remainingElements.first).y + next.height +
+           (this.laneSpeed * (this.initialTime - this.timeLimit)) >= 0
+          ) {
+      double tmp = (next = remainingElements.first).y + next.height +
+          (this.laneSpeed * (this.initialTime - this.timeLimit));
+      next.y = tmp.floor();
+      visibleElements.putIfAbsent(next.id, () => next);
       remainingElements.removeFirst();
     }
+  }
+
+  /**
+   * Removes invisible elements mainly elements that scrolled past the viewport
+   * from the visibileElements Map
+   */
+  void removeInvisibleElements() {
+    this.getVisibleElements().forEach((id, e) {
+      if (this.viewHeight < e.y) {
+        this.visibleElements.remove(id);
+      }
+    });
   }
 }
