@@ -16,30 +16,17 @@ class LevelView {
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
-    this.level = level;
-    querySelector("body").setInnerHtml("<div id='lane'></div>");
-    this._view = querySelector("#lane");
-    this._view.appendHtml(level.getDozer().toString());
-    level.getDozer().y = this._view.getBoundingClientRect().height - 100;*/
-
     this._level = level;
+    querySelector("body").setInnerHtml("<div id='lane'></div>");
+    this._lane = querySelector("#lane");
+    this._lane.appendHtml(level.getDozer().toString());
+    level.getDozer().y = this._lane.getBoundingClientRect().height - 100;
+
     querySelector("body").setInnerHtml("<div id='lane'></div>");
     this._lane = querySelector("#lane");
   }
 
   void render() {
-    /*List<int> removeObject = new List<int>();
-
-    _level.getVisibleElements().forEach((id, e) {
-      if (e.y > _view.getBoundingClientRect().bottom) {
-        querySelector("#"+id.toString()).remove();
-        removeObject.add(id);
-        return;
-      }
-      e.move(0, _level.laneSpeed);
-      e.update();
-    });*/
-
     Map<int, elem.Element> visibleElements = _level.getVisibleElements();
 
     _lane.querySelectorAll(".element").forEach((e) {
