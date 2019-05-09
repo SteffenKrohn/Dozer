@@ -117,7 +117,7 @@ class Level {
    * This will probably be called every 50ms
    */
   void checkCollisions() {
-    this.visibleElements.forEach((id, e) {
+    this.getVisibleElements().forEach((id, e) {
       if (e is Brick || e is Barrier) {
         if(CollisionChecker.recCir(e, this._dozer)) {
           this._dozer.hitBy(e);
@@ -130,6 +130,7 @@ class Level {
         if(CollisionChecker.circles(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
+          visibleElements.remove(id);
         }
       }
     });

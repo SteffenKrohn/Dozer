@@ -27,24 +27,17 @@ class CollisionChecker {
    * by checking the boundaries of both elements
    */
   static bool circles(m.Element a, m.Element b) {
-    int x1, x2, y1, y2;
-    x1 = (a.x + (a.width / 2)) as int;
-    x2 = (b.x + (b.width / 2)) as int;
-    y1 = (a.y + (a.height / 2)) as int;
-    y2 = (b.y + (b.height / 2)) as int;
 
-    if (y1 > y2) {
-      int tmp = y1;
-      y1 = y2;
-      y2 = tmp;
-    }
-    if (x1 > x2) {
-      int tmp = x1;
-      x1 = x2;
-      x2 = tmp;
-    }
+    double ra = (a.width / 2);
+    double rb = (b.width / 2);
 
-    if (sqrt((x2 - x1)^2 + (y2 - y1)^2) <= (a.height / 2) + (b. height / 2)) {
+    double xa = a.x + ra;
+    double ya = a.y + ra;
+
+    double xb = b.x + rb;
+    double yb = b.y + rb;
+
+    if (ra + rb >= sqrt(pow(xa - xb, 2) + pow(ya - yb, 2)) ) {
       return true;
     }
     return false;
