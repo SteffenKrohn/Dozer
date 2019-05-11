@@ -57,22 +57,39 @@ class CollisionChecker {
     int x = circle.x + r.floor();
     int y = circle.y + r.floor();
 
-    // FIXME this only checks the corners of the rectangle against the circle
+    // This will be set to true when the circle is outside the corner of the rectangle
+    bool edgeCase = false;
 
     // Upper left
-    if (r <= sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y, 2))) {
-      return true;
+    if (x < rectangle.x && y < rectangle.y) {
+      if ((r < sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y, 2)))) {
+        edgeCase = true;
+      }
     }
+
     // Upper right
-    if (r <= sqrt(pow(x - rectangle.x + rectangle.width, 2) + pow(y - rectangle.y, 2))) {
-      return true;
+    if (x > rectangle.x + rectangle.width && y < rectangle.y) {
+      if ((r < sqrt(pow(x - (rectangle.x + rectangle.width), 2) + pow(y - rectangle.y, 2)))) {
+        edgeCase = true;
+      }
     }
+
     // Lower left
-    if (r <= sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y + rectangle.height, 2))) {
-      return true;
+    if (x < rectangle.x && y > rectangle.y + rectangle.height) {
+      if ((r < sqrt(pow(x - rectangle.x, 2) + pow(y - (rectangle.y + rectangle.height), 2)))) {
+        edgeCase = true;
+      }
     }
+
     // Lower right
-    if (r <= sqrt(pow(x - rectangle.x + rectangle.width, 2) + pow(y - rectangle.y + rectangle.height, 2))) {
+    if (x > rectangle.x + rectangle.width && y > rectangle.y + rectangle.height) {
+      // Radius is greater than the distance to the corner
+      if ((r < sqrt(pow(x - (rectangle.x + rectangle.width), 2) + pow(y - (rectangle.y + rectangle.height), 2)))) {
+        edgeCase = true;
+      }
+    }
+
+    if (!edgeCase) {
       return true;
     }
     return false;
