@@ -117,7 +117,7 @@ class Level {
    * This will probably be called every 50ms
    */
   void checkCollisions() {
-    this.visibleElements.forEach((id, e) {
+    this.getVisibleElements().forEach((id, e) {
       if (e is Brick || e is Barrier) {
         if(CollisionChecker.recCir(e, this._dozer)) {
           this._dozer.hitBy(e);
@@ -130,6 +130,7 @@ class Level {
         if(CollisionChecker.circles(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
+          visibleElements.remove(id);
         }
       }
     });
@@ -142,7 +143,7 @@ class Level {
     //TODO provisional
 
     for (int i = 0; i < 20; i++) {
-      Brick b = new Brick(i, 100 + i, 5 + i);
+      Brick b = new Brick(i, 320 + i*10, 5 + i);
       b.width = this.viewWidth ~/ 4 - 10;
       b.y = i * -200;
       b.move(0, (this.laneSpeed / 50) as int);
@@ -156,13 +157,12 @@ class Level {
    */
   void addNewlyVisibleElements() {
     Element next;
+    double scrolled;
     while (remainingElements.length > 0 &&
-           (next = remainingElements.first).y + next.height +
-           (this.laneSpeed * (this.initialTime - this.timeLimit)) >= 0
+           (scrolled = (next = remainingElements.first).y + next.height +
+           (this.laneSpeed * (this.initialTime - this.timeLimit))) >= 0
           ) {
-      double tmp = (next = remainingElements.first).y + next.height +
-          (this.laneSpeed * (this.initialTime - this.timeLimit));
-      next.y = tmp.floor();
+      next.y = scrolled.floor();
       visibleElements.putIfAbsent(next.id, () => next);
       remainingElements.removeFirst();
     }

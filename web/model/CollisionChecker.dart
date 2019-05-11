@@ -10,35 +10,16 @@ class CollisionChecker {
    * by checking the boundaries of both elements
    */
   static bool rectangles(m.Element a, m.Element b) {
-    // TODO make pretty
-    var av = querySelector("#e"+a.id.toString());
-    var bv = querySelector("#e"+b.id.toString());
 
-    int aTop = av.getBoundingClientRect().top.toInt();
-    int aLeft = av.getBoundingClientRect().left.toInt();
-    int aBot = av.getBoundingClientRect().bottom.toInt();
-    int aRight = av.getBoundingClientRect().right.toInt();
-
-    int bTop = bv.getBoundingClientRect().top.toInt();
-    int bLeft = bv.getBoundingClientRect().left.toInt();
-    int bBot = bv.getBoundingClientRect().bottom.toInt();
-    int bRight = bv.getBoundingClientRect().right.toInt();
-
-    bool v = false;
-    bool h = false;
-    if (aTop >= bTop && aTop <= bBot) {
-      v = true;
+    // Upper left of a and not lower left of a
+    if (
+          (a.y <= b.y + b.height && a.x <= b.x + b.width)
+          &&
+          !(a.y + a.height < b.y || a.x + a.width < b.x)
+        ) {
+      return true;
     }
-    if (aBot >= bTop && aBot <= bBot) {
-      v = true;
-    }
-    if (aLeft >= bLeft && aLeft <= bRight) {
-      h = true;
-    }
-    if (aRight >= bLeft && aRight <= bRight) {
-      h = true;
-    }
-    return v && h;
+    return false;
   }
 
   /**
@@ -46,24 +27,17 @@ class CollisionChecker {
    * by checking the boundaries of both elements
    */
   static bool circles(m.Element a, m.Element b) {
-    int x1, x2, y1, y2;
-    x1 = (a.x + (a.width / 2)) as int;
-    x2 = (b.x + (b.width / 2)) as int;
-    y1 = (a.y + (a.height / 2)) as int;
-    y2 = (b.y + (b.height / 2)) as int;
 
-    if (y1 > y2) {
-      int tmp = y1;
-      y1 = y2;
-      y2 = tmp;
-    }
-    if (x1 > x2) {
-      int tmp = x1;
-      x1 = x2;
-      x2 = tmp;
-    }
+    double ra = (a.width / 2);
+    double rb = (b.width / 2);
 
-    if (sqrt((x2 - x1)^2 + (y2 - y1)^2) <= (a.height / 2) + (b. height / 2)) {
+    double xa = a.x + ra;
+    double ya = a.y + ra;
+
+    double xb = b.x + rb;
+    double yb = b.y + rb;
+
+    if (ra + rb >= sqrt(pow(xa - xb, 2) + pow(ya - yb, 2)) ) {
       return true;
     }
     return false;
@@ -75,32 +49,49 @@ class CollisionChecker {
    */
   static bool recCir(m.Element rectangle, m.Element circle) {
 
-    int x = (circle.x + (circle.width / 2)) as int;
-    int y = (circle.y + (circle.height / 2)) as int;
+    if (!CollisionChecker.rectangles(rectangle, circle)) {
+      return false;
+    }
 
-    return CollisionChecker.rectangles(rectangle, circle);
-    /*
+    double r = (circle.width / 2);
+    int x = circle.x + r.floor();
+    int y = circle.y + r.floor();
+
+    // This will be set to true when the circle is outside the corner of the rectangle
+    bool edgeCase = false;
+
     // Upper left
-    if (sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)
-        && !(sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2))) {
-      return true;
+    if (x < rectangle.x && y < rectangle.y) {
+      if ((r < sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y, 2)))) {
+        edgeCase = true;
+      }
     }
+
     // Upper right
-    if (sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)
-        && !(sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2))) {
-      return true;
+    if (x > rectangle.x + rectangle.width && y < rectangle.y) {
+      if ((r < sqrt(pow(x - (rectangle.x + rectangle.width), 2) + pow(y - rectangle.y, 2)))) {
+        edgeCase = true;
+      }
     }
-    // Lower Left
-    if (sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)
-        && !(sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2))) {
-      return true;
+
+    // Lower left
+    if (x < rectangle.x && y > rectangle.y + rectangle.height) {
+      if ((r < sqrt(pow(x - rectangle.x, 2) + pow(y - (rectangle.y + rectangle.height), 2)))) {
+        edgeCase = true;
+      }
     }
+
     // Lower right
-    if (sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)
-        && !(sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2))) {
+    if (x > rectangle.x + rectangle.width && y > rectangle.y + rectangle.height) {
+      // Radius is greater than the distance to the corner
+      if ((r < sqrt(pow(x - (rectangle.x + rectangle.width), 2) + pow(y - (rectangle.y + rectangle.height), 2)))) {
+        edgeCase = true;
+      }
+    }
+
+    if (!edgeCase) {
       return true;
     }
     return false;
-     */
   }
 }
