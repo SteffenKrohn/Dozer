@@ -23,11 +23,11 @@ class LevelController {
     // TODO Provisional
     lc.level = new Level(
         lc,
-        100,
-        10,
-        50,
-        250,
-        1,
+        100,// Time limit
+        10, // Initial score
+        50, // target Score
+        250, // lanespeed
+        1,  // level id
         querySelector("#lane").getBoundingClientRect().height,
         querySelector("#lane").getBoundingClientRect().width
     );

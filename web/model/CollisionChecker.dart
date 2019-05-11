@@ -49,32 +49,32 @@ class CollisionChecker {
    */
   static bool recCir(m.Element rectangle, m.Element circle) {
 
-    int x = (circle.x + (circle.width / 2)) as int;
-    int y = (circle.y + (circle.height / 2)) as int;
+    if (!CollisionChecker.rectangles(rectangle, circle)) {
+      return false;
+    }
 
-    return CollisionChecker.rectangles(rectangle, circle);
-    /*
+    double r = (circle.width / 2);
+    int x = circle.x + r.floor();
+    int y = circle.y + r.floor();
+
+    // FIXME this only checks the corners of the rectangle against the circle
+
     // Upper left
-    if (sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)
-        && !(sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2))) {
+    if (r <= sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y, 2))) {
       return true;
     }
     // Upper right
-    if (sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2)
-        && !(sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2))) {
+    if (r <= sqrt(pow(x - rectangle.x + rectangle.width, 2) + pow(y - rectangle.y, 2))) {
       return true;
     }
-    // Lower Left
-    if (sqrt((rectangle.x - x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)
-        && !(sqrt((x - rectangle.x)^2 + (rectangle.y - y)^2) <= (circle.height / 2))) {
+    // Lower left
+    if (r <= sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y + rectangle.height, 2))) {
       return true;
     }
     // Lower right
-    if (sqrt((x - rectangle.x)^2 + (y - rectangle.y)^2) <= (circle.height / 2)
-        && !(sqrt((rectangle.x - x)^2 + (rectangle.y - y)^2) <= (circle.height / 2))) {
+    if (r <= sqrt(pow(x - rectangle.x + rectangle.width, 2) + pow(y - rectangle.y + rectangle.height, 2))) {
       return true;
     }
     return false;
-     */
   }
 }

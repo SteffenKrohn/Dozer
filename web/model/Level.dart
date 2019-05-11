@@ -143,7 +143,7 @@ class Level {
     //TODO provisional
 
     for (int i = 0; i < 20; i++) {
-      Brick b = new Brick(i, 100 + i, 5 + i);
+      Brick b = new Brick(i, 320 + i*10, 5 + i);
       b.width = this.viewWidth ~/ 4 - 10;
       b.y = i * -200;
       b.move(0, (this.laneSpeed / 50) as int);
