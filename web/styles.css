@@ -36,6 +36,18 @@ h1 {
     height: 100%;
 }
 
+#message {
+    width: 100%;
+    height: 100%;
+}
+
+.button_level_clickable {
+    background-color: aqua;
+}
+
+.button_level_greyed_out {
+    background-color: #6666ff;
+}
 .element {
     position: fixed;
     text-align: center;

@@ -55,7 +55,7 @@ class LevelView {
     view.style.height = model.height.toString() + "px";
   }
 
-  String getHtmlRepresentation(elem.Element element) {
+  static String getHtmlRepresentation(elem.Element element) {
     String type = element.runtimeType.toString();
     String out;
 

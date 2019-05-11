@@ -76,6 +76,10 @@ class LevelController {
       if (e.keyCode == 39) {
         this.level.getDozer().move(10, 0);
       }
+      // Straight pressed
+      if (e.keyCode == 38) {
+        this.level.getDozer().move(0, 0);
+      }
     });
   }
 
@@ -91,7 +95,7 @@ class LevelController {
       // Device orientation available
       else {
         // TODO make prettier
-        int dx = ev.gamma.toInt();
+        int dx = ev.gamma ~/ 1.6;
         this.level.getDozer().move(dx, 0);
       }
     });
@@ -99,6 +103,6 @@ class LevelController {
 
   void stop(Timer t) {
     t.cancel();
-    this._gameController.showMenu();
+    this._gameController.showMessageWin(this.level.getScore(), this.level.timeLimit.toInt());
   }
 }
