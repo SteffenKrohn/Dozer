@@ -76,7 +76,7 @@ class LevelController {
       if (e.keyCode == 39) {
         this.level.getDozer().move(10, 0);
       }
-      // Straight pressed
+      // Upper pressed
       if (e.keyCode == 38) {
         this.level.getDozer().move(0, 0);
       }
@@ -89,15 +89,9 @@ class LevelController {
   void enableOrientationControl() {
     // Handle the device orientation to move the Dozer
     window.onDeviceOrientation.listen((ev) {
-      // No device orientation
-      if (ev.alpha == null && ev.beta == null && ev.gamma == null) {
-      }
-      // Device orientation available
-      else {
-        // TODO make prettier
-        int dx = ev.gamma ~/ 1.6;
-        this.level.getDozer().move(dx, 0);
-      }
+      // TODO make prettier
+      int dx = ev.gamma ~/ 1.6;
+      this.level.getDozer().move(dx, 0);
     });
   }
 

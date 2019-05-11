@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import '../file/ConfigLoader.dart';
@@ -16,7 +17,7 @@ class GameController {
   int _highscore = 0;
   int _reachedLevel = 2; // TODO Web Storage
   int _nrAvailableLevels;
-  bool _gyroAvailable;
+  bool _gyroAvailable = true;
 
   void startup() {
 
@@ -27,9 +28,14 @@ class GameController {
     // TODO load levels
     this._nrAvailableLevels = 13; //provisional
 
-    // TODO wait 1s test if gyro is supported, if not showMessageNoSupportForGyro
-    this._gyroAvailable = false; //provisional
-    this.showMessageNoSupportForGyro();
+    // Check Gyrosensor Support
+    window.onDeviceOrientation.first.then((e) {
+      this._gyroAvailable = e.gamma != null ? true : false;
+      if(!this._gyroAvailable) {
+        this.showMessageNoSupportForGyro();
+      }
+    });
+
   }
 
   void startNextLevel() {

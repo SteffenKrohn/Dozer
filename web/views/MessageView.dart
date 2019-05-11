@@ -33,6 +33,7 @@ class MessageView {
 
   static void showMessageNoSupportForGyro() {
     String html  = "<div id='message'>"
+        "<h1>Dozer</h1>"
         "<h2>Sadly your device does not support motion control.</h2>"
         "<h3>Controlling the Dozer is only possible with the arrow buttons on your keyboard. "
         "But you can scan the QR-Code to play it on your smartphone!</h3>"
@@ -45,6 +46,7 @@ class MessageView {
 
   static void showMessageQRCode() {
     String html  = "<div id='message'>"
+        "<h1>Dozer</h1>"
         "<img src=\"../images/qr-code.jpg\">"
         "<h3>Get your Smartphone out and scan the QR-Code to play with Motion Control!</h3>"
         "<button id='button_to_menu'>Go To Menu</button>"
@@ -57,6 +59,7 @@ class MessageView {
     String descr = gyroAvailable ? "tilting your phone": "pressing the left and right arrow keys. Move straight on by pressing the upper key";
 
     String html  = "<div id='message'>"
+        "<h1>Dozer</h1>"
         "<h3>You move the dozer by $descr. In a limited time, "
         "make the dozer grow by collecting the red dots. "
         "But be careful because there will be obstacles like bricks and barriers.</h3>"
@@ -68,6 +71,7 @@ class MessageView {
 
   static void showMessageCredits() {
     String html  = "<div id='message'>"
+        "<h1>Dozer</h1>"
         "<h3>Creators, License, Fonts, Participants will be stated here later</h3>" // TODO
         "<button id='button_to_menu'>Back</button>"
         "</div>";
