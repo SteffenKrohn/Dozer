@@ -27,6 +27,7 @@ class Level {
   Queue<Element> remainingElements = new Queue<Element>();
 
   int initialTime;
+  String instructions = "Catch The Dots To Grow The Dozer"; // provisional
 
   // TODO probably provisional
   int viewWidth;

@@ -1,6 +1,8 @@
 import 'dart:html';
 
 import '../controller/LevelController.dart';
+import '../model/Brick.dart';
+import '../model/Dot.dart';
 import '../model/Dozer.dart';
 import '../model/Level.dart';
 import '../model/Element.dart' as elem;
@@ -56,16 +58,24 @@ class LevelView {
   }
 
   static String getHtmlRepresentation(elem.Element element) {
-    String type = element.runtimeType.toString();
     String out;
 
-    if(type == "Dozer" || type == "Dot" || type == "Brick") { // TODO Dozer kommt später raus, da es eine Schlange werden soll
+    /*if(type == "Dozer" || type == "Dot" || type == "Brick") { // TODO Dozer kommt später raus, da es eine Schlange werden soll
       out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'> ${element.toString()} </div>";
     } /*else if() { // Power ups
 
     }*/ else { // Barrier
       out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'></div>";
+    }*/
+
+    if(element is Dozer){
+      out += "<div class='element dozer' id='e${element.id}'> ${element.toString()} </div>"; // TODO toString is provisional
+    } else if(element is Dot) {
+      out += "<div class='element dot' id='e${element.id}'> ${element.toString()} </div>";
+    } else if(element is Brick) {
+      out += "<div class='element brick' id='e${element.id}'> ${element.toString()} </div>";
     }
+
     return out;
   }
 }

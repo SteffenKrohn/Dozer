@@ -80,23 +80,10 @@ class GameController {
     });
   }
 
-  void listenHelpButton() {
-    querySelector("#button_help").onClick.listen((MouseEvent e) {
-      this.showMessageHelp();
-    });
-  }
-
-  void listenQRCodeButton() {
-    querySelector("#button_qr_code").onClick.listen((MouseEvent e) {
-      this.showMessageQRCode();
-    });
-  }
-
   void showMenu() {
-    MenuView.show();
+    MenuView.show(this._reachedLevel, "Catch The Dots To Grow The Dozer"); // this._levelController.level.instructions TODO waiting for dependency
     this.listenNextLevelButton();
     this.listenChooseLevelButton();
-    this.listenHelpButton();
     this.listenCreditsButton();
   }
 
@@ -115,22 +102,6 @@ class GameController {
   void showMessageNoSupportForGyro() {
     MessageView.showMessageNoSupportForGyro();
     this.listenGoToMenuButton();
-    this.listenQRCodeButton();
-  }
-
-  void showMessageQRCode() {
-    MessageView.showMessageQRCode();
-    this.listenGoToMenuButton();
-  }
-
-  void showMessageHelp() {
-    MessageView.showMessageHelp(this._gyroAvailable);
-    this.listenGoToMenuButton();
-  }
-
-  void showMessageCredits() {
-    MessageView.showMessageCredits();
-    this.listenGoToMenuButton();
   }
 
   void showMessageChooseLevels(int nrAvailableLevels, int reachedLevel) {
@@ -138,4 +109,10 @@ class GameController {
     this.listenGoToMenuButton();
     this.listenAllLevelButtons(reachedLevel);
   }
+
+  void showMessageCredits() {
+    MessageView.showMessageCredits();
+    this.listenGoToMenuButton();
+  }
+
 }
