@@ -19,8 +19,12 @@ class LevelLoader {
         querySelector("#lane").getBoundingClientRect().width
     );
 
-    List<dynamic> entities = map.putIfAbsent("entities", () => List());
+    if (params.containsKey("instructions")) {
+      lvl.instructions = params.putIfAbsent("instructions", () => "");
+    }
 
+
+    List<dynamic> entities = map.putIfAbsent("entities", () => List());
     Queue<Entity> queuedEntities = Queue<Entity>();
 
     // Counter to give each element an unique id
