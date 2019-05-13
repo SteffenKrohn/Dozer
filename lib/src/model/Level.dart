@@ -145,7 +145,7 @@ class Level {
 
   /**
    * Removes invisible entities mainly entities that scrolled past the viewport
-   * from the visibileElements Map
+   * from the visibileEntities Map
    */
   void removeInvisibleEntities() {
     this.getVisibleEntities().forEach((id, e) {

@@ -23,7 +23,7 @@ class Brick extends Entity {
   }
 
   /**
-   * Returns a string representing as a DOM element of this Brick
+   * Returns a string representing of this Brick
    */
   String toString() {
     return "brick";

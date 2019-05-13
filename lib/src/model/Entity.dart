@@ -4,7 +4,7 @@ abstract class Entity {
 
   int id;
 
-  /** The current movement of the element for the next view update */
+  /** The current movement of the entity for the next view update */
   int dx = 0;
   int dy = 5;
 
@@ -27,7 +27,7 @@ abstract class Entity {
   String toString();
 
   /**
-   * Called when Element e collides with this element
+   * Called when Entity e collides with this Entity
    */
   void hitBy(Entity e);
 }
