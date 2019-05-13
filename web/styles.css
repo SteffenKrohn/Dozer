@@ -48,7 +48,8 @@ h1 {
 .button_level_greyed_out {
     background-color: #6666ff;
 }
-.element {
+
+.entity {
     position: fixed;
     text-align: center;
     display: flex;

@@ -1,12 +1,11 @@
-import 'Dozer.dart';
-import 'Element.dart' as m;
+part of dozergame;
 
 /**
  * Representation of a Brick
  * This is used to build obstacles for the player
  * Upon hitting the Brick, the score will be decreased
  */
-class Brick extends m.Element {
+class Brick extends Entity {
 
   /** The value is displayed and used to decrease the score */
   int value;
@@ -31,7 +30,7 @@ class Brick extends m.Element {
   }
 
   @override
-  void hitBy(m.Element e) {
+  void hitBy(Entity e) {
     if (e is Dozer) {
       this.value = 0;
     }

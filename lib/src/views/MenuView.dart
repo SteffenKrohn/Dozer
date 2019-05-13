@@ -1,4 +1,4 @@
-import 'dart:html';
+part of dozergame;
 
 class MenuView {
 

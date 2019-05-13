@@ -1,6 +1,5 @@
-import 'controller/GameController.dart';
+import 'package:dozergame/dozergame.dart';
 
 void main() {
-
-  new GameController().startup();
+  new AppController().startup();
 }

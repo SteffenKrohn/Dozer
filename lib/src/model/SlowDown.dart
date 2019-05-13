@@ -1,6 +1,4 @@
-
-import 'Element.dart';
-import 'PowerUp.dart';
+part of dozergame;
 
 class SlowDown extends PowerUp {
 
@@ -9,7 +7,7 @@ class SlowDown extends PowerUp {
   }
 
   @override
-  void hitBy(Element e) {
+  void hitBy(Entity e) {
     // TODO: implement hitBy
   }
 

@@ -1,28 +1,22 @@
-import 'dart:async';
-import 'dart:html';
-
-import '../controller/GameController.dart';
-import '../file/LevelLoader.dart';
-import '../model/Level.dart';
-import '../views/LevelView.dart';
+part of dozergame;
 
 class LevelController {
 
-  GameController _gameController;
+  AppController _gameController;
   Level level;
   LevelView _levelView;
 
-  static void loadAndStart(GameController gc, int level) async {
-    Future<LevelController> dlc = LevelController.load(gc, level);
+  static void loadAndStart(AppController ac, int level) async {
+    Future<LevelController> dlc = LevelController.load(ac, level);
     LevelController lc = await dlc;
     lc.start();
   }
 
-  static Future<LevelController> load(GameController gc, int level) async {
+  static Future<LevelController> load(AppController ac, int level) async {
 
     LevelController lc = new LevelController();
 
-    lc._gameController = gc;
+    lc._gameController = ac;
 
     lc._levelView = new LevelView(lc, lc.level);
 
@@ -38,8 +32,8 @@ class LevelController {
 
     Timer t;
     // Start the periodic update of the game elements with 50hz
-    t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ GameController.framerate), (update) {
-      this.level.changeTimeLimit(-1000 / GameController.framerate / 1000);
+    t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
+      this.level.changeTimeLimit(-1000 / AppController.framerate / 1000);
 
       if (this.level.timeLimit <= 0) {
         this.stop(t);

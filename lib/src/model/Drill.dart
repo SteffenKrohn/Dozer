@@ -1,5 +1,4 @@
-import 'Element.dart';
-import 'PowerUp.dart';
+part of dozergame;
 
 class Drill extends PowerUp {
 
@@ -8,7 +7,7 @@ class Drill extends PowerUp {
   }
 
   @override
-  void hitBy(Element e) {
+  void hitBy(Entity e) {
     // TODO: implement hitBy
   }
 

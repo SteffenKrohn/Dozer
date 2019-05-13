@@ -1,14 +1,4 @@
-
-import 'dart:collection';
-import 'dart:convert';
-import 'dart:html';
-
-import '../controller/LevelController.dart';
-import '../model/Brick.dart';
-import '../model/Dot.dart';
-import '../model/Element.dart' as prefix0;
-import '../model/Level.dart';
-
+part of dozergame;
 
 class LevelLoader {
   
@@ -29,19 +19,19 @@ class LevelLoader {
         querySelector("#lane").getBoundingClientRect().width
     );
 
-    List<dynamic> elements = map.putIfAbsent("elements", () => List());
+    List<dynamic> entities = map.putIfAbsent("entities", () => List());
 
-    Queue<prefix0.Element> queuedElements = Queue<prefix0.Element>();
+    Queue<Entity> queuedEntities = Queue<Entity>();
 
     // Counter to give each element an unique id
     int elementId = 1;
 
-    elements.forEach((e) {
+    entities.forEach((e) {
       String type = e.putIfAbsent("type", () => "");
 
       if (type == "dot") {
         int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
-        queuedElements.add(Dot(
+        queuedEntities.add(Dot(
           elementId,
           (width * e.putIfAbsent("x", () => 0)).floor(), // x
           lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
@@ -51,7 +41,7 @@ class LevelLoader {
         ));
       } else if (type == "brick") {
         int width = lvl.viewWidth - (lvl.viewWidth * Brick.getStandardWidth()).floor();
-        queuedElements.add(Brick(
+        queuedEntities.add(Brick(
             elementId,
             (width * e.putIfAbsent("x", () => 0)).floor(), // x
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
@@ -62,7 +52,7 @@ class LevelLoader {
       }
       elementId++;
     });
-    lvl.remainingElements = queuedElements;
+    lvl.remainingElements = queuedEntities;
     return lvl;
   }
 

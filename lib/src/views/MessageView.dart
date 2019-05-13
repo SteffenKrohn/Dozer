@@ -1,4 +1,4 @@
-import 'dart:html';
+part of dozergame;
 
 class MessageView {
 
@@ -35,7 +35,7 @@ class MessageView {
     String html  = "<div id='message'>"
         "<h1>Dozer</h1><hr>"
         "<h2>Oh No! On this device motion control is not available.</h2>"
-        "<img src=\"../images/qr-code.jpg\">"
+        "<img src=\"resources/qr-code.jpg\">"
         "<h3>Scan the QR-Code or play with your arrow keys.</h3><hr>"
         "<button id='button_to_menu'>Let me play anyway</button>"
         "</div>";
