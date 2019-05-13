@@ -4,23 +4,25 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:collection';
+import 'dart:math';
 
-import 'src/controller/AppController.dart';
-import 'src/controller/LevelController.dart';
+part 'src/controller/AppController.dart';
+part 'src/controller/LevelController.dart';
 
-import 'src/file/LevelLoader.dart';
+part 'src/file/LevelLoader.dart';
 
-import 'src/model/Barrier.dart';
-import 'src/model/Brick.dart';
-import 'src/model/Dozer.dart';
-import 'src/model/Dot.dart';
-import 'src/model/PowerUp.dart';
-import 'src/model/SlowDown.dart';
-import 'src/model/CollisionChecker.dart';
-import 'src/model/Drill.dart';
-import 'src/model/Entity.dart';
-import 'src/model/Level.dart';
+part 'src/model/Barrier.dart';
+part 'src/model/Brick.dart';
+part 'src/model/Dozer.dart';
+part 'src/model/Dot.dart';
+part 'src/model/PowerUp.dart';
+part 'src/model/SlowDown.dart';
+part 'src/model/DoubleUp.dart';
+part 'src/model/CollisionChecker.dart';
+part 'src/model/Drill.dart';
+part 'src/model/Entity.dart';
+part 'src/model/Level.dart';
 
-import 'src/views/LevelView.dart';
-import 'src/views/MenuView.dart';
-import 'src/views/MessageView.dart';
+part 'src/views/LevelView.dart';
+part 'src/views/MenuView.dart';
+part 'src/views/MessageView.dart';

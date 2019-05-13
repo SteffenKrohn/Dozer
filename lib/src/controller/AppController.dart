@@ -3,7 +3,6 @@ part of dozergame;
 class AppController {
 
   LevelController _levelController;
-  ConfigLoader _configLoader;
 
   /** The target framerate in hz */
   static const int framerate = 50;
