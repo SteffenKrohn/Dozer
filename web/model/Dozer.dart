@@ -51,7 +51,7 @@ class Dozer extends elem.Element {
    * Returns a string representation of the dozer as an html element
    */
   String toString() {
-    return this.score.toString();
+    return "dozer";
   }
 
   @override

@@ -15,7 +15,7 @@ class Dot extends elem.Element {
   }
 
   String toString() {
-    return this.value.toString();
+    return "dot";
   }
 
   @override

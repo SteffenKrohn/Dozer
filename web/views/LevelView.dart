@@ -28,18 +28,17 @@ class LevelView {
       int id = int.parse(e.id.substring(1));
       elem.Element element;
 
+      // update old DOM Element if its also in visibleElements
       if(visibleElements.containsKey(id)) {
         element = visibleElements[id];
         updateElement(e, element);
         visibleElements.remove(id);
-        if (element is Dozer) {
-          e.text = element.score.toString();
-        }
-      } else {
+      } else { // otherwise delete it
         e.remove();
       }
     });
 
+    // add new DOM Elements
     visibleElements.forEach((id, value) {
       this.lane.appendHtml(getHtmlRepresentation(value));
       Element e = document.querySelector("#e" + id.toString());
@@ -58,22 +57,15 @@ class LevelView {
   }
 
   static String getHtmlRepresentation(elem.Element element) {
-    String out;
+    String out = "";
 
-    /*if(type == "Dozer" || type == "Dot" || type == "Brick") { // TODO Dozer kommt später raus, da es eine Schlange werden soll
-      out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'> ${element.toString()} </div>";
-    } /*else if() { // Power ups
 
-    }*/ else { // Barrier
-      out = "<div class='element ${type.toLowerCase()}' id='e${element.id}'></div>";
-    }*/
-
-    if(element is Dozer){
-      out += "<div class='element dozer' id='e${element.id}'> ${element.toString()} </div>"; // TODO toString is provisional
-    } else if(element is Dot) {
-      out += "<div class='element dot' id='e${element.id}'> ${element.toString()} </div>";
-    } else if(element is Brick) {
-      out += "<div class='element brick' id='e${element.id}'> ${element.toString()} </div>";
+    if(element.toString() == "dozer"){
+      out += "<div class='element dozer' id='e${element.id}'></div>";
+    } else if(element.toString() == "dot") {
+      out += "<div class='element dot' id='e${element.id}'> ${(element as Dot).value} </div>";
+    } else if(element.toString() == "brick") {
+      out += "<div class='element brick' id='e${element.id}'> ${(element as Brick).value} </div>";
     }
 
     return out;

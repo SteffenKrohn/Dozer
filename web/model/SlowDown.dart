@@ -12,4 +12,8 @@ class SlowDown extends PowerUp {
   void hitBy(Element e) {
     // TODO: implement hitBy
   }
+
+  String toString() {
+    return "slowdown";
+  }
 }

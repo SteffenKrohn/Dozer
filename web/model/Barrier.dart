@@ -12,7 +12,7 @@ class Barrier extends Element {
   }
 
   String toString() {
-    return "<div class='element barrier' id='e${this.id}'></div>";
+    return "barrier";
   }
 
   @override
