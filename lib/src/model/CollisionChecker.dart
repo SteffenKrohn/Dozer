@@ -3,8 +3,8 @@ part of dozergame;
 class CollisionChecker {
 
   /**
-   * Checks if two elements with rectangle shape overlap or touch
-   * by checking the boundaries of both elements
+   * Checks if two entities with rectangle shape overlap or touch
+   * by checking the boundaries of both entities
    */
   static bool rectangles(Entity a, Entity b) {
 
@@ -20,8 +20,8 @@ class CollisionChecker {
   }
 
   /**
-   * Checks if two elements with circle shape overlap or touch
-   * by checking the boundaries of both elements
+   * Checks if two entities with circle shape overlap or touch
+   * by checking the boundaries of both entities
    */
   static bool circles(Entity a, Entity b) {
 
@@ -41,8 +41,8 @@ class CollisionChecker {
   }
 
   /**
-   * Checks if two elements with circle and rectangle shape overlap or touch
-   * by checking the boundaries of both elements
+   * Checks if two entities with circle and rectangle shape overlap or touch
+   * by checking the boundaries of both entities
    */
   static bool recCir(Entity rectangle, Entity circle) {
 

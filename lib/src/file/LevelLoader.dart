@@ -56,7 +56,7 @@ class LevelLoader {
       }
       elementId++;
     });
-    lvl.remainingElements = queuedEntities;
+    lvl.remainingEntities = queuedEntities;
     return lvl;
   }
 

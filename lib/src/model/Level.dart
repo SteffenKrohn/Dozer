@@ -10,12 +10,12 @@ class Level {
   int _initialScore;
   int targetScore;
 
-  /** Equals the percentage which certain elements (such as Brick, Dot) move per second */
+  /** Equals the percentage which certain entities (such as Brick, Dot) move per second */
   double laneSpeed;
   int _level;
 
-  Map<int, Entity> visibleElements = new Map<int, Entity>();
-  Queue<Entity> remainingElements;
+  Map<int, Entity> visibleEntities = new Map<int, Entity>();
+  Queue<Entity> remainingEntities;
 
   int initialTime;
   String instructions = "Catch The Dots To Grow The Dozer"; // provisional
@@ -39,7 +39,7 @@ class Level {
     this.viewWidth = width;
 
     this._dozer = new Dozer(initialScore);
-    this.visibleElements.putIfAbsent(this._dozer.id, () => this._dozer);
+    this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
   /**
@@ -83,74 +83,74 @@ class Level {
   }
 
   /**
-   * Returns an immutable map of all currently visible elements
+   * Returns an immutable map of all currently visible entities
    * The key value pair of a map entry is:
-   * <ID of element | element>
+   * <ID of entity | entity>
    */
-  Map<int, Entity> getVisibleElements() {
-    return Map<int, Entity>.from(this.visibleElements);
+  Map<int, Entity> getVisibleEntities() {
+    return Map<int, Entity>.from(this.visibleEntities);
   }
 
   /**
-   * Updates all necessary elements
+   * Updates all necessary entities
    * This will probably be called every 50ms
    */
   void update() {
-    this.visibleElements.forEach((id, e) => e.update());
-    this.addNewlyVisibleElements();
-    this.removeInvisibleElements();
+    this.visibleEntities.forEach((id, e) => e.update());
+    this.addNewlyVisibleEntities();
+    this.removeInvisibleEntities();
     this.checkCollisions();
   }
 
   /**
-   * Checks collision of all visible elements with the dozer
+   * Checks collision of all visible entities with the dozer
    * This will probably be called every 50ms
    */
   void checkCollisions() {
-    this.getVisibleElements().forEach((id, e) {
+    this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {
         if(CollisionChecker.recCir(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
           if (e is Brick) {
-            visibleElements.remove(id);
+            visibleEntities.remove(id);
           }
         }
       } else if (e is Dot || e is PowerUp) {
         if(CollisionChecker.circles(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
-          visibleElements.remove(id);
+          visibleEntities.remove(id);
         }
       }
     });
   }
 
   /**
-   * Adds all elements that became visible since the last update
+   * Adds all entities that became visible since the last update
    * This will probably be called every 50ms
    */
-  void addNewlyVisibleElements() {
+  void addNewlyVisibleEntities() {
     Entity next;
     double scrolled;
-    while (remainingElements.length > 0 &&
-           (scrolled = (next = remainingElements.first).y + next.height +
+    while (remainingEntities.length > 0 &&
+           (scrolled = (next = remainingEntities.first).y + next.height +
            (this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit))) >= next.height * -1
           ) {
       next.y = scrolled.floor();
-      visibleElements.putIfAbsent(next.id, () => next);
-      remainingElements.removeFirst();
+      visibleEntities.putIfAbsent(next.id, () => next);
+      remainingEntities.removeFirst();
     }
   }
 
   /**
-   * Removes invisible elements mainly elements that scrolled past the viewport
-   * from the visibileElements Map
+   * Removes invisible entities mainly entities that scrolled past the viewport
+   * from the visibileEntities Map
    */
-  void removeInvisibleElements() {
-    this.getVisibleElements().forEach((id, e) {
+  void removeInvisibleEntities() {
+    this.getVisibleEntities().forEach((id, e) {
       if (this.viewHeight < e.y) {
-        this.visibleElements.remove(id);
+        this.visibleEntities.remove(id);
       }
     });
   }

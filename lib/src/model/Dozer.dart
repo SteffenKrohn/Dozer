@@ -44,7 +44,7 @@ class Dozer extends Entity {
   }
 
   /**
-   * Returns a string representation of the dozer as an html element
+   * Returns a string representation of the dozer
    */
   String toString() {
     return "dozer";
