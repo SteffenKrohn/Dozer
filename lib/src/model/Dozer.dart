@@ -29,8 +29,8 @@ class Dozer extends Entity {
       dx = this.x * -1;
     }
     // TODO bad querySelector
-    if (this.x + dx + this.width > querySelector("#lane").getBoundingClientRect().right) {
-      dx = querySelector("#lane").getBoundingClientRect().right - this.x + this.width;
+    if (this.x + dx + this.width > querySelector("#lane").getBoundingClientRect().width) {
+      dx = querySelector("#lane").getBoundingClientRect().width - this.x - this.width;
     }
     this.dx = dx;
     super.update();
