@@ -14,12 +14,13 @@ class Brick extends m.Element {
   /**
    * Constructs a new Brick with all necessary information
    */
-  Brick(int id, int x, int value) {
+  Brick(int id, int x, int y, int value, int width, int height) {
     this.id = id;
     this.x = x;
+    this.y = y;
     this.value = value;
-    this.width = 250;
-    this.height= 80;
+    this.width = width;
+    this.height = height;
   }
 
   /**
@@ -34,5 +35,13 @@ class Brick extends m.Element {
     if (e is Dozer) {
       this.value = 0;
     }
+  }
+
+  static double getStandardWidth() {
+    return 0.25;
+  }
+
+  static double getStandardHeight() {
+    return 0.1;
   }
 }

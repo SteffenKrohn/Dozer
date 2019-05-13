@@ -39,13 +39,11 @@ class GameController {
   }
 
   void startNextLevel() {
-    _levelController = LevelController.load(this, this._reachedLevel);
-    _levelController.start();
+    LevelController.loadAndStart(this, this._reachedLevel);
   }
 
   void startLevel(int level) {
-    _levelController = LevelController.load(this, level);
-    _levelController.start();
+    LevelController.loadAndStart(this, level);
   }
 
   void listenGoToMenuButton() {
