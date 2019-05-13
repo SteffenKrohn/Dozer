@@ -1,6 +1,6 @@
-import 'Element.dart';
+part of dozergame;
 
-class Barrier extends Element {
+class Barrier extends Entity {
 
   int height;
 
@@ -16,7 +16,7 @@ class Barrier extends Element {
   }
 
   @override
-  void hitBy(Element e) {
+  void hitBy(Entity e) {
     // TODO: implement hitBy
   }
 }

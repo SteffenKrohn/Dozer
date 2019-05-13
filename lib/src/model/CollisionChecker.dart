@@ -1,7 +1,4 @@
-import 'dart:html';
-import 'dart:math';
-
-import '../model/Element.dart' as m;
+part of dozergame;
 
 class CollisionChecker {
 
@@ -9,7 +6,7 @@ class CollisionChecker {
    * Checks if two elements with rectangle shape overlap or touch
    * by checking the boundaries of both elements
    */
-  static bool rectangles(m.Element a, m.Element b) {
+  static bool rectangles(Entity a, Entity b) {
 
     // Upper left of a and not lower left of a
     if (
@@ -26,7 +23,7 @@ class CollisionChecker {
    * Checks if two elements with circle shape overlap or touch
    * by checking the boundaries of both elements
    */
-  static bool circles(m.Element a, m.Element b) {
+  static bool circles(Entity a, Entity b) {
 
     double ra = (a.width / 2);
     double rb = (b.width / 2);
@@ -47,7 +44,7 @@ class CollisionChecker {
    * Checks if two elements with circle and rectangle shape overlap or touch
    * by checking the boundaries of both elements
    */
-  static bool recCir(m.Element rectangle, m.Element circle) {
+  static bool recCir(Entity rectangle, Entity circle) {
 
     if (!CollisionChecker.rectangles(rectangle, circle)) {
       return false;

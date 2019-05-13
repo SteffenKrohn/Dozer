@@ -1,7 +1,6 @@
+part of dozergame;
 
-import 'Element.dart';
-
-abstract class PowerUp extends Element {
+abstract class PowerUp extends Entity {
 
   int duration;
 

@@ -1,10 +1,6 @@
-import 'dart:html';
+part of dozergame;
 
-import 'Brick.dart';
-import 'Dot.dart';
-import 'Element.dart' as elem;
-
-class Dozer extends elem.Element {
+class Dozer extends Entity {
 
   /** The current score / length of the dozer */
   int score;
@@ -55,7 +51,7 @@ class Dozer extends elem.Element {
   }
 
   @override
-  void hitBy(elem.Element e) {
+  void hitBy(Entity e) {
     if (e is Brick) {
       this.score -= e.value;
       return;

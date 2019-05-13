@@ -1,4 +1,6 @@
-abstract class Element {
+part of dozergame;
+
+abstract class Entity {
 
   int id;
 
@@ -27,5 +29,5 @@ abstract class Element {
   /**
    * Called when Element e collides with this element
    */
-  void hitBy(Element e);
+  void hitBy(Entity e);
 }

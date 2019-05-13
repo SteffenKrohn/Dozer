@@ -4,9 +4,9 @@
     "timelimit": 100000,
     "initialscore": 25,
     "targetscore": 50,
-    "lanespeed": 0.1
+    "lanespeed": 0.3
   },
-  "elements": [
+  "entities": [
     {
       "type": "brick",
       "value": 5,

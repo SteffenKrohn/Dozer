@@ -1,7 +1,6 @@
-import 'Dozer.dart';
-import 'Element.dart' as elem;
+part of dozergame;
 
-class Dot extends elem.Element {
+class Dot extends Entity {
 
   int value;
 
@@ -19,7 +18,7 @@ class Dot extends elem.Element {
   }
 
   @override
-  void hitBy(elem.Element e) {
+  void hitBy(Entity e) {
     if (e is Dozer) {
       this.value = 0;
     }

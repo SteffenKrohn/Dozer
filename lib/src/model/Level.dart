@@ -1,14 +1,4 @@
-
-import 'dart:collection';
-
-import '../controller/LevelController.dart';
-import 'Barrier.dart';
-import 'Brick.dart';
-import 'CollisionChecker.dart';
-import 'Dot.dart';
-import 'Dozer.dart';
-import 'Element.dart';
-import 'PowerUp.dart';
+part of dozergame;
 
 class Level {
 
@@ -24,8 +14,8 @@ class Level {
   double laneSpeed;
   int _level;
 
-  Map<int, Element> visibleElements = new Map<int, Element>();
-  Queue<Element> remainingElements;
+  Map<int, Entity> visibleElements = new Map<int, Entity>();
+  Queue<Entity> remainingElements;
 
   int initialTime;
   String instructions = "Catch The Dots To Grow The Dozer"; // provisional
@@ -97,8 +87,8 @@ class Level {
    * The key value pair of a map entry is:
    * <ID of element | element>
    */
-  Map<int, Element> getVisibleElements() {
-    return Map<int, Element>.from(this.visibleElements);
+  Map<int, Entity> getVisibleElements() {
+    return Map<int, Entity>.from(this.visibleElements);
   }
 
   /**
@@ -141,7 +131,7 @@ class Level {
    * This will probably be called every 50ms
    */
   void addNewlyVisibleElements() {
-    Element next;
+    Entity next;
     double scrolled;
     while (remainingElements.length > 0 &&
            (scrolled = (next = remainingElements.first).y + next.height +

@@ -1,12 +1,6 @@
-import 'dart:async';
-import 'dart:html';
+part of dozergame;
 
-import '../file/ConfigLoader.dart';
-import '../views/MenuView.dart';
-import 'LevelController.dart';
-import '../views/MessageView.dart';
-
-class GameController {
+class AppController {
 
   LevelController _levelController;
   ConfigLoader _configLoader;
