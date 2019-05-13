@@ -17,19 +17,22 @@ class MessageView {
     querySelector("body").setInnerHtml(html);
   }
 
-  static void showMessageLoose(int score) {
+  static void showMessageLoose(bool timeout) {
     String out;
-    if(score > 0) {
+    if(timeout) {
       out = "Be faster and grow your dozer bigger next time!";
     } else {
       out = "Your Dozer did not make it, avoid the dangerous bricks next time!";
     }
 
-    String html  = "<div id='message'><hr>"
-        "<h1>You Loose.</h1>"
-        "<h2>$out</h2>"
-        "<hr>"
-        "<button id='button_to_menu'>Go To Menu</button>"
+    String html  = "<div id='message'>"
+          "<div id='button_next_level'"
+            "<hr>"
+            "<h1>You Loose.</h1>"
+            "<h2>$out</h2>"
+            "<hr>"
+            "<button id='button_to_menu'>Go To Menu</button>"
+          "</div>"
         "</div>";
 
     querySelector("body").setInnerHtml(html);

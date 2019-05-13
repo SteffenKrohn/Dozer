@@ -5,7 +5,7 @@ class Level {
   LevelController _levelController;
   Dozer _dozer;
 
-  /** Time limit in seconds */
+  /** Time limit in ms */
   double timeLimit;
   int _initialScore;
   int targetScore;
@@ -65,7 +65,7 @@ class Level {
    * Returns the current score
    */
   int getScore() {
-    return this._dozer.score;
+    return (this.timeLimit * 1.357).floor();
   }
 
   /**
@@ -158,5 +158,14 @@ class Level {
   int getRemainingYFromTime(int ms) {
     return this.viewHeight * laneSpeed * ms ~/ -1000;
   }
+
+  bool gameWon() {
+    return this.getDozer().score >= this.targetScore;
+  }
+
+  bool gameLost() {
+    return this.timeLimit <= 0 || this.getDozer().score <= 0;
+  }
+
 
 }

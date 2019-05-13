@@ -2,35 +2,23 @@
   "params": {
     "level": 1,
     "timelimit": 100000,
-    "initialscore": 25,
-    "targetscore": 50,
+    "initialscore": 10,
+    "targetscore": 15,
     "lanespeed": 0.3,
     "instructions": "Catch the dots"
   },
   "entities": [
     {
       "type": "brick",
-      "value": 5,
+      "value": 10,
       "time": 2000,
       "x": 0
     },
     {
-      "type": "brick",
+      "type": "dot",
       "value": 5,
       "time": 2000,
-      "x": 0.33
-    },
-    {
-      "type" : "brick",
-      "value": 10,
-      "time": 2000,
-      "x": 0.66
-    },
-    {
-      "type" : "brick",
-      "value": 10,
-      "time": 2000,
-      "x": 1
+      "x": 0.5
     }
   ]
 }

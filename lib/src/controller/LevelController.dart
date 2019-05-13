@@ -35,8 +35,9 @@ class LevelController {
     t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
       this.level.changeTimeLimit(-1000 / AppController.framerate / 1000);
 
-      if (this.level.timeLimit <= 0) {
-        this.stop(t);
+      if (this.level.gameLost()) {
+        t.cancel();
+        this._gameController.showMessageLoose(this.level.timeLimit <= 0);
         return;
       }
 
@@ -44,8 +45,10 @@ class LevelController {
 
       // TODO smart?
       this.level.update();
-      if (this.level.getScore() <= 0 || this.level.getDozer().score >= level.targetScore) {
-        this.stop(t);
+      if (this.level.gameWon()) {
+        t.cancel();
+        // TODO second parameter provisional
+        this._gameController.showMessageWin(this.level.getScore(), true);
         return;
       }
 
@@ -84,10 +87,5 @@ class LevelController {
       int dx = ev.gamma ~/ 1.6;
       this.level.getDozer().move(dx, 0);
     });
-  }
-
-  void stop(Timer t) {
-    t.cancel();
-    this._gameController.showMessageWin(this.level.initialTime - this.level.timeLimit.toInt(), true); // TODO provisional
   }
 }
