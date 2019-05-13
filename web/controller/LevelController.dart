@@ -11,27 +11,24 @@ class LevelController {
   GameController _gameController;
   Level level;
   LevelView _levelView;
-  LevelLoader _levelLoader;
 
-  static LevelController load(GameController gc, int level) {
+  static void loadAndStart(GameController gc, int level) async {
+    Future<LevelController> dlc = LevelController.load(gc, level);
+    LevelController lc = await dlc;
+    lc.start();
+  }
+
+  static Future<LevelController> load(GameController gc, int level) async {
 
     LevelController lc = new LevelController();
 
     lc._gameController = gc;
 
     lc._levelView = new LevelView(lc, lc.level);
-    // TODO Provisional
-    lc.level = new Level(
-        lc,
-        100,// Time limit
-        10, // Initial score
-        50, // target Score
-        250, // lanespeed
-        1,  // level id
-        querySelector("#lane").getBoundingClientRect().height,
-        querySelector("#lane").getBoundingClientRect().width
-    );
-    lc._levelView.level = lc.level;
+
+    Level lvl = await LevelLoader.getLevel(lc, 1);
+    lc.level = lvl;
+    lc._levelView.level = lvl;
     return lc;
   }
 

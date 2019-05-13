@@ -19,12 +19,13 @@ class Level {
   double timeLimit;
   int _initialScore;
   int targetScore;
-  /** Equals the pixel which certain elements (such as Brick, Dot) move per second */
-  int laneSpeed;
+
+  /** Equals the percentage which certain elements (such as Brick, Dot) move per second */
+  double laneSpeed;
   int _level;
 
   Map<int, Element> visibleElements = new Map<int, Element>();
-  Queue<Element> remainingElements = new Queue<Element>();
+  Queue<Element> remainingElements;
 
   int initialTime;
   String instructions = "Catch The Dots To Grow The Dozer"; // provisional
@@ -36,7 +37,7 @@ class Level {
   /**
    * Creates a new level
    */
-  Level(LevelController lc, int timeLimit, int initialScore, int targetScore, int laneSpeed, int level, int height, int width) {
+  Level(LevelController lc, int timeLimit, int initialScore, int targetScore, double laneSpeed, int level, int height, int width) {
     this._levelController = lc;
     this._level = level;
     this.timeLimit = timeLimit.toDouble();
@@ -49,8 +50,6 @@ class Level {
 
     this._dozer = new Dozer(initialScore);
     this.visibleElements.putIfAbsent(this._dozer.id, () => this._dozer);
-
-    this.initialize(List<String>());
   }
 
   /**
@@ -138,21 +137,6 @@ class Level {
   }
 
   /**
-   * Initializes the level elements by filling the remainingElements queue
-   */
-  void initialize(List<String> params) {
-    //TODO provisional
-
-    for (int i = 0; i < 20; i++) {
-      Brick b = new Brick(i, 320 + i*10, 5 + i);
-      b.width = this.viewWidth ~/ 4 - 10;
-      b.y = i * -200;
-      b.move(0, (this.laneSpeed / 50) as int);
-      remainingElements.add(b);
-    }
-  }
-
-  /**
    * Adds all elements that became visible since the last update
    * This will probably be called every 50ms
    */
@@ -161,7 +145,7 @@ class Level {
     double scrolled;
     while (remainingElements.length > 0 &&
            (scrolled = (next = remainingElements.first).y + next.height +
-           (this.laneSpeed * (this.initialTime - this.timeLimit))) >= 0
+           (this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit))) >= next.height * -1
           ) {
       next.y = scrolled.floor();
       visibleElements.putIfAbsent(next.id, () => next);
@@ -180,4 +164,9 @@ class Level {
       }
     });
   }
+
+  int getRemainingYFromTime(int ms) {
+    return this.viewHeight * laneSpeed * ms ~/ -1000;
+  }
+
 }

@@ -5,13 +5,13 @@ class Dot extends elem.Element {
 
   int value;
 
-  Dot(int id, int x, int value) {
+  Dot(int id, int x, int y, int value, int width, int height) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.value = value;
-    this.width = 50;
-    this.height = 50;
+    this.width = width;
+    this.height = height;
   }
 
   String toString() {
@@ -23,5 +23,9 @@ class Dot extends elem.Element {
     if (e is Dozer) {
       this.value = 0;
     }
+  }
+
+  static double getStandardRadius() {
+    return 0.05;
   }
 }
