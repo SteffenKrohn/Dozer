@@ -4,7 +4,8 @@
     "timelimit": 100000,
     "initialscore": 25,
     "targetscore": 50,
-    "lanespeed": 0.3
+    "lanespeed": 0.3,
+    "instructions": "Catch the dots"
   },
   "entities": [
     {
