@@ -15,7 +15,7 @@ class LevelView {
   }
 
   void render() {
-    Map<int, Entity> visibleElements = level.getVisibleElements();
+    Map<int, Entity> visibleElements = level.getVisibleEntities();
 
     lane.querySelectorAll(".entity").forEach((e) {
       int id = int.parse(e.id.substring(1));
