@@ -27,7 +27,7 @@ class Brick extends m.Element {
    * Returns a string representing as a DOM element of this Brick
    */
   String toString() {
-    return this.value.toString();
+    return "brick";
   }
 
   @override

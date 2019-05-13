@@ -2,15 +2,18 @@ import 'dart:html';
 
 class MenuView {
 
-  static void show() {
+  static void show(int level, String levelInstruction) {
     String html  = "<div id='menu'>"
-        "<h1>Dozer</h1>"
-        "<h2>The Game - (logo?)</h2>"
-        "<button id='button_next_level'>Play</button>"
+        "<div id='button_next_level'"
+        "<h1>Dozer</h1><hr>"
+        "<h3>Level</h3>"
+        "<h2>$level</h2>"
+        "<h3>$levelInstruction</h3><hr>"
+        "<p>Tap To Play</p>"
+        "</div>"
+
         "<button id='button_choose_levels'>Choose a Level</button>"
-        "<button id='button_help'>Help</button>"
         "<button id='button_credits'>Credits</button>"
-        "<p>Hier könnte ihre Werbung stehen.</p>"
         "</div>";
 
     querySelector("body").setInnerHtml(html);
