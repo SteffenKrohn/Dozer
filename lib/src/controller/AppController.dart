@@ -78,8 +78,8 @@ class AppController {
     this.listenCreditsButton();
   }
 
-  void showMessageWin(int score, int seconds) {
-    MessageView.showMessageWin(score, seconds);
+  void showMessageWin(int seconds, bool highscore) {
+    MessageView.showMessageWin(seconds, highscore);
     this.listenGoToMenuButton();
     this.listenNextLevelButton();
   }

@@ -88,6 +88,6 @@ class LevelController {
 
   void stop(Timer t) {
     t.cancel();
-    this._gameController.showMessageWin(this.level.getScore(), this.level.initialTime - this.level.timeLimit.toInt());
+    this._gameController.showMessageWin(this.level.initialTime - this.level.timeLimit.toInt(), true); // TODO provisional
   }
 }

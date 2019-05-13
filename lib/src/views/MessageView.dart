@@ -2,12 +2,16 @@ part of dozergame;
 
 class MessageView {
 
-  static void showMessageWin(int score, int seconds) {
-    String html  = "<div id='message'>"
+  static void showMessageWin(int seconds, bool highscore) {
+    String out = highscore ? "New Highsore" : "Your Score";
+    String html  = "<div id='message'><hr>"
+        "<div id='button_next_level'"
         "<h1>You won!</h1>"
-        "<h2>You reached a score of $score in only $seconds seconds</h2>"
+        "<h3>$out</h3>"
+        "<h1>$seconds</h1>"
+        "<hr>"
+        "</div>"
         "<button id='button_to_menu'>Go To Menu</button>"
-        "<button id='button_next_level'>Next Level</button>"
         "</div>";
 
     querySelector("body").setInnerHtml(html);
@@ -21,11 +25,11 @@ class MessageView {
       out = "Your Dozer did not make it, avoid the dangerous bricks next time!";
     }
 
-    String html  = "<div id='message'>"
+    String html  = "<div id='message'><hr>"
         "<h1>You Loose.</h1>"
         "<h2>$out</h2>"
+        "<hr>"
         "<button id='button_to_menu'>Go To Menu</button>"
-        "<button id='button_next_level'>Try Again</button>"
         "</div>";
 
     querySelector("body").setInnerHtml(html);
