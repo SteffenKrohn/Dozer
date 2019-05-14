@@ -13,7 +13,7 @@ class Dozer extends Entity {
     this.id = 0;
     this.score = score;
     this.dy = 0;
-    // TODO fix this
+    // TODO fix this (streng genommen gehört das hier doch alles in den View als membervariablen, die man sich dann hier getted?)
     this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
     this.y = querySelector("body").getBoundingClientRect().height - 150;
     this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
@@ -22,16 +22,18 @@ class Dozer extends Entity {
 
   void update() {
     // TODO Make prettier
-    dx = this.dx;
-    // Left border
+    int dx = this.dx;
 
+    // Left border
     if (this.x + dx < 0) {
       dx = this.x * -1;
     }
+    // Right border
     // TODO bad querySelector
     if (this.x + dx + this.width > querySelector("#lane").getBoundingClientRect().width) {
       dx = querySelector("#lane").getBoundingClientRect().width - this.x - this.width;
     }
+
     this.dx = dx;
     super.update();
   }
