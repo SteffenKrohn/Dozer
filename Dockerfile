@@ -4,7 +4,7 @@ RUN pub global activate webdev
 COPY . /root/build-here/
 WORKDIR /root/build-here
 RUN pub get && \
-    webdev build --no-release --output web:build
+    webdev build --output web:build
 
 FROM nginx
 EXPOSE 80
