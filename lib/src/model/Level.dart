@@ -15,7 +15,7 @@ class Level {
   int _level;
 
   Map<int, Entity> visibleEntities = new Map<int, Entity>();
-  Queue<Entity> remainingEntities;
+  List<Entity> remainingEntities;
 
   int initialTime;
   String instructions = "Catch The Dots To Grow The Dozer"; // provisional
@@ -132,15 +132,29 @@ class Level {
    */
   void addNewlyVisibleEntities() {
     Entity next;
-    double scrolled;
-    while (remainingEntities.length > 0 &&
-           (scrolled = (next = remainingEntities.first).y + next.height +
-           (this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit))) >= next.height * -1
-          ) {
-      next.y = scrolled.floor();
-      visibleEntities.putIfAbsent(next.id, () => next);
-      remainingEntities.removeFirst();
-    }
+    double scrolled = this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit);
+
+    List<Entity> remEnt = List.from(remainingEntities);
+
+    int lastY;
+    int lastH;
+
+    remEnt.forEach((e) {
+
+      if (lastY != null && e.y < lastY && e.y + e.height < lastY + lastH) {
+        return;
+      }
+
+      lastY = e.y;
+      lastH = e.height;
+
+      if (e.y + e.height + scrolled >= 0) {
+        e.y = e.y + scrolled.floor();
+        visibleEntities.putIfAbsent(e.id, () => e);
+        remainingEntities.remove(e);
+      }
+
+    });
   }
 
   /**

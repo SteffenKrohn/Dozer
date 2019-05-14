@@ -25,34 +25,40 @@ class LevelLoader {
 
 
     List<dynamic> entities = map.putIfAbsent("entities", () => List());
-    Queue<Entity> queuedEntities = Queue<Entity>();
+    List<Entity> queuedEntities = List<Entity>();
 
     // Counter to give each element an unique id
     int elementId = 1;
 
+
     entities.forEach((e) {
       String type = e.putIfAbsent("type", () => "");
+      Entity model;
 
       if (type == "dot") {
         int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
-        queuedEntities.add(Dot(
+        model = Dot(
           elementId,
           (width * e.putIfAbsent("x", () => 0)).floor(), // x
           lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
           e.putIfAbsent("value", () => 1) as int,
           (lvl.viewWidth * Dot.getStandardRadius()).floor(),
           (lvl.viewWidth * Dot.getStandardRadius()).floor()
-        ));
+        );
       } else if (type == "brick") {
         int width = lvl.viewWidth - (lvl.viewWidth * Brick.getStandardWidth()).floor();
-        queuedEntities.add(Brick(
+        model = Brick(
             elementId,
             (width * e.putIfAbsent("x", () => 0)).floor(), // x
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
             e.putIfAbsent("value", () => 1) as int,
             (lvl.viewWidth * Brick.getStandardWidth()).floor(),
             (lvl.viewHeight * Brick.getStandardHeight()).floor()
-        ));
+        );
+      }
+      if (model != null) {
+        model.dy = lvl.viewHeight * lvl.laneSpeed ~/ AppController.framerate;
+        queuedEntities.add(model);
       }
       elementId++;
     });
