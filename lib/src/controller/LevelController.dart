@@ -2,7 +2,7 @@ part of dozergame;
 
 class LevelController {
 
-  AppController _gameController;
+  AppController _appController;
   Level level;
   LevelView _levelView;
 
@@ -16,7 +16,7 @@ class LevelController {
 
     LevelController lc = new LevelController();
 
-    lc._gameController = ac;
+    lc._appController = ac;
 
     lc._levelView = new LevelView(lc, lc.level);
 
@@ -37,7 +37,7 @@ class LevelController {
 
       if (this.level.gameLost()) {
         t.cancel();
-        this._gameController.showMessageLoose(this.level.timeLimit <= 0);
+        this._appController.showMessageLoose(this.level.timeLimit <= 0);
         return;
       }
 
@@ -48,7 +48,7 @@ class LevelController {
       if (this.level.gameWon()) {
         t.cancel();
         // TODO second parameter provisional
-        this._gameController.showMessageWin(this.level.getScore(), true);
+        this._appController.showMessageWin(this.level.getScore(), true);
         return;
       }
 
@@ -84,7 +84,7 @@ class LevelController {
     // Handle the device orientation to move the Dozer
     window.onDeviceOrientation.listen((ev) {
       // TODO make prettier
-      int dx = ev.gamma ~/ 1.6;
+      int dx = ev.gamma ~/ 2;
       this.level.getDozer().move(dx, 0);
     });
   }

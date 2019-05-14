@@ -4,6 +4,7 @@ class LevelView {
 
   LevelController _levelController;
   Level level;
+  List<int> dozerTailIds;
 
   Element lane;
 
@@ -53,6 +54,8 @@ class LevelView {
     String out = "";
 
     if(entity.toString() == "dozer"){
+      out += "<div class='entity dozer' id='e${entity.id}'></div>";
+    } else if(entity.toString() == "dozertail"){
       out += "<div class='entity dozer' id='e${entity.id}'></div>";
     } else if(entity.toString() == "dot") {
       out += "<div class='entity ${entity.toString()}' id='e${entity.id}'> ${(entity as Dot).value} </div>";
