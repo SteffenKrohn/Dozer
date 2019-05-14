@@ -55,9 +55,9 @@ class LevelView {
     if(entity.toString() == "dozer"){
       out += "<div class='entity dozer' id='e${entity.id}'></div>";
     } else if(entity.toString() == "dot") {
-      out += "<div class='entity dot' id='e${entity.id}'> ${(entity as Dot).value} </div>";
+      out += "<div class='entity ${entity.toString()}' id='e${entity.id}'> ${(entity as Dot).value} </div>";
     } else if(entity.toString() == "brick") {
-      out += "<div class='entity brick' id='e${entity.id}'> ${(entity as Brick).value} </div>";
+      out += "<div class='entity ${entity.toString()}' id='e${entity.id}'> ${(entity as Brick).value} </div>";
     }
 
     return out;

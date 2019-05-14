@@ -4,7 +4,7 @@ class Dozer extends Entity {
 
   /** The current score / length of the dozer */
   int score;
-  List<int> tail;
+  List<DozerTail> tail;
 
   /**
    * Creates a Dozer object with the id  dozer and the given score
@@ -15,9 +15,14 @@ class Dozer extends Entity {
     this.dy = 0;
     // TODO fix this (streng genommen gehört das hier doch alles in den View als membervariablen, die man sich dann hier getted?)
     this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
-    this.y = querySelector("body").getBoundingClientRect().height - 150;
+    this.y = (querySelector("body").getBoundingClientRect().height * 0.8).toInt();
     this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
     this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
+
+    // create initial vertical tail
+    for(int i = 0; i < this.score; i++) {
+      //this.tail.add();
+    }
   }
 
   void update() {

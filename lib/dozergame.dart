@@ -14,6 +14,7 @@ part 'src/file/LevelLoader.dart';
 part 'src/model/Barrier.dart';
 part 'src/model/Brick.dart';
 part 'src/model/Dozer.dart';
+part 'src/model/DozerTail.dart';
 part 'src/model/Dot.dart';
 part 'src/model/PowerUp.dart';
 part 'src/model/SlowDown.dart';
