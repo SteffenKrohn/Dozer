@@ -4,14 +4,15 @@ class MessageView {
 
   static void showMessageWin(int seconds, bool highscore) {
     String out = highscore ? "New Highsore" : "Your Score";
-    String html  = "<div id='message'><hr>"
-        "<div id='button_next_level'"
-        "<h1>You won!</h1>"
-        "<h3>$out</h3>"
-        "<h1>$seconds</h1>"
-        "<hr>"
-        "</div>"
-        "<button id='button_to_menu'>Go To Menu</button>"
+    String html  = "<div id='message'>"
+          "<hr>"
+          "<div id='button_next_level'>"
+            "<h1>You won!</h1>"
+            "<h3>$out</h3>"
+            "<h1>$seconds</h1>"
+            "<hr>"
+          "</div>"
+          "<button id='button_to_menu'>Go To Menu</button>"
         "</div>";
 
     querySelector("body").setInnerHtml(html);
@@ -26,7 +27,7 @@ class MessageView {
     }
 
     String html  = "<div id='message'>"
-          "<div id='button_next_level'"
+          "<div id='button_next_level'>"
             "<hr>"
             "<h1>You Loose.</h1>"
             "<h2>$out</h2>"
@@ -40,7 +41,8 @@ class MessageView {
 
   static void showMessageNoSupportForGyro() {
     String html  = "<div id='message'>"
-        "<h1>Dozer</h1><hr>"
+        "<h1>Dozer</h1>"
+        "<hr>"
         "<h2>Oh No! On this device motion control is not available.</h2>"
         "<img src=\"resources/qr-code.jpg\">"
         "<h3>Scan the QR-Code or play with your arrow keys.</h3><hr>"

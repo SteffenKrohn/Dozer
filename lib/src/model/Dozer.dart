@@ -15,9 +15,9 @@ class Dozer extends Entity {
     this.dy = 0;
     // TODO fix this
     this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
-    this.y = querySelector("body").getBoundingClientRect().height - 50;
-    this.height = 60;
-    this.width = 60;
+    this.y = querySelector("body").getBoundingClientRect().height - 150;
+    this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
+    this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
   }
 
   void update() {
