@@ -28,7 +28,7 @@ class LevelLoader {
     Queue<Entity> queuedEntities = Queue<Entity>();
 
     // Counter to give each element an unique id
-    int elementId = 1;
+    int elementId = 100;
 
     entities.forEach((e) {
       String type = e.putIfAbsent("type", () => "");

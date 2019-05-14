@@ -99,6 +99,7 @@ class Level {
     this.visibleEntities.forEach((id, e) => e.update());
     this.addNewlyVisibleEntities();
     this.removeInvisibleEntities();
+    this.updateDozerTailInVisibleEntities();
     this.checkCollisions();
   }
 
@@ -165,6 +166,13 @@ class Level {
 
   bool gameLost() {
     return this.timeLimit <= 0 || this.getDozer().score <= 0;
+  }
+
+  void updateDozerTailInVisibleEntities() {
+    this._dozer.tailEntities.forEach((e) {
+      this.visibleEntities.putIfAbsent(e.id, () => e);
+    });
+    // TODO remove
   }
 
 
