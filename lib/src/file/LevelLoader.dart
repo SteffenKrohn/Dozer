@@ -25,7 +25,7 @@ class LevelLoader {
 
 
     List<dynamic> entities = map.putIfAbsent("entities", () => List());
-    Queue<Entity> queuedEntities = Queue<Entity>();
+    List<Entity> queuedEntities = List<Entity>();
 
     // Counter to give each element an unique id
     int elementId = 1;
