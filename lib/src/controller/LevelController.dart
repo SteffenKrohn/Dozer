@@ -33,7 +33,7 @@ class LevelController {
     Timer t;
     // Start the periodic update of the game elements with 50hz
     t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
-      this.level.changeTimeLimit(-1000 / AppController.framerate / 1000);
+      this.level.changeTimeLimit(-1000 / AppController.framerate);
 
       if (this.level.gameLost()) {
         t.cancel();
