@@ -32,8 +32,8 @@ class MessageView {
             "<h1>You Loose.</h1>"
             "<h2>$out</h2>"
             "<hr>"
-            "<button id='button_to_menu'>Go To Menu</button>"
           "</div>"
+        "<button id='button_to_menu'>Go To Menu</button>"
         "</div>";
 
     querySelector("body").setInnerHtml(html);
