@@ -132,7 +132,7 @@ class Level {
    */
   void addNewlyVisibleEntities() {
     Entity next;
-    double scrolled = this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit);
+    double scrolled = this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit) / 1000;
 
     List<Entity> remEnt = List.from(remainingEntities);
 
