@@ -54,8 +54,10 @@ class MessageView {
 
   static void showMessageCredits() {
     String html  = "<div id='message'>"
-        "<h1>Dozer</h1><hr>"
+        "<h1>Dozer</h1>"
+        "<hr>"
         "<h3>Creators, License, Fonts, Participants will be stated here later</h3>" // TODO
+        "<hr>"
         "<button id='button_to_menu'>Back</button>"
         "</div>";
 
