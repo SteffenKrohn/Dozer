@@ -66,6 +66,10 @@ class MenuView {
     outerDiv.append(div);
     
     DivElement buttonBox = getBottomButtonBox();
+
+    buttonBox.setAttribute("style", "height: 20%");
+    chooseLevel.setAttribute("style", "height: 50%");
+    credits.setAttribute("style", "height: 50%");
     buttonBox.append(chooseLevel);
     buttonBox.append(credits);
     
@@ -141,6 +145,8 @@ class MenuView {
     outerDiv.append(div);
 
     DivElement buttonBox = getBottomButtonBox();
+    buttonBox.setAttribute("style", "height: 10%");
+    button.setAttribute("style", "height: 100%");
     buttonBox.append(button);
 
     outerDiv.append(buttonBox);
