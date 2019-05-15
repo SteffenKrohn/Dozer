@@ -72,37 +72,37 @@ class AppController {
   }
 
   void showMenu() {
-    MenuView.show(this._reachedLevel, "Catch The Dots To Grow The Dozer"); // this._levelController.level.instructions TODO waiting for dependency
+    MenuView.show().levelOverview(this._reachedLevel, "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenNextLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
   }
 
   void showMessageWin(int score, bool newHighscore) {
-    MessageView.showMessageWin(score, newHighscore);
+    MenuView.messageWin(score, newHighscore);
     this.listenGoToMenuButton();
     this.listenNextLevelButton();
   }
 
   void showMessageLoose(bool timeout) {
-    MessageView.showMessageLoose(timeout);
+    MenuView.messageLoose(timeout);
     this.listenGoToMenuButton();
     this.listenNextLevelButton();
   }
 
   void showMessageNoSupportForGyro() {
-    MessageView.showMessageNoSupportForGyro();
+    MenuView.show().messageNoSupportForGyro().render();
     this.listenGoToMenuButton();
   }
 
   void showMessageChooseLevels(int nrAvailableLevels, int reachedLevel) {
-    MessageView.showMessageChooseLevels(nrAvailableLevels, reachedLevel);
+    MenuView.messageChooseLevels(nrAvailableLevels, reachedLevel);
     this.listenGoToMenuButton();
     this.listenAllLevelButtons(reachedLevel);
   }
 
   void showMessageCredits() {
-    MessageView.showMessageCredits();
+    MenuView.messageCredits();
     this.listenGoToMenuButton();
   }
 
