@@ -55,6 +55,15 @@ class LevelLoader {
             (lvl.viewWidth * Brick.getStandardWidth()).floor(),
             (lvl.viewHeight * Brick.getStandardHeight()).floor()
         );
+      } else if (type == "barrier") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
+        model = Barrier(
+            elementId,
+            (width * e.putIfAbsent("x", () => 0)).floor(),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
+            -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int)
+        );
       }
       if (model != null) {
         model.dy = lvl.viewHeight * lvl.laneSpeed ~/ AppController.framerate;
@@ -65,7 +74,6 @@ class LevelLoader {
     lvl.remainingEntities = queuedEntities;
     return lvl;
   }
-
   static Future<Map> makeRequest(int id) async {
     var path='resources/level'+ id.toString() +'.json';
     var r = HttpRequest.getString(path);

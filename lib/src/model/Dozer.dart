@@ -62,6 +62,15 @@ class Dozer extends Entity {
       this.score += e.value;
       return;
     }
+    if (e is Barrier) {
+      // TODO probably provisional
+      if (this.dx < 0) {
+        this.x = e.x + e.width;
+      } else {
+        this.x = e.x;
+      }
+      return;
+    }
     //TODO other hitBy behaviour
     // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
   }
