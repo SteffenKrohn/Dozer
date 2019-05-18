@@ -6,7 +6,7 @@ class Dozer extends Entity {
   int score;
   List<Coordinates> _tailRoute = new List<Coordinates>();
   List<DozerTail> tailEntities = new List<DozerTail>();
-  final int _tailGap = 5;
+  int _tailGap;
 
   /**
    * Creates a Dozer object with the id  dozer and the given score
@@ -23,6 +23,7 @@ class Dozer extends Entity {
     this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
 
     // initialise tailRoute list with straight tail
+    this._tailGap = (this.height * 0.15).toInt();
     for(int i = 0; i <= 25 * this._tailGap; i++) { // target score * gap
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
