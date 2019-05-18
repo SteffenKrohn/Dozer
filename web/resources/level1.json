@@ -3,14 +3,14 @@
     "level": 1,
     "timelimit": 100000,
     "initialscore": 10,
-    "targetscore": 15,
+    "targetscore": 25,
     "lanespeed": 0.3,
     "instructions": "Catch the dots"
   },
   "entities": [
     {
       "type": "brick",
-      "value": 10,
+      "value": 5,
       "time": 2000,
       "x": 0
     },
@@ -19,6 +19,18 @@
       "value": 5,
       "time": 2000,
       "x": 0.5
+    },
+    {
+      "type": "brick",
+      "value": 3,
+      "time": 5000,
+      "x": 0.95
+    },
+    {
+      "type": "dot",
+      "value": 5,
+      "time": 5500,
+      "x": 0.8
     }
   ]
 }

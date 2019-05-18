@@ -4,8 +4,9 @@ class Dozer extends Entity {
 
   /** The current score / length of the dozer */
   int score;
-  List<int> _tailMovement = new List<int>();
+  List<Coordinates> _tailRoute = new List<Coordinates>();
   List<DozerTail> tailEntities = new List<DozerTail>();
+  final int _tailGap = 5;
 
   /**
    * Creates a Dozer object with the id  dozer and the given score
@@ -21,9 +22,9 @@ class Dozer extends Entity {
     this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
     this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
 
-    // initialise tailMovement list with straight tail
-    for(int i = 0; i <= 25 * 50; i++) { // target score * update rate
-      this._tailMovement.add(0);
+    // initialise tailRoute list with straight tail
+    for(int i = 0; i <= 25 * this._tailGap; i++) { // target score * gap
+      this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
   }
 
@@ -46,26 +47,27 @@ class Dozer extends Entity {
     this.dx = dx;
     super.update();
 
-    // Add Tail Movement
-    this._tailMovement.insert(0, this.dx);
-    this._tailMovement.removeLast();
+    // Add new Route Coordinates to List and update existing ones
+    this._tailRoute.insert(0, Coordinates(this.x, this.y));
+    this._tailRoute.removeLast();
+    this._tailRoute.forEach((c) => c.y += 5);
 
-    // Remove Tail Entity
-    if(this.tailEntities.length > this.score) {
-      while(this.tailEntities.length != this.score) {
+    // Remove Tail Entities after score decreases
+    while(this.tailEntities.length >= this.score) {
         this.tailEntities.removeLast();
-      }
     }
 
-    // Add Tail Entity
-    if(this.tailEntities.length < this.score) {
-      this.tailEntities.add(DozerTail(this.tailEntities.length + 1, this.tailEntities.last.x, this.tailEntities.last.y + 5)); // x wert ist falsch
+    // Add Tail Entities
+    while(this.tailEntities.length + 1 < this.score) {
+      this.tailEntities.add(DozerTail(this.tailEntities.length + 1,
+          this._tailRoute[(this.tailEntities.length + 1) * this._tailGap].x,
+          this._tailRoute[(this.tailEntities.length + 1) * this._tailGap].y));
     }
 
     // Update existing Tail Entities
     for(int i = 0; i < this.tailEntities.length; i++) {
-      this.tailEntities[i].move(this._tailMovement[(i + 1) * 50], 5);
-      this.tailEntities[i].update();
+      this.tailEntities[i].x = this._tailRoute[i * this._tailGap].x;
+      this.tailEntities[i].y = this._tailRoute[i * this._tailGap].y;
     }
   }
 

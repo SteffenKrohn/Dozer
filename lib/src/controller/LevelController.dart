@@ -64,11 +64,11 @@ class LevelController {
     window.onKeyDown.listen((KeyboardEvent e) {
       //Left pressed
       if (e.keyCode == 37) {
-        this.level.getDozer().move(-10, 0);
+        this.level.getDozer().move(-8, 0);
       }
       // Right pressed
       if (e.keyCode == 39) {
-        this.level.getDozer().move(10, 0);
+        this.level.getDozer().move(8, 0);
       }
       // Upper pressed
       if (e.keyCode == 38) {

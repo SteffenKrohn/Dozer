@@ -169,10 +169,15 @@ class Level {
   }
 
   void updateDozerTailInVisibleEntities() {
+    // add tail entities to visible entities list
     this._dozer.tailEntities.forEach((e) {
       this.visibleEntities.putIfAbsent(e.id, () => e);
     });
-    // TODO remove
+
+    // remove
+    for(int i = this._dozer.score; i < 60; i++){ // magic value aus LevelLoader (max. possible score)
+      this.visibleEntities.remove(i);
+    }
   }
 
 

@@ -23,6 +23,7 @@ part 'src/model/CollisionChecker.dart';
 part 'src/model/Drill.dart';
 part 'src/model/Entity.dart';
 part 'src/model/Level.dart';
+part 'src/model/Coordinates.dart';
 
 part 'src/views/LevelView.dart';
 part 'src/views/MenuView.dart';
