@@ -3,7 +3,6 @@ library dozergame;
 import 'dart:html';
 import 'dart:async';
 import 'dart:convert';
-import 'dart:collection';
 import 'dart:math';
 
 part 'src/controller/AppController.dart';
@@ -27,4 +26,3 @@ part 'src/model/Coordinates.dart';
 
 part 'src/views/LevelView.dart';
 part 'src/views/MenuView.dart';
-part 'src/views/MessageView.dart';
