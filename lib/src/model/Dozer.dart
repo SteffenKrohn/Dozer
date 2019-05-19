@@ -7,11 +7,12 @@ class Dozer extends Entity {
   List<Coordinates> _tailRoute = new List<Coordinates>();
   List<DozerTail> tailEntities = new List<DozerTail>();
   int _tailGap;
+  double _lanespeed;
 
   /**
    * Creates a Dozer object with the id  dozer and the given score
    */
-  Dozer(int score) {
+  Dozer(int score, double lanespeed) {
     this.id = 0;
     this.score = score;
     this.dy = 0;
@@ -23,8 +24,9 @@ class Dozer extends Entity {
     this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
 
     // initialise tailRoute list with straight tail
-    this._tailGap = (this.height * 0.15).toInt();
-    for(int i = 0; i <= 25 * this._tailGap; i++) { // target score * gap
+    this._tailGap = (this.height * 0.4).toInt();
+    this._lanespeed = lanespeed;
+    for(int i = 0; i <= 50 * this._tailGap; i++) { // target score * gap
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
   }
@@ -51,7 +53,7 @@ class Dozer extends Entity {
     // Add new Route Coordinates to List and update existing ones
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
-    this._tailRoute.forEach((c) => c.y += 5);
+    this._tailRoute.forEach((c) => c.y += 3); // dy movement from entity
 
     // Remove Tail Entities after score decreases
     while(this.tailEntities.length >= this.score) {
@@ -66,10 +68,18 @@ class Dozer extends Entity {
     }
 
     // Update existing Tail Entities
+    Coordinates lastCoordinates = this._tailRoute.first;
     for(int i = 0; i < this.tailEntities.length; i++) {
-      this.tailEntities[i].x = this._tailRoute[i * this._tailGap].x;
-      this.tailEntities[i].y = this._tailRoute[i * this._tailGap].y;
+      // theorem of pythagoras
+      Coordinates nextCoordinates = this._tailRoute.firstWhere((nextCoordinates) => nextCoordinates.y > lastCoordinates.y
+          && sqrt(pow(lastCoordinates.y - nextCoordinates.y, 2) + pow(lastCoordinates.x - nextCoordinates.x, 2)) >= this._tailGap);
+
+      this.tailEntities[i].x = nextCoordinates.x;
+      this.tailEntities[i].y = nextCoordinates.y;
+
+      lastCoordinates = nextCoordinates;
     }
+
   }
 
   /**

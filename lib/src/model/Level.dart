@@ -38,7 +38,7 @@ class Level {
     this.viewHeight = height;
     this.viewWidth = width;
 
-    this._dozer = new Dozer(initialScore);
+    this._dozer = new Dozer(initialScore, laneSpeed);
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
