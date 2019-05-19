@@ -19,7 +19,7 @@ class Dozer extends Entity {
     // TODO fix this (streng genommen gehören querySelector... width/height in den View als membervariablen, die man sich dann hier getted?)
     // und im Level wird doch auch schon Height und Width gespeichert?
     this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
-    this.y = (querySelector("body").getBoundingClientRect().height * 0.5).toInt();
+    this.y = this._getYAccordingScore();
     this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
     this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
 
@@ -49,6 +49,18 @@ class Dozer extends Entity {
 
     this.dx = dx;
     super.update();
+
+    // Change dozer height (y) according to the score
+    // dozer grows in height
+    if(this._getYAccordingScore() < this.y) {
+      this._tailRoute.forEach((c) => c.y -= 1);
+      this.y -= 1;
+    }
+    // dozer shrinks in height
+    if(this._getYAccordingScore() > this.y) {
+      this._tailRoute.forEach((c) => c.y += 1);
+      this.y += 1;
+    }
 
     // Add new Route Coordinates to List and update existing ones
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
@@ -106,5 +118,9 @@ class Dozer extends Entity {
     }
     //TODO other hitBy behaviour
     // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
+  }
+
+  int _getYAccordingScore() {
+    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 2 / 100))).toInt();
   }
 }
