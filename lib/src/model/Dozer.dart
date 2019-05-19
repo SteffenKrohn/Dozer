@@ -53,7 +53,7 @@ class Dozer extends Entity {
     // Add new Route Coordinates to List and update existing ones
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
-    this._tailRoute.forEach((c) => c.y += 3); // dy movement from entity
+    this._tailRoute.forEach((c) => c.y += (5 * this._lanespeed).toInt()); // dy movement from entity * laneSpeed (because of truncation + 1 ?)
 
     // Remove Tail Entities after score decreases
     while(this.tailEntities.length >= this.score) {
@@ -62,9 +62,7 @@ class Dozer extends Entity {
 
     // Add Tail Entities
     while(this.tailEntities.length + 1 < this.score) {
-      this.tailEntities.add(DozerTail(this.tailEntities.length + 1,
-          this._tailRoute[(this.tailEntities.length + 1) * this._tailGap].x,
-          this._tailRoute[(this.tailEntities.length + 1) * this._tailGap].y));
+      this.tailEntities.add(DozerTail(this.tailEntities.length + 1, this.x, this.y));
     }
 
     // Update existing Tail Entities
