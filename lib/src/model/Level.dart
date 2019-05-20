@@ -38,7 +38,7 @@ class Level {
     this.viewHeight = height;
     this.viewWidth = width;
 
-    this._dozer = new Dozer(initialScore);
+    this._dozer = new Dozer(initialScore, laneSpeed);
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
@@ -99,6 +99,7 @@ class Level {
     this.visibleEntities.forEach((id, e) => e.update());
     this.addNewlyVisibleEntities();
     this.removeInvisibleEntities();
+    this.updateDozerTailInVisibleEntities();
     this.checkCollisions();
   }
 
@@ -179,6 +180,18 @@ class Level {
 
   bool gameLost() {
     return this.timeLimit <= 0 || this.getDozer().score <= 0;
+  }
+
+  void updateDozerTailInVisibleEntities() {
+    // add tail entities to visible entities list
+    this._dozer.tailEntities.forEach((e) {
+      this.visibleEntities.putIfAbsent(e.id, () => e);
+    });
+
+    // remove
+    for(int i = this._dozer.score; i < 60; i++){ // magic value aus LevelLoader (max. possible score)
+      this.visibleEntities.remove(i);
+    }
   }
 
 

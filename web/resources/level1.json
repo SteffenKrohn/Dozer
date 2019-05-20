@@ -3,7 +3,7 @@
     "level": 1,
     "timelimit": 10000,
     "initialscore": 10,
-    "targetscore": 15,
+    "targetscore": 25,
     "lanespeed": 0.4,
     "instructions": "Catch the dots"
   },
@@ -22,15 +22,27 @@
     },
     {
       "type": "brick",
-      "value": 10,
-      "time": 1000,
+      "value": 5,
+      "time": 2000,
       "x": 0
     },
     {
+      "type": "dot",
+      "value": 5,
+      "time": 2000,
+      "x": 0.5
+    },
+    {
       "type": "brick",
-      "value": 11,
-      "time": 1000,
-      "x": 0.34
+      "value": 3,
+      "time": 5000,
+      "x": 0.95
+    },
+    {
+      "type": "dot",
+      "value": 5,
+      "time": 5500,
+      "x": 0.8
     }
   ]
 }
