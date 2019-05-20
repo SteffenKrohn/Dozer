@@ -117,9 +117,11 @@ class Dozer extends Entity {
       return;
     }
     if (e is Barrier) {
+      // Right Side
       if (this.dx < 0) {
         this.x = e.x + e.width - this.dx;
-      } else {
+      } else if (this.dx > 0) {
+        // Left Side
         this.x = e.x - this.width - this.dx;
       }
       return;
