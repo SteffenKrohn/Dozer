@@ -15,8 +15,8 @@ class LevelLoader {
         params.putIfAbsent("targetscore", () => 100) as int, // target Score
         params.putIfAbsent("lanespeed", () => 100) as double, // lanespeed
         params.putIfAbsent("level", () => 100) as int,  // level id
-        querySelector("#lane").getBoundingClientRect().height,
-        querySelector("#lane").getBoundingClientRect().width
+        querySelector("#lane").getBoundingClientRect().height.floor(),
+        querySelector("#lane").getBoundingClientRect().width.floor()
     );
 
     if (params.containsKey("instructions")) {
@@ -55,6 +55,16 @@ class LevelLoader {
             (lvl.viewWidth * Brick.getStandardWidth()).floor(),
             (lvl.viewHeight * Brick.getStandardHeight()).floor()
         );
+      } else if (type == "barrier") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
+        int barrierHeight = -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int);
+        model = Barrier(
+            elementId,
+            (width * e.putIfAbsent("x", () => 0)).floor(),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
+            (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
+            barrierHeight
+        );
       }
       if (model != null) {
         model.dy = lvl.viewHeight * lvl.laneSpeed ~/ AppController.framerate;
@@ -65,7 +75,6 @@ class LevelLoader {
     lvl.remainingEntities = queuedEntities;
     return lvl;
   }
-
   static Future<Map> makeRequest(int id) async {
     var path='resources/level'+ id.toString() +'.json';
     var r = HttpRequest.getString(path);

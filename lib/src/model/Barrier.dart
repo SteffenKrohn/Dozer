@@ -2,21 +2,24 @@ part of dozergame;
 
 class Barrier extends Entity {
 
-  int height;
-
-  Barrier(int id, int x, int height) {
+  Barrier(int id, int x, int y, int width, int height) {
     this.id = id;
     this. x = x;
+    this.y = y;
+    this.width = width;
     this.height = height;
-    this.width = 5;
   }
 
   String toString() {
     return "barrier";
   }
 
+  static double getStandardWidth() {
+    return 0.01;
+  }
+
   @override
   void hitBy(Entity e) {
-    // TODO: implement hitBy
+    // The Barrier does nothing when hit
   }
 }
