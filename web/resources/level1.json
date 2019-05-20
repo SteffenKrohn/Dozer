@@ -29,8 +29,8 @@
     {
       "type": "dot",
       "value": 5,
-      "time": 2000,
-      "x": 0.5
+      "time": 2500,
+      "x": 0.7
     },
     {
       "type": "brick",
@@ -48,7 +48,7 @@
       "type": "dot",
       "value": 20,
       "time": 7000,
-      "x": 0.6
+      "x": 0.8
     },
     {
       "type": "brick",
