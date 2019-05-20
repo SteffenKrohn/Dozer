@@ -191,6 +191,36 @@ class MenuView {
     return this;
   }
 
+  MenuView messageNoSuchLevel(int level) {
+    DivElement div = DivElement();
+    div.setAttribute("class", "message");
+    div.append(getLogo());
+    div.append(HRElement());
+
+    ParagraphElement upperText = ParagraphElement();
+    upperText.appendText("The level ${level} is not available.");
+    div.append(upperText);
+
+    div.append(HRElement());
+
+    ButtonElement button = ButtonElement();
+    button.setAttribute("id", "button_pevious_level");
+    button.appendText("Return to last Level");
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    DivElement buttonBox = getBottomButtonBox();
+    buttonBox.setAttribute("style", "height: 10%");
+    button.setAttribute("style", "height: 100%");
+    buttonBox.append(button);
+
+    outerDiv.append(buttonBox);
+
+    this.content = outerDiv;
+    return this;
+  }
+
   static void messageCredits() {
     String html  = "<div id='message'>"
         "<h1>Dozer</h1>"

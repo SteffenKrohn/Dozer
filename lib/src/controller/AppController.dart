@@ -19,7 +19,7 @@ class AppController {
     this.showLeveLOverview();
 
     // TODO load levels
-    this._nrAvailableLevels = 13; //provisional
+    this._nrAvailableLevels = 1; //provisional
 
     // Check Gyrosensor Support
     window.onDeviceOrientation.first.then((e) {
@@ -31,11 +31,11 @@ class AppController {
   }
 
   void startNextLevel() {
-    LevelController.loadAndStart(this, this._reachedLevel);
+      LevelController.loadAndStart(this, this._reachedLevel);
   }
 
   void startLevel(int level) {
-    LevelController.loadAndStart(this, level);
+      LevelController.loadAndStart(this, level);
   }
 
   void listenGoToMenuButton() {
@@ -53,6 +53,17 @@ class AppController {
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
       this._reachedLevel++;
+      if (this._reachedLevel > this._nrAvailableLevels) {
+        this.showNoSuchLevel(this._reachedLevel);
+      } else {
+        this.showLeveLOverview();
+      }
+    });
+  }
+
+  void listenPreviousLevelButton() {
+    querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
+      this._reachedLevel--;
       this.showLeveLOverview();
     });
   }
@@ -87,7 +98,6 @@ class AppController {
   void showMessageWin(int score, bool newHighscore) {
     MenuView.show().messageWin(score, newHighscore).render();
     this.listenNextLevelButton();
-    this.listenGoToMenuButton();
   }
 
   void showMessageLoose(bool timeout) {
@@ -109,6 +119,11 @@ class AppController {
   void showMessageCredits() {
     MenuView.messageCredits();
     this.listenGoToMenuButton();
+  }
+
+  void showNoSuchLevel(int level) {
+    MenuView.show().messageNoSuchLevel(level).render();
+    this.listenPreviousLevelButton();
   }
 
 }
