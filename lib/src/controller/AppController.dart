@@ -16,7 +16,7 @@ class AppController {
 
     // TODO dynamic level
     // Load level 1
-    this.showMenu();
+    this.showLeveLOverview();
 
     // TODO load levels
     this._nrAvailableLevels = 13; //provisional
@@ -41,7 +41,7 @@ class AppController {
 
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
-      this.showMenu();
+      this.showLeveLOverview();
     });
   }
 
@@ -71,7 +71,7 @@ class AppController {
     });
   }
 
-  void showMenu() {
+  void showLeveLOverview() {
     MenuView.show().levelOverview(this._reachedLevel, "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenNextLevelButton();
     this.listenChooseLevelButton();
