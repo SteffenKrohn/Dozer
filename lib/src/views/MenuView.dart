@@ -116,25 +116,41 @@ class MenuView {
     return this;
   }
 
-  static void messageLoose(bool timeout) {
-    String out;
+  MenuView messageLoose(bool timeout) {
+
+    String msg;
     if(timeout) {
-      out = "Be faster and grow your dozer bigger next time!";
+      msg = "Be faster and grow your dozer bigger next time!";
     } else {
-      out = "Your Dozer did not make it, avoid the dangerous bricks next time!";
+      msg = "Your Dozer did not make it, avoid the dangerous bricks next time!";
     }
 
-    String html  = "<div id='message'>"
-        "<div id='button_next_level'>"
-        "<hr>"
-        "<h1>You Loose.</h1>"
-        "<h2>$out</h2>"
-        "<hr>"
-        "</div>"
-        "<button id='button_to_menu'>Go To Menu</button>"
-        "</div>";
+    DivElement div = DivElement();
+    div.setAttribute("id", "button_to_menu");
+    div.setAttribute("class", "message");
 
-    querySelector("body").setInnerHtml(html);
+    div.append(getLogo());
+    div.append(HRElement());
+
+    HeadingElement levelTitle = HeadingElement.h2();
+    levelTitle.appendText("You Lost!");
+    div.append(levelTitle);
+
+    SpanElement msgText = SpanElement();
+    msgText.appendText(msg);
+    div.append(msgText);
+
+    div.append(HRElement());
+
+    ParagraphElement tapToAdvance = ParagraphElement();
+    tapToAdvance.appendText("Tap To Advance");
+    div.append(tapToAdvance);
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    this.content = outerDiv;
+    return this;
   }
 
   MenuView messageNoSupportForGyro() {
