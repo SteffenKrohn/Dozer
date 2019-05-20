@@ -84,7 +84,7 @@ class LevelController {
     // Handle the device orientation to move the Dozer
     window.onDeviceOrientation.listen((ev) {
       // TODO make prettier
-      int dx = ev.gamma ~/ 10;
+      int dx = ev.gamma ~/ 5;
       this.level.getDozer().move(dx, 0);
     });
   }
