@@ -15,8 +15,8 @@ class LevelLoader {
         params.putIfAbsent("targetscore", () => 100) as int, // target Score
         params.putIfAbsent("lanespeed", () => 100) as double, // lanespeed
         params.putIfAbsent("level", () => 100) as int,  // level id
-        querySelector("#lane").getBoundingClientRect().height,
-        querySelector("#lane").getBoundingClientRect().width
+        querySelector("#lane").getBoundingClientRect().height.floor(),
+        querySelector("#lane").getBoundingClientRect().width.floor()
     );
 
     if (params.containsKey("instructions")) {
@@ -57,12 +57,13 @@ class LevelLoader {
         );
       } else if (type == "barrier") {
         int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
+        int barrierHeight = -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int);
         model = Barrier(
             elementId,
             (width * e.putIfAbsent("x", () => 0)).floor(),
-            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
             (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
-            -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int)
+            barrierHeight
         );
       }
       if (model != null) {

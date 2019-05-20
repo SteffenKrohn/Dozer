@@ -58,6 +58,8 @@ class LevelView {
       out += "<div class='entity dot' id='e${entity.id}'> ${(entity as Dot).value} </div>";
     } else if(entity.toString() == "brick") {
       out += "<div class='entity brick' id='e${entity.id}'> ${(entity as Brick).value} </div>";
+    } else if (entity.toString() == "barrier") {
+      out += "<div class='entity barrier' id='e${entity.id}'></div>";
     }
 
     return out;
