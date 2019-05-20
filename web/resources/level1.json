@@ -22,9 +22,15 @@
     },
     {
       "type": "brick",
-      "value": 10,
-      "time": 1000,
+      "value": 5,
+      "time": 2000,
       "x": 0
+    },
+    {
+      "type": "dot",
+      "value": 5,
+      "time": 2000,
+      "x": 0.5
     },
     {
       "type": "brick",
