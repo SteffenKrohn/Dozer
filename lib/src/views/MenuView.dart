@@ -30,7 +30,7 @@ class MenuView {
   MenuView levelOverview(int level, String levelInstruction) {
 
     DivElement div = DivElement();
-    div.setAttribute("id", "button_next_level");
+    div.setAttribute("id", "button_start_level");
     div.setAttribute("class", "message");
 
     div.append(getLogo());
@@ -79,21 +79,41 @@ class MenuView {
     return this;
   }
 
-  static void messageWin(int seconds, bool highscore) {
-    String out = highscore ? "New Highsore" : "Your Score";
-    String html  =
-        "<div id='menu'>"
-        "<hr>"
-        "<div id='button_next_level'>"
-        "<h1>You won!</h1>"
-        "<h3>$out</h3>"
-        "<h1>$seconds</h1>"
-        "<hr>"
-        "</div>"
-        "<button id='button_to_menu'>Go To Menu</button>"
-        "</div>";
+  MenuView messageWin(int score, bool newHighscore) {
 
-    querySelector("body").setInnerHtml(html);
+    String msg = newHighscore ? "New Highsore" : "Your Score";
+
+    DivElement div = DivElement();
+    div.setAttribute("id", "button_next_level");
+    div.setAttribute("class", "message");
+
+    div.append(getLogo());
+    div.append(HRElement());
+
+    HeadingElement levelTitle = HeadingElement.h2();
+    levelTitle.appendText("You Won!");
+    div.append(levelTitle);
+
+    SpanElement msgText = SpanElement();
+    msgText.appendText(msg);
+    div.append(msgText);
+
+    ParagraphElement scoreParagraph = ParagraphElement()
+      ..appendText(score.toString())
+      ..setAttribute("class", "highscore");
+    div.append(scoreParagraph);
+
+    div.append(HRElement());
+
+    ParagraphElement tapToAdvance = ParagraphElement();
+    tapToAdvance.appendText("Tap To Advance");
+    div.append(tapToAdvance);
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    this.content = outerDiv;
+    return this;
   }
 
   static void messageLoose(bool timeout) {

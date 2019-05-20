@@ -8,7 +8,7 @@ class AppController {
   static const int framerate = 50;
 
   int _highscore = 0;
-  int _reachedLevel = 2; // TODO Web Storage
+  int _reachedLevel = 1; // TODO Web Storage
   int _nrAvailableLevels;
   bool _gyroAvailable = true;
 
@@ -28,7 +28,6 @@ class AppController {
         this.showMessageNoSupportForGyro();
       }
     });
-
   }
 
   void startNextLevel() {
@@ -45,9 +44,16 @@ class AppController {
     });
   }
 
+  void listenStartLevelButton() {
+    querySelector("#button_start_level").onClick.listen((MouseEvent e) {
+      this.startNextLevel();
+    });
+  }
+
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
-      this.startNextLevel();
+      this._reachedLevel++;
+      this.showLeveLOverview();
     });
   }
 
@@ -73,21 +79,20 @@ class AppController {
 
   void showLeveLOverview() {
     MenuView.show().levelOverview(this._reachedLevel, "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
-    this.listenNextLevelButton();
+    this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
   }
 
   void showMessageWin(int score, bool newHighscore) {
-    MenuView.messageWin(score, newHighscore);
-    this.listenGoToMenuButton();
+    MenuView.show().messageWin(score, newHighscore).render();
     this.listenNextLevelButton();
+    this.listenGoToMenuButton();
   }
 
   void showMessageLoose(bool timeout) {
     MenuView.messageLoose(timeout);
     this.listenGoToMenuButton();
-    this.listenNextLevelButton();
   }
 
   void showMessageNoSupportForGyro() {
