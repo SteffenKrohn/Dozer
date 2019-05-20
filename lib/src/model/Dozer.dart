@@ -131,6 +131,6 @@ class Dozer extends Entity {
   }
 
   int _getYAccordingScore() {
-    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 2 / 100))).toInt();
+    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 1.5 / 100))).toInt() - 10;
   }
 }

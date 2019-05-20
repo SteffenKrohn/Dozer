@@ -1,9 +1,9 @@
 {
   "params": {
     "level": 1,
-    "timelimit": 10000,
-    "initialscore": 11,
-    "targetscore": 15,
+    "timelimit": 100000,
+    "initialscore": 1,
+    "targetscore": 55,
     "lanespeed": 0.4,
     "instructions": "Catch the dots"
   },
@@ -35,14 +35,38 @@
     {
       "type": "brick",
       "value": 11,
-      "time": 1000,
+      "time": 3000,
       "x": 0.34
     },
     {
       "type": "barrier",
-      "time": 1000,
+      "time": 3000,
       "x": 0.34,
       "height": 1500
+    },
+    {
+      "type": "dot",
+      "value": 20,
+      "time": 7000,
+      "x": 0.6
+    },
+    {
+      "type": "brick",
+      "value": 10,
+      "time": 7500,
+      "x": 0
+    },
+    {
+      "type": "dot",
+      "value": 5,
+      "time": 7900,
+      "x": 0.5
+    },
+    {
+      "type": "brick",
+      "value": 11,
+      "time": 8000,
+      "x": 0.34
     }
   ]
 }
