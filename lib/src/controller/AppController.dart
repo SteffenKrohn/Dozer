@@ -117,7 +117,7 @@ class AppController {
   }
 
   void showMessageCredits() {
-    MenuView.messageCredits();
+    MenuView.show().messageCredits().render();
     this.listenGoToMenuButton();
   }
 

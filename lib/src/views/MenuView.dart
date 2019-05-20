@@ -221,16 +221,34 @@ class MenuView {
     return this;
   }
 
-  static void messageCredits() {
-    String html  = "<div id='message'>"
-        "<h1>Dozer</h1>"
-        "<hr>"
-        "<h3>Creators, License, Fonts, Participants will be stated here later</h3>" // TODO
-        "<hr>"
-        "<button id='button_to_menu'>Back</button>"
-        "</div>";
+  MenuView messageCredits() {
+    DivElement div = DivElement();
+    div.setAttribute("class", "message");
+    div.append(getLogo());
+    div.append(HRElement());
 
-    querySelector("body").setInnerHtml(html);
+    ParagraphElement upperText = ParagraphElement();
+    upperText.appendText("Creators, License, Fonts, Participants will be stated here later");
+    div.append(upperText);
+
+    div.append(HRElement());
+
+    ButtonElement button = ButtonElement();
+    button.setAttribute("id", "button_to_menu");
+    button.appendText("Return to Menu");
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    DivElement buttonBox = getBottomButtonBox();
+    buttonBox.setAttribute("style", "height: 10%");
+    button.setAttribute("style", "height: 100%");
+    buttonBox.append(button);
+
+    outerDiv.append(buttonBox);
+
+    this.content = outerDiv;
+    return this;
   }
 
   static void messageChooseLevels(int nrAvailableLevels, int reachedLevel) {
