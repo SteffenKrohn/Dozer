@@ -20,7 +20,7 @@ class LevelController {
 
     lc._levelView = new LevelView(lc, lc.level);
 
-    Level lvl = await LevelLoader.getLevel(lc, 1);
+    Level lvl = await LevelLoader.getLevel(lc, level);
     lc.level = lvl;
     lc._levelView.level = lvl;
     return lc;

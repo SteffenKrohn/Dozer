@@ -30,7 +30,7 @@ class MenuView {
   MenuView levelOverview(int level, String levelInstruction) {
 
     DivElement div = DivElement();
-    div.setAttribute("id", "button_next_level");
+    div.setAttribute("id", "button_start_level");
     div.setAttribute("class", "message");
 
     div.append(getLogo());
@@ -79,42 +79,78 @@ class MenuView {
     return this;
   }
 
-  static void messageWin(int seconds, bool highscore) {
-    String out = highscore ? "New Highsore" : "Your Score";
-    String html  =
-        "<div id='menu'>"
-        "<hr>"
-        "<div id='button_next_level'>"
-        "<h1>You won!</h1>"
-        "<h3>$out</h3>"
-        "<h1>$seconds</h1>"
-        "<hr>"
-        "</div>"
-        "<button id='button_to_menu'>Go To Menu</button>"
-        "</div>";
+  MenuView messageWin(int score, bool newHighscore) {
 
-    querySelector("body").setInnerHtml(html);
+    String msg = newHighscore ? "New Highsore" : "Your Score";
+
+    DivElement div = DivElement();
+    div.setAttribute("id", "button_next_level");
+    div.setAttribute("class", "message");
+
+    div.append(getLogo());
+    div.append(HRElement());
+
+    HeadingElement levelTitle = HeadingElement.h2();
+    levelTitle.appendText("You Won!");
+    div.append(levelTitle);
+
+    SpanElement msgText = SpanElement();
+    msgText.appendText(msg);
+    div.append(msgText);
+
+    ParagraphElement scoreParagraph = ParagraphElement()
+      ..appendText(score.toString())
+      ..setAttribute("class", "highscore");
+    div.append(scoreParagraph);
+
+    div.append(HRElement());
+
+    ParagraphElement tapToAdvance = ParagraphElement();
+    tapToAdvance.appendText("Tap To Advance");
+    div.append(tapToAdvance);
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    this.content = outerDiv;
+    return this;
   }
 
-  static void messageLoose(bool timeout) {
-    String out;
+  MenuView messageLose(bool timeout) {
+
+    String msg;
     if(timeout) {
-      out = "Be faster and grow your dozer bigger next time!";
+      msg = "Be faster and grow your dozer bigger next time!";
     } else {
-      out = "Your Dozer did not make it, avoid the dangerous bricks next time!";
+      msg = "Your Dozer did not make it, avoid the dangerous bricks next time!";
     }
 
-    String html  = "<div id='message'>"
-        "<div id='button_next_level'>"
-        "<hr>"
-        "<h1>You Loose.</h1>"
-        "<h2>$out</h2>"
-        "<hr>"
-        "</div>"
-        "<button id='button_to_menu'>Go To Menu</button>"
-        "</div>";
+    DivElement div = DivElement();
+    div.setAttribute("id", "button_to_menu");
+    div.setAttribute("class", "message");
 
-    querySelector("body").setInnerHtml(html);
+    div.append(getLogo());
+    div.append(HRElement());
+
+    HeadingElement levelTitle = HeadingElement.h2();
+    levelTitle.appendText("You Lost!");
+    div.append(levelTitle);
+
+    SpanElement msgText = SpanElement();
+    msgText.appendText(msg);
+    div.append(msgText);
+
+    div.append(HRElement());
+
+    ParagraphElement tapToAdvance = ParagraphElement();
+    tapToAdvance.appendText("Tap To Advance");
+    div.append(tapToAdvance);
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    this.content = outerDiv;
+    return this;
   }
 
   MenuView messageNoSupportForGyro() {
@@ -155,16 +191,64 @@ class MenuView {
     return this;
   }
 
-  static void messageCredits() {
-    String html  = "<div id='message'>"
-        "<h1>Dozer</h1>"
-        "<hr>"
-        "<h3>Creators, License, Fonts, Participants will be stated here later</h3>" // TODO
-        "<hr>"
-        "<button id='button_to_menu'>Back</button>"
-        "</div>";
+  MenuView messageNoSuchLevel(int level) {
+    DivElement div = DivElement();
+    div.setAttribute("class", "message");
+    div.append(getLogo());
+    div.append(HRElement());
 
-    querySelector("body").setInnerHtml(html);
+    ParagraphElement upperText = ParagraphElement();
+    upperText.appendText("The level ${level} is not available.");
+    div.append(upperText);
+
+    div.append(HRElement());
+
+    ButtonElement button = ButtonElement();
+    button.setAttribute("id", "button_pevious_level");
+    button.appendText("Return to last Level");
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    DivElement buttonBox = getBottomButtonBox();
+    buttonBox.setAttribute("style", "height: 10%");
+    button.setAttribute("style", "height: 100%");
+    buttonBox.append(button);
+
+    outerDiv.append(buttonBox);
+
+    this.content = outerDiv;
+    return this;
+  }
+
+  MenuView messageCredits() {
+    DivElement div = DivElement();
+    div.setAttribute("class", "message");
+    div.append(getLogo());
+    div.append(HRElement());
+
+    ParagraphElement upperText = ParagraphElement();
+    upperText.appendText("Creators, License, Fonts, Participants will be stated here later");
+    div.append(upperText);
+
+    div.append(HRElement());
+
+    ButtonElement button = ButtonElement();
+    button.setAttribute("id", "button_to_menu");
+    button.appendText("Return to Menu");
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    DivElement buttonBox = getBottomButtonBox();
+    buttonBox.setAttribute("style", "height: 10%");
+    button.setAttribute("style", "height: 100%");
+    buttonBox.append(button);
+
+    outerDiv.append(buttonBox);
+
+    this.content = outerDiv;
+    return this;
   }
 
   static void messageChooseLevels(int nrAvailableLevels, int reachedLevel) {
