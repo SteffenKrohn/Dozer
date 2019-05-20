@@ -116,7 +116,7 @@ class MenuView {
     return this;
   }
 
-  MenuView messageLoose(bool timeout) {
+  MenuView messageLose(bool timeout) {
 
     String msg;
     if(timeout) {

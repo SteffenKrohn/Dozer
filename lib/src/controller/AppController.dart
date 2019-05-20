@@ -91,7 +91,7 @@ class AppController {
   }
 
   void showMessageLoose(bool timeout) {
-    MenuView.show().messageLoose(timeout).render();
+    MenuView.show().messageLose(timeout).render();
     this.listenGoToMenuButton();
   }
 
