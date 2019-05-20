@@ -7,12 +7,12 @@ class Dozer extends Entity {
   List<Coordinates> _tailRoute = new List<Coordinates>();
   List<DozerTail> tailEntities = new List<DozerTail>();
   int _tailGap;
-  double _lanespeed;
+  double _entityDy;
 
   /**
    * Creates a Dozer object with the id  dozer and the given score
    */
-  Dozer(int score, double lanespeed) {
+  Dozer(int score, double entityDy) {
     this.id = 0;
     this.score = score;
     this.dy = 0;
@@ -25,7 +25,7 @@ class Dozer extends Entity {
 
     // initialise tailRoute list with straight tail
     this._tailGap = (this.height * 0.4).toInt();
-    this._lanespeed = lanespeed;
+    this._entityDy = entityDy;
     for(int i = 0; i <= 50 * this._tailGap; i++) { // target score * gap
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
@@ -65,7 +65,7 @@ class Dozer extends Entity {
     // Add new Route Coordinates to List and update existing ones
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
-    this._tailRoute.forEach((c) => c.y += (5 * this._lanespeed).toInt()); // dy movement from entity * laneSpeed (because of truncation + 1 ?)
+    this._tailRoute.forEach((c) => c.y += this._entityDy.toInt()); // dy movement from entity
 
     // Remove Tail Entities after score decreases
     while(this.tailEntities.length >= this.score) {
