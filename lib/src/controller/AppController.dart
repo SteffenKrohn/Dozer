@@ -19,7 +19,7 @@ class AppController {
     this.showLeveLOverview();
 
     // TODO load levels
-    this._nrAvailableLevels = 1; //provisional
+    this._nrAvailableLevels = 5; //provisional
 
     // Check Gyrosensor Support
     window.onDeviceOrientation.first.then((e) {
