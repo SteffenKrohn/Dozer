@@ -79,19 +79,38 @@ h1 {
     height: 5vh;
 }
 
-.visual-bar .score-progress {
-    margin: auto;
-    width: 50%;
-    background-color: yellowgreen;
+.visual-bar .progress-bar {
     z-index: 1;
+    margin: auto;
+}
+
+.visual-bar .progress-bar .level {
+    height: 4vh;
+    width: 4vh;
+    float: left;
+    display: flex;
+    color: white;
+    align-items: center;
+    border-radius: 0.5vh;
+    background-color: yellowgreen;
+    justify-content: center;
+    font-size: x-large;
+}
+
+.visual-bar .progress-bar progress {
+    width: 50vw;
+    background-color: grey;
+    color: yellowgreen;
     height: 3vh;
+    float: left;
+    margin-top: 0.5vh;
 }
 
 .visual-bar .countdown {
     position: absolute;
     right: 0px;
     color: white;
-    padding-right: 10vw;
+    padding-right: 5vw;
     font-size: xx-large;
 }
 

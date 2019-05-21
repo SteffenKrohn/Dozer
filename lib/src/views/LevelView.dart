@@ -80,17 +80,33 @@ class LevelView {
     _visualBar = DivElement()
       ..setAttribute("class", "visual-bar");
 
+    DivElement progressBar = DivElement()
+      ..setAttribute("class", "progress-bar");
+    
+    DivElement currentLevel = DivElement()
+      ..setAttribute("class", "level first-level")
+      ..appendText(level.getLevel().toString());
+    
     ProgressElement scoreProgress = ProgressElement()
       ..setAttribute("class", "score-progress")
       ..setAttribute("min", "0")
       ..setAttribute("max", level.targetScore.toString());
 
+    DivElement nextLevel = DivElement()
+      ..setAttribute("class", "level next-level")
+      ..appendText((level.getLevel() + 1).toString());
+
     SpanElement timer = SpanElement()
       ..setAttribute("class", "countdown")
       ..appendText((level.timeLimit / 1000).toStringAsFixed(2));
 
-    _visualBar.append(scoreProgress);
+    progressBar.append(currentLevel);
+    progressBar.append(scoreProgress);
+    progressBar.append(nextLevel);
+    
+    _visualBar.append(progressBar);
     _visualBar.append(timer);
+    
 
     lane.append(_visualBar);
   }
@@ -98,7 +114,7 @@ class LevelView {
   /// Updates the visual bar with values taken from [level]
   void _updateVisualBar() {
     // Score Progress
-    _visualBar.children.elementAt(0).setAttribute("value", level.getDozer().score.toString());
+    _visualBar.children.elementAt(0).children.elementAt(1).setAttribute("value", level.getDozer().score.toString());
     // Countdown
     _visualBar.children.elementAt(1).setInnerHtml((level.timeLimit / 1000).toStringAsFixed(2));
   }
