@@ -5,7 +5,7 @@ class AppController {
   LevelController _levelController;
 
   /** The target framerate in hz */
-  static const int framerate = 50;
+  static const int framerate = 35;
 
   int _highscore = 0;
   int _reachedLevel = 1; // TODO Web Storage
