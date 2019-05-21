@@ -72,6 +72,30 @@ h1 {
     border: 0px solid black;
 }
 
+/* Visual Bar */
+.visual-bar {
+    display: flex;
+    align-items: center;
+    height: 5vh;
+}
+
+.visual-bar .score-progress {
+    margin: auto;
+    width: 50%;
+    background-color: yellowgreen;
+    z-index: 1;
+    height: 3vh;
+}
+
+.visual-bar .countdown {
+    position: absolute;
+    right: 0px;
+    color: white;
+    padding-right: 10vw;
+    font-size: xx-large;
+}
+
+
 .entity {
     position: fixed;
     text-align: center;

@@ -85,14 +85,21 @@ class LevelView {
       ..setAttribute("min", "0")
       ..setAttribute("max", level.targetScore.toString());
 
+    SpanElement timer = SpanElement()
+      ..setAttribute("class", "countdown")
+      ..appendText((level.timeLimit / 1000).toStringAsFixed(2));
+
     _visualBar.append(scoreProgress);
+    _visualBar.append(timer);
 
     lane.append(_visualBar);
   }
 
-  /// Updates the visual bar with the values taken from [level]
+  /// Updates the visual bar with values taken from [level]
   void _updateVisualBar() {
-    querySelector(".score-progress").setAttribute("value", level.getDozer().score.toString());
-
+    // Score Progress
+    _visualBar.children.elementAt(0).setAttribute("value", level.getDozer().score.toString());
+    // Countdown
+    _visualBar.children.elementAt(1).setInnerHtml((level.timeLimit / 1000).toStringAsFixed(2));
   }
 }
