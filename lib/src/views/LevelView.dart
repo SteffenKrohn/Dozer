@@ -66,12 +66,25 @@ class LevelView {
     } else if(entity.toString() == "dot") {
       out += "<div class='entity ${entity.toString()}' id='e${entity.id}'> ${(entity as Dot).value} </div>";
     } else if(entity.toString() == "brick") {
-      out += "<div class='entity brick' id='e${entity.id}'> ${(entity as Brick).value} </div>";
+      out += "<div class='entity brick ${_getBrickColorClass((entity as Brick).value)}' id='e${entity.id}'> ${(entity as Brick).value} </div>";
     } else if (entity.toString() == "barrier") {
       out += "<div class='entity barrier' id='e${entity.id}'></div>";
     }
-
     return out;
+  }
+
+  static String _getBrickColorClass(int value) {
+    if (value < 4) {
+      return "c1";
+    } else if (value < 7) {
+      return "c2";
+    } else if (value < 11) {
+      return "c3";
+    } else if (value < 16) {
+      return "c4";
+    } else {
+      return "c5";
+    }
   }
 
   /// Create the initial Visual Bar
