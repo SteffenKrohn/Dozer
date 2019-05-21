@@ -120,9 +120,8 @@ h1 {
     right: 0px;
     color: white;
     padding-right: 5vw;
-    font-size: xx-large;
+    font-size: 3vw;
 }
-
 
 .entity {
     position: fixed;
@@ -146,6 +145,7 @@ h1 {
     height: 10%;
     background-color: aquamarine;
     border: 0px solid black;
+    font-size: 5vh;
 }
 
 .dot {
@@ -154,6 +154,7 @@ h1 {
     background-color: red;
     color: white;
     border-radius: 50%;
+    font-size: 3vh;
 }
 
 .barrier {
