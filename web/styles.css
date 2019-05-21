@@ -48,6 +48,9 @@ h1 {
     width: 100%;
     position: relative;
     float: left;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .button_level_clickable {
