@@ -8,7 +8,7 @@ html, body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
 
-    background-color: rgb(31, 96, 255);
+    background-color: #003da0;
 }
 
 /* Menu styles */
@@ -68,7 +68,6 @@ h1 {
 #lane {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
     border: 0px solid black;
 }
 
@@ -92,7 +91,7 @@ h1 {
     color: white;
     align-items: center;
     border-radius: 0.5vh;
-    background-color: yellowgreen;
+    background-color: green;
     justify-content: center;
     font-size: x-large;
     border: 1px solid black;
@@ -101,7 +100,7 @@ h1 {
 .visual-bar .progress-bar progress {
     width: 50vw;
     background-color: grey;
-    color: yellowgreen;
+    color: green;
     height: 3vh;
     float: left;
     margin-top: 0.5vh;
@@ -113,8 +112,8 @@ h1 {
     appearance: none;
 }
 /* Color for the progress part of the progress element */
-.visual-bar .progress-bar progress::-moz-progress-bar { background: yellowgreen; }
-.visual-bar .progress-bar progress::-webkit-progress-value { background: yellowgreen; }
+.visual-bar .progress-bar progress::-moz-progress-bar { background: green; }
+.visual-bar .progress-bar progress::-webkit-progress-value { background: green; }
 
 .visual-bar .countdown {
     position: absolute;
