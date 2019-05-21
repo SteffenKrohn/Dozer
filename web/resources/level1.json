@@ -1,9 +1,9 @@
 {
   "params": {
     "level": 1,
-    "timelimit": 100000,
-    "initialscore": 1,
-    "targetscore": 55,
+    "timelimit": 10000,
+    "initialscore": 3,
+    "targetscore": 25,
     "lanespeed": 0.4,
     "instructions": "Catch the dots"
   },
