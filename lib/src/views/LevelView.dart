@@ -7,15 +7,22 @@ class LevelView {
   List<int> dozerTailIds;
 
   Element lane;
+  DivElement _visualBar;
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
     this.level = level;
     querySelector("body").setInnerHtml("<div id='lane'></div>");
     this.lane = querySelector("#lane");
+    querySelector("body").append(_visualBar);
   }
 
   void render() {
+    if (null == _visualBar) {
+      _createVisualBar();
+    }
+    _updateVisualBar();
+
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
     lane.querySelectorAll(".entity").forEach((e) {
@@ -66,5 +73,27 @@ class LevelView {
     }
 
     return out;
+  }
+
+  /// Create the initial Visual Bar
+  void _createVisualBar() {
+
+    _visualBar = DivElement()
+      ..setAttribute("class", "visual-bar");
+
+    ProgressElement scoreProgress = ProgressElement()
+      ..setAttribute("class", "score-progress")
+      ..setAttribute("min", "0")
+      ..setAttribute("max", level.targetScore.toString());
+
+    _visualBar.append(scoreProgress);
+
+    // Update the created visual bar to fill it with the correct information
+  }
+
+  /// Updates the visual bar with the values taken from [level]
+  void _updateVisualBar() {
+    querySelector(".score-progress").setAttribute("value", level.getScore().toString());
+
   }
 }
