@@ -4,6 +4,7 @@ class Generator {
 
   ParameterGenerator pg;
   int levelId = 1;
+  EntitiesGenerator eg;
 
   String create() {
     return _createLevel(levelId);
@@ -19,6 +20,6 @@ class Generator {
   }
 
   String _printEntities() {
-    return EntitiesGenerator().generateEntities(pg.timeLimit ~/ 300);
+    return EntitiesGenerator().generateEntities(pg.timeLimit ~/ 300, 200 ~/ pg.laneSpeed);
   }
 }

@@ -9,17 +9,18 @@ class EntitiesGenerator {
   int drillChance = 1;
   int doubleUpChance = 1;
   int slowDownChance = 1;
+  int wallChance = 1;
 
   // Parameter that determine the placement in the level
   int time = 1000;
 
-  String generateEntities(int count) {
+  String generateEntities(int count, int gap) {
     String output = '"entities": [';
 
     for(int i = 0; i < count; i++) {
       output += generateEntity();
       output += ",";
-      time += 300;
+      time += gap;
     }
 
     output = output.substring(0, output.length - 1);
@@ -28,7 +29,7 @@ class EntitiesGenerator {
   }
 
   String generateEntity() {
-    int rnd = Random().nextInt(brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance);
+    int rnd = Random().nextInt(brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance + wallChance);
 
     if (rnd < brickChance) {
       return generateBrick();
@@ -42,6 +43,8 @@ class EntitiesGenerator {
       return generateDoubleUp();
     } else if (rnd < brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance) {
       return generateSlowDown();
+    } else if (rnd < brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance + wallChance) {
+      return generateWall();
     }
       return "";
   }
@@ -56,6 +59,10 @@ class EntitiesGenerator {
 
   String generateBarrier() {
     return BarrierGenerator(time, getX()).generate();
+  }
+
+  String generateWall() {
+    return WallGenerator(time).generate();
   }
 
   double getX() {

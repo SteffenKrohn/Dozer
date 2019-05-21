@@ -15,7 +15,7 @@ class ParameterGenerator {
   int maxTimeLimit = 100000; // Default 120.000ms = 120s = 2min
 
   int minInitialScore = 10;
-  int maxInitialScore = 11;
+  int maxInitialScore = 15;
 
   int minTargetScore = 40;
   int maxTargetScore = 50;
@@ -58,8 +58,7 @@ class ParameterGenerator {
         '"timelimit": ${this.timeLimit},' +
         '"initialscore": ${this.initialScore},' +
         '"targetscore": ${this.targetScore},'+
-        '"lanespeed": ${this.laneSpeed},' +
-        '"instructions": ${this.instructions}' +
+        '"lanespeed": ${this.laneSpeed}' +
       '}'
     ;
   }

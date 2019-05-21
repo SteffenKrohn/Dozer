@@ -14,3 +14,7 @@ part 'models/DotGenerator.dart';
 part 'models/DrillGenerator.dart';
 part 'models/DoubleUpGenerator.dart';
 part 'models/SlowDownGenerator.dart';
+
+// sets
+part 'sets/SetGenerator.dart';
+part 'sets/WallGenerator.dart';
