@@ -7,6 +7,7 @@ class LevelView {
   List<int> dozerTailIds;
 
   Element lane;
+  DivElement _visualBar;
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
@@ -16,6 +17,11 @@ class LevelView {
   }
 
   void render() {
+    if (null == _visualBar) {
+      _createVisualBar();
+    }
+    _updateVisualBar();
+
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
     lane.querySelectorAll(".entity").forEach((e) {
@@ -60,11 +66,69 @@ class LevelView {
     } else if(entity.toString() == "dot") {
       out += "<div class='entity ${entity.toString()}' id='e${entity.id}'> ${(entity as Dot).value} </div>";
     } else if(entity.toString() == "brick") {
-      out += "<div class='entity brick' id='e${entity.id}'> ${(entity as Brick).value} </div>";
+      out += "<div class='entity brick ${_getBrickColorClass((entity as Brick).value)}' id='e${entity.id}'> ${(entity as Brick).value} </div>";
     } else if (entity.toString() == "barrier") {
       out += "<div class='entity barrier' id='e${entity.id}'></div>";
     }
-
     return out;
+  }
+
+  static String _getBrickColorClass(int value) {
+    if (value < 4) {
+      return "c1";
+    } else if (value < 7) {
+      return "c2";
+    } else if (value < 11) {
+      return "c3";
+    } else if (value < 16) {
+      return "c4";
+    } else {
+      return "c5";
+    }
+  }
+
+  /// Create the initial Visual Bar
+  void _createVisualBar() {
+
+    _visualBar = DivElement()
+      ..setAttribute("class", "visual-bar");
+
+    DivElement progressBar = DivElement()
+      ..setAttribute("class", "progress-bar");
+    
+    DivElement currentLevel = DivElement()
+      ..setAttribute("class", "level first-level")
+      ..appendText(level.getLevel().toString());
+    
+    ProgressElement scoreProgress = ProgressElement()
+      ..setAttribute("class", "score-progress")
+      ..setAttribute("min", "0")
+      ..setAttribute("max", level.targetScore.toString());
+
+    DivElement nextLevel = DivElement()
+      ..setAttribute("class", "level next-level")
+      ..appendText((level.getLevel() + 1).toString());
+
+    SpanElement timer = SpanElement()
+      ..setAttribute("class", "countdown")
+      ..appendText((level.timeLimit / 1000).toStringAsFixed(2));
+
+    progressBar.append(currentLevel);
+    progressBar.append(scoreProgress);
+    progressBar.append(nextLevel);
+    
+    _visualBar.append(progressBar);
+    _visualBar.append(timer);
+    
+
+    lane.append(_visualBar);
+  }
+
+  /// Updates the visual bar with values taken from [level]
+  void _updateVisualBar() {
+    // Score Progress
+    _visualBar.children.elementAt(0).children.elementAt(1).setAttribute("value", level.getDozer().score.toString());
+    // Countdown
+    _visualBar.children.elementAt(1).setInnerHtml((level.timeLimit / 1000).toStringAsFixed(2));
   }
 }
