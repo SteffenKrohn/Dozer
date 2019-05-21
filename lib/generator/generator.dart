@@ -1,5 +1,14 @@
 library generator;
 
-import 'package:dozergame/dozergame.dart';
+import 'dart:math';
 
-part 'tools/LevelGenerator.dart';
+part 'tools/Generator.dart';
+part 'tools/ParameterGenerator.dart';
+part 'tools/EntitiesGenerator.dart';
+
+// models
+part 'models/EntityGenerator.dart';
+part 'models/BrickGenerator.dart';
+part 'models/BarrierGenerator.dart';
+part 'models/DotGenerator.dart';
+
