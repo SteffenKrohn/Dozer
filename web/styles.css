@@ -52,6 +52,8 @@ h1 {
     -moz-border-radius: 0;
     border-radius: 0;
     border: 0;
+    font-size: 3vh;
+    color: white;
 }
 
 .button-box .lower-bottom-button {
