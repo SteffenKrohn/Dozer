@@ -54,13 +54,15 @@ class MenuView {
     tapToPlay.appendText("Tap To Play");
     div.append(tapToPlay);
 
-    ButtonElement chooseLevel = ButtonElement();
-    chooseLevel.setAttribute("id", "button_choose_levels");
-    chooseLevel.appendText("Choose a Level");
+    ButtonElement chooseLevel = ButtonElement()
+      ..setAttribute("id", "button_choose_levels")
+      ..setAttribute("class", "upper-bottom-button")
+      ..appendText("Choose a Level");
 
-    ButtonElement credits = ButtonElement();
-    credits.setAttribute("id", "button_credits");
-    credits.appendText("Credits");
+    ButtonElement credits = ButtonElement()
+      ..setAttribute("id", "button_credits")
+      ..setAttribute("class", "lower-bottom-button")
+      ..appendText("Credits");
 
     DivElement outerDiv = DivElement();
     outerDiv.append(div);
@@ -173,9 +175,10 @@ class MenuView {
 
     div.append(HRElement());
 
-    ButtonElement button = ButtonElement();
-    button.setAttribute("id", "button_to_menu");
-    button.appendText("Let me play anyway");
+    ButtonElement button = ButtonElement()
+      ..setAttribute("id", "button_to_menu")
+      ..setAttribute("class", "lower-bottom-button")
+      ..appendText("Let me play anyway");
 
     DivElement outerDiv = DivElement();
     outerDiv.append(div);
@@ -203,9 +206,10 @@ class MenuView {
 
     div.append(HRElement());
 
-    ButtonElement button = ButtonElement();
-    button.setAttribute("id", "button_pevious_level");
-    button.appendText("Return to last Level");
+    ButtonElement button = ButtonElement()
+      ..setAttribute("id", "button_pevious_level")
+      ..setAttribute("class", "lower-bottom-button")
+      ..appendText("Return to last Level");
 
     DivElement outerDiv = DivElement();
     outerDiv.append(div);
@@ -255,9 +259,10 @@ class MenuView {
 
     div.append(HRElement());
 
-    ButtonElement button = ButtonElement();
-    button.setAttribute("id", "button_to_menu");
-    button.appendText("Return to Menu");
+    ButtonElement button = ButtonElement()
+      ..setAttribute("id", "button_to_menu")
+      ..setAttribute("class", "lower-bottom-button")
+      ..appendText("Return to Menu");
 
     DivElement outerDiv = DivElement();
     outerDiv.append(div);

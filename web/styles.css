@@ -51,7 +51,17 @@ h1 {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+    border: 0;
 }
+
+.button-box .lower-bottom-button {
+    background-color: #99ccff;
+}
+
+.button-box .upper-bottom-button {
+    background-color: #6666ff;
+}
+
 
 .button_level_clickable {
     background-color: aqua;
