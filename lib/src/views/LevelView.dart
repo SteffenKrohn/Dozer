@@ -30,7 +30,7 @@ class LevelView {
 
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
-    this.laneElements.forEach((id, e) {
+    Map<String, Element>.from(this.laneElements).forEach((id, e) {
       int id = int.parse(e.id.substring(1));
       Entity entity;
 
@@ -41,6 +41,7 @@ class LevelView {
         visibleElements.remove(id);
       } else { // otherwise delete it
         e.remove();
+        this.laneElements.remove(id);
       }
     });
 

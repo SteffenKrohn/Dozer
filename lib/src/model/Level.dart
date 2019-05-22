@@ -38,7 +38,7 @@ class Level {
     this.viewHeight = height;
     this.viewWidth = width;
 
-    this._dozer = new Dozer(initialScore, this.viewHeight * this.laneSpeed / AppController.framerate);
+    this._dozer = new Dozer(initialScore, this.viewHeight * this.laneSpeed / AppController.framerate, viewHeight, viewWidth);
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
@@ -189,10 +189,8 @@ class Level {
     });
 
     // remove
-    for(int i = this._dozer.score; i < 60; i++){ // magic value aus LevelLoader (max. possible score)
+    for(int i = this._dozer.score; i - 1 < this._dozer.tailEntities.length; i++){
       this.visibleEntities.remove(i);
     }
   }
-
-
 }

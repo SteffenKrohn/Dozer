@@ -9,19 +9,24 @@ class Dozer extends Entity {
   int _tailGap;
   double _entityDy;
 
+  // Height of the lane in pixel
+  int laneHeight;
+  // Width of the lane in pixel
+  int laneWidth;
+
   /**
    * Creates a Dozer object with the id  dozer and the given score
    */
-  Dozer(int score, double entityDy) {
+  Dozer(int score, double entityDy, int laneHeight, int laneWidth) {
     this.id = 0;
     this.score = score;
     this.dy = 0;
     // TODO fix this (streng genommen gehören querySelector... width/height in den View als membervariablen, die man sich dann hier getted?)
     // und im Level wird doch auch schon Height und Width gespeichert?
-    this.x = querySelector("body").getBoundingClientRect().width / 2;
+    this.x = laneWidth / 2;
     this.y = this._getYAccordingScore();
-    this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
-    this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
+    this.height = (laneWidth * 0.05).floor();
+    this.width = (laneWidth * 0.05).floor();
 
     // initialise tailRoute list with straight tail
     this._tailGap = (this.height * 0.4).toInt();
@@ -131,6 +136,6 @@ class Dozer extends Entity {
   }
 
   double _getYAccordingScore() {
-    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 1.5 / 100))) - 10;
+    return this.laneHeight * (1 - (this.score * 1.5 / 100)) - 10;
   }
 }
