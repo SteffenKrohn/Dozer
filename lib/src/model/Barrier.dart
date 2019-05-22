@@ -2,7 +2,7 @@ part of dozergame;
 
 class Barrier extends Entity {
 
-  Barrier(int id, int x, int y, int width, int height) {
+  Barrier(int id, double x, double y, int width, int height) {
     this.id = id;
     this. x = x;
     this.y = y;

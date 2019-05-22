@@ -9,11 +9,17 @@ class LevelView {
   Element lane;
   DivElement _visualBar;
 
+  Map<String, Element> laneElements = Map<String, Element>();
+
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
     this.level = level;
-    querySelector("body").setInnerHtml("<div id='lane'></div>");
-    this.lane = querySelector("#lane");
+    
+    this.lane = DivElement()
+      ..setAttribute("id", "lane");
+    querySelector("body")
+        ..setInnerHtml("")
+        ..append(this.lane);
   }
 
   void render() {
@@ -24,53 +30,65 @@ class LevelView {
 
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
-    lane.querySelectorAll(".entity").forEach((e) {
+    Map<String, Element>.from(this.laneElements).forEach((id, e) {
       int id = int.parse(e.id.substring(1));
       Entity entity;
 
       // update old DOM Element if its also in visibleElements
       if(visibleElements.containsKey(id)) {
         entity = visibleElements[id];
-        updateEntity(e, entity);
-        visibleElements.remove(id);
+        updateEntityElement(e, entity);
       } else { // otherwise delete it
         e.remove();
+        this.laneElements.remove(e.id);
       }
+      // Remove handles entries
+      visibleElements.remove(id);
     });
 
     // add new DOM Elements
     visibleElements.forEach((id, value) {
-      this.lane.appendHtml(getHtmlRepresentation(value));
-      Element e = document.querySelector("#e" + id.toString());
-      updateEntity(e, value);
+      DivElement e = getEntityRepresentation(value);
+      this.lane.append(e);
+      this.laneElements.putIfAbsent("e"+id.toString(), () => e);
+      updateEntityElement(e, value);
     });
   }
 
   /**
    * Updates the default view values of a given Element
    */
-  static void updateEntity(Element view, Entity model) {
+  static void updateEntityElement(Element view, Entity model) {
     view.style.top = model.y.toString() + "px";
     view.style.left = model.x.toString() + "px";
     view.style.width = model.width.toString() + "px";
     view.style.height = model.height.toString() + "px";
   }
 
-  static String getHtmlRepresentation(Entity entity) {
-    String out = "";
+  static DivElement getEntityRepresentation(Entity entity) {
 
-    if(entity.toString() == "dozer"){
-      out += "<div class='entity dozer' id='e${entity.id}'></div>";
-    } else if(entity.toString() == "dozertail"){
-      out += "<div class='entity dozer' id='e${entity.id}'></div>";
+    if(entity.toString() == "dozer" || entity.toString() == "dozertail"){
+      return DivElement()
+          ..setAttribute("class", "entity dozer")
+          ..setAttribute("id", "e"+entity.id.toString());
     } else if(entity.toString() == "dot") {
-      out += "<div class='entity ${entity.toString()}' id='e${entity.id}'> ${(entity as Dot).value} </div>";
+      return DivElement()
+        ..setAttribute("class", "entity dot")
+        ..setAttribute("id", "e"+entity.id.toString())
+        ..appendText((entity as Dot).value.toString());
     } else if(entity.toString() == "brick") {
-      out += "<div class='entity brick ${_getBrickColorClass((entity as Brick).value)}' id='e${entity.id}'> ${(entity as Brick).value} </div>";
+      return DivElement()
+        ..setAttribute("class", "entity brick ${_getBrickColorClass((entity as Brick).value)}")
+        ..setAttribute("id", "e"+entity.id.toString())
+        ..appendText((entity as Brick).value.toString());
     } else if (entity.toString() == "barrier") {
-      out += "<div class='entity barrier' id='e${entity.id}'></div>";
+      return DivElement()
+        ..setAttribute("class", "entity barrier")
+        ..setAttribute("id", "e"+entity.id.toString());
     }
-    return out;
+    // This should not be reached
+    // If this is reached an entity has not been implemented above
+    return DivElement();
   }
 
   static String _getBrickColorClass(int value) {

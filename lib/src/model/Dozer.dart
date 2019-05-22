@@ -2,6 +2,8 @@ part of dozergame;
 
 class Dozer extends Entity {
 
+  static final double MAXIMUM_DOZER_HEIGHT = 0.7;
+
   /** The current score / length of the dozer */
   int score;
   List<Coordinates> _tailRoute = new List<Coordinates>();
@@ -9,19 +11,26 @@ class Dozer extends Entity {
   int _tailGap;
   double _entityDy;
 
+  // Height of the lane in pixel
+  int laneHeight;
+  // Width of the lane in pixel
+  int laneWidth;
+
   /**
    * Creates a Dozer object with the id  dozer and the given score
    */
-  Dozer(int score, double entityDy) {
+  Dozer(int score, double entityDy, int laneHeight, int laneWidth) {
     this.id = 0;
     this.score = score;
     this.dy = 0;
+    this.laneHeight = laneHeight;
+    this.laneWidth = laneWidth;
     // TODO fix this (streng genommen gehören querySelector... width/height in den View als membervariablen, die man sich dann hier getted?)
     // und im Level wird doch auch schon Height und Width gespeichert?
-    this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
+    this.x = laneWidth / 2;
     this.y = this._getYAccordingScore();
-    this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
-    this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
+    this.height = (laneWidth * 0.05).floor();
+    this.width = (laneWidth * 0.05).floor();
 
     // initialise tailRoute list with straight tail
     this._tailGap = (this.height * 0.4).toInt();
@@ -33,7 +42,7 @@ class Dozer extends Entity {
 
   void update() {
     // TODO Make prettier
-    int dx = this.dx;
+    double dx = this.dx;
 
     // Left border
     if (this.x + dx < 0) {
@@ -74,7 +83,7 @@ class Dozer extends Entity {
 
     // Add Tail Entities
     while(this.tailEntities.length + 1 < this.score) {
-      this.tailEntities.add(DozerTail(this.tailEntities.length + 1, this.x, this.y));
+      this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y));
     }
 
     // Update existing Tail Entities
@@ -130,7 +139,8 @@ class Dozer extends Entity {
     // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
   }
 
-  int _getYAccordingScore() {
-    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 1.5 / 100))).toInt() - 10;
+  /// Gets the height for the head of the dozer
+  double _getYAccordingScore() {
+    return max(this.laneHeight * (1 - (this.score * 1.5 / 100)) - 10, this.laneHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
   }
 }

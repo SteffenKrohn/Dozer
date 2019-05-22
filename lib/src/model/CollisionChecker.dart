@@ -51,30 +51,29 @@ class CollisionChecker {
     }
 
     double r = (circle.width / 2);
-    int x = circle.x + r.floor();
-    int y = circle.y + r.floor();
+    double x = circle.x + r;
+    double y = circle.y + r;
 
-    // This will be set to true when the circle is outside the corner of the rectangle
-    bool edgeCase = false;
+    // This will return false when the circle is outside the corner of the rectangle
 
     // Upper left
     if (x < rectangle.x && y < rectangle.y) {
       if ((r < sqrt(pow(x - rectangle.x, 2) + pow(y - rectangle.y, 2)))) {
-        edgeCase = true;
+        return false;
       }
     }
 
     // Upper right
     if (x > rectangle.x + rectangle.width && y < rectangle.y) {
       if ((r < sqrt(pow(x - (rectangle.x + rectangle.width), 2) + pow(y - rectangle.y, 2)))) {
-        edgeCase = true;
+        return false;
       }
     }
 
     // Lower left
     if (x < rectangle.x && y > rectangle.y + rectangle.height) {
       if ((r < sqrt(pow(x - rectangle.x, 2) + pow(y - (rectangle.y + rectangle.height), 2)))) {
-        edgeCase = true;
+        return false;
       }
     }
 
@@ -82,13 +81,9 @@ class CollisionChecker {
     if (x > rectangle.x + rectangle.width && y > rectangle.y + rectangle.height) {
       // Radius is greater than the distance to the corner
       if ((r < sqrt(pow(x - (rectangle.x + rectangle.width), 2) + pow(y - (rectangle.y + rectangle.height), 2)))) {
-        edgeCase = true;
+        return false;
       }
     }
-
-    if (!edgeCase) {
-      return true;
-    }
-    return false;
+    return true;
   }
 }

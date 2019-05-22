@@ -2,7 +2,7 @@ part of dozergame;
 
 class DozerTail extends Entity {
 
-  DozerTail(int id, int x, int y) {
+  DozerTail(int id, double x, double y) {
     this.id = id;
     this.x = x;
     this.y = y;

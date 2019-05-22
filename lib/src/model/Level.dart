@@ -38,7 +38,7 @@ class Level {
     this.viewHeight = height;
     this.viewWidth = width;
 
-    this._dozer = new Dozer(initialScore, this.viewHeight * this.laneSpeed / AppController.framerate);
+    this._dozer = new Dozer(initialScore, this.viewHeight * this.laneSpeed / AppController.framerate, viewHeight, viewWidth);
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
@@ -137,7 +137,7 @@ class Level {
 
     List<Entity> remEnt = List.from(remainingEntities);
 
-    int lastY;
+    double lastY;
     int lastH;
 
     remEnt.forEach((e) {
@@ -170,8 +170,8 @@ class Level {
     });
   }
 
-  int getRemainingYFromTime(int ms) {
-    return this.viewHeight * laneSpeed * ms ~/ -1000;
+  double getRemainingYFromTime(int ms) {
+    return this.viewHeight * laneSpeed * ms / -1000;
   }
 
   bool gameWon() {
@@ -189,10 +189,8 @@ class Level {
     });
 
     // remove
-    for(int i = this._dozer.score; i < 60; i++){ // magic value aus LevelLoader (max. possible score)
-      this.visibleEntities.remove(i);
+    for(int i = this._dozer.tailEntities.length + 1; this.visibleEntities.containsKey(-1 * i); i++){
+      this.visibleEntities.remove(-1*i);
     }
   }
-
-
 }
