@@ -9,9 +9,8 @@ class AppController {
 
   int _highscore = 0;
   Storage _reachedLevelStorage = window.localStorage;
-  int activeLevel = 1;
   int _reachedLevel = 1;
-  int _nrAvailableLevels = 10;
+  int _nrAvailableLevels;
   bool _gyroAvailable = true;
 
   void startup() {
@@ -19,11 +18,12 @@ class AppController {
     if(this._reachedLevelStorage.containsKey('reachedLevel')) {
       this._reachedLevel = int.parse(this._reachedLevelStorage['reachedLevel']);
     }
-    this.activeLevel = this.getReachedLevel();
     // TODO dynamic level
+    // Load level 1
     this.showLeveLOverview();
 
     // TODO load levels
+    this._nrAvailableLevels = 10; //provisional
 
     // Check Gyrosensor Support
     window.onDeviceOrientation.first.then((e) {
@@ -37,7 +37,7 @@ class AppController {
   }
 
   void startNextLevel() {
-    LevelController.loadAndStart(this, this.getActiveLevel());
+    LevelController.loadAndStart(this, this._reachedLevel);
   }
 
   void startLevel(int level) {
@@ -66,9 +66,10 @@ class AppController {
 
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
-      this.setActiveLevel(this.getActiveLevel() + 1);
-      if (this.getActiveLevel() > this._nrAvailableLevels) {
-        this.showNoSuchLevel(this.getActiveLevel());
+      this._reachedLevel++;
+      this._reachedLevelStorage["reachedLevel"] = this._reachedLevel.toString();
+      if (this._reachedLevel > this._nrAvailableLevels) {
+        this.showNoSuchLevel(this._reachedLevel);
       } else {
         this.showLeveLOverview();
       }
@@ -77,21 +78,21 @@ class AppController {
 
   void listenPreviousLevelButton() {
     querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
-      this.setActiveLevel(this.getActiveLevel() - 1);
+      this._reachedLevel--;
+      this._reachedLevelStorage["reachedLevel"] = this._reachedLevel.toString();
       this.showLeveLOverview();
     });
   }
 
   void listenChooseLevelButton() {
     querySelector("#button_choose_levels").onClick.listen((MouseEvent e) {
-      this.showMessageChooseLevels(this._nrAvailableLevels, this.getReachedLevel());
+      this.showMessageChooseLevels(this._nrAvailableLevels, this._reachedLevel);
     });
   }
 
   void listenAllLevelButtons(int reachedLevel) {
-    for(int i = 1; i <= this.getReachedLevel(); i++) {
+    for(int i = 1; i <= this._reachedLevel; i++) {
       querySelector("#button_level_$i").onClick.listen((MouseEvent e) {
-        this.setActiveLevel(i);
         this.startLevel(i);
       });
     }
@@ -104,7 +105,7 @@ class AppController {
   }
 
   void showLeveLOverview() {
-    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelIntrusction(this.getActiveLevel())).render(); // this._levelController.level.instructions TODO waiting for dependency
+    MenuView.show().levelOverview(this._reachedLevel, "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
@@ -144,41 +145,5 @@ class AppController {
   void showNoSuchLevel(int level) {
     MenuView.show().messageNoSuchLevel(level).render();
     this.listenPreviousLevelButton();
-  }
-
-  int getActiveLevel() {
-    return this.activeLevel;
-  }
-
-  void setActiveLevel(int activeLevel) {
-    this.activeLevel = activeLevel;
-    if (activeLevel > this.getReachedLevel()) {
-      this.setReachedLevel(activeLevel);
-    }
-  }
-
-  int getReachedLevel() {
-    if(this._reachedLevelStorage.containsKey('reachedLevel')) {
-      return int.parse(this._reachedLevelStorage['reachedLevel']);
-    }
-    return this._reachedLevel;
-  }
-
-  void setReachedLevel(int reachedLevel) {
-    this._reachedLevelStorage["reachedLevel"] = reachedLevel.toString();
-    this._reachedLevel = reachedLevel;
-  }
-
-  String _getLevelIntrusction(int level) {
-    switch (level) {
-      case 1:
-        return "Get in Rhythm and catch all dots to win! ";
-      case 2:
-        return "This time try to avoid the bricks and survive until the end!";
-      case 3:
-        return "Choose wisely. The barriers are your friends.";
-      default:
-        return "Now you are on your own. Try to reach level 10!";
-    }
   }
 }
