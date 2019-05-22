@@ -91,6 +91,7 @@ class AppController {
   void listenAllLevelButtons(int reachedLevel) {
     for(int i = 1; i <= this.getReachedLevel(); i++) {
       querySelector("#button_level_$i").onClick.listen((MouseEvent e) {
+        this.setActiveLevel(i);
         this.startLevel(i);
       });
     }
