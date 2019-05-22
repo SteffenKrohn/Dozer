@@ -9,7 +9,7 @@ class AppController {
 
   int _highscore = 0;
   Storage _reachedLevelStorage = window.localStorage;
-  int activeLevel = 1;
+  int _activeLevel = 1;
   int _reachedLevel = 1;
   int _nrAvailableLevels = 10;
   bool _gyroAvailable = true;
@@ -19,7 +19,7 @@ class AppController {
     if(this._reachedLevelStorage.containsKey('reachedLevel')) {
       this._reachedLevel = int.parse(this._reachedLevelStorage['reachedLevel']);
     }
-    this.activeLevel = this.getReachedLevel();
+    this._activeLevel = this.getReachedLevel();
     // TODO dynamic level
     this.showLeveLOverview();
 
@@ -140,6 +140,7 @@ class AppController {
     MenuView.show().messageCredits().render();
     this._reachedLevelStorage["reachedLevel"] = 1.toString(); // for testing purposes
     this._reachedLevel = 1;
+    this._activeLevel = 1;
     this.listenGoToMenuButton();
   }
 
@@ -149,11 +150,11 @@ class AppController {
   }
 
   int getActiveLevel() {
-    return this.activeLevel;
+    return this._activeLevel;
   }
 
   void setActiveLevel(int activeLevel) {
-    this.activeLevel = activeLevel;
+    this._activeLevel = activeLevel;
     if (activeLevel > this.getReachedLevel()) {
       this.setReachedLevel(activeLevel);
     }
