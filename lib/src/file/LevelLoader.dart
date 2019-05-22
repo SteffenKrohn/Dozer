@@ -39,7 +39,7 @@ class LevelLoader {
         int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
         model = Dot(
           elementId,
-          (width * e.putIfAbsent("x", () => 0)).floor(), // x
+          (width * e.putIfAbsent("x", () => 0)), // x
           lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
           e.putIfAbsent("value", () => 1) as int,
           (lvl.viewWidth * Dot.getStandardRadius()).floor(),
@@ -49,7 +49,7 @@ class LevelLoader {
         int width = lvl.viewWidth - (lvl.viewWidth * Brick.getStandardWidth()).floor();
         model = Brick(
             elementId,
-            (width * e.putIfAbsent("x", () => 0)).floor(), // x
+            (width * e.putIfAbsent("x", () => 0)), // x
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
             e.putIfAbsent("value", () => 1) as int,
             (lvl.viewWidth * Brick.getStandardWidth()).floor(),
@@ -57,17 +57,17 @@ class LevelLoader {
         );
       } else if (type == "barrier") {
         int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
-        int barrierHeight = -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int);
+        int barrierHeight = -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int).floor();
         model = Barrier(
             elementId,
-            (width * e.putIfAbsent("x", () => 0)).floor(),
+            width * e.putIfAbsent("x", () => 0),
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
             (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
             barrierHeight
         );
       }
       if (model != null) {
-        model.dy = lvl.viewHeight * lvl.laneSpeed ~/ AppController.framerate;
+        model.dy = lvl.viewHeight * lvl.laneSpeed / AppController.framerate;
         queuedEntities.add(model);
       }
       elementId++;

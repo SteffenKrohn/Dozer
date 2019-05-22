@@ -137,7 +137,7 @@ class Level {
 
     List<Entity> remEnt = List.from(remainingEntities);
 
-    int lastY;
+    double lastY;
     int lastH;
 
     remEnt.forEach((e) {
@@ -170,8 +170,8 @@ class Level {
     });
   }
 
-  int getRemainingYFromTime(int ms) {
-    return this.viewHeight * laneSpeed * ms ~/ -1000;
+  double getRemainingYFromTime(int ms) {
+    return this.viewHeight * laneSpeed * ms / -1000;
   }
 
   bool gameWon() {

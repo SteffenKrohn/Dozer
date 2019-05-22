@@ -4,7 +4,7 @@ class Dot extends Entity {
 
   int value;
 
-  Dot(int id, int x, int y, int value, int width, int height) {
+  Dot(int id, double x, double y, int value, int width, int height) {
     this.id = id;
     this.x = x;
     this.y = y;

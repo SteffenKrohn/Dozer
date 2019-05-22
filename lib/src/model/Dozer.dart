@@ -18,7 +18,7 @@ class Dozer extends Entity {
     this.dy = 0;
     // TODO fix this (streng genommen gehören querySelector... width/height in den View als membervariablen, die man sich dann hier getted?)
     // und im Level wird doch auch schon Height und Width gespeichert?
-    this.x = querySelector("body").getBoundingClientRect().width ~/ 2;
+    this.x = querySelector("body").getBoundingClientRect().width / 2;
     this.y = this._getYAccordingScore();
     this.height = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
     this.width = (querySelector("body").getBoundingClientRect().width * 0.05).floor();
@@ -33,7 +33,7 @@ class Dozer extends Entity {
 
   void update() {
     // TODO Make prettier
-    int dx = this.dx;
+    double dx = this.dx;
 
     // Left border
     if (this.x + dx < 0) {
@@ -130,7 +130,7 @@ class Dozer extends Entity {
     // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
   }
 
-  int _getYAccordingScore() {
-    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 1.5 / 100))).toInt() - 10;
+  double _getYAccordingScore() {
+    return (querySelector("body").getBoundingClientRect().height * (1 - (this.score * 1.5 / 100))) - 10;
   }
 }
