@@ -2,6 +2,8 @@ part of dozergame;
 
 class Dozer extends Entity {
 
+  static final double MAXIMUM_DOZER_HEIGHT = 0.7;
+
   /** The current score / length of the dozer */
   int score;
   List<Coordinates> _tailRoute = new List<Coordinates>();
@@ -137,7 +139,8 @@ class Dozer extends Entity {
     // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
   }
 
+  /// Gets the height for the head of the dozer
   double _getYAccordingScore() {
-    return this.laneHeight * (1 - (this.score * 1.5 / 100)) - 10;
+    return min(this.laneHeight * (1 - (this.score * 1.5 / 100)) - 10, this.laneHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
   }
 }
