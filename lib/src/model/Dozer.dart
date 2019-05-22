@@ -141,6 +141,6 @@ class Dozer extends Entity {
 
   /// Gets the height for the head of the dozer
   double _getYAccordingScore() {
-    return min(this.laneHeight * (1 - (this.score * 1.5 / 100)) - 10, this.laneHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
+    return max(this.laneHeight * (1 - (this.score * 1.5 / 100)) - 10, this.laneHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
   }
 }
