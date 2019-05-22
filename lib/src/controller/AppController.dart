@@ -104,7 +104,7 @@ class AppController {
   }
 
   void showLeveLOverview() {
-    MenuView.show().levelOverview(this.getActiveLevel(), "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
+    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelIntrusction(this.getActiveLevel())).render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
@@ -167,5 +167,18 @@ class AppController {
   void setReachedLevel(int reachedLevel) {
     this._reachedLevelStorage["reachedLevel"] = reachedLevel.toString();
     this._reachedLevel = reachedLevel;
+  }
+
+  String _getLevelIntrusction(int level) {
+    switch (level) {
+      case 1:
+        return "Get in Rhythm and catch all dots to win! ";
+      case 2:
+        return "This time try to avoid the bricks and survive until the end!";
+      case 3:
+        return "Choose wisely. The barriers are your friends.";
+      default:
+        return "Now you are on your own. Try to reach level 10!";
+    }
   }
 }
