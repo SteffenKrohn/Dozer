@@ -21,6 +21,8 @@ class Dozer extends Entity {
     this.id = 0;
     this.score = score;
     this.dy = 0;
+    this.laneHeight = laneHeight;
+    this.laneWidth = laneWidth;
     // TODO fix this (streng genommen gehören querySelector... width/height in den View als membervariablen, die man sich dann hier getted?)
     // und im Level wird doch auch schon Height und Width gespeichert?
     this.x = laneWidth / 2;

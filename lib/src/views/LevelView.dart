@@ -38,16 +38,17 @@ class LevelView {
       if(visibleElements.containsKey(id)) {
         entity = visibleElements[id];
         updateEntityElement(e, entity);
-        visibleElements.remove(id);
       } else { // otherwise delete it
         e.remove();
         this.laneElements.remove(id);
       }
+      // Remove handles entries
+      visibleElements.remove(id);
     });
 
     // add new DOM Elements
     visibleElements.forEach((id, value) {
-      Element e = getEntityRepresentation(value);
+      DivElement e = getEntityRepresentation(value);
       this.lane.append(e);
       this.laneElements.putIfAbsent("e"+id.toString(), () => e);
       updateEntityElement(e, value);
