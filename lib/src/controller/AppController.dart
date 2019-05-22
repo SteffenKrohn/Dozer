@@ -48,9 +48,9 @@ class AppController {
 
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
+      this.showLeveLOverview();
       document.body.requestFullscreen();
       window.screen.orientation.lock("portrait-primary");
-      this.showLeveLOverview();
     });
   }
 
