@@ -28,7 +28,7 @@ class LevelLoader {
     List<Entity> queuedEntities = List<Entity>();
 
     // Counter to give each element an unique id
-    int elementId = 60;
+    int elementId = 1;
 
 
     entities.forEach((e) {

@@ -81,7 +81,7 @@ class Dozer extends Entity {
 
     // Add Tail Entities
     while(this.tailEntities.length + 1 < this.score) {
-      this.tailEntities.add(DozerTail(this.tailEntities.length + 1, this.x, this.y));
+      this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y));
     }
 
     // Update existing Tail Entities
