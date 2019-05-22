@@ -26,20 +26,30 @@ class AppController {
       this._gyroAvailable = e.gamma != null ? true : false;
       if(!this._gyroAvailable) {
         this.showMessageNoSupportForGyro();
+      } else {
+        this.showWelcomeScreenOnMobileDevices();
       }
     });
   }
 
   void startNextLevel() {
-      LevelController.loadAndStart(this, this._reachedLevel);
+    LevelController.loadAndStart(this, this._reachedLevel);
   }
 
   void startLevel(int level) {
-      LevelController.loadAndStart(this, level);
+    LevelController.loadAndStart(this, level);
   }
 
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
+      this.showLeveLOverview();
+    });
+  }
+
+  void listenGoToMenuButtonAndRequestFullscreen() {
+    querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
+      document.body.requestFullscreen();
+      window.screen.orientation.lock("portrait-primary");
       this.showLeveLOverview();
     });
   }
@@ -110,6 +120,11 @@ class AppController {
     this.listenGoToMenuButton();
   }
 
+  void showWelcomeScreenOnMobileDevices() {
+    MenuView.show().messageWelcomeScreenOnMobile().render(); // TODO replace with welcomeScreen
+    this.listenGoToMenuButtonAndRequestFullscreen();
+  }
+
   void showMessageChooseLevels(int nrAvailableLevels, int reachedLevel) {
     MenuView.messageChooseLevels(nrAvailableLevels, reachedLevel);
     this.listenGoToMenuButton();
@@ -125,5 +140,4 @@ class AppController {
     MenuView.show().messageNoSuchLevel(level).render();
     this.listenPreviousLevelButton();
   }
-
 }

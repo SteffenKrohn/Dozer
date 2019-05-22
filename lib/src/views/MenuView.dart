@@ -221,6 +221,28 @@ class MenuView {
     return this;
   }
 
+
+  MenuView messageWelcomeScreenOnMobile() {
+    DivElement div = DivElement();
+    div.setAttribute("class", "message");
+    div.append(getLogo());
+    div.append(HRElement());
+
+    ParagraphElement upperText = ParagraphElement();
+    upperText.appendText("Welcome to Dozer - Have fun!");
+    div.append(upperText);
+
+    div.append(HRElement());
+
+    DivElement outerDiv = DivElement()
+      ..setAttribute("id", "button_to_menu");
+    outerDiv.append(div);
+
+
+    this.content = outerDiv;
+    return this;
+  }
+
   MenuView messageCredits() {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
@@ -273,4 +295,5 @@ class MenuView {
 
     querySelector("body").setInnerHtml(html);
   }
+
 }
