@@ -189,8 +189,8 @@ class Level {
     });
 
     // remove
-    for(int i = this._dozer.score; i - 1 < this._dozer.tailEntities.length; i++){
-      this.visibleEntities.remove(i);
+    for(int i = this._dozer.tailEntities.length + 1; this.visibleEntities.containsKey(-1 * i); i++){
+      this.visibleEntities.remove(-1*i);
     }
   }
 }

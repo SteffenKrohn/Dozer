@@ -40,7 +40,7 @@ class LevelView {
         updateEntityElement(e, entity);
       } else { // otherwise delete it
         e.remove();
-        this.laneElements.remove(id);
+        this.laneElements.remove(e.id);
       }
       // Remove handles entries
       visibleElements.remove(id);
