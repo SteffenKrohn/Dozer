@@ -9,8 +9,9 @@ class AppController {
 
   int _highscore = 0;
   Storage _reachedLevelStorage = window.localStorage;
+  int activeLevel = 1;
   int _reachedLevel = 1;
-  int _nrAvailableLevels;
+  int _nrAvailableLevels = 10;
   bool _gyroAvailable = true;
 
   void startup() {
@@ -18,12 +19,11 @@ class AppController {
     if(this._reachedLevelStorage.containsKey('reachedLevel')) {
       this._reachedLevel = int.parse(this._reachedLevelStorage['reachedLevel']);
     }
+    this.activeLevel = this.getReachedLevel();
     // TODO dynamic level
-    // Load level 1
     this.showLeveLOverview();
 
     // TODO load levels
-    this._nrAvailableLevels = 10; //provisional
 
     // Check Gyrosensor Support
     window.onDeviceOrientation.first.then((e) {
@@ -37,7 +37,7 @@ class AppController {
   }
 
   void startNextLevel() {
-    LevelController.loadAndStart(this, this._reachedLevel);
+    LevelController.loadAndStart(this, this.getActiveLevel());
   }
 
   void startLevel(int level) {
@@ -66,10 +66,9 @@ class AppController {
 
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
-      this._reachedLevel++;
-      this._reachedLevelStorage["reachedLevel"] = this._reachedLevel.toString();
-      if (this._reachedLevel > this._nrAvailableLevels) {
-        this.showNoSuchLevel(this._reachedLevel);
+      this.setActiveLevel(this.getActiveLevel() + 1);
+      if (this.getActiveLevel() > this._nrAvailableLevels) {
+        this.showNoSuchLevel(this.getActiveLevel());
       } else {
         this.showLeveLOverview();
       }
@@ -78,20 +77,19 @@ class AppController {
 
   void listenPreviousLevelButton() {
     querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
-      this._reachedLevel--;
-      this._reachedLevelStorage["reachedLevel"] = this._reachedLevel.toString();
+      this.setActiveLevel(this.getActiveLevel() - 1);
       this.showLeveLOverview();
     });
   }
 
   void listenChooseLevelButton() {
     querySelector("#button_choose_levels").onClick.listen((MouseEvent e) {
-      this.showMessageChooseLevels(this._nrAvailableLevels, this._reachedLevel);
+      this.showMessageChooseLevels(this._nrAvailableLevels, this.getReachedLevel());
     });
   }
 
   void listenAllLevelButtons(int reachedLevel) {
-    for(int i = 1; i <= this._reachedLevel; i++) {
+    for(int i = 1; i <= this.getReachedLevel(); i++) {
       querySelector("#button_level_$i").onClick.listen((MouseEvent e) {
         this.startLevel(i);
       });
@@ -105,7 +103,7 @@ class AppController {
   }
 
   void showLeveLOverview() {
-    MenuView.show().levelOverview(this._reachedLevel, "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
+    MenuView.show().levelOverview(this.getActiveLevel(), "Catch The Dots To Grow The Dozer").render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
@@ -145,5 +143,28 @@ class AppController {
   void showNoSuchLevel(int level) {
     MenuView.show().messageNoSuchLevel(level).render();
     this.listenPreviousLevelButton();
+  }
+
+  int getActiveLevel() {
+    return this.activeLevel;
+  }
+
+  void setActiveLevel(int activeLevel) {
+    this.activeLevel = activeLevel;
+    if (activeLevel > this.getReachedLevel()) {
+      this.setReachedLevel(activeLevel);
+    }
+  }
+
+  int getReachedLevel() {
+    if(this._reachedLevelStorage.containsKey('reachedLevel')) {
+      return int.parse(this._reachedLevelStorage['reachedLevel']);
+    }
+    return this._reachedLevel;
+  }
+
+  void setReachedLevel(int reachedLevel) {
+    this._reachedLevelStorage["reachedLevel"] = reachedLevel.toString();
+    this._reachedLevel = reachedLevel;
   }
 }
