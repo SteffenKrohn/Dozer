@@ -139,6 +139,8 @@ class AppController {
 
   void showMessageCredits() {
     MenuView.show().messageCredits().render();
+    this._reachedLevelStorage["reachedLevel"] = 1.toString(); // for testing purposes
+    this._reachedLevel = 1;
     this.listenGoToMenuButton();
   }
 
