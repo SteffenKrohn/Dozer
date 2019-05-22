@@ -8,12 +8,16 @@ class AppController {
   static const int framerate = 35;
 
   int _highscore = 0;
-  int _reachedLevel = 1; // TODO Web Storage
+  Storage _reachedLevelStorage = window.localStorage;
+  int _reachedLevel = 1;
   int _nrAvailableLevels;
   bool _gyroAvailable = true;
 
   void startup() {
 
+    if(this._reachedLevelStorage.containsKey('reachedLevel')) {
+      this._reachedLevel = int.parse(this._reachedLevelStorage['reachedLevel']);
+    }
     // TODO dynamic level
     // Load level 1
     this.showLeveLOverview();
@@ -63,6 +67,7 @@ class AppController {
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
       this._reachedLevel++;
+      this._reachedLevelStorage["reachedLevel"] = this._reachedLevel.toString();
       if (this._reachedLevel > this._nrAvailableLevels) {
         this.showNoSuchLevel(this._reachedLevel);
       } else {
@@ -74,6 +79,7 @@ class AppController {
   void listenPreviousLevelButton() {
     querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
       this._reachedLevel--;
+      this._reachedLevelStorage["reachedLevel"] = this._reachedLevel.toString();
       this.showLeveLOverview();
     });
   }
