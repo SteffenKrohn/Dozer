@@ -11,7 +11,7 @@
   "background_color": "#003da0",
   "icons": [
     {
-      "src": "favicon,ico",
+      "src": "favicon.ico",
       "sizes": "144x144",
       "type": "image/ico"
     }
