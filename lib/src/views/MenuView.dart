@@ -262,7 +262,7 @@ class MenuView {
     ButtonElement button = ButtonElement()
       ..setAttribute("id", "button_to_menu")
       ..setAttribute("class", "lower-bottom-button")
-      ..appendText("Return to Menu");
+      ..appendText("Return");
 
     DivElement outerDiv = DivElement();
     outerDiv.append(div);
@@ -278,27 +278,45 @@ class MenuView {
     return this;
   }
 
-  static void messageChooseLevels(int nrAvailableLevels, int reachedLevel) {
-    String html  = "<div id='message'><h1>Dozer</h1><hr><h3>Your unlocked levels!</h3><table>";
+  MenuView messageChooseLevels(int nrAvailableLevels, int reachedLevel) {
+    DivElement div = DivElement()
+      ..setAttribute("class", "message")
+      ..append(getLogo())
+      ..append(HRElement());
 
-    int columns = 4;
-    int nrLevel = 1;
-    for(int y = 1; y <= nrAvailableLevels ~/ columns + 1; y++) { // rows
-      html += "<tr>";
-      for(int x = 1; x <= columns; x++) { // columns
-        if(nrLevel <= reachedLevel) {
-          html += "<td><button class='button_level_clickable' id='button_level_$nrLevel'>$nrLevel</button></td>";
-        } else {
-          html += "<td><button class='button_level_greyed_out'>$nrLevel</button></td>";
-        }
-        nrLevel++;
-      }
-      html += "</tr>";
+    DivElement chooseLevelWrapper = DivElement()
+      ..setAttribute("class", "choose-level-wrapper");
+
+    for (int i = 0; i < nrAvailableLevels; i++) {
+      ButtonElement levelButton = ButtonElement()
+          ..setAttribute("value", (i + 1).toString())
+          ..setAttribute("class", "choose-level ${i < reachedLevel ? "reached" : ""}")
+          ..setAttribute("id", "level-${i + 1}")
+          ..appendText((i + 1).toString());
+
+      chooseLevelWrapper.append(levelButton);
     }
+    div.append(chooseLevelWrapper);
 
-    html += "</table><button id='button_to_menu'>Back</button></div>";
+    div.append(HRElement());
 
-    querySelector("body").setInnerHtml(html);
+    ButtonElement button = ButtonElement()
+      ..setAttribute("id", "button_to_menu")
+      ..setAttribute("class", "lower-bottom-button")
+      ..appendText("Return");
+
+    DivElement outerDiv = DivElement();
+    outerDiv.append(div);
+
+    DivElement buttonBox = getBottomButtonBox();
+    buttonBox.setAttribute("style", "height: 10%");
+    button.setAttribute("style", "height: 100%");
+    buttonBox.append(button);
+
+    outerDiv.append(buttonBox);
+
+    this.content = outerDiv;
+    return this;
   }
 
 }

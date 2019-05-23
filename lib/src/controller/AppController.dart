@@ -89,10 +89,11 @@ class AppController {
   }
 
   void listenAllLevelButtons(int reachedLevel) {
-    for(int i = 1; i <= this.getReachedLevel(); i++) {
-      querySelector("#button_level_$i").onClick.listen((MouseEvent e) {
-        this.setActiveLevel(i);
-        this.startLevel(i);
+    for (int i = 0; i < this._nrAvailableLevels; i++) {
+      querySelector("#level-${i + 1}").onClick.listen((Event e) {
+        e.preventDefault();
+        this.setActiveLevel(i + 1);
+        this.startLevel(i + 1);
       });
     }
   }
@@ -131,7 +132,7 @@ class AppController {
   }
 
   void showMessageChooseLevels(int nrAvailableLevels, int reachedLevel) {
-    MenuView.messageChooseLevels(nrAvailableLevels, reachedLevel);
+    MenuView.show().messageChooseLevels(nrAvailableLevels, reachedLevel).render();
     this.listenGoToMenuButton();
     this.listenAllLevelButtons(reachedLevel);
   }
