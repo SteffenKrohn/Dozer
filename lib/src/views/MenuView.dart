@@ -269,7 +269,7 @@ class MenuView {
     // a little space to put the paypal logo on the bottom but above th buttons TODO nicht super responsiv
     DivElement spaceDiv = DivElement();
     spaceDiv.style.width = "auto";
-    spaceDiv.style.marginTop = "35vh";
+    spaceDiv.style.marginTop = "32vh";
     div.append(spaceDiv);
 
     ParagraphElement donateText = ParagraphElement();
