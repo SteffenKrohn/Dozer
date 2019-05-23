@@ -118,11 +118,11 @@ class Dozer extends Entity {
   @override
   void hitBy(Entity e) {
     if (e is Brick) {
-      this.score -= e.value;
+      this.changeScore(-1 * e.value);
       return;
     }
     if (e is Dot) {
-      this.score += e.value;
+      this.changeScore(e.value);
       return;
     }
     if (e is Barrier) {
