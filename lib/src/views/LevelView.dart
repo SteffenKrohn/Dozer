@@ -85,6 +85,10 @@ class LevelView {
       return DivElement()
         ..setAttribute("class", "entity barrier")
         ..setAttribute("id", "e"+entity.id.toString());
+    } else if (entity.toString() == "doubleup" || entity.toString() == "drill" || entity.toString() == "slowdown") {
+      return DivElement()
+        ..setAttribute("class", "entity powerup ${entity.toString()}")
+        ..setAttribute("id", "e"+entity.id.toString());
     }
     // This should not be reached
     // If this is reached an entity has not been implemented above

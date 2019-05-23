@@ -65,7 +65,35 @@ class LevelLoader {
             (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
             barrierHeight
         );
+      } else if (type == "doubleup") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
+        model = DoubleUp(
+            elementId,
+            width * e.putIfAbsent("x", () => 0),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (width * Dot.getStandardRadius()).floor(),
+            (width * Dot.getStandardRadius()).floor()
+        );
+      } else if (type == "drill") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
+        model = Drill(
+            elementId,
+            width * e.putIfAbsent("x", () => 0),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (width * Dot.getStandardRadius()).floor(),
+            (width * Dot.getStandardRadius()).floor()
+        );
+      } else if (type == "slowdown") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
+        model = SlowDown(
+            elementId,
+            width * e.putIfAbsent("x", () => 0),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (width * Dot.getStandardRadius()).floor(),
+            (width * Dot.getStandardRadius()).floor()
+        );
       }
+
       if (model != null) {
         model.dy = lvl.viewHeight * lvl.laneSpeed / AppController.framerate;
         queuedEntities.add(model);
@@ -76,7 +104,7 @@ class LevelLoader {
     return lvl;
   }
   static Future<Map> makeRequest(int id) async {
-    var path='resources/level'+ id.toString() +'.json';
+    var path='resources/level/level'+ id.toString() +'.json';
     var r = HttpRequest.getString(path);
     String str = await r;
     return json.decode(str);

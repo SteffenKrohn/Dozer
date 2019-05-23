@@ -2,8 +2,12 @@ part of dozergame;
 
 class SlowDown extends PowerUp {
 
-  SlowDown(int id) {
+  SlowDown(int id, double x, double y, int width, int height) {
     this.id = id;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
   }
 
   @override
