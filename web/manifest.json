@@ -6,7 +6,7 @@
   "start_url": "https://webtech.mylab.th-luebeck.de/ss2019/team-4a/",
   "scope": "https://webtech.mylab.th-luebeck.de/ss2019/team-4a/",
   "display": "fullscreen",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "theme_color": "#003da0",
   "background_color": "#003da0",
   "icons": [
