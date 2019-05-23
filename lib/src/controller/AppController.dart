@@ -104,6 +104,13 @@ class AppController {
     });
   }
 
+
+  void listenDonateButton() {
+    querySelector("#button_donate").onClick.listen((MouseEvent e) {
+      window.open("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EW22STTHR8DK2&source=url", "Donate on PayPal");
+    });
+  }
+
   void showLeveLOverview() {
     MenuView.show().levelOverview(this.getActiveLevel(), _getLevelIntrusction(this.getActiveLevel())).render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenStartLevelButton();
@@ -140,6 +147,7 @@ class AppController {
   void showMessageCredits() {
     MenuView.show().messageCredits().render();
     this.listenGoToMenuButton();
+    this.listenDonateButton();
   }
 
   void showNoSuchLevel(int level) {
@@ -182,4 +190,5 @@ class AppController {
         return "Now you are on your own. Try to reach level 10!";
     }
   }
+
 }

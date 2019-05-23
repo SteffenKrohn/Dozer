@@ -257,12 +257,46 @@ class MenuView {
     div.append(HRElement());
 
     ParagraphElement upperText = ParagraphElement();
-    upperText.appendText("Creators, License, Fonts, Participants will be stated here later");
+    upperText.appendText("Built with Love in Lübeck.");
     div.append(upperText);
+
+    ParagraphElement middleText = ParagraphElement();
+    middleText.appendText("Jan Steffen Krohn & Tom Christopher Böttger");
+    div.append(middleText);
 
     div.append(HRElement());
 
-    ButtonElement button = ButtonElement()
+    // a little space to put the paypal logo on the bottom but above th buttons TODO nicht super responsiv
+    DivElement spaceDiv = DivElement();
+    spaceDiv.style.width = "auto";
+    spaceDiv.style.marginTop = "35vh";
+    div.append(spaceDiv);
+
+    ParagraphElement donateText = ParagraphElement();
+    donateText.appendText("Help us making Dozer even better and donate us a coffee :-)");
+    div.append(donateText);
+
+    ImageElement paypal = ImageElement(src: "resources/paypal.png");
+    paypal.style.position = "relative";
+    paypal.style.height = "5vh";
+    paypal.style.width = "auto";
+    paypal.style.marginTop = "auto";
+    paypal.style.marginRight = "100%";
+    paypal.style.display = "inline-block";
+    //div.append(paypal);
+
+    SpanElement textDonate = SpanElement();
+    textDonate.text = "Donate";
+    textDonate.style.display = "inline-block";
+    textDonate.style.position = "relative";
+
+    ButtonElement buttonDonate = ButtonElement()
+      ..setAttribute("id", "button_donate")
+      ..setAttribute("class", "upper-bottom-button")
+      ..append(paypal)
+      ..append(textDonate);
+
+    ButtonElement buttonToMenu = ButtonElement()
       ..setAttribute("id", "button_to_menu")
       ..setAttribute("class", "lower-bottom-button")
       ..appendText("Return");
@@ -271,9 +305,11 @@ class MenuView {
     outerDiv.append(div);
 
     DivElement buttonBox = getBottomButtonBox();
-    buttonBox.setAttribute("style", "height: 10%");
-    button.setAttribute("style", "height: 100%");
-    buttonBox.append(button);
+    buttonBox.setAttribute("style", "height: 20%");
+    buttonDonate.setAttribute("style", "height: 50%");
+    buttonToMenu.setAttribute("style", "height: 50%");
+    buttonBox.append(buttonDonate);
+    buttonBox.append(buttonToMenu);
 
     outerDiv.append(buttonBox);
 
