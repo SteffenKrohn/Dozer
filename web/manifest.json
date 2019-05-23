@@ -7,6 +7,13 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#ffffff",
-  "background_color": "#111111"
+  "theme_color": "#003da0",
+  "background_color": "#003da0",
+  "icons": [
+    {
+      "src": "favicon,ico",
+      "sizes": "144x144",
+      "type": "image/ico"
+    }
+  ]
 }
