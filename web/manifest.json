@@ -3,12 +3,14 @@
   "short_name": "Dozer",
   "description": "A cool new unicorn game featuring construction material and a very hungry critter.",
   "lang": "en-US",
-  "start_url": "https://webtech.mylab.th-luebeck.de/ss2019/team-4a/",
-  "scope": "https://webtech.mylab.th-luebeck.de/ss2019/team-4a/",
+  "start_url": ".",
+  
   "display": "fullscreen",
   "orientation": "portrait",
+  
   "theme_color": "#003da0",
   "background_color": "#003da0",
+  
   "icons": [
     {
       "src": "favicon.ico",
