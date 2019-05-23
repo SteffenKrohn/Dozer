@@ -102,6 +102,8 @@ h1 {
     border-radius: 3vw;
 
     background-color: darkgrey;
+    color: white;
+    font-size: large;
 }
 
 .choose-level-wrapper .choose-level.reached {
