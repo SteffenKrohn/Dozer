@@ -58,6 +58,11 @@ h1 {
     color: white;
 }
 
+.tap-me {
+    font-size: 5vh;
+    opacity: 0.3;
+}
+
 .button-box .lower-bottom-button {
     background-color: #99ccff;
 }
@@ -110,8 +115,7 @@ h1 {
     background-color: aqua;
 }
 
-    /* Inside a level */
-
+/* Inside a level */
 #lane {
     width: 100%;
     height: 100%;

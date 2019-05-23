@@ -50,8 +50,9 @@ class MenuView {
 
     div.append(HRElement());
 
-    ParagraphElement tapToPlay = ParagraphElement();
-    tapToPlay.appendText("Tap To Play");
+    ParagraphElement tapToPlay = ParagraphElement()
+      ..setAttribute("class", "tap-me")
+      ..appendText("Tap To Play");
     div.append(tapToPlay);
 
     ButtonElement chooseLevel = ButtonElement()
@@ -107,8 +108,9 @@ class MenuView {
 
     div.append(HRElement());
 
-    ParagraphElement tapToAdvance = ParagraphElement();
-    tapToAdvance.appendText("Tap To Advance");
+    ParagraphElement tapToAdvance = ParagraphElement()
+      ..setAttribute("class", "tap-me")
+      ..appendText("Tap To Advance");
     div.append(tapToAdvance);
 
     DivElement outerDiv = DivElement();
@@ -144,8 +146,9 @@ class MenuView {
 
     div.append(HRElement());
 
-    ParagraphElement tapToAdvance = ParagraphElement();
-    tapToAdvance.appendText("Tap To Advance");
+    ParagraphElement tapToAdvance = ParagraphElement()
+      ..setAttribute("class", "tap-me")
+      ..appendText("Tap To Advance");
     div.append(tapToAdvance);
 
     DivElement outerDiv = DivElement();
