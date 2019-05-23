@@ -89,7 +89,7 @@ class AppController {
   }
 
   void listenAllLevelButtons(int reachedLevel) {
-    for (int i = 0; i < this._nrAvailableLevels; i++) {
+    for (int i = 0; i < this.getReachedLevel(); i++) {
       querySelector("#level-${i + 1}").onClick.listen((Event e) {
         e.preventDefault();
         this.setActiveLevel(i + 1);
