@@ -6,7 +6,7 @@
   "start_url": ".",
   
   "display": "fullscreen",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   
   "theme_color": "#003da0",
   "background_color": "#003da0",
