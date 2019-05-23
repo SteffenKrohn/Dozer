@@ -224,4 +224,12 @@ h1 {
 
 .c5 {
     background-color: #9933ff;
+    animation-name: shiny;
+    animation-duration: 2s;
+}
+
+@keyframes shiny {
+    0%   {background-color: #9933ff;}
+    75%  {background-color: red;}
+    100% {background-color: #9933ff;}
 }
