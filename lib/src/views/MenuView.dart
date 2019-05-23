@@ -298,8 +298,6 @@ class MenuView {
     }
     div.append(chooseLevelWrapper);
 
-    div.append(HRElement());
-
     ButtonElement button = ButtonElement()
       ..setAttribute("id", "button_to_menu")
       ..setAttribute("class", "lower-bottom-button")
