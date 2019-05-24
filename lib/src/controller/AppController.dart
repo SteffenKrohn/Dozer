@@ -61,9 +61,13 @@ class AppController {
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLevelOverview();
-      this._sendVisitStats();
-      document.body.requestFullscreen();
-      window.screen.orientation.lock("portrait-primary");
+      try {
+        document.body.requestFullscreen();
+        window.screen.orientation.lock("portrait-primary");
+        this._sendVisitStats(isFullscreen: true);
+      } catch (e) {
+        this._sendVisitStats();
+      }
     });
   }
 
@@ -201,7 +205,7 @@ class AppController {
     }
   }
 
-  void _sendVisitStats() {
+  void _sendVisitStats({bool isFullscreen = false}) {
     // in the very first start the used ID will be assigned and stored
     if(this._userId == null) {
       this._userId = Random.secure().nextInt(pow(2, 32));
@@ -214,7 +218,9 @@ class AppController {
         "'viewWidth':{'integerValue': '${this._levelController.level.viewWidth}'},"
         "'viewHeight': {'integerValue': '${this._levelController.level.viewHeight}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
-        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}";
+        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}},"
+        "'isFullscreen': {'booleanValue': $isFullscreen}},"
+        "}}";
 
     HttpRequest.request(
         "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/visits",
@@ -233,7 +239,8 @@ class AppController {
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'startetLevel': {'integerValue': '${startetLevel}'},"
-        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}"; // TODO number of tries
+        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}"
+        "}}";
 
     HttpRequest.request(
         "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/levelstarts",
