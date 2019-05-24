@@ -7,7 +7,7 @@ class Level {
 
   /** Time limit in ms */
   double timeLimit;
-  int _initialScore;
+  int initialScore;
   int targetScore;
 
   /** Equals the percentage which certain entities (such as Brick, Dot) move per second */
@@ -24,6 +24,9 @@ class Level {
   int viewWidth;
   int viewHeight;
 
+  /// Fields to keep track of power up´s
+  bool slowDownActive = false;
+
   /**
    * Creates a new level
    */
@@ -32,13 +35,13 @@ class Level {
     this._level = level;
     this.timeLimit = timeLimit.toDouble();
     this.initialTime = timeLimit;
-    this._initialScore = initialScore;
+    this.initialScore = initialScore;
     this.targetScore = targetScore;
     this.laneSpeed = laneSpeed;
     this.viewHeight = height;
     this.viewWidth = width;
 
-    this._dozer = new Dozer(initialScore, this.viewHeight * this.laneSpeed / AppController.framerate, viewHeight, viewWidth);
+    this._dozer = new Dozer(this);
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
@@ -49,6 +52,10 @@ class Level {
    * a negative change to decrease the time limit.
    */
   void changeTimeLimit(double change) {
+    // If the game is slowed the time is also slowed
+    if (this.slowDownActive) {
+      change = change * SlowDown.POWER;
+    }
     this.timeLimit += change;
   }
 
@@ -65,7 +72,7 @@ class Level {
    * Returns the current score
    */
   int getScore() {
-    return (this.timeLimit * 1.357).floor();
+    return (this.timeLimit * 1.357).floor() + this._dozer.score * 537;
   }
 
   /**
@@ -170,18 +177,27 @@ class Level {
     });
   }
 
+  /// Gets the distance in pixel depending on duration and lanespeed
   double getRemainingYFromTime(int ms) {
     return this.viewHeight * laneSpeed * ms / -1000;
   }
 
+  /// Gets the distance a scrolling entity (like a Brick or Dot) moves per frame
+  double getVerticalMovementPerUpdate() {
+    return this.viewHeight * this.laneSpeed / AppController.framerate;
+  }
+
+  /// Returns true if the game is won, false otherwise
   bool gameWon() {
     return this.getDozer().score >= this.targetScore;
   }
 
+  /// Returns true if the game is lost, false otherwise
   bool gameLost() {
     return this.timeLimit <= 0 || this.getDozer().score <= 0;
   }
 
+  /// Adds or removes dozer tail entities depending on the current score
   void updateDozerTailInVisibleEntities() {
     // add tail entities to visible entities list
     this._dozer.tailEntities.forEach((e) {

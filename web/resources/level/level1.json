@@ -67,6 +67,30 @@
       "value": 2,
       "time": 14500,
       "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 16000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 17500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 19000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 20500,
+      "x": 0.7
     }
   ]
 }

@@ -1,6 +1,8 @@
 part of dozergame;
 
 class LevelLoader {
+
+  static final levelBasePath = "resources/level/";
   
   static Future<Level> getLevel(LevelController lc, int id) async {
     Future<Map> fmap = makeRequest(id);
@@ -43,7 +45,8 @@ class LevelLoader {
           lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
           e.putIfAbsent("value", () => 1) as int,
           (lvl.viewWidth * Dot.getStandardRadius()).floor(),
-          (lvl.viewWidth * Dot.getStandardRadius()).floor()
+          (lvl.viewWidth * Dot.getStandardRadius()).floor(),
+          lvl
         );
       } else if (type == "brick") {
         int width = lvl.viewWidth - (lvl.viewWidth * Brick.getStandardWidth()).floor();
@@ -53,7 +56,8 @@ class LevelLoader {
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
             e.putIfAbsent("value", () => 1) as int,
             (lvl.viewWidth * Brick.getStandardWidth()).floor(),
-            (lvl.viewHeight * Brick.getStandardHeight()).floor()
+            (lvl.viewHeight * Brick.getStandardHeight()).floor(),
+            lvl
         );
       } else if (type == "barrier") {
         int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
@@ -63,11 +67,43 @@ class LevelLoader {
             width * e.putIfAbsent("x", () => 0),
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
             (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
-            barrierHeight
+            barrierHeight,
+            lvl
+        );
+      } else if (type == "doubleup") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
+        model = DoubleUp(
+            elementId,
+            width * e.putIfAbsent("x", () => 0),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (width * Dot.getStandardRadius()).floor(),
+            (width * Dot.getStandardRadius()).floor(),
+            lvl
+        );
+      } else if (type == "drill") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
+        model = Drill(
+            elementId,
+            width * e.putIfAbsent("x", () => 0),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (width * Dot.getStandardRadius()).floor(),
+            (width * Dot.getStandardRadius()).floor(),
+            lvl
+        );
+      } else if (type == "slowdown") {
+        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
+        model = SlowDown(
+            elementId,
+            width * e.putIfAbsent("x", () => 0),
+            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+            (width * Dot.getStandardRadius()).floor(),
+            (width * Dot.getStandardRadius()).floor(),
+            lvl
         );
       }
+
       if (model != null) {
-        model.dy = lvl.viewHeight * lvl.laneSpeed / AppController.framerate;
+        model.dy = lvl.getVerticalMovementPerUpdate();
         queuedEntities.add(model);
       }
       elementId++;
@@ -76,7 +112,7 @@ class LevelLoader {
     return lvl;
   }
   static Future<Map> makeRequest(int id) async {
-    var path='resources/level'+ id.toString() +'.json';
+    var path= levelBasePath + 'level'+ id.toString() +'.json';
     var r = HttpRequest.getString(path);
     String str = await r;
     return json.decode(str);

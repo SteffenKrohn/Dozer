@@ -212,6 +212,36 @@ h1 {
     background-color: white;
 }
 
+/* Power Up Styles */
+.powerup {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    color: gold;
+    border-radius: 50%;
+}
+
+.doubleup:before {
+    content: "✌";
+}
+
+.drill:before {
+    content: "★";
+}
+
+.drill {
+    font-size: larger;
+}
+
+.slowdown:before {
+    content: "⌛";
+}
+
+.slowdown {
+    font-size: small;
+}
+
+/* Brick colors */
 .c1 {
     background-color: #99ccff;
 }

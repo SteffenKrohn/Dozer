@@ -4,13 +4,14 @@ class Dot extends Entity {
 
   int value;
 
-  Dot(int id, double x, double y, int value, int width, int height) {
+  Dot(int id, double x, double y, int value, int width, int height, Level level) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.value = value;
     this.width = width;
     this.height = height;
+    this.level = level;
   }
 
   String toString() {
