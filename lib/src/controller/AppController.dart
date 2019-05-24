@@ -211,8 +211,8 @@ class AppController {
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
-        "'viewWidth':{'integerValue': '360'}," // TODO
-        "'viewHeight': {'integerValue': '640'},"
+        "'viewWidth':{'integerValue': '${this._levelController.level.viewWidth}'},"
+        "'viewHeight': {'integerValue': '${this._levelController.level.viewHeight}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}";
 

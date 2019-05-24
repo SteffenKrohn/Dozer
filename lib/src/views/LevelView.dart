@@ -37,7 +37,11 @@ class LevelView {
       // update old DOM Element if its also in visibleElements
       if(visibleElements.containsKey(id)) {
         entity = visibleElements[id];
-        updateEntityElement(e, entity);
+        if (entity is Dozer || entity is DozerTail) {
+          updateDozerEntity(e, entity);
+        } else {
+          updateEntityElement(e, entity);
+        }
       } else { // otherwise delete it
         e.remove();
         this.laneElements.remove(e.id);
@@ -53,6 +57,36 @@ class LevelView {
       this.laneElements.putIfAbsent("e"+id.toString(), () => e);
       updateEntityElement(e, value);
     });
+  }
+
+  void updateDozerEntity(Element view, Entity model) {
+    view.style.top = model.y.toString() + "px";
+    view.style.left = model.x.toString() + "px";
+    view.style.width = model.width.toString() + "px";
+    view.style.height = model.height.toString() + "px";
+
+    // Drill PowerUp Animation
+    if (this.level._dozer.drillActive) {
+      if (!view.classes.contains("has-drill")) view.classes.add("has-drill");
+    }
+    else {
+      view.classes.remove("has-drill");
+    }
+    // TODO double up animation
+    /*
+    // DoubleUp PowerUp Animation
+    if (this.level._dozer.doubleUpActive) {
+      if (view.style.width != model.width.toString() + "px") {
+        view.style.width = model.width.toString() + "px";
+      } else {
+        view.style.width = (model.width * 1.5).toString() + "px";
+      }
+
+    }
+    else {
+      view.style.width = model.width.toString() + "px";
+    }
+     */
   }
 
   /**
