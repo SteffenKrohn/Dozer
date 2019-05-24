@@ -125,7 +125,7 @@ class AppController {
 
 
   void listenDonateButton() {
-    querySelector("#button_donate").onClick.listen((MouseEvent e) {
+    querySelector("#donate-button").onClick.listen((MouseEvent e) {
       window.open("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EW22STTHR8DK2&source=url", "Donate on PayPal");
     });
   }
