@@ -64,7 +64,12 @@ class AppController {
       try {
         document.body.requestFullscreen();
         window.screen.orientation.lock("portrait-primary");
-        this._sendVisitStats(isFullscreen: true);
+
+        // delayed call of sendStats because fullscreen request is async
+        Future delay = Future.delayed(Duration(milliseconds: 1000), () => true);
+        delay.then((d) {
+          this._sendVisitStats(isFullscreen: true);
+        });
       } catch (e) {
         this._sendVisitStats();
       }
@@ -215,8 +220,8 @@ class AppController {
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
-        "'viewWidth':{'integerValue': '${this._levelController.level.viewWidth}'},"
-        "'viewHeight': {'integerValue': '${this._levelController.level.viewHeight}'},"
+        "'viewWidth':{'integerValue': '${document.body.style.width}'},"
+        "'viewHeight': {'integerValue': '${document.body.style.height}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}},"
         "'isFullscreen': {'booleanValue': $isFullscreen}},"
