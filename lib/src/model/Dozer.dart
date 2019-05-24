@@ -11,6 +11,8 @@ class Dozer extends Entity {
   int _tailGap;
 
   /// Fields that track if a power up is active
+  List<Future> drillFutures = List();
+  List<Future> doubleUpFutures = List();
   bool drillActive = false;
   bool doubleUpActive = false;
 
@@ -137,27 +139,70 @@ class Dozer extends Entity {
       }
       return;
     }
+    // PowerUp´s
+    // If the power up is already active we have a future for that powerup
+    // in [drillFutures]. So start a new Future when the previous power up
+    // has ended.
     if (e is DoubleUp) {
-      Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
-      delay.then((d) {
-        this.doubleUpActive = false;
-      });
+      if (this.doubleUpFutures.length > 0) {
+        this.doubleUpFutures.first.then((t) {
+          this.doubleUpActive = true;
+          Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+          delay.then((d) {
+            this.doubleUpActive = false;
+          });
+          this.doubleUpFutures.insert(0, delay);
+          this.doubleUpFutures.removeLast();
+        });
+      } else {
+        Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+        delay.then((d) {
+          this.doubleUpActive = false;
+        });
+        this.doubleUpFutures.insert(0, delay);
+      }
       this.doubleUpActive = true;
       return;
     }
     if (e is Drill) {
-      Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
-      delay.then((d) {
-        this.drillActive = false;
-      });
+      if (this.drillFutures.length > 0) {
+        this.drillFutures.first.then((t) {
+          this.drillActive = true;
+          Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+          delay.then((d) {
+            this.drillActive = false;
+          });
+          this.drillFutures.insert(0, delay);
+          this.drillFutures.removeLast();
+        });
+      } else {
+        Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+        delay.then((d) {
+          this.drillActive = false;
+        });
+        this.drillFutures.insert(0, delay);
+      }
       this.drillActive = true;
       return;
     }
     if (e is SlowDown) {
-      Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
-      delay.then((d) {
-        this.level.slowDownActive = false;
-      });
+      if (this.level.slowDownFutures.length > 0) {
+        this.level.slowDownFutures.first.then((t) {
+          this.level.slowDownActive = true;
+          Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+          delay.then((d) {
+            this.level.slowDownActive = false;
+          });
+          this.level.slowDownFutures.insert(0, delay);
+          this.level.slowDownFutures.removeLast();
+        });
+      } else {
+        Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+        delay.then((d) {
+          this.level.slowDownActive = false;
+        });
+        this.level.slowDownFutures.insert(0, delay);
+      }
       this.level.slowDownActive = true;
       return;
     }

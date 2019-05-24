@@ -25,6 +25,7 @@ class Level {
   int viewHeight;
 
   /// Fields to keep track of power up´s
+  List<Future> slowDownFutures = List();
   bool slowDownActive = false;
 
   /**
