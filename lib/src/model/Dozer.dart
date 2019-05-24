@@ -11,10 +11,14 @@ class Dozer extends Entity {
   int _tailGap;
   double _entityDy;
 
-  // Height of the lane in pixel
+  /// Height of the lane in pixel
   int laneHeight;
-  // Width of the lane in pixel
+  /// Width of the lane in pixel
   int laneWidth;
+
+  /// Fields that track if a power up is active
+  bool drillActive = false;
+  bool doubleUpActive = false;
 
   /**
    * Creates a Dozer object with the id  dozer and the given score
@@ -102,10 +106,18 @@ class Dozer extends Entity {
   }
 
   /**
-   * Changes the score of the dozer
+   * Changes the score of the [Dozer]
+   * Depending on the power up´s behaviour will be different
    */
   void changeScore(int change) {
-    this.score + change;
+    if (this.doubleUpActive && change > 0) {
+      change = change * 2;
+    }
+
+    if (this.drillActive && change < 0) {
+      return;
+    }
+    this.score += change;
   }
 
   /**
@@ -135,8 +147,27 @@ class Dozer extends Entity {
       }
       return;
     }
+    if (e is DoubleUp) {
+      Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+      delay.then((d) {
+        this.doubleUpActive = false;
+      });
+      this.doubleUpActive = true;
+      return;
+    }
+    if (e is Drill) {
+      Future delay = Future.delayed(Duration(milliseconds: e.getDuration()), () => true);
+      delay.then((d) {
+        this.drillActive = false;
+      });
+      this.drillActive = true;
+      return;
+    }
     //TODO other hitBy behaviour
     // For Barrier maybe use tail positions to determine which side of the barrier the dozer is stuck
+    if (e is SlowDown) {
+      // TODO SlowDown behaviour
+    }
   }
 
   /// Gets the height for the head of the dozer
