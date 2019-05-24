@@ -224,7 +224,7 @@ class AppController {
         "'viewHeight': {'integerValue': '${document.body.style.height}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}},"
-        "'isFullscreen': {'booleanValue': $isFullscreen}},"
+        "'isFullscreen': {'booleanValue': $isFullscreen},"
         "}}";
 
     HttpRequest.request(
