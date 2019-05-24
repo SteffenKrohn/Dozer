@@ -27,7 +27,7 @@ class AppController {
 
     this._activeLevel = this.getReachedLevel();
     // TODO dynamic level
-    this.showLeveLOverview();
+    this.showLevelOverview();
 
     // TODO load levels
 
@@ -54,13 +54,13 @@ class AppController {
 
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
-      this.showLeveLOverview();
+      this.showLevelOverview();
     });
   }
 
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
-      this.showLeveLOverview();
+      this.showLevelOverview();
       this._sendVisitStats();
       document.body.requestFullscreen();
       window.screen.orientation.lock("portrait-primary");
@@ -79,7 +79,7 @@ class AppController {
       if (this.getActiveLevel() > this._nrAvailableLevels) {
         this.showNoSuchLevel(this.getActiveLevel());
       } else {
-        this.showLeveLOverview();
+        this.showLevelOverview();
       }
     });
   }
@@ -87,7 +87,7 @@ class AppController {
   void listenPreviousLevelButton() {
     querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
       this.setActiveLevel(this.getActiveLevel() - 1);
-      this.showLeveLOverview();
+      this.showLevelOverview();
     });
   }
 
@@ -120,8 +120,8 @@ class AppController {
     });
   }
 
-  void showLeveLOverview() {
-    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelIntrusction(this.getActiveLevel())).render(); // this._levelController.level.instructions TODO waiting for dependency
+  void showLevelOverview() {
+    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelInstruction(this.getActiveLevel())).render(); // this._levelController.level.instructions TODO waiting for dependency
     this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
@@ -188,7 +188,7 @@ class AppController {
     this._reachedLevel = reachedLevel;
   }
 
-  String _getLevelIntrusction(int level) {
+  String _getLevelInstruction(int level) {
     switch (level) {
       case 1:
         return "Get in Rhythm and catch all dots to win! ";
@@ -215,8 +215,6 @@ class AppController {
         "'viewHeight': {'integerValue': '640'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}";
-
-    print(body);
 
     HttpRequest.request(
         "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/visits",
