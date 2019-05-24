@@ -217,14 +217,14 @@ class AppController {
       this._localStorage['userId'] = this._userId.toString();
     }
 
-    String width = document.body.style.width;
-    String height = document.body.style.height;
+    int width = document.body.getBoundingClientRect().width;
+    int height = document.body.getBoundingClientRect().height;
     
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
-        "'viewWidth':{'integerValue': '${width.substring(0, width.length - 3)}'},"
-        "'viewHeight': {'integerValue': '${height.substring(0, height.length - 3)}'},"
+        "'viewWidth':{'integerValue': '${width}'},"
+        "'viewHeight': {'integerValue': '${height}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}},"
         "'isFullscreen': {'booleanValue': $isFullscreen}"

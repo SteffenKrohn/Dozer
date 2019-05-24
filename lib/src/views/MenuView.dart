@@ -257,7 +257,7 @@ class MenuView {
     div.append(HRElement());
 
     ParagraphElement upperText = ParagraphElement();
-    upperText.appendText("Built with Love in Lübeck.");
+    upperText.appendText("Built with \u{2764} in Lübeck.");
     div.append(upperText);
 
     ParagraphElement middleText = ParagraphElement();
