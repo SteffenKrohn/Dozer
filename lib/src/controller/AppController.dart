@@ -8,17 +8,23 @@ class AppController {
   static const int framerate = 35;
 
   int _highscore = 0;
-  Storage _reachedLevelStorage = window.localStorage;
+  Storage _localStorage = window.localStorage;
   int _activeLevel = 1;
   int _reachedLevel = 1;
+  int _userId;
   int _nrAvailableLevels = 10;
-  bool _gyroAvailable = true;
+  bool _gyroAvailable = false;
 
   void startup() {
 
-    if(this._reachedLevelStorage.containsKey('reachedLevel')) {
-      this._reachedLevel = int.parse(this._reachedLevelStorage['reachedLevel']);
+    // get local storage
+    if(this._localStorage.containsKey('reachedLevel')) {
+      this._reachedLevel = int.parse(this._localStorage['reachedLevel']);
     }
+    if(this._localStorage.containsKey('userId')) {
+      this._userId = int.parse(this._localStorage['userId']);
+    }
+
     this._activeLevel = this.getReachedLevel();
     // TODO dynamic level
     this.showLeveLOverview();
@@ -53,6 +59,7 @@ class AppController {
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLeveLOverview();
+      this._sendVisitStats();
       document.body.requestFullscreen();
       window.screen.orientation.lock("portrait-primary");
     });
@@ -131,10 +138,11 @@ class AppController {
   void showMessageNoSupportForGyro() {
     MenuView.show().messageNoSupportForGyro().render();
     this.listenGoToMenuButton();
+    this._sendVisitStats();
   }
 
   void showWelcomeScreenOnMobileDevices() {
-    MenuView.show().messageWelcomeScreenOnMobile().render(); // TODO replace with welcomeScreen
+    MenuView.show().messageWelcomeScreenOnMobile().render();
     this.listenGoToMenuButtonAndRequestFullscreen();
   }
 
@@ -167,14 +175,14 @@ class AppController {
   }
 
   int getReachedLevel() {
-    if(this._reachedLevelStorage.containsKey('reachedLevel')) {
-      return int.parse(this._reachedLevelStorage['reachedLevel']);
+    if(this._localStorage.containsKey('reachedLevel')) {
+      return int.parse(this._localStorage['reachedLevel']);
     }
     return this._reachedLevel;
   }
 
   void setReachedLevel(int reachedLevel) {
-    this._reachedLevelStorage["reachedLevel"] = reachedLevel.toString();
+    this._localStorage["reachedLevel"] = reachedLevel.toString();
     this._reachedLevel = reachedLevel;
   }
 
@@ -189,6 +197,32 @@ class AppController {
       default:
         return "Now you are on your own. Try to reach level 10!";
     }
+  }
+
+  void _sendVisitStats() {
+    // in the very first start the used ID will be assigned and stored
+    if(this._userId == null) {
+      this._userId = Random.secure().nextInt(pow(2, 32));
+      this._localStorage['userId'] = this._userId.toString();
+    }
+
+    String body = "{'fields':{"
+        "'userId':{'integerValue': '${this._userId}'},"
+        "'timestamp':{'timestampValue': '${this._userId}'},"
+        "'viewWidth':{'integerValue': '360'}," // TODO
+        "'viewHeight': {'integerValue': '640'},"
+        "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
+        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}";
+
+    HttpRequest.request(
+        "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/visits",
+        method: "POST",
+        sendData: body,
+        requestHeaders: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }).then((HttpRequest resp) {
+      print(resp.responseText);
+    }).catchError((e) => print(e));
   }
 
 }
