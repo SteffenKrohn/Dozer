@@ -11,4 +11,6 @@ part 'models/EntityGenerator.dart';
 part 'models/BrickGenerator.dart';
 part 'models/BarrierGenerator.dart';
 part 'models/DotGenerator.dart';
-
+part 'models/DrillGenerator.dart';
+part 'models/DoubleUpGenerator.dart';
+part 'models/SlowDownGenerator.dart';

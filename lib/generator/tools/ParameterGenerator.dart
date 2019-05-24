@@ -11,17 +11,17 @@ class ParameterGenerator {
   String instructions;
 
   // Parameter used to generate final level parameter
-  int minTimeLimit = 20000; // Default 20.000ms = 20s
+  int minTimeLimit = 50000; // Default 50.000ms = 50s
   int maxTimeLimit = 120000; // Default 120.000ms = 120s = 2min
 
-  int minInitialScore = 5;
-  int maxInitialScore = 20;
+  int minInitialScore = 10;
+  int maxInitialScore = 11;
 
-  int minTargetScore = 25;
-  int maxTargetScore = 60;
+  int minTargetScore = 35;
+  int maxTargetScore = 50;
 
-  double minLaneSpeed = 0.2;
-  double maxLaneSpeed = 1.5;
+  double minLaneSpeed = 0.5;
+  double maxLaneSpeed = 1.0;
 
   ParameterGenerator(int levelID) {
     this.levelId = levelID;
