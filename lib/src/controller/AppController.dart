@@ -43,10 +43,12 @@ class AppController {
   }
 
   void startNextLevel() {
+    this._sendLevelStats(this.getActiveLevel());
     LevelController.loadAndStart(this, this.getActiveLevel());
   }
 
   void startLevel(int level) {
+    this._sendLevelStats(level);
     LevelController.loadAndStart(this, level);
   }
 
@@ -208,14 +210,35 @@ class AppController {
 
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
-        "'timestamp':{'timestampValue': '${this._userId}'},"
+        "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
         "'viewWidth':{'integerValue': '360'}," // TODO
         "'viewHeight': {'integerValue': '640'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}";
 
+    print(body);
+
     HttpRequest.request(
         "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/visits",
+        method: "POST",
+        sendData: body,
+        requestHeaders: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }).then((HttpRequest resp) {
+      print(resp.responseText);
+    }).catchError((e) => print(e));
+  }
+
+  void _sendLevelStats(int startetLevel) {
+    String body = "{'fields':{"
+        "'userId':{'integerValue': '${this._userId}'},"
+        "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
+        "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
+        "'startetLevel': {'integerValue': '${startetLevel}'},"
+        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}}}"; // TODO number of tries
+
+    HttpRequest.request(
+        "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/levelstarts",
         method: "POST",
         sendData: body,
         requestHeaders: {
