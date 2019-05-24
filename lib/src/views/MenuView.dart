@@ -110,7 +110,7 @@ class MenuView {
 
     ParagraphElement tapToAdvance = ParagraphElement()
       ..setAttribute("class", "tap-me")
-      ..appendText("Tap To Advance");
+      ..appendText("Tap To Continue");
     div.append(tapToAdvance);
 
     DivElement outerDiv = DivElement();
@@ -148,7 +148,7 @@ class MenuView {
 
     ParagraphElement tapToAdvance = ParagraphElement()
       ..setAttribute("class", "tap-me")
-      ..appendText("Tap To Advance");
+      ..appendText("Tap To Continue");
     div.append(tapToAdvance);
 
     DivElement outerDiv = DivElement();
