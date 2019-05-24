@@ -9,19 +9,19 @@
   },
   "entities": [
     {
-      "type": "dot",
+      "type": "drill",
       "value": 2,
       "time": 1000,
       "x": 0.3
     },
     {
-      "type": "dot",
+      "type": "slowdown",
       "value": 2,
       "time": 2500,
       "x": 0.7
     },
     {
-      "type": "dot",
+      "type": "doubleup",
       "value": 2,
       "time": 4000,
       "x": 0.3

@@ -1,6 +1,8 @@
 part of dozergame;
 
 class LevelLoader {
+
+  static final levelBasePath = "resources/level/";
   
   static Future<Level> getLevel(LevelController lc, int id) async {
     Future<Map> fmap = makeRequest(id);
@@ -104,7 +106,7 @@ class LevelLoader {
     return lvl;
   }
   static Future<Map> makeRequest(int id) async {
-    var path='resources/level/level'+ id.toString() +'.json';
+    var path= levelBasePath + 'level'+ id.toString() +'.json';
     var r = HttpRequest.getString(path);
     String str = await r;
     return json.decode(str);
