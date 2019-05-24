@@ -6,7 +6,7 @@ class BrickGenerator extends EntityGenerator {
   int value;
 
   int minValue = 1;
-  int maxValue = 20;
+  int maxValue = 21;
 
   BrickGenerator(int time, double x, {int value = null}) {
     this.time = time;

@@ -5,14 +5,15 @@ class AppController {
   LevelController _levelController;
 
   /** The target framerate in hz */
-  static const int framerate = 35;
+  static const int framerate = 40;
 
   int _highscore = 0;
   Storage _localStorage = window.localStorage;
   int _activeLevel = 1;
   int _reachedLevel = 1;
   int _userId;
-  int _nrAvailableLevels = 10;
+  /// This is the number of all available level
+  int _nrAvailableLevels = 20;
   bool _gyroAvailable = false;
 
   void startup() {
