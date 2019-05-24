@@ -266,32 +266,18 @@ class MenuView {
 
     div.append(HRElement());
 
-    // a little space to put the paypal logo on the bottom but above th buttons TODO nicht super responsiv
-    DivElement spaceDiv = DivElement();
-    spaceDiv.style.width = "auto";
-    spaceDiv.style.marginTop = "32vh";
-    div.append(spaceDiv);
-
-    ParagraphElement donateText = ParagraphElement();
-    donateText.appendText("Help us making Dozer even better and donate us a coffee :-)");
+    ParagraphElement donateText = ParagraphElement()
+      ..setAttribute("class", "donate-text")
+      ..appendText("Help us making Dozer even better and donate us a coffee :-)");
     div.append(donateText);
 
     ImageElement paypal = ImageElement(src: "resources/paypal.png");
-    paypal.style.position = "relative";
-    paypal.style.height = "5vh";
-    paypal.style.width = "auto";
-    paypal.style.marginTop = "auto";
-    paypal.style.marginRight = "100%";
-    paypal.style.display = "inline-block";
-    //div.append(paypal);
 
     SpanElement textDonate = SpanElement();
     textDonate.text = "Donate";
-    textDonate.style.display = "inline-block";
-    textDonate.style.position = "relative";
 
     ButtonElement buttonDonate = ButtonElement()
-      ..setAttribute("id", "button_donate")
+      ..setAttribute("id", "donate-button")
       ..setAttribute("class", "upper-bottom-button")
       ..append(paypal)
       ..append(textDonate);
