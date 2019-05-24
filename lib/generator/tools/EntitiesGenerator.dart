@@ -3,9 +3,9 @@ part of generator;
 class EntitiesGenerator {
 
   // Chances determine how often these entities are generated
-  int brickChance = 15;
-  int dotChance = 10;
-  int barrierChance = 5;
+  int brickChance = 45;
+  int dotChance = 30;
+  int barrierChance = 15;
   int drillChance = 1;
   int doubleUpChance = 1;
   int slowDownChance = 1;

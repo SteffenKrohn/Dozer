@@ -2,7 +2,7 @@ part of generator;
 
 class SlowDownGenerator extends EntityGenerator {
 
-  String type = "drill";
+  String type = "slowdown";
   int value;
 
   SlowDownGenerator(int time, double x) {

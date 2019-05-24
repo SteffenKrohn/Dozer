@@ -2,7 +2,7 @@ part of generator;
 
 class DoubleUpGenerator extends EntityGenerator {
 
-  String type = "drill";
+  String type = "doubleup";
   int value;
 
   DoubleUpGenerator(int time, double x) {

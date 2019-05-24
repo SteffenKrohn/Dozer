@@ -3,9 +3,10 @@ part of generator;
 class Generator {
 
   ParameterGenerator pg;
+  int levelId = 1;
 
   void create() {
-    createLevel(2);
+    createLevel(levelId);
   }
 
   void createLevel(int levelId) {
