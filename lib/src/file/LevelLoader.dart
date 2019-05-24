@@ -45,7 +45,8 @@ class LevelLoader {
           lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
           e.putIfAbsent("value", () => 1) as int,
           (lvl.viewWidth * Dot.getStandardRadius()).floor(),
-          (lvl.viewWidth * Dot.getStandardRadius()).floor()
+          (lvl.viewWidth * Dot.getStandardRadius()).floor(),
+          lvl
         );
       } else if (type == "brick") {
         int width = lvl.viewWidth - (lvl.viewWidth * Brick.getStandardWidth()).floor();
@@ -55,7 +56,8 @@ class LevelLoader {
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
             e.putIfAbsent("value", () => 1) as int,
             (lvl.viewWidth * Brick.getStandardWidth()).floor(),
-            (lvl.viewHeight * Brick.getStandardHeight()).floor()
+            (lvl.viewHeight * Brick.getStandardHeight()).floor(),
+            lvl
         );
       } else if (type == "barrier") {
         int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
@@ -65,7 +67,8 @@ class LevelLoader {
             width * e.putIfAbsent("x", () => 0),
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
             (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
-            barrierHeight
+            barrierHeight,
+            lvl
         );
       } else if (type == "doubleup") {
         int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
@@ -74,7 +77,8 @@ class LevelLoader {
             width * e.putIfAbsent("x", () => 0),
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
             (width * Dot.getStandardRadius()).floor(),
-            (width * Dot.getStandardRadius()).floor()
+            (width * Dot.getStandardRadius()).floor(),
+            lvl
         );
       } else if (type == "drill") {
         int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
@@ -83,7 +87,8 @@ class LevelLoader {
             width * e.putIfAbsent("x", () => 0),
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
             (width * Dot.getStandardRadius()).floor(),
-            (width * Dot.getStandardRadius()).floor()
+            (width * Dot.getStandardRadius()).floor(),
+            lvl
         );
       } else if (type == "slowdown") {
         int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
@@ -92,12 +97,13 @@ class LevelLoader {
             width * e.putIfAbsent("x", () => 0),
             lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
             (width * Dot.getStandardRadius()).floor(),
-            (width * Dot.getStandardRadius()).floor()
+            (width * Dot.getStandardRadius()).floor(),
+            lvl
         );
       }
 
       if (model != null) {
-        model.dy = lvl.viewHeight * lvl.laneSpeed / AppController.framerate;
+        model.dy = lvl.getVerticalMovementPerUpdate();
         queuedEntities.add(model);
       }
       elementId++;

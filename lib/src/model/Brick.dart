@@ -13,13 +13,14 @@ class Brick extends Entity {
   /**
    * Constructs a new Brick with all necessary information
    */
-  Brick(int id, double x, double y, int value, int width, int height) {
+  Brick(int id, double x, double y, int value, int width, int height, Level level) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.value = value;
     this.width = width;
     this.height = height;
+    this.level = level;
   }
 
   /**
