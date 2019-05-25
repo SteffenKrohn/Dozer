@@ -11,10 +11,6 @@ class LevelView {
 
   Map<String, Element> laneElements = Map<String, Element>();
 
-  /// Save the current state of power up activity
-  bool _doubleUpActive = false;
-  bool _drillActive = false;
-
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
     this.level = level;
@@ -66,17 +62,21 @@ class LevelView {
 
   void updateDotEntityElement(Element view, Entity model) {
     // DoubleUp PowerUp Animation
-    if (this.level._dozer.doubleUpActive != this._doubleUpActive) {
-      view.classes.toggle("has-doubleup");
-      this._doubleUpActive = !this._doubleUpActive;
+    if (this.level._dozer.doubleUpActive) {
+      view.classes.add("has-doubleup");
+    }
+    else {
+      view.classes.remove("has-doubleup");
     }
   }
 
   void updateDozerEntityElement(Element view, Entity model) {
     // Drill PowerUp Animation
-    if (this.level._dozer.drillActive != this._drillActive) {
-      view.classes.toggle("has-drill");
-      this._drillActive = !this._drillActive;
+    if (this.level._dozer.drillActive) {
+      view.classes.add("has-drill");
+    }
+    else {
+      view.classes.remove("has-drill");
     }
   }
 
