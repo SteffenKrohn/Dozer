@@ -28,8 +28,12 @@ class LevelController {
   }
 
   void start() {
-    enableKeyboardControl();
-    enableOrientationControl();
+    // Enable the appropriate control
+    if (this._appController.gyroAvailable) {
+      enableOrientationControl();
+    } else {
+      enableKeyboardControl();
+    }
 
     Timer t;
     // Start the periodic update of the game elements with 50hz
@@ -98,9 +102,7 @@ class LevelController {
   void enableOrientationControl() {
     // Handle the device orientation to move the Dozer
     window.onDeviceOrientation.listen((ev) {
-      // TODO make prettier
-      double dx = ev.gamma / 4;
-      this.level.getDozer().move(dx, 0);
+      this.level.getDozer().move(ev.gamma / 4, 0);
     });
   }
 }

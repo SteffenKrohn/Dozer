@@ -14,7 +14,7 @@ class AppController {
   int _userId;
   /// This is the number of all available level
   int _nrAvailableLevels = 20;
-  bool _gyroAvailable = false;
+  bool gyroAvailable = false;
 
   void startup() {
 
@@ -34,8 +34,8 @@ class AppController {
 
     // Check Gyrosensor Support
     window.onDeviceOrientation.first.then((e) {
-      this._gyroAvailable = e.gamma != null ? true : false;
-      if(!this._gyroAvailable) {
+      this.gyroAvailable = e.gamma != null ? true : false;
+      if(!this.gyroAvailable) {
         this.showMessageNoSupportForGyro();
       } else {
         this.showWelcomeScreenOnMobileDevices();
@@ -227,7 +227,7 @@ class AppController {
         "'viewWidth':{'integerValue': '${width}'},"
         "'viewHeight': {'integerValue': '${height}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
-        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}},"
+        "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}},"
         "'isFullscreen': {'booleanValue': $isFullscreen}"
         "}}";
 
@@ -249,7 +249,7 @@ class AppController {
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'startetLevel': {'integerValue': '${startetLevel}'},"
-        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}"
+        "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}}"
         "}}";
 
     HttpRequest.request(
@@ -271,7 +271,7 @@ class AppController {
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'score': {'integerValue': '$score'},"
         "'level': {'integerValue': '$level'},"
-        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}"
+        "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}}"
         "}}";
 
     HttpRequest.request(
