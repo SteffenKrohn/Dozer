@@ -13,7 +13,7 @@ class AppController {
   int _reachedLevel = 1;
   int _userId;
   /// This is the number of all available level
-  int _nrAvailableLevels = 20;
+  int _nrAvailableLevels = 500;
   bool gyroAvailable = false;
 
   void startup() {
