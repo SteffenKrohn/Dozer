@@ -65,7 +65,7 @@ class LevelController {
         }
 
         // send score stats
-        this._appController._sendScoreStats(this.level._level, this.level.getScore());
+        this._appController.sendScoreStats(this.level._level, this.level.getScore());
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore);

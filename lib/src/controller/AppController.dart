@@ -267,7 +267,7 @@ class AppController {
     }).catchError((e) => print(e));
   }
 
-  void _sendScoreStats(int level, int score) {
+  void sendScoreStats(int level, int score) {
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
