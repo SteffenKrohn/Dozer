@@ -238,7 +238,8 @@ class AppController {
         requestHeaders: {
           'Content-Type': 'application/json; charset=UTF-8'
         }).then((HttpRequest resp) {
-      print(resp.responseText);
+      // print(resp.responseText);
+      print("sent visit");
     }).catchError((e) => print(e));
   }
 
@@ -258,7 +259,8 @@ class AppController {
         requestHeaders: {
           'Content-Type': 'application/json; charset=UTF-8'
         }).then((HttpRequest resp) {
-      print(resp.responseText);
+      // print(resp.responseText);
+      print("sent levelstart");
     }).catchError((e) => print(e));
   }
 
@@ -279,7 +281,8 @@ class AppController {
         requestHeaders: {
           'Content-Type': 'application/json; charset=UTF-8'
         }).then((HttpRequest resp) {
-      print(resp.responseText);
+      // print(resp.responseText);
+      print("sent score");
     }).catchError((e) => print(e));
   }
 
