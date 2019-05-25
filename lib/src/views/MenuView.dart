@@ -145,7 +145,9 @@ class MenuView {
     msgText.appendText(msg);
     div.append(msgText);
 
-    div.append(HRElement());
+    HRElement hr = HRElement();
+    hr.style.marginTop = "3vh";
+    div.append(hr);
 
     ParagraphElement tapToAdvance = ParagraphElement()
       ..setAttribute("class", "tap-me")
