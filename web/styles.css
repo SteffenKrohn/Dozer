@@ -285,19 +285,15 @@ h1 {
 
 .c5 {
     background-color: #9933ff;
-    animation-name: shiny;
-    animation-duration: 2s;
+    -webkit-animation: pulse 1s ease infinite;
+    -z-animation: pulse 1s ease infinite;
+    -o-animation: pulse 1s ease infinite;
+    animation: pulse 1s ease infinite;
 }
 
-@keyframes shiny {
-    0%   {background-color: #9933ff;}
-    75%  {background-color: red;}
-    100% {background-color: #9933ff;}
-}
+/* Power up styles for dozer and Animations */
 
-/* Power up styles for dozer */
-
-/* Rainbow Animation for Drill*/
+/* Rainbow Animation for Drill and DoubleUp */
 .has-drill {
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 1800% 1800%;
@@ -318,7 +314,10 @@ h1 {
     animation: rainbow 1s ease infinite;
 }
 
-
+/*
+    Rainbow Animation
+    Credit: https://codepen.io/nohoid/pen/kIfto
+ */
 @-webkit-keyframes rainbow {
     0%{background-position:0% 82%}
     50%{background-position:100% 19%}
@@ -340,4 +339,32 @@ h1 {
     100%{background-position:0% 82%}
 }
 
-/* Animation for DoubleUp */
+/*
+    Pulse Animation
+    Credit: https://codepen.io/igorsheg/pen/MBpwGw
+*/
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
+}
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+        box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+        box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+        box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
+}
