@@ -5,6 +5,7 @@ class LevelController {
   AppController _appController;
   Level level;
   LevelView _levelView;
+  final Storage _localStorage = window.localStorage;
 
   static void loadAndStart(AppController ac, int level) async {
     Future<LevelController> dlc = LevelController.load(ac, level);
@@ -47,8 +48,19 @@ class LevelController {
       this.level.update();
       if (this.level.gameWon()) {
         t.cancel();
-        // TODO second parameter provisional
-        this._appController.showMessageWin(this.level.getScore(), true);
+
+        // check highscore from local storage
+        int oldHighscore = 0;
+        bool isNewHighscore = true;
+        if(this._localStorage.containsKey('highscore_level_${this.level._level}')) {
+          oldHighscore = int.parse(this._localStorage['highscore_level_${this.level._level}']);
+          isNewHighscore = oldHighscore < this.level.getScore() ? true : false;
+        }
+        if(oldHighscore < this.level.getScore()){
+          this._localStorage['highscore_level_${this.level._level}'] = this.level.getScore().toString();
+        }
+
+        this._appController.showMessageWin(this.level.getScore(), isNewHighscore);
         return;
       }
 

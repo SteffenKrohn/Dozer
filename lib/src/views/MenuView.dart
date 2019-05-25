@@ -204,7 +204,7 @@ class MenuView {
     div.append(HRElement());
 
     ParagraphElement upperText = ParagraphElement();
-    upperText.appendText("The level ${level} is not available.");
+    upperText.appendText("The level ${level} is not available yet.");
     div.append(upperText);
 
     div.append(HRElement());
