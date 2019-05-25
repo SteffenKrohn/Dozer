@@ -286,7 +286,7 @@ class AppController {
           'Content-Type': 'application/json; charset=UTF-8'
         }).then((HttpRequest resp) {
       // print(resp.responseText);
-      print("sent score");
+      print("sent score $level $score $won");
     }).catchError((e) => print(e));
   }
 
