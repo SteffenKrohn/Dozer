@@ -262,4 +262,25 @@ class AppController {
     }).catchError((e) => print(e));
   }
 
+  void _sendScoreStats(int level, int score) {
+    String body = "{'fields':{"
+        "'userId':{'integerValue': '${this._userId}'},"
+        "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
+        "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
+        "'score': {'integerValue': '$score'},"
+        "'level': {'integerValue': '$level'},"
+        "'isGyroAvailable': {'booleanValue': ${this._gyroAvailable}}"
+        "}}";
+
+    HttpRequest.request(
+        "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/scores",
+        method: "POST",
+        sendData: body,
+        requestHeaders: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }).then((HttpRequest resp) {
+      print(resp.responseText);
+    }).catchError((e) => print(e));
+  }
+
 }

@@ -60,6 +60,9 @@ class LevelController {
           this._localStorage['highscore_level_${this.level._level}'] = this.level.getScore().toString();
         }
 
+        // send score stats
+        this._appController._sendScoreStats(this.level._level, this.level.getScore());
+
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore);
         return;
       }
