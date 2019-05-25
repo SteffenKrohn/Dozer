@@ -16,7 +16,7 @@ class MenuView {
   }
 
   HeadingElement getLogo() {
-    var logo = HeadingElement.h1();
+    HeadingElement logo = HeadingElement.h1();
     logo.setInnerHtml("Dozer");
     return logo;
   }
@@ -40,8 +40,9 @@ class MenuView {
     levelTitle.appendText("Level");
     div.append(levelTitle);
 
-    SpanElement levelId = SpanElement();
-    levelId.appendText(level.toString());
+    HeadingElement levelId = HeadingElement.h1();
+    levelId.setInnerHtml("$level");
+    levelId.style.marginTop = "1vh";
     div.append(levelId);
 
     ParagraphElement instructions = ParagraphElement();
