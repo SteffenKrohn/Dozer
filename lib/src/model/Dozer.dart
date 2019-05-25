@@ -38,6 +38,9 @@ class Dozer extends Entity {
   }
 
   void update() {
+    if (this.level.gameLost()) {
+      return;
+    }
     // TODO Make prettier
     double dx = this.dx;
 
