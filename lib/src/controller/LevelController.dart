@@ -43,6 +43,7 @@ class LevelController {
       if (this.level.gameLost()) {
         t.cancel();
         this._appController.showMessageLoose(this.level.timeLimit <= 0);
+        this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), false);
         return;
       }
 
@@ -65,7 +66,7 @@ class LevelController {
         }
 
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.getScore());
+        this._appController.sendScoreStats(this.level._level, this.level.getScore(), true);
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore);

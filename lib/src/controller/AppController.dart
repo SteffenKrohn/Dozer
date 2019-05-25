@@ -32,7 +32,7 @@ class AppController {
 
     // TODO load levels
 
-    // Check Gyrosensor Support
+    // Check Gyrosensor Support and show first menu screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
@@ -267,13 +267,14 @@ class AppController {
     }).catchError((e) => print(e));
   }
 
-  void sendScoreStats(int level, int score) {
+  void sendScoreStats(int level, int score, bool won) {
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
         "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
         "'score': {'integerValue': '$score'},"
         "'level': {'integerValue': '$level'},"
+        "'won': {'booleanValue': $won},"
         "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}}"
         "}}";
 
