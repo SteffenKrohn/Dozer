@@ -209,9 +209,11 @@ class AppController {
         return "This time try to avoid the bricks and survive until the end!";
       case 3:
         return "Choose wisely. The barriers are your friends.";
-      default:
-        return "Now you are on your own. Try to reach level 10!";
     }
+    if (level < 10) {
+      return "Now you are on your own. Try to reach Level 10!";
+    }
+    return "You exceded all expectations. Keep enjoying the game!";
   }
 
   void _sendVisitStats({bool isFullscreen = false}) {
