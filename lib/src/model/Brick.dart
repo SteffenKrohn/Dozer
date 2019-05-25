@@ -42,6 +42,6 @@ class Brick extends Entity {
   }
 
   static double getStandardHeight() {
-    return 0.1;
+    return 0.07;
   }
 }
