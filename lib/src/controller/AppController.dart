@@ -37,8 +37,11 @@ class AppController {
       this._gyroAvailable = e.gamma != null ? true : false;
       if(!this._gyroAvailable) {
         this.showMessageNoSupportForGyro();
-      } else {
+      } else if(window.screen.height > window.innerHeight) {
         this.showWelcomeScreenOnMobileDevices();
+      } else {
+        this.showLevelOverview();
+        this._sendVisitStats();
       }
     });
   }
