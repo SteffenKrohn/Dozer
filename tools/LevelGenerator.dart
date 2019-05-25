@@ -13,7 +13,7 @@ void main(List<String> args) {
     Generator g = Generator();
     g.levelId = i;
     String levelJson = g.create();
-    File f = File("web/resources/level/level${i}.json");
+    File f = File("web/resources/level/level${i.toString()}.json");
     f.writeAsString(levelJson);
   }
 
