@@ -241,6 +241,11 @@ class MenuView {
 
     div.append(HRElement());
 
+    ParagraphElement tapToAdvance = ParagraphElement()
+      ..setAttribute("class", "tap-me")
+      ..appendText("Tap To Continue");
+    div.append(tapToAdvance);
+
     DivElement outerDiv = DivElement()
       ..setAttribute("id", "button_to_menu");
     outerDiv.append(div);
