@@ -5,24 +5,20 @@ class Generator {
   ParameterGenerator pg;
   int levelId = 1;
 
-  void create() {
-    createLevel(levelId);
+  String create() {
+    return _createLevel(levelId);
   }
 
-  void createLevel(int levelId) {
-    print('{');
-    printParams(levelId);
-    printEntities();
-    print('}');
+  String _createLevel(int levelId) {
+    return '{' + _printParams(levelId) + _printEntities() + '}';
   }
 
-  void printParams(int levelId) {
-    this. pg = ParameterGenerator(levelId).generateValues();
-    print(pg.toString());
-    print(",");
+  String _printParams(int levelId) {
+    this.pg = ParameterGenerator(levelId).generateValues();
+    return pg.toString() + ",";
   }
 
-  void printEntities() {
-    print(EntitiesGenerator().generateEntities(pg.timeLimit ~/ 300));
+  String _printEntities() {
+    return EntitiesGenerator().generateEntities(pg.timeLimit ~/ 300);
   }
 }
