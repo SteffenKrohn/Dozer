@@ -1,7 +1,7 @@
 {
   "params": {
     "level": 1,
-    "timelimit": 18000,
+    "timelimit": 21000,
     "initialscore": 10,
     "targetscore": 25,
     "lanespeed": 0.4,
