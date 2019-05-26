@@ -8,7 +8,7 @@ class Dozer extends Entity {
   int score;
   List<Coordinates> _tailRoute = new List<Coordinates>();
   List<DozerTail> tailEntities = new List<DozerTail>();
-  int _tailGap;
+  double _tailGap;
 
   /// Fields that track if a power up is active
   List<Future> drillFutures = List();
@@ -25,14 +25,14 @@ class Dozer extends Entity {
     this.dy = 0;
     this.level = level;
 
-    this.x = this.level.viewWidth / 2;
-    this.y = this._getYAccordingToScore();
     this.height = (this.level.viewWidth * 0.05).floor();
     this.width = (this.level.viewWidth * 0.05).floor();
+    this.x = this.level.viewWidth / 2 - this.width;
+    this.y = this._getYAccordingToScore();
 
     // initialise tailRoute list with straight tail
-    this._tailGap = (this.height * 0.6).toInt();
-    for(int i = 0; i <= 50 * this._tailGap; i++) { // target score * gap
+    this._tailGap = this.height * 0.5;
+    for(int i = 0; i <= this.level.targetScore * this._tailGap; i++) {
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
     // Add the tail entities according to initial score
@@ -61,7 +61,7 @@ class Dozer extends Entity {
     this._updateVerticalDozerPlacement();
 
     // Add new Route Coordinate to List and update existing ones
-    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()));
+    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()) * this.level.laneSpeed);
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
 
@@ -73,12 +73,12 @@ class Dozer extends Entity {
     // dozer grows in height
     if(this._getYAccordingToScore() < this.y) {
       this._tailRoute.forEach((c) => c.y -= 1);
-      this.y -= 1;
+      this.y -= 2;
     }
     // dozer shrinks in height
     if(this._getYAccordingToScore() > this.y) {
       this._tailRoute.forEach((c) => c.y += 1);
-      this.y += 1;
+      this.y += 2;
     }
   }
 
@@ -102,11 +102,11 @@ class Dozer extends Entity {
     for(int i = 0; i < this.tailEntities.length; i++) {
       // theorem of pythagoras
       Coordinates nextCoordinates = this._tailRoute.skip(i).firstWhere(
-              (c) =>
+        (c) =>
           // Next Coordinate must be above old one
           c.y > lastCoordinates.y
-              &&
-              sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
+          &&
+          sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
       );
 
       this.tailEntities[i].x = nextCoordinates.x;
