@@ -52,7 +52,7 @@ class LevelView {
     });
 
     // add new DOM Elements
-    visibleElements.forEach((id, value) {
+    visibleElements.forEach((id, value) async {
       DivElement e = getEntityRepresentation(value);
       this.lane.append(e);
       this.laneElements.putIfAbsent("e"+id.toString(), () => e);
