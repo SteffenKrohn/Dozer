@@ -37,7 +37,7 @@ class Dozer extends Entity {
     }
   }
 
-  void update() {
+  void update() async {
     if (this.level.gameLost()) {
       return;
     }
@@ -123,7 +123,7 @@ class Dozer extends Entity {
   }
 
   @override
-  void hitBy(Entity e) {
+  void hitBy(Entity e) async {
     if (e is Brick) {
       this.changeScore(-1 * e.value);
       return;

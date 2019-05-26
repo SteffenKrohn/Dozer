@@ -103,7 +103,7 @@ class Level {
    * Updates all necessary entities
    * This will probably be called every 50ms
    */
-  void update() {
+  void update() async {
     this.visibleEntities.forEach((id, e) => e.update());
     this.addNewlyVisibleEntities();
     this.removeInvisibleEntities();
@@ -115,7 +115,7 @@ class Level {
    * Checks collision of all visible entities with the dozer
    * This will probably be called every 50ms
    */
-  void checkCollisions() {
+  void checkCollisions() async {
     this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {
         if(CollisionChecker.recCir(e, this._dozer)) {
@@ -139,7 +139,7 @@ class Level {
    * Adds all entities that became visible since the last update
    * This will probably be called every 50ms
    */
-  void addNewlyVisibleEntities() {
+  void addNewlyVisibleEntities() async {
     Entity next;
     double scrolled = this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit) / 1000;
 
@@ -170,7 +170,7 @@ class Level {
    * Removes invisible entities mainly entities that scrolled past the viewport
    * from the visibileEntities Map
    */
-  void removeInvisibleEntities() {
+  void removeInvisibleEntities() async {
     this.getVisibleEntities().forEach((id, e) {
       if (this.viewHeight < e.y) {
         this.visibleEntities.remove(id);
@@ -199,7 +199,7 @@ class Level {
   }
 
   /// Adds or removes dozer tail entities depending on the current score
-  void updateDozerTailInVisibleEntities() {
+  void updateDozerTailInVisibleEntities() async {
     // add tail entities to visible entities list
     this._dozer.tailEntities.forEach((e) {
       this.visibleEntities.putIfAbsent(e.id, () => e);

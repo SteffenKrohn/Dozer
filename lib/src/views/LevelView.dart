@@ -22,7 +22,7 @@ class LevelView {
         ..append(this.lane);
   }
 
-  void render() {
+  void render() async {
     if (null == _visualBar) {
       _createVisualBar();
     }
@@ -60,7 +60,7 @@ class LevelView {
     });
   }
 
-  void updateDotEntityElement(Element view, Entity model) {
+  void  updateDotEntityElement(Element view, Entity model) async {
     // DoubleUp PowerUp Animation
     if (this.level._dozer.doubleUpActive) {
       view.classes.add("has-doubleup");
@@ -70,7 +70,7 @@ class LevelView {
     }
   }
 
-  void updateDozerEntityElement(Element view, Entity model) {
+  void updateDozerEntityElement(Element view, Entity model) async {
     // Drill PowerUp Animation
     if (this.level._dozer.drillActive) {
       view.classes.add("has-drill");
@@ -83,7 +83,7 @@ class LevelView {
   /**
    * Updates the default view values of a given Element
    */
-  static void updateEntityElement(Element view, Entity model) {
+  static void updateEntityElement(Element view, Entity model) async {
     view.style.top = model.y.toString() + "px";
     view.style.left = model.x.toString() + "px";
     view.style.width = model.width.toString() + "px";
@@ -182,7 +182,7 @@ class LevelView {
   }
 
   /// Updates the visual bar with values taken from [level]
-  void _updateVisualBar() {
+  void _updateVisualBar() async {
     // Score Progress
     _visualBar.children.elementAt(0).children.elementAt(1).setAttribute("value", level.getDozer().score.toString());
     // Countdown
