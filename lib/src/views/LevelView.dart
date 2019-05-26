@@ -92,10 +92,20 @@ class LevelView {
 
   static DivElement getEntityRepresentation(Entity entity) {
 
-    if(entity.toString() == "dozer" || entity.toString() == "dozertail"){
+    if(entity.toString() == "dozer"){
       return DivElement()
-          ..setAttribute("class", "entity dozer")
-          ..setAttribute("id", "e"+entity.id.toString());
+          ..setAttribute("class", "entity dozer head")
+          ..setAttribute("id", "e"+entity.id.toString())
+          ..append(DivElement()
+              ..setAttribute("class", "eye left-eye")
+          )
+          ..append(DivElement()
+              ..setAttribute("class", "eye right-eye")
+          );
+    } else if(entity.toString() == "dozertail"){
+      return DivElement()
+        ..setAttribute("class", "entity dozer")
+        ..setAttribute("id", "e"+entity.id.toString());
     } else if(entity.toString() == "dot") {
       return DivElement()
         ..setAttribute("class", "entity dot")
