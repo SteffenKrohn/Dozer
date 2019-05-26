@@ -10,7 +10,8 @@ class LevelController {
   static void loadAndStart(AppController ac, int level) async {
     Future<LevelController> dlc = LevelController.load(ac, level);
     LevelController lc = await dlc;
-    lc.start();
+    await lc.start();
+    lc.increaseNrOfTries();
   }
 
   static Future<LevelController> load(AppController ac, int level) async {
@@ -55,6 +56,7 @@ class LevelController {
 
       // TODO smart?
       this.level.update();
+
       if (this.level.gameWon()) {
         t.cancel();
 
@@ -73,7 +75,7 @@ class LevelController {
         this._appController.sendScoreStats(this.level._level, this.level.getScore(), true);
 
         // show win message
-        this._appController.showMessageWin(this.level.getScore(), isNewHighscore);
+        this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
         return;
       }
 
@@ -110,5 +112,16 @@ class LevelController {
     window.onDeviceOrientation.listen((ev) {
       this.level.getDozer().move(ev.gamma / 4, 0);
     });
+  }
+
+  Future increaseNrOfTries() async {
+    int tries = 0;
+    if(this._localStorage.containsKey('tries_level_${this.level._level}')) {
+      tries = int.parse(this._localStorage['tries_level_${this.level._level}']);
+    }
+    tries += 1;
+    this._localStorage['tries_level_${this.level._level}'] = tries.toString();
+    this.level.tries = tries;
+    return;
   }
 }

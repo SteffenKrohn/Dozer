@@ -140,8 +140,8 @@ class AppController {
     this.listenCreditsButton();
   }
 
-  void showMessageWin(int score, bool newHighscore) {
-    MenuView.show().messageWin(score, newHighscore).render();
+  void showMessageWin(int score, bool newHighscore, int tries) {
+    MenuView.show().messageWin(score, newHighscore, tries).render();
     this.listenNextLevelButton();
   }
 

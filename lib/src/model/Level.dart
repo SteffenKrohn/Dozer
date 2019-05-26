@@ -9,6 +9,7 @@ class Level {
   double timeLimit;
   int initialScore;
   int targetScore;
+  int tries;
 
   /** Equals the percentage which certain entities (such as Brick, Dot) move per second */
   double laneSpeed;

@@ -83,7 +83,7 @@ class MenuView {
     return this;
   }
 
-  MenuView messageWin(int score, bool newHighscore) {
+  MenuView messageWin(int score, bool newHighscore, int tries) {
 
     String msg = newHighscore ? "New Highsore" : "Your Score";
 
