@@ -30,7 +30,7 @@ class LevelView {
 
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
-    Map<String, Element>.from(this.laneElements).forEach((id, e) {
+    Map<String, Element>.from(this.laneElements).forEach((id, e) async {
       int id = int.parse(e.id.substring(1));
       Entity entity;
 
