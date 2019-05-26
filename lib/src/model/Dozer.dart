@@ -40,9 +40,6 @@ class Dozer extends Entity {
   }
 
   void update() async {
-    if (this.level.gameLost()) {
-      return;
-    }
     // TODO Make prettier
     double dx = this.dx;
 
@@ -88,7 +85,7 @@ class Dozer extends Entity {
   /// Adds or removes [DozerTail] according to the current score
   void _removeAndAddTailEntities() {
     // Remove Tail Entities after score decreases
-    while(this.tailEntities.length >= this.score) {
+    while(this.tailEntities.length >= this.score && this.tailEntities.length > 0) {
       this.tailEntities.removeLast();
     }
 
