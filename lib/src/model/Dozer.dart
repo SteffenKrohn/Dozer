@@ -25,13 +25,13 @@ class Dozer extends Entity {
     this.dy = 0;
     this.level = level;
 
-    this.x = this.level.viewWidth / 2 - this.width;
+    this.x = this.level.viewWidth / 2;
     this.y = this._getYAccordingToScore();
     this.height = (this.level.viewWidth * 0.05).floor();
     this.width = (this.level.viewWidth * 0.05).floor();
 
     // initialise tailRoute list with straight tail
-    this._tailGap = (this.height * this.level.laneSpeed).toInt();
+    this._tailGap = (this.height * 0.6).toInt();
     for(int i = 0; i <= 50 * this._tailGap; i++) { // target score * gap
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
@@ -61,7 +61,7 @@ class Dozer extends Entity {
     this._updateVerticalDozerPlacement();
 
     // Add new Route Coordinate to List and update existing ones
-    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()) * this.level.laneSpeed);
+    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()));
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
 
@@ -102,11 +102,11 @@ class Dozer extends Entity {
     for(int i = 0; i < this.tailEntities.length; i++) {
       // theorem of pythagoras
       Coordinates nextCoordinates = this._tailRoute.skip(i).firstWhere(
-        (c) =>
+              (c) =>
           // Next Coordinate must be above old one
           c.y > lastCoordinates.y
-          &&
-          sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
+              &&
+              sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
       );
 
       this.tailEntities[i].x = nextCoordinates.x;
