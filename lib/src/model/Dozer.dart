@@ -32,15 +32,16 @@ class Dozer extends Entity {
 
     // initialise tailRoute list with straight tail
     this._tailGap = this.height * 0.5;
-    for(int i = 0; i <= this.level.targetScore * this._tailGap; i++) {
-      this._tailRoute.add(Coordinates(this.x, this.y + i));
+
+
+    for(int i = 0; i <= this.level.targetScore * AppController.framerate; i++) {
+      this._tailRoute.add(Coordinates(this.x, this.y + (i * this._tailGap * this.level.laneSpeed)));
     }
     // Add the tail entities according to initial score
     this._removeAndAddTailEntities();
   }
 
   void update() async {
-    // TODO Make prettier
     double dx = this.dx;
 
     // Left border
@@ -48,7 +49,6 @@ class Dozer extends Entity {
       dx = this.x * -1;
     }
     // Right border
-    // TODO bad querySelector
     if (this.x + dx + this.width > level.viewWidth) {
       dx = level.viewWidth - this.x - this.width;
     }
@@ -58,14 +58,15 @@ class Dozer extends Entity {
 
     // Dozer Tail
 
-    this._updateVerticalDozerPlacement();
-
     // Add new Route Coordinate to List and update existing ones
-    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()) * this.level.laneSpeed);
-    this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
+    double movedDistance = this._tailRoute[1].y - this.y;
+    this._tailRoute.forEach((c) => c.y += movedDistance);
+    this._tailRoute.insert(0, Coordinates(this.x, this.y));
+
 
     this._updateExistingTailEntities();
+    this._updateVerticalDozerPlacement();
   }
 
   /// Change certical [Dozer] placement Y-Coordinate according to the score
@@ -73,12 +74,14 @@ class Dozer extends Entity {
     // dozer grows in height
     if(this._getYAccordingToScore() < this.y) {
       this._tailRoute.forEach((c) => c.y -= 1);
-      this.y -= 2;
+      this.y -= 1;
+      return;
     }
     // dozer shrinks in height
     if(this._getYAccordingToScore() > this.y) {
       this._tailRoute.forEach((c) => c.y += 1);
-      this.y += 2;
+      this.y += 1;
+      return;
     }
   }
 
