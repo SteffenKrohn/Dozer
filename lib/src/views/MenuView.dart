@@ -85,7 +85,7 @@ class MenuView {
 
   MenuView messageWin(int score, bool newHighscore, int tries) {
 
-    String msg = newHighscore ? "New Highsore" : "Your Score";
+    String msgScore = newHighscore ? "New Highsore" : "Your Score";
 
     DivElement div = DivElement();
     div.setAttribute("id", "button_next_level");
@@ -99,13 +99,21 @@ class MenuView {
     div.append(levelTitle);
 
     SpanElement msgText = SpanElement();
-    msgText.appendText(msg);
+    msgText.appendText(msgScore);
+    msgText.style.fontStyle = "italic";
     div.append(msgText);
 
     ParagraphElement scoreParagraph = ParagraphElement()
       ..appendText(score.toString())
       ..setAttribute("class", "highscore");
     div.append(scoreParagraph);
+
+    if(newHighscore) {
+      String msgTries = tries > 1 ? "It took you $tries tries!" : "Unbelievable, with your first try!";
+      ParagraphElement triesParagraph = ParagraphElement()
+        ..appendText(msgTries);
+      div.append(triesParagraph);
+    }
 
     div.append(HRElement());
 
@@ -143,6 +151,7 @@ class MenuView {
 
     SpanElement msgText = SpanElement();
     msgText.appendText(msg);
+    msgText.style.fontStyle = "italic";
     div.append(msgText);
 
     HRElement hr = HRElement();
