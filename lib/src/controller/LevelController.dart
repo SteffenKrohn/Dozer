@@ -45,7 +45,7 @@ class LevelController {
         t.cancel();
 
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), false);
+        this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false);
 
         // show loose message
         this._appController.showMessageLoose(this.level.timeLimit <= 0);
@@ -72,7 +72,7 @@ class LevelController {
         }
 
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.getScore(), true);
+        this._appController.sendScoreStats(this.level._level, this.level.getScore(), this.level.tries, true);
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
