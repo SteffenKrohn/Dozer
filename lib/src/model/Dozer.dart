@@ -59,9 +59,7 @@ class Dozer extends Entity {
     this.dx = dx;
     super.update();
 
-    // -------------------------------------------------------------------//
-    //                               DozerTail                            //
-    // -------------------------------------------------------------------//
+    // Dozer Tail
 
     this._updateVerticalDozerPlacement();
 
@@ -70,18 +68,7 @@ class Dozer extends Entity {
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
 
-    // Update existing Tail Entities
-    Coordinates lastCoordinates = this._tailRoute.first;
-    for(int i = 0; i < this.tailEntities.length; i++) {
-      // theorem of pythagoras
-      Coordinates nextCoordinates = this._tailRoute.firstWhere((nextCoordinates) => nextCoordinates.y > lastCoordinates.y
-          && sqrt(pow(lastCoordinates.y - nextCoordinates.y, 2) + pow(lastCoordinates.x - nextCoordinates.x, 2)) >= this._tailGap);
-
-      this.tailEntities[i].x = nextCoordinates.x;
-      this.tailEntities[i].y = nextCoordinates.y;
-
-      lastCoordinates = nextCoordinates;
-    }
+    this._updateExistingTailEntities();
   }
 
   /// Change certical [Dozer] placement Y-Coordinate according to the score
@@ -110,6 +97,28 @@ class Dozer extends Entity {
       this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y, this.level));
     }
   }
+
+  /// Update existing [DozerTail] entities
+  /// TODO this seems unnecessary unperformant by going through the same Coordinates multiple times
+  void _updateExistingTailEntities() {
+    Coordinates lastCoordinates = this._tailRoute.first;
+    for(int i = 0; i < this.tailEntities.length; i++) {
+      // theorem of pythagoras
+      Coordinates nextCoordinates = this._tailRoute.skip(i).firstWhere(
+              (c) =>
+          // Next Coordinate must be above old one
+          c.y > lastCoordinates.y
+              &&
+              sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
+      );
+
+      this.tailEntities[i].x = nextCoordinates.x;
+      this.tailEntities[i].y = nextCoordinates.y;
+
+      lastCoordinates = nextCoordinates;
+    }
+}
+
 
   /**
    * Changes the score of the [Dozer]
