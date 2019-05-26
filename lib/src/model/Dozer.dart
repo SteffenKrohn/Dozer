@@ -57,23 +57,17 @@ class Dozer extends Entity {
     this.dx = dx;
     super.update();
 
-    // Change dozer height (y) according to the score
-    // dozer grows in height
-    if(this._getYAccordingToScore() < this.y) {
-      this._tailRoute.forEach((c) => c.y -= 1);
-      this.y -= 1;
-    }
-    // dozer shrinks in height
-    if(this._getYAccordingToScore() > this.y) {
-      this._tailRoute.forEach((c) => c.y += 1);
-      this.y += 1;
-    }
+    // -------------------------------------------------------------------//
+    //                               DozerTail                            //
+    // -------------------------------------------------------------------//
 
-    // Add new Route Coordinates to List and update existing ones
+    this._updateVerticalDozerPlacement();
+
+    // Add new Route Coordinate to List and update existing ones
+    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()));
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
-    // TODO 0.6?
-    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate() * 0.6)); // dy movement from entity
+
 
     // Remove Tail Entities after score decreases
     while(this.tailEntities.length >= this.score) {
@@ -97,7 +91,20 @@ class Dozer extends Entity {
 
       lastCoordinates = nextCoordinates;
     }
+  }
 
+  /// Change certical [Dozer] placement Y-Coordinate according to the score
+  void _updateVerticalDozerPlacement() {
+    // dozer grows in height
+    if(this._getYAccordingToScore() < this.y) {
+      this._tailRoute.forEach((c) => c.y -= 1);
+      this.y -= 1;
+    }
+    // dozer shrinks in height
+    if(this._getYAccordingToScore() > this.y) {
+      this._tailRoute.forEach((c) => c.y += 1);
+      this.y += 1;
+    }
   }
 
   /**
