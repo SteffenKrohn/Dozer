@@ -209,11 +209,24 @@ h1 {
 }
 
 .dozer {
-    width: 30px;
-    height: 30px;
     color: white;
     background-color: green;
     border-radius: 50%;
+}
+
+.dozer.head .eye {
+    background-color: white;
+    height: 30%;
+    width: 30%;
+    border-radius: 50%;
+    position: absolute;
+    top: 30%;
+}
+.dozer.head .left-eye {
+    left: 15%;
+}
+.dozer.head .right-eye {
+    right: 15%;
 }
 
 .brick {
