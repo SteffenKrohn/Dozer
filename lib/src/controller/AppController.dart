@@ -115,7 +115,7 @@ class AppController {
       querySelector("#level-${i + 1}").onClick.listen((Event e) {
         e.preventDefault();
         this.setActiveLevel(i + 1);
-        this.startLevel(i + 1);
+        this.showLevelOverview();
       });
     }
   }
