@@ -30,7 +30,7 @@ class LevelView {
 
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
-    Map<String, Element>.from(this.laneElements).forEach((id, e) {
+    Map<String, Element>.from(this.laneElements).forEach((id, e) async {
       int id = int.parse(e.id.substring(1));
       Entity entity;
 
@@ -52,7 +52,7 @@ class LevelView {
     });
 
     // add new DOM Elements
-    visibleElements.forEach((id, value) {
+    visibleElements.forEach((id, value) async {
       DivElement e = getEntityRepresentation(value);
       this.lane.append(e);
       this.laneElements.putIfAbsent("e"+id.toString(), () => e);
