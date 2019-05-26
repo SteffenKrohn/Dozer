@@ -35,6 +35,8 @@ class Dozer extends Entity {
     for(int i = 0; i <= 50 * this._tailGap; i++) { // target score * gap
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
+    // Add the tail entities according to initial score
+    this._removeAndAddTailEntities();
   }
 
   void update() async {
@@ -68,17 +70,6 @@ class Dozer extends Entity {
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
     this._tailRoute.removeLast();
 
-
-    // Remove Tail Entities after score decreases
-    while(this.tailEntities.length >= this.score) {
-        this.tailEntities.removeLast();
-    }
-
-    // Add Tail Entities
-    while(this.tailEntities.length + 1 < this.score) {
-      this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y, this.level));
-    }
-
     // Update existing Tail Entities
     Coordinates lastCoordinates = this._tailRoute.first;
     for(int i = 0; i < this.tailEntities.length; i++) {
@@ -107,6 +98,19 @@ class Dozer extends Entity {
     }
   }
 
+  /// Adds or removes [DozerTail] according to the current score
+  void _removeAndAddTailEntities() {
+    // Remove Tail Entities after score decreases
+    while(this.tailEntities.length >= this.score) {
+      this.tailEntities.removeLast();
+    }
+
+    // Add Tail Entities after score increase
+    while(this.tailEntities.length + 1 < this.score) {
+      this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y, this.level));
+    }
+  }
+
   /**
    * Changes the score of the [Dozer]
    * Depending on the power up´s behaviour will be different
@@ -117,9 +121,10 @@ class Dozer extends Entity {
     }
 
     if (this.drillActive && change < 0) {
-      return;
+      change = 0;
     }
     this.score += change;
+    this._removeAndAddTailEntities();
   }
 
   /**
