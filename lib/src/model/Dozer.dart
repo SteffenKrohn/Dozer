@@ -35,12 +35,11 @@ class Dozer extends Entity {
     for(int i = 0; i <= 50 * this._tailGap; i++) { // target score * gap
       this._tailRoute.add(Coordinates(this.x, this.y + i));
     }
+    // Add the tail entities according to initial score
+    this._removeAndAddTailEntities();
   }
 
   void update() async {
-    if (this.level.gameLost()) {
-      return;
-    }
     // TODO Make prettier
     double dx = this.dx;
 
@@ -57,7 +56,20 @@ class Dozer extends Entity {
     this.dx = dx;
     super.update();
 
-    // Change dozer height (y) according to the score
+    // Dozer Tail
+
+    this._updateVerticalDozerPlacement();
+
+    // Add new Route Coordinate to List and update existing ones
+    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate()));
+    this._tailRoute.insert(0, Coordinates(this.x, this.y));
+    this._tailRoute.removeLast();
+
+    this._updateExistingTailEntities();
+  }
+
+  /// Change certical [Dozer] placement Y-Coordinate according to the score
+  void _updateVerticalDozerPlacement() {
     // dozer grows in height
     if(this._getYAccordingToScore() < this.y) {
       this._tailRoute.forEach((c) => c.y -= 1);
@@ -68,37 +80,42 @@ class Dozer extends Entity {
       this._tailRoute.forEach((c) => c.y += 1);
       this.y += 1;
     }
+  }
 
-    // Add new Route Coordinates to List and update existing ones
-    this._tailRoute.insert(0, Coordinates(this.x, this.y));
-    this._tailRoute.removeLast();
-    // TODO 0.6?
-    this._tailRoute.forEach((c) => c.y += (this.level.getVerticalMovementPerUpdate() * 0.6)); // dy movement from entity
-
+  /// Adds or removes [DozerTail] according to the current score
+  void _removeAndAddTailEntities() {
     // Remove Tail Entities after score decreases
-    while(this.tailEntities.length >= this.score) {
-        this.tailEntities.removeLast();
+    while(this.tailEntities.length >= this.score && this.tailEntities.length > 0) {
+      this.tailEntities.removeLast();
     }
 
-    // Add Tail Entities
+    // Add Tail Entities after score increase
     while(this.tailEntities.length + 1 < this.score) {
       this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y, this.level));
     }
+  }
 
-    // Update existing Tail Entities
+  /// Update existing [DozerTail] entities
+  /// TODO this seems unnecessary unperformant by going through the same Coordinates multiple times
+  void _updateExistingTailEntities() {
     Coordinates lastCoordinates = this._tailRoute.first;
     for(int i = 0; i < this.tailEntities.length; i++) {
       // theorem of pythagoras
-      Coordinates nextCoordinates = this._tailRoute.firstWhere((nextCoordinates) => nextCoordinates.y > lastCoordinates.y
-          && sqrt(pow(lastCoordinates.y - nextCoordinates.y, 2) + pow(lastCoordinates.x - nextCoordinates.x, 2)) >= this._tailGap);
+      Coordinates nextCoordinates = this._tailRoute.skip(i).firstWhere(
+              (c) =>
+          // Next Coordinate must be above old one
+          c.y > lastCoordinates.y
+              &&
+              sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
+      );
 
       this.tailEntities[i].x = nextCoordinates.x;
       this.tailEntities[i].y = nextCoordinates.y;
 
       lastCoordinates = nextCoordinates;
     }
+}
 
-  }
 
   /**
    * Changes the score of the [Dozer]
@@ -110,9 +127,10 @@ class Dozer extends Entity {
     }
 
     if (this.drillActive && change < 0) {
-      return;
+      change = 0;
     }
     this.score += change;
+    this._removeAndAddTailEntities();
   }
 
   /**
