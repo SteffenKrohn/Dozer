@@ -131,7 +131,7 @@ h1 {
 }
 
 .choose-level-wrapper .choose-level.reached {
-    background-color: aqua;
+    background-color: green;
 }
 
 /* Donate Button */
