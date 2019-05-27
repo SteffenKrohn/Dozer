@@ -194,6 +194,14 @@ class AppController {
     return this._reachedLevel;
   }
 
+  int getHighscore(int level) {
+    int hs = 0;
+    if(this._localStorage.containsKey('highscore_level_$level')) {
+      hs = int.parse(this._localStorage['highscore_level_$level']);
+    }
+    return hs;
+  }
+
   void setReachedLevel(int reachedLevel) {
     this._localStorage["reachedLevel"] = reachedLevel.toString();
     this._reachedLevel = reachedLevel;
@@ -204,14 +212,15 @@ class AppController {
       case 1:
         return "Get in Rhythm and catch all dots to win! ";
       case 2:
-        return "This time try to avoid the bricks and survive until the end!";
+        return "This time, try to avoid the bricks and survive until the end!";
       case 3:
         return "Choose wisely. The barriers are your friends.";
+      case 4:
+        return "Now you are on your own. Try to reach Level 500!";
+      default:
+        int hs = this.getHighscore(level);
+        return hs > 0 ? "Highscore: $hs" : "No Highscore yet";
     }
-    if (level < 10) {
-      return "Now you are on your own. Try to reach Level 10!";
-    }
-    return "You exceded all expectations. Keep enjoying the game!";
   }
 
   void _sendVisitStats({bool isFullscreen = false}) {
