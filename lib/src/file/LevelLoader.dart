@@ -3,28 +3,21 @@ part of dozergame;
 class LevelLoader {
 
   static final levelBasePath = "resources/level/";
+
+  LevelController levelController;
+  Map params;
+
+  Level level;
   
-  static Future<Level> getLevel(LevelController lc, int id) async {
+  Future<Level> getLevel(LevelController lc, int id) async {
+    this.levelController = lc;
+
     Future<Map> fmap = makeRequest(id);
     
     Map map = await fmap;
-    Map params = map.putIfAbsent("params", () => null);
+    this.params = map.putIfAbsent("params", () => null);
 
-    Level lvl = new Level(
-        lc,
-        params.putIfAbsent("timelimit", () => 100) as int,// Time limit
-        params.putIfAbsent("initialscore", () => 100) as int, // Initial score
-        params.putIfAbsent("targetscore", () => 100) as int, // target Score
-        params.putIfAbsent("lanespeed", () => 100) as double, // lanespeed
-        params.putIfAbsent("level", () => 100) as int,  // level id
-        querySelector("#lane").getBoundingClientRect().height.floor(),
-        querySelector("#lane").getBoundingClientRect().width.floor()
-    );
-
-    if (params.containsKey("instructions")) {
-      lvl.instructions = params.putIfAbsent("instructions", () => "");
-    }
-
+    this._createLevelStump();
 
     List<dynamic> entities = map.putIfAbsent("entities", () => List());
     List<Entity> queuedEntities = List<Entity>();
@@ -32,89 +25,130 @@ class LevelLoader {
     // Counter to give each element an unique id
     int elementId = 1;
 
-
     entities.forEach((e) {
       String type = e.putIfAbsent("type", () => "");
       Entity model;
 
       if (type == "dot") {
-        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
-        model = Dot(
-          elementId,
-          (width * e.putIfAbsent("x", () => 0)), // x
-          lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
-          e.putIfAbsent("value", () => 1) as int,
-          (lvl.viewWidth * Dot.getStandardRadius()).floor(),
-          (lvl.viewWidth * Dot.getStandardRadius()).floor(),
-          lvl
-        );
+        model = this._getDot(elementId, e);
       } else if (type == "brick") {
-        int width = lvl.viewWidth - (lvl.viewWidth * Brick.getStandardWidth()).floor();
-        model = Brick(
-            elementId,
-            (width * e.putIfAbsent("x", () => 0)), // x
-            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
-            e.putIfAbsent("value", () => 1) as int,
-            (lvl.viewWidth * Brick.getStandardWidth()).floor(),
-            (lvl.viewHeight * Brick.getStandardHeight()).floor(),
-            lvl
-        );
+        model = this._getBrick(elementId, e);
       } else if (type == "barrier") {
-        int width = lvl.viewWidth - (lvl.viewWidth * Barrier.getStandardWidth()).floor();
-        int barrierHeight = -1 * lvl.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int).floor();
-        model = Barrier(
-            elementId,
-            width * e.putIfAbsent("x", () => 0),
-            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
-            (lvl.viewWidth * Barrier.getStandardWidth()).floor(),
-            barrierHeight,
-            lvl
-        );
+        model = this._getBarrier(elementId, e);
       } else if (type == "doubleup") {
-        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
-        model = DoubleUp(
-            elementId,
-            width * e.putIfAbsent("x", () => 0),
-            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
-            (width * Dot.getStandardRadius()).floor(),
-            (width * Dot.getStandardRadius()).floor(),
-            lvl
-        );
+        model = this._getDoubleUp(elementId, e);
       } else if (type == "drill") {
-        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
-        model = Drill(
-            elementId,
-            width * e.putIfAbsent("x", () => 0),
-            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
-            (width * Dot.getStandardRadius()).floor(),
-            (width * Dot.getStandardRadius()).floor(),
-            lvl
-        );
+        model = this._getDrill(elementId, e);
       } else if (type == "slowdown") {
-        int width = lvl.viewWidth - (lvl.viewWidth * Dot.getStandardRadius()).floor();
-        model = SlowDown(
-            elementId,
-            width * e.putIfAbsent("x", () => 0),
-            lvl.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
-            (width * Dot.getStandardRadius()).floor(),
-            (width * Dot.getStandardRadius()).floor(),
-            lvl
-        );
+        model = this._getSlowDown(elementId, e);
       }
 
       if (model != null) {
-        model.dy = lvl.getVerticalMovementPerUpdate();
+        model.dy = this.level.getVerticalMovementPerUpdate();
         queuedEntities.add(model);
       }
       elementId++;
     });
-    lvl.remainingEntities = queuedEntities;
-    return lvl;
+    this.level.remainingEntities = queuedEntities;
+    return this.level;
   }
+
   static Future<Map> makeRequest(int id) async {
     var path= levelBasePath + 'level'+ id.toString() +'.json';
     var r = HttpRequest.getString(path);
     String str = await r;
     return json.decode(str);
+  }
+
+  void _createLevelStump() {
+    this.level = new Level(
+        this.levelController,
+        this.params.putIfAbsent("timelimit", () => 100) as int,// Time limit
+        this.params.putIfAbsent("initialscore", () => 100) as int, // Initial score
+        this.params.putIfAbsent("targetscore", () => 100) as int, // target Score
+        this.params.putIfAbsent("lanespeed", () => 100) as double, // lanespeed
+        this.params.putIfAbsent("level", () => 100) as int,  // level id
+        window.innerHeight.floor(),
+        window.innerWidth.floor()
+    );
+
+    if (this.params.containsKey("instructions")) {
+      this.level.instructions = this.params.putIfAbsent("instructions", () => "");
+    }
+  }
+
+  Dot _getDot(int eId, Map e) {
+    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    return Dot(
+        eId,
+        (width * e.putIfAbsent("x", () => 0)), // x
+        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
+        e.putIfAbsent("value", () => 1) as int,
+        (this.level.viewWidth * Dot.getStandardRadius()).floor(),
+        (this.level.viewWidth * Dot.getStandardRadius()).floor(),
+        this.level
+    );
+  }
+
+  Brick _getBrick(int eId, Map e) {
+    int width = this.level.viewWidth - (this.level.viewWidth * Brick.getStandardWidth()).floor();
+    return Brick(
+        eId,
+        (width * e.putIfAbsent("x", () => 0)), // x
+        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
+        e.putIfAbsent("value", () => 1) as int,
+        (this.level.viewWidth * Brick.getStandardWidth()).floor(),
+        (this.level.viewHeight * Brick.getStandardHeight()).floor(),
+        this.level
+    );
+  }
+
+  Barrier _getBarrier(int eId, Map e) {
+    int width = this.level.viewWidth - (this.level.viewWidth * Barrier.getStandardWidth()).floor();
+    int barrierHeight = -1 * this.level.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int).floor();
+    return Barrier(
+        eId,
+        width * e.putIfAbsent("x", () => 0),
+        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
+        (this.level.viewWidth * Barrier.getStandardWidth()).floor(),
+        barrierHeight,
+        this.level
+    );
+  }
+
+  DoubleUp _getDoubleUp(int eId, Map e) {
+    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    return DoubleUp(
+        eId,
+        width * e.putIfAbsent("x", () => 0),
+        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+        (width * Dot.getStandardRadius()).floor(),
+        (width * Dot.getStandardRadius()).floor(),
+        this.level
+    );
+  }
+
+  SlowDown _getSlowDown(int eId, Map e) {
+    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    return SlowDown(
+        eId,
+        width * e.putIfAbsent("x", () => 0),
+        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+        (width * Dot.getStandardRadius()).floor(),
+        (width * Dot.getStandardRadius()).floor(),
+        this.level
+    );
+  }
+
+  Drill _getDrill(int eId, Map e) {
+    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    return Drill(
+        eId,
+        width * e.putIfAbsent("x", () => 0),
+        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+        (width * Dot.getStandardRadius()).floor(),
+        (width * Dot.getStandardRadius()).floor(),
+        this.level
+    );
   }
 }
