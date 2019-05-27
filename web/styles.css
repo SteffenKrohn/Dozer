@@ -98,6 +98,8 @@ h1 {
     height: 70vh;
     float: none;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
