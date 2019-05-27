@@ -272,16 +272,28 @@ h1 {
     content: "★";
 }
 
-.drill {
-    font-size: larger;
-}
-
 .slowdown:before {
     content: "⌛";
 }
 
+.doubleup {
+    -webkit-animation: blink-green 1s infinite;
+    -moz-animation:    blink-green 1s infinite;
+    animation:         blink-green 1s infinite;
+}
+
+.drill {
+    font-size: larger;
+    -webkit-animation: blink-yellow 1s infinite;
+    -moz-animation:    blink-yellow 1s infinite;
+    animation:         blink-yellow 1s infinite;
+}
+
 .slowdown {
     font-size: small;
+    -webkit-animation: blink-white 1s infinite;
+    -moz-animation:    blink-white 1s infinite;
+    animation:         blink-white 1s infinite;
 }
 
 /* Brick colors */
@@ -330,6 +342,57 @@ h1 {
     -z-animation: rainbow 1s ease infinite;
     -o-animation: rainbow 1s ease infinite;
     animation: rainbow 1s ease infinite;
+}
+
+/*
+    Drill
+    Credit: https://code.sololearn.com/Wv54364U2VCg/#html
+ */
+@-webkit-keyframes blink-yellow {
+    0%   { background-color: red; }
+    100% { background-color: gold; }
+}
+@-moz-keyframes blink-yellow {
+    0%   { background-color: red; }
+    100% { background-color: gold; }
+}
+@keyframes blink-yellow {
+    0%   { background-color: red; }
+    100% { background-color: gold; }
+}
+
+/*
+    DoubleUp
+    Credit: https://code.sololearn.com/Wv54364U2VCg/#html
+ */
+@-webkit-keyframes blink-green {
+    0%   { background-color: red; }
+    100% { background-color: lawngreen; }
+}
+@-moz-keyframes blink-green {
+    0%   { background-color: red; }
+    100% { background-color: lawngreen; }
+}
+@keyframes blink-green {
+    0%   { background-color: red; }
+    100% { background-color: lawngreen; }
+}
+
+/*
+    SlowDown
+    Credit: https://code.sololearn.com/Wv54364U2VCg/#html
+ */
+@-webkit-keyframes blink-white {
+    0%   { background-color: red; }
+    100% { background-color: #1ddde8; }
+}
+@-moz-keyframes blink-white {
+    0%   { background-color: red; }
+    100% { background-color: #1ddde8; }
+}
+@keyframes blink-white {
+    0%   { background-color: red; }
+    100% { background-color: #1ddde8; }
 }
 
 /*
