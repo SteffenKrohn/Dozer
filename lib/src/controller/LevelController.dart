@@ -25,6 +25,7 @@ class LevelController {
     Level lvl = await LevelLoader().getLevel(lc, level);
     lc.level = lvl;
     lc._levelView.level = lvl;
+    lc._levelView.createVisualBar();
     return lc;
   }
 

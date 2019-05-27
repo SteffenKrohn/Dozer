@@ -11,6 +11,11 @@ class LevelView {
 
   Map<String, Element> laneElements = Map<String, Element>();
 
+  /// Values that store the status of power up´s
+  bool drillActive = false;
+  bool doubleUpActive = false;
+  bool slowDownActive = false;
+
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
     this.level = level;
@@ -23,9 +28,6 @@ class LevelView {
   }
 
   void render() async {
-    if (null == _visualBar) {
-      _createVisualBar();
-    }
     _updateVisualBar();
 
     Map<int, Entity> visibleElements = level.getVisibleEntities();
@@ -37,11 +39,6 @@ class LevelView {
       // update old DOM Element if its also in visibleElements
       if(visibleElements.containsKey(id)) {
         entity = visibleElements[id];
-        if (entity is Dozer || entity is DozerTail) {
-          updateDozerEntityElement(e, entity);
-        } else if(entity is Dot) {
-          updateDotEntityElement(e, entity);
-        }
         updateEntityElement(e, entity);
       } else { // otherwise delete it
         e.remove();
@@ -60,7 +57,7 @@ class LevelView {
     });
   }
 
-  void  updateDotEntityElement(Element view, Entity model) async {
+  void  _updateDotEntityElement(Element view, Entity model) async {
     // DoubleUp PowerUp Animation
     if (this.level._dozer.doubleUpActive) {
       view.classes.add("has-doubleup");
@@ -70,7 +67,7 @@ class LevelView {
     }
   }
 
-  void updateDozerEntityElement(Element view, Entity model) async {
+  void _updateDozerEntityElement(Element view, Entity model) async {
     // Drill PowerUp Animation
     if (this.level._dozer.drillActive) {
       view.classes.add("has-drill");
@@ -145,7 +142,7 @@ class LevelView {
   }
 
   /// Create the initial Visual Bar
-  void _createVisualBar() {
+  void createVisualBar() {
 
     _visualBar = DivElement()
       ..setAttribute("class", "visual-bar");
