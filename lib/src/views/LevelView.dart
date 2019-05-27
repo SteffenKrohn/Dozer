@@ -12,9 +12,9 @@ class LevelView {
   Map<String, Element> laneElements = Map<String, Element>();
 
   /// Values that store the status of power up´s
-  bool drillActive = false;
-  bool doubleUpActive = false;
-  bool slowDownActive = false;
+  bool _drillActive = false;
+  bool _doubleUpActive = false;
+  bool _slowDownActive = false;
 
   LevelView(LevelController lc, Level level) {
     this._levelController = lc;
@@ -29,6 +29,7 @@ class LevelView {
 
   void render() async {
     _updateVisualBar();
+    _handlePowerUps();
 
     Map<int, Entity> visibleElements = level.getVisibleEntities();
 
@@ -50,31 +51,41 @@ class LevelView {
 
     // add new DOM Elements
     visibleElements.forEach((id, value) async {
-      DivElement e = getEntityRepresentation(value);
+      DivElement e = this.getEntityRepresentation(value);
       this.lane.append(e);
       this.laneElements.putIfAbsent("e"+id.toString(), () => e);
       updateEntityElement(e, value);
     });
   }
 
-  void  _updateDotEntityElement(Element view, Entity model) async {
-    // DoubleUp PowerUp Animation
-    if (this.level._dozer.doubleUpActive) {
-      view.classes.add("has-doubleup");
+  /// Handles all PowerUp Animations
+  void _handlePowerUps() {
+    if (this._drillActive != this.level.getDozer().drillActive) {
+      this._drillActive = !this._drillActive;
+      this._updateDozerEntityElement();
     }
-    else {
-      view.classes.remove("has-doubleup");
+    if (this._doubleUpActive != this.level.getDozer().doubleUpActive) {
+      this._doubleUpActive = !this._doubleUpActive;
+      this._updateDotEntityElement();
     }
   }
 
-  void _updateDozerEntityElement(Element view, Entity model) async {
-    // Drill PowerUp Animation
-    if (this.level._dozer.drillActive) {
-      view.classes.add("has-drill");
-    }
-    else {
-      view.classes.remove("has-drill");
-    }
+  /// Handle DoubleUp PowerUp Animation
+  void  _updateDotEntityElement() async {
+    this.laneElements.forEach((id, e) async {
+      if (e.classes.contains("dot")) {
+        e.classes.toggle("has-doubleup");
+      }
+    });
+  }
+
+  /// Handle Drill PowerUp Animation
+  void _updateDozerEntityElement() async {
+    this.laneElements.forEach((id, e) async {
+      if (e.classes.contains("dozer")) {
+        e.classes.toggle("has-drill");
+      }
+    });
   }
 
   /**
@@ -87,7 +98,7 @@ class LevelView {
     view.style.height = model.height.toString() + "px";
   }
 
-  static DivElement getEntityRepresentation(Entity entity) {
+  DivElement getEntityRepresentation(Entity entity) {
 
     if(entity.toString() == "dozer"){
       return DivElement()
@@ -101,11 +112,11 @@ class LevelView {
           );
     } else if(entity.toString() == "dozertail"){
       return DivElement()
-        ..setAttribute("class", "entity dozer")
+        ..setAttribute("class", "entity dozer ${this._drillActive ? "has-drill" : ""}")
         ..setAttribute("id", "e"+entity.id.toString());
     } else if(entity.toString() == "dot") {
       return DivElement()
-        ..setAttribute("class", "entity dot")
+        ..setAttribute("class", "entity dot ${this._doubleUpActive ? "has-doubleup" : ""}")
         ..setAttribute("id", "e"+entity.id.toString())
         ..appendText((entity as Dot).value.toString());
     } else if(entity.toString() == "brick") {
