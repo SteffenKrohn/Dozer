@@ -44,6 +44,7 @@ class MenuView {
     HeadingElement levelId = HeadingElement.h1();
     levelId.setInnerHtml("$level");
     levelId.style.marginTop = "1vh";
+    levelId.style.textShadow = "0.04em 0.04em rgb(137,137,137)";
     div.append(levelId);
 
     ParagraphElement instructions = ParagraphElement();
