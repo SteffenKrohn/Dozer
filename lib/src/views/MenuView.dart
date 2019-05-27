@@ -18,6 +18,7 @@ class MenuView {
   HeadingElement getLogo() {
     HeadingElement logo = HeadingElement.h1();
     logo.setInnerHtml("Dozer");
+    logo.setAttribute("id", "dozer-logo");
     return logo;
   }
 
