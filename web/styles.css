@@ -37,7 +37,6 @@ hr {
     padding-right: 10%;
 }
 
-/* Dozer Logo */
 h1 {
     height: 5vh;
     margin: 30pt;
@@ -45,6 +44,13 @@ h1 {
     font-size: 3em;
     text-align: center;
     font-weight: bold;
+}
+
+#dozer-logo {
+    height: 10vh;
+    margin: 25pt;
+    font-family: 'Pacifico', cursive;
+    font-size: 4em;
 }
 
 .button-box {
