@@ -158,7 +158,8 @@ class LevelView {
     _visualBar = DivElement()
       ..setAttribute("class", "visual-bar");
 
-
+    ImageElement menuButton = ImageElement(src: "resources/back.svg")
+      ..setAttribute("id", "menu_button_in_level");
 
     DivElement progressBar = DivElement()
       ..setAttribute("class", "progress-bar");
@@ -183,7 +184,8 @@ class LevelView {
     progressBar.append(currentLevel);
     progressBar.append(scoreProgress);
     progressBar.append(nextLevel);
-    
+
+    _visualBar.append(menuButton);
     _visualBar.append(progressBar);
     _visualBar.append(timer);
     

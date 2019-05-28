@@ -166,6 +166,13 @@ h1 {
     height: 5vh;
 }
 
+#menu_button_in_level {
+    width: 9vw;
+    height: auto;
+    padding: 3vw;
+    margin-top: 4vw;
+}
+
 .visual-bar .progress-bar {
     z-index: 1;
     margin: auto;
