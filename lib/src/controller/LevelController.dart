@@ -6,12 +6,13 @@ class LevelController {
   Level level;
   LevelView _levelView;
   final Storage _localStorage = window.localStorage;
+  Timer timer;
 
   static void loadAndStart(AppController ac, int level) async {
     Future<LevelController> dlc = LevelController.load(ac, level);
     LevelController lc = await dlc;
     await lc.start();
-    lc.increaseNrOfTries();
+    lc._increaseNrOfTries();
   }
 
   static Future<LevelController> load(AppController ac, int level) async {
@@ -32,21 +33,22 @@ class LevelController {
   void start() {
     // Enable the appropriate control
     if (this._appController.gyroAvailable) {
-      enableOrientationControl();
+      this._enableOrientationControl();
     } else {
-      enableKeyboardControl();
+      this._enableKeyboardControl();
     }
 
-    Timer t;
+    this._listenBackButton();
+
     // Start the periodic update of the game elements with 50hz
-    t = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
+    this.timer = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
       this.level.changeTimeLimit(-1000 / AppController.framerate);
 
       if (this.level.gameLost()) {
-        t.cancel();
+        timer.cancel();
 
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false);
+        this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false, false);
 
         // show loose message
         this._appController.showMessageLoose(this.level.timeLimit <= 0);
@@ -59,7 +61,7 @@ class LevelController {
       this.level.update();
 
       if (this.level.gameWon()) {
-        t.cancel();
+        timer.cancel();
 
         // check highscore from local storage
         int oldHighscore = 0;
@@ -73,7 +75,7 @@ class LevelController {
         }
 
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.getScore(), this.level.tries, true);
+        this._appController.sendScoreStats(this.level._level, this.level.getScore(), this.level.tries, true, false);
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
@@ -88,7 +90,7 @@ class LevelController {
    * Enables control of the dozer by keyboard
    * namely the left and right arrow button
    */
-  void enableKeyboardControl(){
+  void _enableKeyboardControl(){
     window.onKeyDown.listen((KeyboardEvent e) {
       //Left pressed
       if (e.keyCode == 37) {
@@ -108,14 +110,14 @@ class LevelController {
   /**
    * Enables control of the dozer by tilting the phone
    */
-  void enableOrientationControl() {
+  void _enableOrientationControl() {
     // Handle the device orientation to move the Dozer
     window.onDeviceOrientation.listen((ev) {
       this.level.getDozer().move(ev.gamma / 4, 0);
     });
   }
 
-  Future increaseNrOfTries() async {
+  Future _increaseNrOfTries() async {
     int tries = 0;
     if(this._localStorage.containsKey('tries_level_${this.level._level}')) {
       tries = int.parse(this._localStorage['tries_level_${this.level._level}']);
@@ -124,5 +126,15 @@ class LevelController {
     this._localStorage['tries_level_${this.level._level}'] = tries.toString();
     this.level.tries = tries;
     return;
+  }
+
+  void _listenBackButton() {
+    querySelector("#button_back_in_level").onClick.listen((MouseEvent e) {
+      this.timer.cancel();
+      this._appController.showLevelOverview();
+
+      // send score stats
+      this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false, true);
+    });
   }
 }

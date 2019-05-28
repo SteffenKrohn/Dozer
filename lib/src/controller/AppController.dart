@@ -255,7 +255,7 @@ class AppController {
     }).catchError((e) => print(e));
   }
 
-  void sendScoreStats(int level, int score, int tries, bool won) {
+  void sendScoreStats(int level, int score, int tries, bool won, bool abort) {
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
@@ -264,6 +264,7 @@ class AppController {
         "'level': {'integerValue': '$level'},"
         "'tries': {'integerValue': '$tries'},"
         "'won': {'booleanValue': $won},"
+        "'abort': {'booleanValue': $abort},"
         "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}}"
         "}}";
 

@@ -49,7 +49,7 @@ h1 {
 
 #dozer-logo {
     height: 10vh;
-    margin: 25pt;
+    margin-top: 2vh;
     font-family: 'Pacifico', cursive;
     font-size: 4em;
     text-shadow: 0.06em 0.06em green;
@@ -85,15 +85,6 @@ h1 {
 }
 
 .button-box .upper-bottom-button {
-    background-color: #6666ff;
-}
-
-
-.button_level_clickable {
-    background-color: aqua;
-}
-
-.button_level_greyed_out {
     background-color: #6666ff;
 }
 
@@ -165,6 +156,14 @@ h1 {
     display: flex;
     align-items: center;
     height: 5vh;
+}
+
+#button_back_in_level {
+    position: absolute;
+    width: 2em;
+    height: auto;
+    padding: 3vw;
+    margin-top: 0.5vh;
 }
 
 .visual-bar .progress-bar {

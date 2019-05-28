@@ -158,6 +158,9 @@ class LevelView {
     _visualBar = DivElement()
       ..setAttribute("class", "visual-bar");
 
+    ImageElement menuButton = ImageElement(src: "resources/back.svg")
+      ..setAttribute("id", "button_back_in_level");
+
     DivElement progressBar = DivElement()
       ..setAttribute("class", "progress-bar");
     
@@ -181,7 +184,8 @@ class LevelView {
     progressBar.append(currentLevel);
     progressBar.append(scoreProgress);
     progressBar.append(nextLevel);
-    
+
+    _visualBar.append(menuButton);
     _visualBar.append(progressBar);
     _visualBar.append(timer);
     
@@ -192,8 +196,8 @@ class LevelView {
   /// Updates the visual bar with values taken from [level]
   void _updateVisualBar() async {
     // Score Progress
-    _visualBar.children.elementAt(0).children.elementAt(1).setAttribute("value", level.getDozer().score.toString());
+    _visualBar.children.elementAt(1).children.elementAt(1).setAttribute("value", level.getDozer().score.toString());
     // Countdown
-    _visualBar.children.elementAt(1).setInnerHtml((level.timeLimit / 1000).toStringAsFixed(2));
+    _visualBar.children.elementAt(2).setInnerHtml((level.timeLimit / 1000).toStringAsFixed(2));
   }
 }
