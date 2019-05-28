@@ -167,10 +167,11 @@ h1 {
 }
 
 #menu_button_in_level {
+    position: absolute;
     width: 9vw;
     height: auto;
     padding: 3vw;
-    margin-top: 4vw;
+    margin-top: 0.5vh;
 }
 
 .visual-bar .progress-bar {
