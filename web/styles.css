@@ -158,9 +158,9 @@ h1 {
     height: 5vh;
 }
 
-#menu_button_in_level {
+#button_back_in_level {
     position: absolute;
-    width: 3em;
+    width: 2em;
     height: auto;
     padding: 3vw;
     margin-top: 0.5vh;
