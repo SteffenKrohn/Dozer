@@ -158,6 +158,8 @@ class LevelView {
     _visualBar = DivElement()
       ..setAttribute("class", "visual-bar");
 
+
+
     DivElement progressBar = DivElement()
       ..setAttribute("class", "progress-bar");
     
