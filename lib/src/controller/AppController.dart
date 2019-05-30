@@ -37,7 +37,7 @@ class AppController {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
         this.showMessageNoSupportForGyro();
-      } else if((window.innerHeight / window.screen.height) < 0.96) { // TODO test with notch and on iPhone
+      } else if((window.innerHeight / window.screen.height) < 0.92) {
         this.showWelcomeScreenOnMobileDevices();
       } else {
         this.showLevelOverview();
