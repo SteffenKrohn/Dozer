@@ -1,7 +1,485 @@
 {
-"params": {"level": 5,"timelimit": 53369,"initialscore": 11,"targetscore": 46,"lanespeed": 0.505095222656137,"instructions": null}
-,
-"entities": [{"type": "dot","time": 1000,"x": 0.3183321670733258,"value": 5},{"type": "barrier","time": 1300,"x": 0.6622636604432216,"height": 1125},{"type": "barrier","time": 1600,"x": 0.4271934473669968,"height": 2702},{"type": "brick","time": 1900,"x": 0.5825428919240921,"value": 11},{"type": "barrier","time": 2200,"x": 0.5209059415390844,"height": 1214},{"type": "barrier","time": 2500,"x": 0.3370596204003876,"height": 2898},{"type": "brick","time": 2800,"x": 0.061446382478024586,"value": 11},{"type": "dot","time": 3100,"x": 0.9104870787876704,"value": 4},{"type": "brick","time": 3400,"x": 0.9250110052533355,"value": 1},{"type": "dot","time": 3700,"x": 0.11288359392792313,"value": 3},{"type": "dot","time": 4000,"x": 0.6495757727277433,"value": 6},{"type": "dot","time": 4300,"x": 0.9943646882984315,"value": 8},{"type": "dot","time": 4600,"x": 0.3407522160949964,"value": 2},{"type": "brick","time": 4900,"x": 0.6130422026762521,"value": 12},{"type": "brick","time": 5200,"x": 0.8683237028964871,"value": 11},{"type": "brick","time": 5500,"x": 0.8563938578025863,"value": 20},{"type": "brick","time": 5800,"x": 0.9103119242792735,"value": 10},{"type": "dot","time": 6100,"x": 0.5483743510868696,"value": 3},{"type": "barrier","time": 6400,"x": 0.031996235886940894,"height": 1044},{"type": "brick","time": 6700,"x": 0.9695336782496338,"value": 15},{"type": "brick","time": 7000,"x": 0.0925310364516555,"value": 18},{"type": "dot","time": 7300,"x": 0.17452503989277968,"value": 4},{"type": "brick","time": 7600,"x": 0.2713071653644854,"value": 4},{"type": "brick","time": 7900,"x": 0.8210064125787236,"value": 11},{"type": "dot","time": 8200,"x": 0.6707854739443432,"value": 9},{"type": "brick","time": 8500,"x": 0.02303652389129751,"value": 4},{"type": "barrier","time": 8800,"x": 0.8957307129044535,"height": 2993},{"type": "barrier","time": 9100,"x": 0.15524930899733025,"height": 2484},{"type": "dot","time": 9400,"x": 0.87309176741707,"value": 2},{"type": "brick","time": 9700,"x": 0.6636440712910412,"value": 8},{"type": "brick","time": 10000,"x": 0.9689328928994736,"value": 5},{"type": "dot","time": 10300,"x": 0.9935137052384478,"value": 5},{"type": "dot","time": 10600,"x": 0.5473336567021291,"value": 1},{"type": "dot","time": 10900,"x": 0.2208956518819588,"value": 8},{"type": "dot","time": 11200,"x": 0.6122255856137188,"value": 5},{"type": "dot","time": 11500,"x": 0.3913190042467064,"value": 8},{"type": "brick","time": 11800,"x": 0.5770326347759323,"value": 16},{"type": "brick","time": 12100,"x": 0.9126131829528227,"value": 19},{"type": "brick","time": 12400,"x": 0.024120139336178736,"value": 14},{"type": "barrier","time": 12700,"x": 0.9016450919899899,"height": 1943},{"type": "brick","time": 13000,"x": 0.9966441701273117,"value": 16},{"type": "brick","time": 13300,"x": 0.1747347810544818,"value": 3},{"type": "brick","time": 13600,"x": 0.0030135978493912585,"value": 1},{"type": "dot","time": 13900,"x": 0.02120336481082541,"value": 8},{"type": "dot","time": 14200,"x": 0.11812214425532663,"value": 1},{"type": "brick","time": 14500,"x": 0.46293913585571367,"value": 8},{"type": "dot","time": 14800,"x": 0.8073950140728255,"value": 2},{"type": "brick","time": 15100,"x": 0.7233150885231857,"value": 1},{"type": "dot","time": 15400,"x": 0.5773584657029952,"value": 3},{"type": "brick","time": 15700,"x": 0.6869109804151271,"value": 16},{"type": "barrier","time": 16000,"x": 0.32416147062450307,"height": 1042},{"type": "brick","time": 16300,"x": 0.5740038631234959,"value": 3},{"type": "brick","time": 16600,"x": 0.19613162032955023,"value": 18},{"type": "brick","time": 16900,"x": 0.2554667547714503,"value": 20},{"type": "dot","time": 17200,"x": 0.07898008869776996,"value": 7},{"type": "brick","time": 17500,"x": 0.6371703731976764,"value": 14},{"type": "dot","time": 17800,"x": 0.6955305353707096,"value": 7},{"type": "dot","time": 18100,"x": 0.04358192182523213,"value": 2},{"type": "dot","time": 18400,"x": 0.6957207408930866,"value": 4},{"type": "dot","time": 18700,"x": 0.8604046577789712,"value": 4},{"type": "brick","time": 19000,"x": 0.16112415588527151,"value": 16},{"type": "dot","time": 19300,"x": 0.9318394034155322,"value": 9},{"type": "barrier","time": 19600,"x": 0.46265715026350074,"height": 1405},{"type": "brick","time": 19900,"x": 0.3512414100913679,"value": 15},{"type": "barrier","time": 20200,"x": 0.8394418182902212,"height": 2991},{"type": "barrier","time": 20500,"x": 0.23273251712752852,"height": 2647},{"type": "barrier","time": 20800,"x": 0.16336162034700363,"height": 1496},{"type": "brick","time": 21100,"x": 0.7043979684876037,"value": 20},{"type": "brick","time": 21400,"x": 0.9384262903823225,"value": 14},{"type": "barrier","time": 21700,"x": 0.3412474165901028,"height": 2439},{"type": "brick","time": 22000,"x": 0.31977895832144443,"value": 11},{"type": "barrier","time": 22300,"x": 0.5032841665699165,"height": 1657},{"type": "drill","time": 22600,"x": 0.5319866682647197},{"type": "brick","time": 22900,"x": 0.07741154329159683,"value": 19},{"type": "brick","time": 23200,"x": 0.6878551891605642,"value": 6},{"type": "dot","time": 23500,"x": 0.19469206343179635,"value": 1},{"type": "dot","time": 23800,"x": 0.5203695846344424,"value": 6},{"type": "dot","time": 24100,"x": 0.9405886860214292,"value": 9},{"type": "barrier","time": 24400,"x": 0.6684302076910243,"height": 510},{"type": "dot","time": 24700,"x": 0.4871875456207182,"value": 7},{"type": "brick","time": 25000,"x": 0.878276592882045,"value": 18},{"type": "brick","time": 25300,"x": 0.3810013865734966,"value": 11},{"type": "dot","time": 25600,"x": 0.15945566788672316,"value": 9},{"type": "brick","time": 25900,"x": 0.931680360503662,"value": 6},{"type": "brick","time": 26200,"x": 0.3146964495995256,"value": 18},{"type": "brick","time": 26500,"x": 0.33593300111042923,"value": 5},{"type": "dot","time": 26800,"x": 0.6596358897896872,"value": 1},{"type": "brick","time": 27100,"x": 0.8794535154291695,"value": 18},{"type": "dot","time": 27400,"x": 0.8852444073160367,"value": 2},{"type": "barrier","time": 27700,"x": 0.29933491146726954,"height": 2382},{"type": "drill","time": 28000,"x": 0.92781464521141},{"type": "dot","time": 28300,"x": 0.9326405037457247,"value": 9},{"type": "dot","time": 28600,"x": 0.5248233823209895,"value": 9},{"type": "brick","time": 28900,"x": 0.1662823189578846,"value": 1},{"type": "slowdown","time": 29200,"x": 0.15209777288273663},{"type": "dot","time": 29500,"x": 0.04652898741478784,"value": 4},{"type": "brick","time": 29800,"x": 0.4141791486122772,"value": 15},{"type": "dot","time": 30100,"x": 0.011897534740108906,"value": 1},{"type": "brick","time": 30400,"x": 0.619645998547449,"value": 19},{"type": "brick","time": 30700,"x": 0.0868936562276259,"value": 5},{"type": "brick","time": 31000,"x": 0.6150710055723265,"value": 13},{"type": "dot","time": 31300,"x": 0.5121163854271352,"value": 4},{"type": "brick","time": 31600,"x": 0.5495443858576485,"value": 15},{"type": "dot","time": 31900,"x": 0.24899170400828263,"value": 3},{"type": "dot","time": 32200,"x": 0.3718563630274957,"value": 8},{"type": "brick","time": 32500,"x": 0.5516212337522903,"value": 2},{"type": "barrier","time": 32800,"x": 0.646052324504618,"height": 1824},{"type": "brick","time": 33100,"x": 0.11036101735932546,"value": 14},{"type": "dot","time": 33400,"x": 0.8668778179738825,"value": 2},{"type": "dot","time": 33700,"x": 0.6142885964247898,"value": 2},{"type": "barrier","time": 34000,"x": 0.5047016291763791,"height": 2569},{"type": "dot","time": 34300,"x": 0.0028597666263229238,"value": 4},{"type": "brick","time": 34600,"x": 0.12159897525758867,"value": 12},{"type": "dot","time": 34900,"x": 0.7354578697483561,"value": 1},{"type": "slowdown","time": 35200,"x": 0.7122294523453621},{"type": "dot","time": 35500,"x": 0.41628370856321983,"value": 5},{"type": "barrier","time": 35800,"x": 0.9434794772408096,"height": 1059},{"type": "dot","time": 36100,"x": 0.9760983473026589,"value": 7},{"type": "brick","time": 36400,"x": 0.7986927209193615,"value": 7},{"type": "brick","time": 36700,"x": 0.7361689207198246,"value": 2},{"type": "dot","time": 37000,"x": 0.3705028766882932,"value": 8},{"type": "brick","time": 37300,"x": 0.712677368258169,"value": 17},{"type": "barrier","time": 37600,"x": 0.410429874217069,"height": 1774},{"type": "dot","time": 37900,"x": 0.0843052139910524,"value": 4},{"type": "dot","time": 38200,"x": 0.4216108483264873,"value": 3},{"type": "brick","time": 38500,"x": 0.8805487960971375,"value": 12},{"type": "brick","time": 38800,"x": 0.11206003686027477,"value": 7},{"type": "brick","time": 39100,"x": 0.002954197934308622,"value": 15},{"type": "dot","time": 39400,"x": 0.6614996012704738,"value": 8},{"type": "barrier","time": 39700,"x": 0.03450797942711903,"height": 2059},{"type": "barrier","time": 40000,"x": 0.5382521634394353,"height": 2402},{"type": "brick","time": 40300,"x": 0.00034434058986620997,"value": 7},{"type": "brick","time": 40600,"x": 0.12380023380486971,"value": 20},{"type": "brick","time": 40900,"x": 0.30725856574111243,"value": 6},{"type": "brick","time": 41200,"x": 0.23464174232024215,"value": 12},{"type": "dot","time": 41500,"x": 0.015051969875760518,"value": 1},{"type": "slowdown","time": 41800,"x": 0.6703890847744824},{"type": "brick","time": 42100,"x": 0.41158668583119695,"value": 2},{"type": "brick","time": 42400,"x": 0.646297754988818,"value": 13},{"type": "dot","time": 42700,"x": 0.5522073716165452,"value": 4},{"type": "brick","time": 43000,"x": 0.43905473756640157,"value": 15},{"type": "brick","time": 43300,"x": 0.752631806800938,"value": 9},{"type": "dot","time": 43600,"x": 0.41651202850294433,"value": 5},{"type": "brick","time": 43900,"x": 0.2450320274828195,"value": 19},{"type": "barrier","time": 44200,"x": 0.446040484356503,"height": 2391},{"type": "brick","time": 44500,"x": 0.2234595270122891,"value": 13},{"type": "doubleup","time": 44800,"x": 0.9880329603867347},{"type": "brick","time": 45100,"x": 0.6536705605613663,"value": 4},{"type": "brick","time": 45400,"x": 0.08845804827693071,"value": 9},{"type": "barrier","time": 45700,"x": 0.9477759906098165,"height": 2894},{"type": "brick","time": 46000,"x": 0.9714180371821621,"value": 13},{"type": "brick","time": 46300,"x": 0.6849584549588466,"value": 9},{"type": "dot","time": 46600,"x": 0.5508114701173566,"value": 8},{"type": "barrier","time": 46900,"x": 0.42303509519450544,"height": 2332},{"type": "dot","time": 47200,"x": 0.23133296759903532,"value": 4},{"type": "barrier","time": 47500,"x": 0.617401079909112,"height": 936},{"type": "brick","time": 47800,"x": 0.44632277988511826,"value": 5},{"type": "barrier","time": 48100,"x": 0.3577308345600094,"height": 1458},{"type": "barrier","time": 48400,"x": 0.027057496861306318,"height": 541},{"type": "brick","time": 48700,"x": 0.19713744422902257,"value": 19},{"type": "slowdown","time": 49000,"x": 0.6479181245906903},{"type": "brick","time": 49300,"x": 0.7041752924529808,"value": 13},{"type": "dot","time": 49600,"x": 0.6869639519988926,"value": 1},{"type": "dot","time": 49900,"x": 0.34258731201420056,"value": 8},{"type": "brick","time": 50200,"x": 0.611198876367897,"value": 10},{"type": "brick","time": 50500,"x": 0.4576593257525745,"value": 6},{"type": "dot","time": 50800,"x": 0.5492304747010933,"value": 8},{"type": "dot","time": 51100,"x": 0.9285669669662769,"value": 9},{"type": "dot","time": 51400,"x": 0.9173564268885345,"value": 7},{"type": "brick","time": 51700,"x": 0.32308175569380604,"value": 8},{"type": "brick","time": 52000,"x": 0.8191493924137465,"value": 17},{"type": "dot","time": 52300,"x": 0.4460134266733127,"value": 8},{"type": "brick","time": 52600,"x": 0.8708587110111797,"value": 1},{"type": "barrier","time": 52900,"x": 0.0028979259956990466,"height": 784},{"type": "brick","time": 53200,"x": 0.44978004127862337,"value": 3},{"type": "dot","time": 53500,"x": 0.06406282454736834,"value": 5},{"type": "brick","time": 53800,"x": 0.17926671914990244,"value": 8}]
+  "params": {
+    "level": 5,
+    "timelimit": 21000,
+    "initialscore": 15,
+    "targetscore": 50,
+    "lanespeed": 0.5
+  },
+  "entities": [
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 0.0,
+      "value": 2
+    },
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 0.3333333333333333,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 1.0,
+      "value": 5
+    },
+    {
+      "type": "barrier",
+      "time": 1000,
+      "x": 0.25,
+      "height": 1000
+    },
+    {
+      "type": "dot",
+      "time": 1500,
+      "x": 0.10,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 2000,
+      "x": 0.0,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 3000,
+      "x": 1.0,
+      "value": 4
+    },
+    {
+      "type": "brick",
+      "time": 3160,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 3320,
+      "x": 0.3333333333333333,
+      "value": 6
+    },
+    {
+      "type": "barrier",
+      "time": 3900,
+      "x": 0.25,
+      "height": 600
+    },
+    {
+      "type": "dot",
+      "time": 4000,
+      "x": 0.1,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 4500,
+      "x": 0.0,
+      "value": 10
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 0.0,
+      "value": 10
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 0.3333333333333333,
+      "value": 15
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 1.0,
+      "value": 15
+    },
+    {
+      "type": "dot",
+      "time": 5300,
+      "x": 0.35,
+      "value": 5
+    },
+    {
+      "type": "barrier",
+      "time": 5600,
+      "x": 0.5,
+      "height": 1500
+    },
+    {
+      "type": "brick",
+      "time": 6000,
+      "x": 0.6666666666666666,
+      "value": 8
+    },
+    {
+      "type": "dot",
+      "time": 5950,
+      "x": 0.9,
+      "value": 8
+    },
+    {
+      "type": "brick",
+      "time": 6200,
+      "x": 0.0,
+      "value": 3
+    },
+    {
+      "type": "brick",
+      "time": 6200,
+      "x": 0.3333333333333333,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 6400,
+      "x": 0.25,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 6700,
+      "x": 0.0,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 6700,
+      "x": 0.3333333333333333,
+      "value": 3
+    },
+    {
+      "type": "dot",
+      "time": 7400,
+      "x": 0.25,
+      "value": 9
+    },
+    {
+      "type": "dot",
+      "time": 7400,
+      "x": 0.75,
+      "value": 3
+    },
+    {
+      "type": "barrier",
+      "time": 7800,
+      "x": 0.25,
+      "height": 1200
+    },
+    {
+      "type": "barrier",
+      "time": 7800,
+      "x": 0.5,
+      "height": 1200
+    },
+    {
+      "type": "dot",
+      "time": 8000,
+      "x": 0.35,
+      "value": 8
+    },
+    {
+      "type": "brick",
+      "time": 9000,
+      "x": 0.3333333333333333,
+      "value": 15
+    },
+    {
+      "type": "barrier",
+      "time": 9000,
+      "x": 0.75,
+      "height": 1000
+    },
+    {
+      "type": "dot",
+      "time": 9200,
+      "x": 0.60,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 9500,
+      "x": 0.0,
+      "value": 4
+    },
+    {
+      "type": "brick",
+      "time": 9660,
+      "x": 0.3333333333333333,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 9820,
+      "x": 0.6666666666666666,
+      "value": 6
+    },
+    {
+      "type": "dot",
+      "time": 10200,
+      "x": 0.9,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 11000,
+      "x": 1.0,
+      "value": 4
+    },
+    {
+      "type": "brick",
+      "time": 11160,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 11320,
+      "x": 0.3333333333333333,
+      "value": 6
+    },
+    {
+      "type": "dot",
+      "time": 11500,
+      "x": 0.2,
+      "value": 5
+    },
+    {
+      "type": "drill",
+      "time": 12000,
+      "x": 0.5
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 0.0,
+      "value": 13
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 0.3333333333333333,
+      "value": 20
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 0.6666666666666666,
+      "value": 16
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 1.0,
+      "value": 15
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 0.0,
+      "value": 18
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 0.3333333333333333,
+      "value": 16
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 0.6666666666666666,
+      "value": 20
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 1.0,
+      "value": 17
+    },
+    {
+      "type": "barrier",
+      "time": 13400,
+      "x": 0.5,
+      "height": 2000
+    },
+    {
+      "type": "brick",
+      "time": 13600,
+      "x": 0.3333333333333333,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 13600,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "dot",
+      "time": 13600,
+      "x": 0.1,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 13600,
+      "x": 0.9,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14100,
+      "x": 0.0,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14100,
+      "x": 1.0,
+      "value": 5
+    },
+    {
+      "type": "dot",
+      "time": 14100,
+      "x": 0.4,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 14100,
+      "x": 0.6,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14600,
+      "x": 0.3333333333333333,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14600,
+      "x": 0.6666666666666666,
+      "value": 10
+    },
+    {
+      "type": "dot",
+      "time": 14600,
+      "x": 0.1,
+      "value": 5
+    },
+    {
+      "type": "dot",
+      "time": 14600,
+      "x": 0.9,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 15100,
+      "x": 0.0,
+      "value": 10
+    },
+    {
+      "type": "brick",
+      "time": 15100,
+      "x": 1.0,
+      "value": 3
+    },
+    {
+      "type": "dot",
+      "time": 15100,
+      "x": 0.4,
+      "value": 2
+    },
+    {
+      "type": "dot",
+      "time": 15100,
+      "x": 0.6,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 16500,
+      "x": 1.0,
+      "value": 3
+    },
+    {
+      "type": "brick",
+      "time": 16660,
+      "x": 0.6666666666666666,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 16820,
+      "x": 0.3333333333333333,
+      "value": 20
+    },
+    {
+      "type": "dot",
+      "time": 17200,
+      "x": 0.4,
+      "value": 8
+    },
+    {
+      "type": "dot",
+      "time": 17200,
+      "x": 0.6,
+      "value": 6
+    },
+    {
+      "type": "barrier",
+      "time": 17600,
+      "x": 0.25,
+      "height": 1000
+    },
+    {
+      "type": "dot",
+      "time": 17700,
+      "x": 0.1,
+      "value": 9
+    },
+    {
+      "type": "brick",
+      "time": 18600,
+      "x": 0.0,
+      "value": 11
+    },
+    {
+      "type": "doubleup",
+      "time": 18200,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "time": 18500,
+      "x": 0.6,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 18500,
+      "x": 0.8,
+      "value": 6
+    }
+  ]
 }
 
 
