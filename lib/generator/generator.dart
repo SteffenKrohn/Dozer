@@ -17,4 +17,6 @@ part 'models/SlowDownGenerator.dart';
 
 // sets
 part 'sets/SetGenerator.dart';
+part 'sets/StairGenerator.dart';
+part 'sets/TrapGenerator.dart';
 part 'sets/WallGenerator.dart';

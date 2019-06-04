@@ -2,17 +2,23 @@ part of generator;
 
 class EntitiesGenerator {
 
-  // Chances determine how often these entities are generated
-  int brickChance = 45;
-  int dotChance = 30;
-  int barrierChance = 15;
-  int drillChance = 1;
-  int doubleUpChance = 1;
-  int slowDownChance = 1;
-  int wallChance = 1;
-
   // Parameter that determine the placement in the level
   int time = 1000;
+
+  // Chances determine how often these entities are generated
+  List<int> chances = List();
+
+  EntitiesGenerator() {
+    chances.add(20); // Brick
+    chances.add(20); // Dot
+    chances.add(6);  // Barrier
+    chances.add(1);  // Drill
+    chances.add(1);  // DoubleUp
+    chances.add(1);  // SlowDown
+    chances.add(1);  // Wall
+    chances.add(1);  // Stair
+    chances.add(1);  // Trap
+  }
 
   String generateEntities(int count, int gap) {
     String output = '"entities": [';
@@ -29,28 +35,45 @@ class EntitiesGenerator {
   }
 
   String generateEntity() {
-    int rnd = Random().nextInt(brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance + wallChance);
+    int c = 0;
+    c = chances.fold(0, (i, e) => i += e);
+    int rnd = Random().nextInt(c);
 
-    if (rnd < brickChance) {
-      return generateBrick();
-    } else if (rnd < brickChance + dotChance) {
-      return generateDot();
-    } else if (rnd < brickChance + dotChance + barrierChance) {
-      return generateBarrier();
-    } else if (rnd < brickChance + dotChance + barrierChance + drillChance) {
-      return generateDrill();
-    } else if (rnd < brickChance + dotChance + barrierChance + drillChance + doubleUpChance) {
-      return generateDoubleUp();
-    } else if (rnd < brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance) {
-      return generateSlowDown();
-    } else if (rnd < brickChance + dotChance + barrierChance + drillChance + doubleUpChance + slowDownChance + wallChance) {
-      return generateWall();
+    c = 0;
+    int i = 0;
+    for (; i < chances.length; i++) {
+      c += chances.elementAt(i);
+      if (rnd < c) break;
     }
-      return "";
+
+    switch (i) {
+      case 0:
+        return generateBrick();
+      case 1:
+        return generateDot();
+      case 2:
+        return generateBarrier();
+      case 3:
+        return generateDrill();
+      case 4:
+        return generateDoubleUp();
+      case 5:
+        return generateSlowDown();
+      case 6:
+        return generateWall();
+      case 7:
+        return generateStair();
+      case 8:
+        return generateTrap();
+      case 9:
+      case 10:
+      default:
+        return "";
+    }
   }
 
   String generateBrick() {
-    return BrickGenerator(time, getX()).generate();
+    return BrickGenerator(time, getXForBrick()).generate();
   }
 
   String generateDot() {
@@ -58,7 +81,7 @@ class EntitiesGenerator {
   }
 
   String generateBarrier() {
-    return BarrierGenerator(time, getX()).generate();
+    return BarrierGenerator(time, getXForBarrier()).generate();
   }
 
   String generateWall() {
@@ -67,6 +90,14 @@ class EntitiesGenerator {
 
   double getX() {
     return Random().nextDouble();
+  }
+
+  double getXForBrick() {
+    return Random().nextInt(4) / 3;
+  }
+
+  double getXForBarrier() {
+    return (Random().nextInt(3) + 1) / 4;
   }
 
   String generateDrill() {
@@ -79,5 +110,24 @@ class EntitiesGenerator {
 
   String generateSlowDown() {
     return SlowDownGenerator(time, getX()).generate();
+  }
+
+  String generateStair() {
+    int x = Random().nextInt(2);
+    StairGenerator s;
+    if (x == 1) {
+      s = StairGenerator(time).right();
+    } else {
+      s = StairGenerator(time).left();
+    }
+    time += 320;
+    return s.generate();
+  }
+
+  String generateTrap() {
+    TrapGenerator t = TrapGenerator(time);
+    time += 1000;
+    return t.generate();
+
   }
 }
