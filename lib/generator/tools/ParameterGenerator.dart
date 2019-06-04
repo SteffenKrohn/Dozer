@@ -20,8 +20,8 @@ class ParameterGenerator {
   int minTargetScore = 40;
   int maxTargetScore = 50;
 
-  double minLaneSpeed = 0.5;
-  double maxLaneSpeed = 0.6;
+  double minLaneSpeed = 0.6;
+  double maxLaneSpeed = 1.5;
 
   ParameterGenerator(int levelID) {
     this.levelId = levelID;
