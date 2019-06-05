@@ -164,6 +164,7 @@ h1 {
     height: auto;
     padding: 3vw;
     margin-top: 0.5vh;
+    z-index: 2;
 }
 
 .visual-bar .progress-bar {
