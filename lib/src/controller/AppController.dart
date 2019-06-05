@@ -40,7 +40,7 @@ class AppController {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
         this.showMessageNoSupportForGyro();
-      } else if((window.innerHeight / window.screen.height) < 92) {
+      } else if((window.innerHeight / window.screen.height) < 0.92) {
         this.showWelcomeScreenOnMobileDevices();
       } else {
         this.showLevelOverview();
