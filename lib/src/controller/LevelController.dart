@@ -63,15 +63,17 @@ class LevelController {
       if (this.level.gameWon()) {
         timer.cancel();
 
+
         // check highscore from local storage
         int oldHighscore = 0;
         bool isNewHighscore = true;
-        if(this._localStorage.containsKey('highscore_level_${this.level._level}')) {
-          oldHighscore = int.parse(this._localStorage['highscore_level_${this.level._level}']);
+        String key = AppController.highscoreLevelKey + this.level._level.toString();
+        if(this._localStorage.containsKey(key)) {
+          oldHighscore = int.parse(this._localStorage[key]);
           isNewHighscore = oldHighscore < this.level.getScore() ? true : false;
         }
         if(oldHighscore < this.level.getScore()){
-          this._localStorage['highscore_level_${this.level._level}'] = this.level.getScore().toString();
+          this._localStorage[key] = this.level.getScore().toString();
         }
 
         // send score stats
@@ -119,11 +121,12 @@ class LevelController {
 
   Future _increaseNrOfTries() async {
     int tries = 0;
-    if(this._localStorage.containsKey('tries_level_${this.level._level}')) {
-      tries = int.parse(this._localStorage['tries_level_${this.level._level}']);
+    String key = AppController.triesLevelKey + this.level._level.toString();
+    if(this._localStorage.containsKey(key)) {
+      tries = int.parse(this._localStorage[key]);
     }
     tries += 1;
-    this._localStorage['tries_level_${this.level._level}'] = tries.toString();
+    this._localStorage[key] = tries.toString();
     this.level.tries = tries;
     return;
   }

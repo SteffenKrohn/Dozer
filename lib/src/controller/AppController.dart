@@ -5,6 +5,12 @@ class AppController {
   /** The target framerate in hz */
   static const int framerate = 40;
 
+  /** The constants for the local storage keys */
+  static const String _reachedLevelKey = "reachedLevel";
+  static const String _userIdKey = "userId";
+  static const String highscoreLevelKey = "highscore_level_";
+  static const String triesLevelKey = "tries_level_";
+
   final Storage _localStorage = window.localStorage;
   int _activeLevel = 1;
   int _reachedLevel = 1;
@@ -16,11 +22,11 @@ class AppController {
   void startup() {
 
     // get local storage
-    if(this._localStorage.containsKey('reachedLevel')) {
-      this._reachedLevel = int.parse(this._localStorage['reachedLevel']);
+    if(this._localStorage.containsKey(_reachedLevelKey)) {
+      this._reachedLevel = int.parse(this._localStorage[_reachedLevelKey]);
     }
-    if(this._localStorage.containsKey('userId')) {
-      this._userId = int.parse(this._localStorage['userId']);
+    if(this._localStorage.containsKey(_userIdKey)) {
+      this._userId = int.parse(this._localStorage[_userIdKey]);
     }
 
     this._activeLevel = this.getReachedLevel();
@@ -185,22 +191,22 @@ class AppController {
   }
 
   int getReachedLevel() {
-    if(this._localStorage.containsKey('reachedLevel')) {
-      return int.parse(this._localStorage['reachedLevel']);
+    if(this._localStorage.containsKey(_reachedLevelKey)) {
+      return int.parse(this._localStorage[_reachedLevelKey]);
     }
     return this._reachedLevel;
   }
 
   int getHighscore(int level) {
     int hs = 0;
-    if(this._localStorage.containsKey('highscore_level_$level')) {
-      hs = int.parse(this._localStorage['highscore_level_$level']);
+    if(this._localStorage.containsKey(highscoreLevelKey + level.toString())) {
+      hs = int.parse(this._localStorage[highscoreLevelKey + level.toString()]);
     }
     return hs;
   }
 
   void setReachedLevel(int reachedLevel) {
-    this._localStorage["reachedLevel"] = reachedLevel.toString();
+    this._localStorage[_reachedLevelKey] = reachedLevel.toString();
     this._reachedLevel = reachedLevel;
   }
 
@@ -224,7 +230,7 @@ class AppController {
     // in the very first start the used ID will be assigned and stored
     if(this._userId == null) {
       this._userId = Random.secure().nextInt(pow(2, 32));
-      this._localStorage['userId'] = this._userId.toString();
+      this._localStorage[_userIdKey] = this._userId.toString();
     }
 
     int width = document.body.getBoundingClientRect().width;
