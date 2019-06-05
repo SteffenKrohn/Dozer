@@ -199,8 +199,9 @@ class AppController {
 
   int getHighscore(int level) {
     int hs = 0;
-    if(this._localStorage.containsKey(highscoreLevelKey + level.toString())) {
-      hs = int.parse(this._localStorage[highscoreLevelKey + level.toString()]);
+    String key = highscoreLevelKey + level.toString();
+    if(this._localStorage.containsKey(key)) {
+      hs = int.parse(this._localStorage[key]);
     }
     return hs;
   }
