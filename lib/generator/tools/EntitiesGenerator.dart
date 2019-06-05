@@ -10,11 +10,11 @@ class EntitiesGenerator {
 
   EntitiesGenerator() {
     chances.add(20); // Brick
-    chances.add(20); // Dot
+    chances.add(18); // Dot
     chances.add(6);  // Barrier
     chances.add(1);  // Drill
     chances.add(1);  // DoubleUp
-    chances.add(1);  // SlowDown
+    chances.add(0);  // SlowDown
     chances.add(1);  // Wall
     chances.add(1);  // Stair
     chances.add(1);  // Trap
