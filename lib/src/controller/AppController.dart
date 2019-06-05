@@ -7,7 +7,6 @@ class AppController {
   /** The target framerate in hz */
   static const int framerate = 40;
 
-  int _highscore = 0;
   final Storage _localStorage = window.localStorage;
   int _activeLevel = 1;
   int _reachedLevel = 1;
@@ -37,7 +36,7 @@ class AppController {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
         this.showMessageNoSupportForGyro();
-      } else if((window.innerHeight / window.screen.height) < 0.92) {
+      } else if((window.innerHeight / window.screen.height) < 92) {
         this.showWelcomeScreenOnMobileDevices();
       } else {
         this.showLevelOverview();
