@@ -2,40 +2,53 @@ part of dozergame;
 
 class AppController {
 
-  /** The target framerate in hz */
+  /// The Target Framerate of the application in hz
   static const int framerate = 40;
 
-  /** The constants for the local storage keys */
+  /// The 'number of reached level' key for the local storage
   static const String _reachedLevelKey = "reachedLevel";
+  /// The userId key for the local storage
   static const String _userIdKey = "userId";
+  /// The 'highscore for level x' key for the local storage.
+  /// Using this key alone is not sufficient.
+  /// You have to append a String with the level number.
   static const String highscoreLevelKey = "highscore_level_";
+  /// The 'number of tries for level x' key for the local storage.
+  /// Using this key alone is not sufficient.
+  /// You have to append a String with the level number.
   static const String triesLevelKey = "tries_level_";
 
+  /// The reference to the local storage
   final Storage _localStorage = window.localStorage;
+
+  /// The level the user would start on the main page 'levelOverview'.
+  /// After the app startup it's set to the reached Level and after the click
+  /// on one specific level in the 'chooseLevelView' it's set to the specific one.
   int _activeLevel = 1;
+  /// The reached Level of the user
   int _reachedLevel = 1;
+  /// TODO will be deleted later
   int _userId;
   /// This is the number of all available level
   int _nrAvailableLevels = 500;
+  /// Is the gyro sensor retrieval available
   bool gyroAvailable = false;
 
+  /// This method initialises the app at startup
   void startup() {
 
-    // get local storage
+    // get reached level from local storage
     if(this._localStorage.containsKey(_reachedLevelKey)) {
       this._reachedLevel = int.parse(this._localStorage[_reachedLevelKey]);
     }
+    this._activeLevel = this.getReachedLevel();
+
+    // TODO will be deleted later
     if(this._localStorage.containsKey(_userIdKey)) {
       this._userId = int.parse(this._localStorage[_userIdKey]);
     }
 
-    this._activeLevel = this.getReachedLevel();
-    // TODO dynamic level
-    this.showLevelOverview();
-
-    // TODO load levels
-
-    // Check Gyrosensor Support and show first menu screen
+    // Check gyro sensor support and show first screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
@@ -107,7 +120,7 @@ class AppController {
 
   void listenChooseLevelButton() {
     querySelector("#button_choose_levels").onClick.listen((MouseEvent e) {
-      this.showMessageChooseLevels(this._nrAvailableLevels, this.getReachedLevel());
+      this.showChooseLevelsView(this._nrAvailableLevels, this.getReachedLevel());
     });
   }
 
@@ -123,7 +136,7 @@ class AppController {
 
   void listenCreditsButton() {
     querySelector("#button_credits").onClick.listen((MouseEvent e) {
-      this.showMessageCredits();
+      this.showCreditsView();
     });
   }
 
@@ -162,14 +175,14 @@ class AppController {
     this.listenGoToMenuButtonAndRequestFullscreen();
   }
 
-  void showMessageChooseLevels(int nrAvailableLevels, int reachedLevel) {
-    MenuView.show().messageChooseLevels(nrAvailableLevels, reachedLevel).render();
+  void showChooseLevelsView(int nrAvailableLevels, int reachedLevel) {
+    MenuView.show().chooseLevelsView(nrAvailableLevels, reachedLevel).render();
     this.listenGoToMenuButton();
     this.listenAllLevelButtons(reachedLevel);
   }
 
-  void showMessageCredits() {
-    MenuView.show().messageCredits().render();
+  void showCreditsView() {
+    MenuView.show().creditsView().render();
     this.listenGoToMenuButton();
     this.listenDonateButton();
   }

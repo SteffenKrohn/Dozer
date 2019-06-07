@@ -269,7 +269,7 @@ class MenuView {
     return this;
   }
 
-  MenuView messageCredits() {
+  MenuView creditsView() {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
     div.append(getLogo());
@@ -322,7 +322,7 @@ class MenuView {
     return this;
   }
 
-  MenuView messageChooseLevels(int nrAvailableLevels, int reachedLevel) {
+  MenuView chooseLevelsView(int nrAvailableLevels, int reachedLevel) {
     DivElement div = DivElement()
       ..setAttribute("class", "message")
       ..append(getLogo())
