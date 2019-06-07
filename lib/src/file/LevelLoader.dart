@@ -62,7 +62,6 @@ class LevelLoader {
 
   void _createLevelStump() {
     this.level = new Level(
-        this.levelController,
         this.params.putIfAbsent("timelimit", () => 100) as int,// Time limit
         this.params.putIfAbsent("initialscore", () => 100) as int, // Initial score
         this.params.putIfAbsent("targetscore", () => 100) as int, // target Score
@@ -71,10 +70,6 @@ class LevelLoader {
         window.innerHeight.floor(),
         window.innerWidth.floor()
     );
-
-    if (this.params.containsKey("instructions")) {
-      this.level.instructions = this.params.putIfAbsent("instructions", () => "");
-    }
   }
 
   Dot _getDot(int eId, Map e) {

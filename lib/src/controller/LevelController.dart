@@ -1,13 +1,22 @@
 part of dozergame;
 
+/// The [LevelController] can be instantiated to control a specific level
+/// It automatically calls methods of the [LevelLoader] and the [Level] to load
+/// and start a level.
 class LevelController {
 
+  /// Reference of the [AppController]
   AppController _appController;
+  /// Reference to the model implementation of the level
   Level level;
+  /// Reference to the view implementation of the level
   LevelView _levelView;
+  /// The reference of the local storage
   final Storage _localStorage = window.localStorage;
+  /// A timer used for counting down the level duration
   Timer timer;
 
+  /// Loads a new [LevelController] and starts the specific [level]
   static void loadAndStart(AppController ac, int level) async {
     Future<LevelController> dlc = LevelController.load(ac, level);
     LevelController lc = await dlc;
@@ -15,21 +24,24 @@ class LevelController {
     lc._increaseNrOfTries();
   }
 
+  /// Factory method of the [LevelController]
   static Future<LevelController> load(AppController ac, int level) async {
 
     LevelController lc = new LevelController();
 
     lc._appController = ac;
-
     lc._levelView = new LevelView(lc, lc.level);
 
+    // get level from [LevelLoader] and initialise [lc]
     Level lvl = await LevelLoader().getLevel(lc, level);
     lc.level = lvl;
     lc._levelView.level = lvl;
     lc._levelView.createVisualBar();
+
     return lc;
   }
 
+  /// Starts the loaded level
   void start() {
     // Enable the appropriate control
     if (this._appController.gyroAvailable) {
@@ -38,15 +50,17 @@ class LevelController {
       this._enableKeyboardControl();
     }
 
+    // start listener for the abort/back button
     this._listenBackButton();
 
-    // Start the periodic update of the game elements with 50hz
+    // Start the periodic update of the game elements with the [AppController.framerate]
     this.timer = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
       this.level.changeTimeLimit(-1000 / AppController.framerate);
 
       if (this.level.gameLost()) {
-        timer.cancel();
+        this.timer.cancel();
 
+        // TODO will be deleted later
         // send score stats
         this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false, false);
 
@@ -55,13 +69,14 @@ class LevelController {
         return;
       }
 
+      // TODO warum ist das rendern vor der abfrage if(win) ?
       this._levelView.render();
 
       // TODO smart?
       this.level.update();
 
       if (this.level.gameWon()) {
-        timer.cancel();
+        this.timer.cancel();
 
 
         // check highscore from local storage
@@ -76,6 +91,7 @@ class LevelController {
           this._localStorage[key] = this.level.getScore().toString();
         }
 
+        // TODO will be deleted later
         // send score stats
         this._appController.sendScoreStats(this.level._level, this.level.getScore(), this.level.tries, true, false);
 
@@ -88,10 +104,7 @@ class LevelController {
     });
   }
 
-  /**
-   * Enables control of the dozer by keyboard
-   * namely the left and right arrow button
-   */
+  /// Enables control of the dozer by keyboard namely the left, right and upper arrow keys
   void _enableKeyboardControl(){
     window.onKeyDown.listen((KeyboardEvent e) {
       //Left pressed
@@ -109,16 +122,14 @@ class LevelController {
     });
   }
 
-  /**
-   * Enables control of the dozer by tilting the phone
-   */
+  /// Enables control of the dozer by tilting the phone
   void _enableOrientationControl() {
-    // Handle the device orientation to move the Dozer
     window.onDeviceOrientation.listen((ev) {
       this.level.getDozer().move(ev.gamma / 4, 0);
     });
   }
 
+  /// Increases the number of tries for the current level in the local storage
   Future _increaseNrOfTries() async {
     int tries = 0;
     String key = AppController.triesLevelKey + this.level._level.toString();
@@ -131,11 +142,13 @@ class LevelController {
     return;
   }
 
+  /// Listens to the back (or abort) button to get back to the menu
   void _listenBackButton() {
     querySelector("#button_back_in_level").onClick.listen((MouseEvent e) {
       this.timer.cancel();
       this._appController.showLevelOverview();
 
+      // TODO will be deleted later
       // send score stats
       this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false, true);
     });

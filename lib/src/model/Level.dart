@@ -2,7 +2,6 @@ part of dozergame;
 
 class Level {
 
-  LevelController _levelController;
   Dozer _dozer;
 
   /** Time limit in ms */
@@ -19,7 +18,6 @@ class Level {
   List<Entity> remainingEntities;
 
   int initialTime;
-  String instructions = "Catch The Dots To Grow The Dozer"; // provisional
 
   // TODO probably provisional
   int viewWidth;
@@ -32,8 +30,7 @@ class Level {
   /**
    * Creates a new level
    */
-  Level(LevelController lc, int timeLimit, int initialScore, int targetScore, double laneSpeed, int level, int height, int width) {
-    this._levelController = lc;
+  Level(int timeLimit, int initialScore, int targetScore, double laneSpeed, int level, int height, int width) {
     this._level = level;
     this.timeLimit = timeLimit.toDouble();
     this.initialTime = timeLimit;

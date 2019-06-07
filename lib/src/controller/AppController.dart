@@ -20,7 +20,7 @@ class AppController {
   /// You have to append a String with the level number.
   static const String triesLevelKey = "tries_level_";
 
-  /// The reference to the local storage
+  /// The reference of the local storage
   final Storage _localStorage = window.localStorage;
 
   /// This is the level the user would start on the main page 'levelOverview'.
