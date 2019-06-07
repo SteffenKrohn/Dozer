@@ -1,18 +1,14 @@
 part of dozergame;
 
-/**
- * Representation of a Brick
- * This is used to build obstacles for the player
- * Upon hitting the Brick, the score will be decreased
- */
+/// Model Representation of a [Brick].
+/// This is used to build obstacles for the player.
+/// Upon hitting the Brick, the score will be decreased.
 class Brick extends Entity {
 
-  /** The value is displayed and used to decrease the score */
+  /// The value is displayed and used to decrease the score
   int value;
 
-  /**
-   * Constructs a new Brick with all necessary information
-   */
+  /// Constructs a new Brick with all necessary information
   Brick(int id, double x, double y, int value, int width, int height, Level level) {
     this.id = id;
     this.x = x;
@@ -23,9 +19,7 @@ class Brick extends Entity {
     this.level = level;
   }
 
-  /**
-   * Returns a string representing of this Brick
-   */
+  /// Returns a string representing of this Brick
   String toString() {
     return "brick";
   }
@@ -37,10 +31,11 @@ class Brick extends Entity {
     }
   }
 
+  /// Returns the percent of the view width which one brick will take up
   static double getStandardWidth() {
     return 0.25;
   }
-
+  /// Returns the percent of the view height which one brick will take up
   static double getStandardHeight() {
     return 0.07;
   }

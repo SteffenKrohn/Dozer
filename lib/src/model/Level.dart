@@ -102,6 +102,7 @@ class Level {
   }
 
   /// Checks collision of all visible [Entity]'s with the [Dozer].
+  /// TODO make more performant by just checking the entities on the same height as the dozer
   void checkCollisions() async {
     this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {

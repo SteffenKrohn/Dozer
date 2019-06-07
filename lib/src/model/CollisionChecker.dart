@@ -1,11 +1,10 @@
 part of dozergame;
 
+/// This class is used to check collisions between [Entity]'s and the [Dozer]
 class CollisionChecker {
 
-  /**
-   * Checks if two entities with rectangle shape overlap or touch
-   * by checking the boundaries of both entities
-   */
+  /// Checks if two entities with rectangle shape overlap or touch
+  /// by checking the boundaries of both entities
   static bool rectangles(Entity a, Entity b) {
 
     // Upper left of a and not lower left of a
@@ -19,10 +18,8 @@ class CollisionChecker {
     return false;
   }
 
-  /**
-   * Checks if two entities with circle shape overlap or touch
-   * by checking the boundaries of both entities
-   */
+  /// Checks if two entities with circle shape overlap or touch
+  /// by checking the boundaries of both entities
   static bool circles(Entity a, Entity b) {
 
     double ra = (a.width / 2);
@@ -40,10 +37,8 @@ class CollisionChecker {
     return false;
   }
 
-  /**
-   * Checks if two entities with circle and rectangle shape overlap or touch
-   * by checking the boundaries of both entities
-   */
+  /// Checks if two entities with circle and rectangle shape overlap or touch
+  /// by checking the boundaries of both entities
   static bool recCir(Entity rectangle, Entity circle) {
 
     if (!CollisionChecker.rectangles(rectangle, circle)) {
