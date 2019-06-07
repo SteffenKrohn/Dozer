@@ -31,11 +31,12 @@ class Brick extends Entity {
     }
   }
 
-  /// Returns the percent of the view width which one brick will take up
+  /// Returns the percent of the view width which one [Brick] will take up
   static double getStandardWidth() {
     return 0.25;
   }
-  /// Returns the percent of the view height which one brick will take up
+
+  /// Returns the percent of the view height which one [Brick] will take up
   static double getStandardHeight() {
     return 0.07;
   }

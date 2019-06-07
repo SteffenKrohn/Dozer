@@ -1,7 +1,8 @@
 part of dozergame;
 
 /// The model representation of the Double Up's used to give the player the
-/// ability to increase his score by double the amount of the dot's values
+/// ability to increase his score by double the amount of the dot's values.
+/// It extends of the [PowerUp] class.
 class DoubleUp extends PowerUp {
 
   /// The constructor to create a [DoubleUp]

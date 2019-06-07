@@ -22,7 +22,8 @@ class Dozer extends Entity {
   bool drillActive = false;
   bool doubleUpActive = false;
 
-  /// Creates a [Dozer] object with the id dozer and the given score
+  /// Creates a [Dozer] object with the zero id, the given score and other member variables.
+  /// The zero id is used to recognize the dozer entity.
   Dozer(Level level) {
     this.id = 0;
     this.dy = 0;
