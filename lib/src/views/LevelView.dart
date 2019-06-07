@@ -2,7 +2,6 @@ part of dozergame;
 
 class LevelView {
 
-  LevelController _levelController;
   Level level;
   List<int> dozerTailIds;
 
@@ -14,10 +13,8 @@ class LevelView {
   /// Values that store the status of power up´s
   bool _drillActive = false;
   bool _doubleUpActive = false;
-  bool _slowDownActive = false;
 
-  LevelView(LevelController lc, Level level) {
-    this._levelController = lc;
+  LevelView(Level level) {
     this.level = level;
     
     this.lane = DivElement()

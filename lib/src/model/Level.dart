@@ -1,5 +1,6 @@
 part of dozergame;
 
+/// The model representation of a [Level]
 class Level {
 
   /// The always available entity reference of the [Dozer]
@@ -123,7 +124,6 @@ class Level {
 
   /// Adds all [Entity]'s that became visible since the last update.
   void addNewlyVisibleEntities() async {
-    Entity next;
     double scrolled = this.viewHeight * this.laneSpeed * (this.initialTimeLimit - this.timeLimit) / 1000;
 
     List<Entity> remEnt = List.from(remainingEntities);
@@ -132,7 +132,6 @@ class Level {
     int lastH;
 
     remEnt.forEach((e) {
-
       if (lastY != null && e.y < lastY && e.y + e.height < lastY + lastH) {
         return;
       }
@@ -145,7 +144,6 @@ class Level {
         visibleEntities.putIfAbsent(e.id, () => e);
         remainingEntities.remove(e);
       }
-
     });
   }
 
