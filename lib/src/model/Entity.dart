@@ -2,15 +2,18 @@ part of dozergame;
 
 abstract class Entity {
 
+  /// Reference of the [Level] the entity is used in
   Level level;
-
+  /// The distinct id of an entity
   int id;
 
-  /** The current movement of the entity for the next view update */
+  /// The horizontal movement the [Entity] wants to make in the next update.
   double dx = 0;
-  double dy = 5;
-
+  /// The vertical movement the [Entity] wants to make in the next update.
+  double dy = 0;
+  /// The horizontal coordinate of the [Entity]
   double x;
+  /// The vertical coordinate of the [Entity]
   double y = 0;
 
   int width;
