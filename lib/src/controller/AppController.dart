@@ -21,7 +21,7 @@ class AppController {
   /// The reference to the local storage
   final Storage _localStorage = window.localStorage;
 
-  /// The level the user would start on the main page 'levelOverview'.
+  /// This is the level the user would start on the main page 'levelOverview'.
   /// After the app startup it's set to the reached Level and after the click
   /// on one specific level in the 'chooseLevelView' it's set to the specific one.
   int _activeLevel = 1;
@@ -62,20 +62,26 @@ class AppController {
     });
   }
 
+  /// Starts the [_activeLevel]
   void startNextLevel() {
     LevelController.loadAndStart(this, this.getActiveLevel());
   }
 
-  void startLevel(int level) {
+  /// TODO die kann doch weg?
+  /*void startLevel(int level) {
     LevelController.loadAndStart(this, level);
-  }
+  }*/
 
+  /// Listens to the 'Go To Menu Button' which directs the user to the main page
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLevelOverview();
     });
   }
 
+  /// Listens to the 'Go To Menu Button' which directs the user to the main page
+  /// and requests the fullscreen on the mobile device.
+  /// Will be called only if the 'messageWelcomeScreenOnMobile' was called before.
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLevelOverview();
@@ -83,6 +89,7 @@ class AppController {
         document.body.requestFullscreen();
         window.screen.orientation.lock("portrait-primary");
 
+        // TODO will be deleted later
         // delayed call of sendStats because fullscreen request is async
         Future delay = Future.delayed(Duration(milliseconds: 1000), () => true);
         delay.then((d) {
@@ -94,12 +101,15 @@ class AppController {
     });
   }
 
+  /// Listens to the 'start level button' click events and starts the next level according to [_activeLevel]
   void listenStartLevelButton() {
     querySelector("#button_start_level").onClick.listen((MouseEvent e) {
       this.startNextLevel();
     });
   }
 
+  /// Listens to the 'next level button' click events, increases the [_activeLevel]
+  /// and redirects the user to the 'levelOverview' if the new level is available.
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
       this.setActiveLevel(this.getActiveLevel() + 1);
@@ -111,6 +121,8 @@ class AppController {
     });
   }
 
+  /// Listens to the 'go to previous level button' click events and decreases the [_activeLevel].
+  /// This method will only be called when the 'messageNoSuchLevel' was shown.
   void listenPreviousLevelButton() {
     querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
       this.setActiveLevel(this.getActiveLevel() - 1);
@@ -118,12 +130,15 @@ class AppController {
     });
   }
 
+  /// Listens to the 'choose level button' click events and shows the 'chooseLevelsView'
   void listenChooseLevelButton() {
     querySelector("#button_choose_levels").onClick.listen((MouseEvent e) {
       this.showChooseLevelsView(this._nrAvailableLevels, this.getReachedLevel());
     });
   }
 
+  /// Listens for all the 'level buttons' click events,
+  /// sets the new [_activeLevel] accordingly and shows the 'levelOverview'.
   void listenAllLevelButtons(int reachedLevel) {
     for (int i = 0; i < this.getReachedLevel(); i++) {
       querySelector("#level-${i + 1}").onClick.listen((Event e) {
@@ -134,68 +149,95 @@ class AppController {
     }
   }
 
+  /// Listens for the 'credits button' click events and shows the credits view
   void listenCreditsButton() {
     querySelector("#button_credits").onClick.listen((MouseEvent e) {
       this.showCreditsView();
     });
   }
 
-
+  /// Listens to the 'donate button' click events and opens a new window directing to paypal
   void listenDonateButton() {
     querySelector("#donate-button").onClick.listen((MouseEvent e) {
-      window.open("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EW22STTHR8DK2&source=url", "Donate on PayPal");
+      window.open("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EW22STTHR8DK2&source=url",
+          "Donate on PayPal");
     });
   }
 
+  /// Shows the 'levelOverview' and activates the button click listener for
+  /// [listenStartLevelButton]
+  /// [listenChooseLevelButton]
+  /// [listenCreditsButton]
   void showLevelOverview() {
-    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelInstruction(this.getActiveLevel())).render(); // this._levelController.level.instructions TODO waiting for dependency
+    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelInstruction(this.getActiveLevel())).render();
     this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
   }
 
+  /// Shows the 'MessageWin' and activates the button click listener for
+  /// [listenNextLevelButton]
   void showMessageWin(int score, bool newHighscore, int tries) {
     MenuView.show().messageWin(score, newHighscore, tries).render();
     this.listenNextLevelButton();
   }
 
+  /// Shows the 'MessageLoose' and activates the button click listener for
+  /// [listenGoToMenuButton]
   void showMessageLoose(bool timeout) {
     MenuView.show().messageLose(timeout).render();
     this.listenGoToMenuButton();
   }
 
+  /// Shows the 'MessageNoSupportForGyro' on desktop devices and activates the button click listener for
+  /// [listenGoToMenuButton]
   void showMessageNoSupportForGyro() {
     MenuView.show().messageNoSupportForGyro().render();
     this.listenGoToMenuButton();
+
+    // TODO will be deleted later
     this._sendVisitStats();
   }
 
+  /// Shows the 'WelcomeScreenOnMobileDevices' and activates the button click listener for
+  /// [listenGoToMenuButtonAndRequestFullscreen]
   void showWelcomeScreenOnMobileDevices() {
     MenuView.show().messageWelcomeScreenOnMobile().render();
     this.listenGoToMenuButtonAndRequestFullscreen();
   }
 
+  /// Shows the 'ChooseLevelsView' and activates the button click listener for
+  /// [listenGoToMenuButton]
+  /// [listenAllLevelButtons]
   void showChooseLevelsView(int nrAvailableLevels, int reachedLevel) {
     MenuView.show().chooseLevelsView(nrAvailableLevels, reachedLevel).render();
     this.listenGoToMenuButton();
     this.listenAllLevelButtons(reachedLevel);
   }
 
+  /// Shows the 'CreditsView' and activates the button click listener for
+  /// [listenGoToMenuButton]
+  /// [listenDonateButton]
   void showCreditsView() {
     MenuView.show().creditsView().render();
     this.listenGoToMenuButton();
     this.listenDonateButton();
   }
 
+  /// Shows the 'NoSuchLevelView' and activates the button click listener for
+  /// [listenPreviousLevelButton]
   void showNoSuchLevel(int level) {
     MenuView.show().messageNoSuchLevel(level).render();
     this.listenPreviousLevelButton();
   }
 
+  /// Returns the [_activeLevel]
   int getActiveLevel() {
     return this._activeLevel;
   }
 
+  /// Sets the [_activeLevel] to the passed integer value. If this value is bigger
+  /// than the [_reachedLevel] then the reached level will be increased accordingly.
   void setActiveLevel(int activeLevel) {
     this._activeLevel = activeLevel;
     if (activeLevel > this.getReachedLevel()) {
@@ -203,13 +245,12 @@ class AppController {
     }
   }
 
+  /// Returns the [_reachedLevel]
   int getReachedLevel() {
-    if(this._localStorage.containsKey(_reachedLevelKey)) {
-      return int.parse(this._localStorage[_reachedLevelKey]);
-    }
     return this._reachedLevel;
   }
 
+  /// Returns the level specific highscore.
   int getHighscore(int level) {
     int hs = 0;
     String key = highscoreLevelKey + level.toString();
@@ -219,11 +260,13 @@ class AppController {
     return hs;
   }
 
+  /// Sets the [_reachedLevel] member variable and the according value in the local storage.
   void setReachedLevel(int reachedLevel) {
     this._localStorage[_reachedLevelKey] = reachedLevel.toString();
     this._reachedLevel = reachedLevel;
   }
 
+  /// Returns the level instructions for the first 4 levels and displays the score for greater levels.
   String _getLevelInstruction(int level) {
     switch (level) {
       case 1:
@@ -240,6 +283,7 @@ class AppController {
     }
   }
 
+  /// TODO will be deleted later
   void _sendVisitStats({bool isFullscreen = false}) {
     // in the very first start the used ID will be assigned and stored
     if(this._userId == null) {
@@ -272,6 +316,7 @@ class AppController {
     }).catchError((e) => print(e));
   }
 
+  /// TODO will be deleted later
   void sendScoreStats(int level, int score, int tries, bool won, bool abort) {
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
