@@ -1,5 +1,7 @@
 part of dozergame;
 
+/// The [AppController] is the main controller of the app. It contains all the listeners
+/// for the buttons, can make the views switch and can start levels.
 class AppController {
 
   /// The Target Framerate of the application in hz
@@ -293,7 +295,7 @@ class AppController {
 
     int width = document.body.getBoundingClientRect().width;
     int height = document.body.getBoundingClientRect().height;
-    
+
     String body = "{'fields':{"
         "'userId':{'integerValue': '${this._userId}'},"
         "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
