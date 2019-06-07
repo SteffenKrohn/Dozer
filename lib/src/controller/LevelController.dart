@@ -57,6 +57,10 @@ class LevelController {
     this.timer = new Timer.periodic(new Duration(milliseconds: 1000 ~/ AppController.framerate), (update) {
       this.level.changeTimeLimit(-1000 / AppController.framerate);
 
+      // update all entities on screen
+      this._levelView.render();
+      this.level.update();
+
       if (this.level.gameLost()) {
         this.timer.cancel();
 
@@ -69,15 +73,8 @@ class LevelController {
         return;
       }
 
-      // TODO warum ist das rendern vor der abfrage if(win) ?
-      this._levelView.render();
-
-      // TODO smart?
-      this.level.update();
-
       if (this.level.gameWon()) {
         this.timer.cancel();
-
 
         // check highscore from local storage
         int oldHighscore = 0;
@@ -99,8 +96,6 @@ class LevelController {
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
         return;
       }
-
-      this.level.getDozer().update();
     });
   }
 

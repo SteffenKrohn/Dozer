@@ -2,22 +2,28 @@ part of dozergame;
 
 class Level {
 
+  /// The always available entity reference of the [Dozer]
   Dozer _dozer;
 
-  /** Time limit in ms */
-  double timeLimit;
-  int initialScore;
-  int targetScore;
-  int tries;
-
-  /** Equals the percentage which certain entities (such as Brick, Dot) move per second */
-  double laneSpeed;
+  /// The number of this level
   int _level;
+  /// The remaining time to accomplish this level in ms
+  double timeLimit;
+  /// The initial time limit of this level
+  int initialTimeLimit;
+  /// The initial score of this level
+  int initialScore;
+  /// The target score a user has to reach to win this level
+  int targetScore;
+  /// The number of tries a user already tried this level
+  int tries;
+  /// The lanespeed equals the percentage which [Entity]'s (such as [Brick], [Dot]) move per second
+  double laneSpeed;
 
+  /// The map which contains all the [Entity]'s which are visible within the screen
   Map<int, Entity> visibleEntities = new Map<int, Entity>();
+  /// The List which contains all remaining [Entity]'s ordered ascending to the displayed time
   List<Entity> remainingEntities;
-
-  int initialTime;
 
   // TODO probably provisional
   int viewWidth;
@@ -27,13 +33,11 @@ class Level {
   List<Future> slowDownFutures = List();
   bool slowDownActive = false;
 
-  /**
-   * Creates a new level
-   */
+  /// Creates a new [Level]
   Level(int timeLimit, int initialScore, int targetScore, double laneSpeed, int level, int height, int width) {
     this._level = level;
     this.timeLimit = timeLimit.toDouble();
-    this.initialTime = timeLimit;
+    this.initialTimeLimit = timeLimit;
     this.initialScore = initialScore;
     this.targetScore = targetScore;
     this.laneSpeed = laneSpeed;
@@ -44,12 +48,10 @@ class Level {
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
   }
 
-  /**
-   * Changes the time limit of the level.
-   * The provided change is in seconds.
-   * Provide a positive change to increase the time limit,
-   * a negative change to decrease the time limit.
-   */
+  /// Changes the time limit of the level.
+  /// The provided change is in seconds.
+  /// Provide a positive change to increase the time limit,
+  /// a negative change to decrease the time limit.
   void changeTimeLimit(double change) {
     // If the game is slowed the time is also slowed
     if (this.slowDownActive) {
@@ -58,61 +60,47 @@ class Level {
     this.timeLimit += change;
   }
 
-  /**
-   * Changes the lane speed of the level.
-   * Provide a positive change to increase the lane speed,
-   * a negative change to decrease the lane speed.
-   */
+  /// Changes the lane speed of the level.
+  /// Provide a positive change to increase the lane speed,
+  /// a negative change to decrease the lane speed.
   void changeLaneSpeed(int change) {
     this.laneSpeed += change;
   }
 
-  /**
-   * Returns the current score
-   */
+  /// Returns the current score, which is ofc scientifically proved ;)
   int getScore() {
     return (this.timeLimit * 1.357).floor() + this._dozer.score * 537;
   }
 
-  /**
-   * Return the current level
-   */
+  /// Return the current level
   int getLevel() {
     return this._level;
   }
 
-  /**
-   * Returns the Dozer object
-   */
+  /// Returns the [Dozer] object reference
   Dozer getDozer() {
     return this._dozer;
   }
 
-  /**
-   * Returns an immutable map of all currently visible entities
-   * The key value pair of a map entry is:
-   * <ID of entity | entity>
-   */
+  /// Returns a new map of all currently visible [Entity]'s.
+  /// The key value pair of a map entry is:
+  /// <ID of entity | entity>
   Map<int, Entity> getVisibleEntities() {
     return Map<int, Entity>.from(this.visibleEntities);
   }
 
-  /**
-   * Updates all necessary entities
-   * This will probably be called every 50ms
-   */
+  /// Updates all visible, newly visible and not-visible-anymore [Entity]'s.
+  /// Also checks for collisions.
   void update() async {
     this.visibleEntities.forEach((id, e) => e.update());
     this.addNewlyVisibleEntities();
     this.removeInvisibleEntities();
     this.updateDozerTailInVisibleEntities();
     this.checkCollisions();
+    this._dozer.update();
   }
 
-  /**
-   * Checks collision of all visible entities with the dozer
-   * This will probably be called every 50ms
-   */
+  /// Checks collision of all visible [Entity]'s with the [Dozer].
   void checkCollisions() async {
     this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {
@@ -133,13 +121,10 @@ class Level {
     });
   }
 
-  /**
-   * Adds all entities that became visible since the last update
-   * This will probably be called every 50ms
-   */
+  /// Adds all [Entity]'s that became visible since the last update.
   void addNewlyVisibleEntities() async {
     Entity next;
-    double scrolled = this.viewHeight * this.laneSpeed * (this.initialTime - this.timeLimit) / 1000;
+    double scrolled = this.viewHeight * this.laneSpeed * (this.initialTimeLimit - this.timeLimit) / 1000;
 
     List<Entity> remEnt = List.from(remainingEntities);
 
@@ -164,10 +149,8 @@ class Level {
     });
   }
 
-  /**
-   * Removes invisible entities mainly entities that scrolled past the viewport
-   * from the visibileEntities Map
-   */
+  /// Removes invisible [Entity]'s mainly entities that scrolled past the viewport
+  /// from the [visibileEntities] Map.
   void removeInvisibleEntities() async {
     this.getVisibleEntities().forEach((id, e) {
       if (this.viewHeight < e.y) {
@@ -176,12 +159,12 @@ class Level {
     });
   }
 
-  /// Gets the distance in pixel depending on duration and lanespeed
+  /// Gets the distance in pixel depending on duration and [laneSpeed]
   double getRemainingYFromTime(int ms) {
     return this.viewHeight * laneSpeed * ms / -1000;
   }
 
-  /// Gets the distance a scrolling entity (like a Brick or Dot) moves per frame
+  /// Gets the distance a scrolling [Entity] (like a [Brick] or [Dot]) moves per frame
   double getVerticalMovementPerUpdate() {
     return this.viewHeight * this.laneSpeed / AppController.framerate;
   }
@@ -196,7 +179,7 @@ class Level {
     return this.timeLimit <= 0 || this.getDozer().score <= 0;
   }
 
-  /// Adds or removes dozer tail entities depending on the current score
+  /// Adds or removes [DozerTail] - [Entity]'s depending on the current score
   void updateDozerTailInVisibleEntities() async {
     // add tail entities to visible entities list
     this._dozer.tailEntities.forEach((e) {
