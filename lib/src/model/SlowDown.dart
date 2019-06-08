@@ -21,9 +21,7 @@ class SlowDown extends PowerUp {
   }
 
   @override
-  void hitBy(Entity e) {
-    // TODO: implement hitBy
-  }
+  void hitBy(Entity e) {}
 
   @override
   String toString() {
