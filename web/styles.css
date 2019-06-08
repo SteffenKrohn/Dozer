@@ -248,6 +248,7 @@ h1 {
     background-color: aquamarine;
     border: 0px solid black;
     font-size: 5vh;
+    border-radius: 3pt;
 }
 
 .dot {

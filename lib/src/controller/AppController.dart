@@ -64,13 +64,14 @@ class AppController {
         this.showMessageNoSupportForGyro();
       } else if((window.innerHeight / window.screen.height) < 0.92) {
         // shown if not started in fullscreen (0.92 because on iphone fs is not
-        // possible and with the notch it's even smaller
+        // possible and with the notch it's even smaller)
         this.showWelcomeScreenOnMobileDevices();
       } else {
         // shown if already in fullscreen, e.g. web app
         this.showLevelOverview();
       }
     });*/
+    this.showWelcomeScreenOnMobileDevices();
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
@@ -86,7 +87,8 @@ class AppController {
     LevelController.loadAndStart(this, this.getActiveLevel());
   }
 
-  /// Listens to the 'Go To Menu Button' which directs the user to the main page
+  /// Listens to the 'Go To Menu Button' which directs the user to the main
+  /// menu page 'Level Overview'
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLevelOverview();
