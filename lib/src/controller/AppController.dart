@@ -29,13 +29,14 @@ class AppController {
   int _activeLevel = 1;
   /// The reached Level of the user
   int _reachedLevel = 1;
-  /// TODO will be deleted later
-  int _userId;
-  String _nick;
   /// This is the number of all available level
   int _nrAvailableLevels = 500;
   /// Is the gyro sensor retrieval available
   bool gyroAvailable = false;
+
+  /// TODO will be deleted later
+  int _userId;
+  String _nick;
 
   /// This method initialises the app at startup
   void startup() {
@@ -314,6 +315,7 @@ class AppController {
             'Content-Type': 'application/json; charset=UTF-8'
           }).then((HttpRequest resp) {
         // print(resp.responseText);
+        print("sent competition stats");
       }).catchError((e) => print(e));
     }
   }
