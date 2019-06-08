@@ -23,13 +23,7 @@ class Dot extends Entity {
   }
 
   @override
-  void hitBy(Entity e) {
-    // TODO das ist doch unnötig, den auf 0 zu setzen oder? würde ich dann löschen
-    // die Power Ups haben auch alle keine hitby methode implementiert
-    if (e is Dozer) {
-      this.value = 0;
-    }
-  }
+  void hitBy(Entity e) {}
 
   /// Returns the percent of the view width which one dot will take up
   static double getStandardRadius() {
