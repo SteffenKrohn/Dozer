@@ -71,7 +71,6 @@ class AppController {
         this.showLevelOverview();
       }
     });*/
-    this.showWelcomeScreenOnMobileDevices();
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {

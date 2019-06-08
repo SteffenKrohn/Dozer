@@ -458,3 +458,20 @@ h1 {
         box-shadow: 0 0 0 0 rgba(204,169,44, 0);
     }
 }
+
+/* TODO delete after final presentation*/
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
