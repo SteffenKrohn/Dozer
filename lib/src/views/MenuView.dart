@@ -313,6 +313,7 @@ class MenuView {
       ..style.marginTop = "4vh"
       ..style.height = "20pt"
       ..style.width = "120pt"
+      ..maxLength = 10
       ..style.fontSize = "14pt";
     div.append(textbox);
 
