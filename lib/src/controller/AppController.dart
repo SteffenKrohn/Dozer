@@ -298,7 +298,7 @@ class AppController {
   }
 
   /// TODO will be deleted later
-  void sendScoreStats(int level, int score, int tries) {
+  void sendCompetitionStats(int level, int score, int tries) {
     if(this._nick != "") {
       String body = "{'fields':{"
           "'userId':{'integerValue': '${this._userId}'},"

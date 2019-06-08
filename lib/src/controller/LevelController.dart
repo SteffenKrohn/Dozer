@@ -86,7 +86,7 @@ class LevelController {
 
         // TODO will be deleted later
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.getScore(), this.level.tries);
+        this._appController.sendCompetitionStats(this.level._level, this.level.getScore(), this.level.tries);
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
