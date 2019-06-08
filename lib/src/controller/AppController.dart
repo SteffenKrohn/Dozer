@@ -102,7 +102,7 @@ class AppController {
 
       // TODO delete after final presentation
       InputElement nickInput = querySelector("#nickInput");
-      this._nick = nickInput.value;
+      this._nick = nickInput.value.substring(0, 12); // cut nickname to max. 12 letters
       print(this._nick);
 
       this.showLevelOverview();
