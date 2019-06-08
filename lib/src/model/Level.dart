@@ -158,12 +158,14 @@ class Level {
     });
   }
 
-  /// Gets the distance in pixel depending on duration and [laneSpeed]
+  /// Returns the vertical y value according to the time when the [Entity]
+  /// would appear on the view
   double getRemainingYFromTime(int ms) {
     return this.viewHeight * laneSpeed * ms / -1000;
   }
 
-  /// Gets the distance a scrolling [Entity] (like a [Brick] or [Dot]) moves per frame
+  /// Returns the vertical distance a scrolling [Entity] (like a [Brick] or [Dot])
+  /// moves per frame update
   double getVerticalMovementPerUpdate() {
     return this.viewHeight * this.laneSpeed / AppController.framerate;
   }

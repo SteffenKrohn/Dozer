@@ -103,7 +103,8 @@ class AppController {
     });
   }
 
-  /// Listens to the 'start level button' click events and starts the next level according to [_activeLevel]
+  /// Listens to the 'start level button' click events and starts the next level
+  /// according to [_activeLevel]
   void listenStartLevelButton() {
     querySelector("#button_start_level").onClick.listen((MouseEvent e) {
       this.startNextLevel();
@@ -158,7 +159,8 @@ class AppController {
     });
   }
 
-  /// Listens to the 'donate button' click events and opens a new window directing to paypal
+  /// Listens to the 'donate button' click events and opens a new window
+  /// directing to paypal
   void listenDonateButton() {
     querySelector("#donate-button").onClick.listen((MouseEvent e) {
       window.open("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EW22STTHR8DK2&source=url",
@@ -191,8 +193,8 @@ class AppController {
     this.listenGoToMenuButton();
   }
 
-  /// Shows the 'MessageNoSupportForGyro' on desktop devices and activates the button click listener for
-  /// [listenGoToMenuButton]
+  /// Shows the 'MessageNoSupportForGyro' on desktop devices and activates the
+  /// button click listener for [listenGoToMenuButton]
   void showMessageNoSupportForGyro() {
     MenuView.show().messageNoSupportForGyro().render();
     this.listenGoToMenuButton();
@@ -201,8 +203,8 @@ class AppController {
     this._sendVisitStats();
   }
 
-  /// Shows the 'WelcomeScreenOnMobileDevices' and activates the button click listener for
-  /// [listenGoToMenuButtonAndRequestFullscreen]
+  /// Shows the 'WelcomeScreenOnMobileDevices' and activates the button click
+  /// listener for [listenGoToMenuButtonAndRequestFullscreen]
   void showWelcomeScreenOnMobileDevices() {
     MenuView.show().messageWelcomeScreenOnMobile().render();
     this.listenGoToMenuButtonAndRequestFullscreen();
@@ -262,13 +264,15 @@ class AppController {
     return hs;
   }
 
-  /// Sets the [_reachedLevel] member variable and the according value in the local storage.
+  /// Sets the [_reachedLevel] member variable and the according value in the
+  /// local storage.
   void setReachedLevel(int reachedLevel) {
     this._localStorage[_reachedLevelKey] = reachedLevel.toString();
     this._reachedLevel = reachedLevel;
   }
 
-  /// Returns the level instructions for the first 4 levels and displays the score for greater levels.
+  /// Returns the level instructions for the first 4 levels and displays the
+  /// score for greater levels.
   String _getLevelInstruction(int level) {
     switch (level) {
       case 1:
