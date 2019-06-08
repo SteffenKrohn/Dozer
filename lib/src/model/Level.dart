@@ -70,7 +70,7 @@ class Level {
 
   /// Returns the current score, which is ofc scientifically proved ;)
   int getScore() {
-    return (this.timeLimit * 1.357).floor() + this._dozer.score * 537;
+    return (100000 / this.initialTimeLimit * this.timeLimit).floor();
   }
 
   /// Return the current level

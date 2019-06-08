@@ -8,17 +8,15 @@ class AppController {
   static const int framerate = 40;
 
   /// The 'number of reached level' key for the local storage
-  static const String _reachedLevelKey = "reachedLevel";
-  /// The userId key for the local storage
-  static const String _userIdKey = "userId";
+  static const String _reachedLevelKey = "reachedLevel_v2";
   /// The 'highscore for level x' key for the local storage.
   /// Using this key alone is not sufficient.
   /// You have to append a String with the level number.
-  static const String highscoreLevelKey = "highscore_level_";
+  static const String highscoreLevelKey = "highscore_level_v2_";
   /// The 'number of tries for level x' key for the local storage.
   /// Using this key alone is not sufficient.
   /// You have to append a String with the level number.
-  static const String triesLevelKey = "tries_level_";
+  static const String triesLevelKey = "tries_level_v2_";
 
   /// The reference of the local storage
   final Storage _localStorage = window.localStorage;
@@ -35,6 +33,7 @@ class AppController {
   bool gyroAvailable = false;
 
   /// TODO will be deleted later
+  static const String _userIdKey = "userId";
   int _userId;
   String _nick = "";
 
