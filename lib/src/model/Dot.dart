@@ -25,7 +25,7 @@ class Dot extends Entity {
   @override
   void hitBy(Entity e) {}
 
-  /// Returns the percent of the view width which one dot will take up
+  /// Returns the percentage of the view width which one [Dot] will take up
   static double getStandardRadius() {
     return 0.05;
   }

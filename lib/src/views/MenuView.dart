@@ -1,13 +1,20 @@
 part of dozergame;
 
+/// This is the View representation of our app, but not the game itself.
+/// This class is used for the menu navigation.
+/// These [MenuView]'s are only rendered after click events or when a level is over.
+/// So they are static once they are called.
 class MenuView {
-  
+
+  /// This is the content what one [MenuView] will display when it's rendered
   HtmlElement content;
 
+  /// Factory method which returns a new [MenuView].
   static MenuView show() {
     return MenuView();
   }
-  
+
+  /// The method will change the DOM-Tree according to the [content]
   void render() {
     querySelector("body").setInnerHtml(
         "<div id='menu'></div>"
@@ -15,6 +22,8 @@ class MenuView {
     querySelector("#menu").insertAdjacentElement("afterbegin", this.content);
   }
 
+  /// Returns a new [HeadingElement] with the Dozer Title.
+  /// This method is used on every MenuView, with corporate identity in mind ;)
   HeadingElement getLogo() {
     HeadingElement logo = HeadingElement.h1();
     logo.setInnerHtml("Dozer");
@@ -22,12 +31,16 @@ class MenuView {
     return logo;
   }
 
+  /// Returns a Button Box for two Buttons on the bottom of the view
   DivElement getBottomButtonBox() {
     DivElement div = DivElement();
     div.setAttribute("class", "button-box");
     return div;
   }
 
+  /// The [levelOverview] is the main view of all the [MenuView]'s. On it the
+  /// active level can be started, the number of the active level is displayed,
+  /// it's highscore, and the buttons to get to the credits and choose level view.
   MenuView levelOverview(int level, String levelInstruction) {
 
     DivElement div = DivElement();
@@ -85,6 +98,10 @@ class MenuView {
     return this;
   }
 
+  /// This is the view, which gets displayed when the user wins a level.
+  /// If he reaches a new highscore, the highscore and the number of tries are
+  /// displayed. Else just the score is displayed. This can be changed easily
+  /// because the parameter 'tries' is mandatory.
   MenuView messageWin(int score, bool newHighscore, int tries) {
 
     String msgScore = newHighscore ? "New Highsore" : "Your Score";
@@ -131,6 +148,9 @@ class MenuView {
     return this;
   }
 
+  /// This is the view which gets displayed when the user looses a level. If he
+  /// didn't make it in time, then a different loose message gets displayed as
+  /// he would get if he looses because his dozer ran into a brick.
   MenuView messageLose(bool timeout) {
 
     String msg;
@@ -172,6 +192,10 @@ class MenuView {
     return this;
   }
 
+  /// This message view will be displayed mainly on desktop devices without
+  /// the gyro sensor support or on mobile devices where the device orientation
+  /// is disabled. It displays the QR-Code to give the user the chance to play
+  /// it on another device. Else he can also play it on the current device.
   MenuView messageNoSupportForGyro() {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
@@ -211,6 +235,9 @@ class MenuView {
     return this;
   }
 
+  /// This message will only be displayed if the user accomplishes the last
+  /// available level. Which at the moment, with [AppController._nrAvailableLevels]
+  /// levels, shouldn't happen.
   MenuView messageNoSuchLevel(int level) {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
@@ -242,7 +269,11 @@ class MenuView {
     return this;
   }
 
-
+  /// This welcome view will only be displayed on mobile devices where the
+  /// device orientation is available but the app was not started in fullscreen
+  /// mode. This view is only used for a user interaction (namely a click event)
+  /// to request the fullscreen mode. Since we give the opportunity to add the
+  /// Webapp to the homescreen, this view should not be displayed often.
   MenuView messageWelcomeScreenOnMobile() {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
@@ -269,6 +300,8 @@ class MenuView {
     return this;
   }
 
+  /// This is the credits view to display the creators of the game and to give a
+  /// donations opportunity.
   MenuView creditsView() {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
@@ -322,6 +355,9 @@ class MenuView {
     return this;
   }
 
+  /// This is the view where the user can choose between all the levels he
+  /// already unlocked by accomplishing the levels. All levels are displayed
+  /// as a button with the corresponding level number in it.
   MenuView chooseLevelsView(int nrAvailableLevels, int reachedLevel) {
     DivElement div = DivElement()
       ..setAttribute("class", "message")
@@ -360,5 +396,4 @@ class MenuView {
     this.content = outerDiv;
     return this;
   }
-
 }

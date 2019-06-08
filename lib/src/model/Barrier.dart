@@ -15,7 +15,7 @@ class Barrier extends Entity {
     this.level = level;
   }
 
-  /// Returns the percent of the view width which one [Barrier] will take up
+  /// Returns the percentage of the view width which one [Barrier] will take up
   static double getStandardWidth() {
     return 0.01;
   }
