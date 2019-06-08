@@ -36,7 +36,7 @@ class AppController {
 
   /// TODO will be deleted later
   int _userId;
-  String _nick;
+  String _nick = "";
 
   /// This method initialises the app at startup
   void startup() {
