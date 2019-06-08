@@ -31,6 +31,7 @@ class AppController {
   int _reachedLevel = 1;
   /// TODO will be deleted later
   int _userId;
+  String _nick;
   /// This is the number of all available level
   int _nrAvailableLevels = 500;
   /// Is the gyro sensor retrieval available
@@ -49,17 +50,33 @@ class AppController {
     if(this._localStorage.containsKey(_userIdKey)) {
       this._userId = int.parse(this._localStorage[_userIdKey]);
     }
+    // in the very first start the used ID will be assigned and stored
+    if(this._userId == null) {
+      this._userId = Random.secure().nextInt(pow(2, 32));
+      this._localStorage[_userIdKey] = this._userId.toString();
+    }
 
-    // Check gyro sensor support and show first screen
+    // TODO change after final presentation
+    /*// Check gyro sensor support and show first screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
         this.showMessageNoSupportForGyro();
       } else if((window.innerHeight / window.screen.height) < 0.92) {
+        // shown if not started in fullscreen (0.92 because on iphone fs is not
+        // possible and with the notch it's even smaller
         this.showWelcomeScreenOnMobileDevices();
       } else {
+        // shown if already in fullscreen, e.g. web app
         this.showLevelOverview();
-        this._sendVisitStats();
+      }
+    });*/
+    window.onDeviceOrientation.first.then((e) {
+      this.gyroAvailable = e.gamma != null ? true : false;
+      if(!this.gyroAvailable) {
+        this.showMessageNoSupportForGyro();
+      } else {
+        this.showWelcomeScreenOnMobileDevices();
       }
     });
   }
@@ -68,11 +85,6 @@ class AppController {
   void startNextLevel() {
     LevelController.loadAndStart(this, this.getActiveLevel());
   }
-
-  /// TODO die kann doch weg?
-  /*void startLevel(int level) {
-    LevelController.loadAndStart(this, level);
-  }*/
 
   /// Listens to the 'Go To Menu Button' which directs the user to the main page
   void listenGoToMenuButton() {
@@ -90,15 +102,8 @@ class AppController {
       try {
         document.body.requestFullscreen();
         window.screen.orientation.lock("portrait-primary");
-
-        // TODO will be deleted later
-        // delayed call of sendStats because fullscreen request is async
-        Future delay = Future.delayed(Duration(milliseconds: 1000), () => true);
-        delay.then((d) {
-          this._sendVisitStats(isFullscreen: true);
-        });
       } catch (e) {
-        this._sendVisitStats();
+        print("You better use Chrome ;)");
       }
     });
   }
@@ -198,9 +203,6 @@ class AppController {
   void showMessageNoSupportForGyro() {
     MenuView.show().messageNoSupportForGyro().render();
     this.listenGoToMenuButton();
-
-    // TODO will be deleted later
-    this._sendVisitStats();
   }
 
   /// Shows the 'WelcomeScreenOnMobileDevices' and activates the button click
@@ -290,62 +292,30 @@ class AppController {
   }
 
   /// TODO will be deleted later
-  void _sendVisitStats({bool isFullscreen = false}) {
-    // in the very first start the used ID will be assigned and stored
-    if(this._userId == null) {
-      this._userId = Random.secure().nextInt(pow(2, 32));
-      this._localStorage[_userIdKey] = this._userId.toString();
+  void sendScoreStats(int level, int score, int tries) {
+    if(this._nick != "") {
+      String body = "{'fields':{"
+          "'userId':{'integerValue': '${this._userId}'},"
+          "'nick':{'stringValue': '${this._nick}'},"
+          "'timestamp':{'timestampValue': '${DateTime.now()
+          .toUtc()
+          .toIso8601String()}'},"
+          "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
+          "'score': {'integerValue': '$score'},"
+          "'level': {'integerValue': '$level'},"
+          "'tries': {'integerValue': '$tries'}"
+          "}}";
+
+      HttpRequest.request(
+          "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/competition",
+          method: "POST",
+          sendData: body,
+          requestHeaders: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }).then((HttpRequest resp) {
+        // print(resp.responseText);
+      }).catchError((e) => print(e));
     }
-
-    int width = document.body.getBoundingClientRect().width;
-    int height = document.body.getBoundingClientRect().height;
-
-    String body = "{'fields':{"
-        "'userId':{'integerValue': '${this._userId}'},"
-        "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
-        "'viewWidth':{'integerValue': '${width}'},"
-        "'viewHeight': {'integerValue': '${height}'},"
-        "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
-        "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}},"
-        "'isFullscreen': {'booleanValue': $isFullscreen}"
-        "}}";
-
-    HttpRequest.request(
-        "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/visits",
-        method: "POST",
-        sendData: body,
-        requestHeaders: {
-          'Content-Type': 'application/json; charset=UTF-8'
-        }).then((HttpRequest resp) {
-      // print(resp.responseText);
-      print("sent visit");
-    }).catchError((e) => print(e));
-  }
-
-  /// TODO will be deleted later
-  void sendScoreStats(int level, int score, int tries, bool won, bool abort) {
-    String body = "{'fields':{"
-        "'userId':{'integerValue': '${this._userId}'},"
-        "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
-        "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
-        "'score': {'integerValue': '$score'},"
-        "'level': {'integerValue': '$level'},"
-        "'tries': {'integerValue': '$tries'},"
-        "'won': {'booleanValue': $won},"
-        "'abort': {'booleanValue': $abort},"
-        "'isGyroAvailable': {'booleanValue': ${this.gyroAvailable}}"
-        "}}";
-
-    HttpRequest.request(
-        "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/scores",
-        method: "POST",
-        sendData: body,
-        requestHeaders: {
-          'Content-Type': 'application/json; charset=UTF-8'
-        }).then((HttpRequest resp) {
-      // print(resp.responseText);
-      print("sent score $level $score $won $abort");
-    }).catchError((e) => print(e));
   }
 
 }
