@@ -307,6 +307,7 @@ class MenuView {
     div.append(HRElement());
 
     InputElement textbox = InputElement()
+      ..setAttribute("id", "nickInput")
       ..placeholder = "Your Nickname"
       ..style.margin = "auto"
       ..style.marginTop = "4vh"

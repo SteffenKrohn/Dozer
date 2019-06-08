@@ -99,6 +99,12 @@ class AppController {
   /// Will be called only if the 'messageWelcomeScreenOnMobile' was called before.
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
+
+      // TODO delete after final presentation
+      InputElement nickInput = querySelector("#nickInput");
+      this._nick = nickInput.value;
+      print(this._nick);
+
       this.showLevelOverview();
       try {
         document.body.requestFullscreen();
