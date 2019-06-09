@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dozer - Final Presentation</title>
+
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-firestore.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        const NR_LEVEL = 20;
+
+        // Initialise Cloud Firestore through Firebase
+        firebase.initializeApp({
+            apiKey: '',
+            authDomain: 'https://accounts.google.com/o/oauth2/auth',
+            projectId: 'dozer-tcb-jsk'
+        });
+        var db = firebase.firestore();
+
+        // create 2d arrays for highscores and min/max nr of tries, the index is the level nr
+        var highscores = [["Level", "Highscore", "Nickname"]];
+        var minTries = [["Level", "Min. Anzahl an Versuchen", "Nickname"]];
+        var maxTries = [["Level", "Max. Anzahl an Versuchen"]];
+
+        // and initialise these arrays for each level and start listeners for each level
+        var i;
+        var unsubscribe_highscores = new Map();
+        var unsubscribe_minTries = new Map();
+        var unsubscribe_maxTries = new Map();
+        for (i = 1; i <= NR_LEVEL; i++) {
+            highscores[i] = [i, 0, ""];
+            minTries[i] = [i, 0, ""];
+            maxTries[i] = [i, 0];
+            //unsubscribe_highscores.set(i, listenForNewHighscore(i, 0));
+            unsubscribe_minTries.set(i, listenForNewMinTries(i, 100));
+            unsubscribe_maxTries.set(i, listenForNewMaxTries(i, 0));
+        }
+
+        // start highscore query listener for specific level and return the unsubscribing function
+        function listenForNewHighscore(level, highscore) {
+            return db.collection("competition")
+                .where("level", "==", level)
+                .where("score", ">", highscore)
+                .onSnapshot(function (querySnapshot) {
+
+                    var hs = [level, highscore];
+                    var update = false;
+
+                    querySnapshot.forEach(function (doc) {
+                        console.log("Score for level " + doc.data().level + ": " + doc.data().score + " by: " + doc.data().nick);
+                        if (doc.data().score > hs[1]) {
+                            hs = [level, doc.data().score, doc.data().nick];
+                            update = true;
+                        }
+                    });
+
+                    if (update) updateHighscores(hs[0], hs[1], hs[2]);
+                });
+        }
+
+        // update the highscores array and chart.
+        // cancel old query listener and start a new query listener with updated highscore
+        function updateHighscores(level, score, nick) {
+            console.log("New Highscore for level " + level + ": " + score + " by: " + nick);
+            highscores[level] = [level, score, nick];
+
+            playSound();
+            drawChartHighscores();
+
+            unsubscribe_highscores.get(level)();
+            unsubscribe_highscores.set(level, listenForNewHighscore(level, score));
+        }
+
+        // start min. tries query listener for specific level and return the unsubscribing function
+        function listenForNewMinTries(level, minTries) {
+            return db.collection("competition")
+                .where("level", "==", level)
+                .where("tries", "<", minTries)
+                .onSnapshot(function (querySnapshot) {
+
+                    var mts = [level, minTries];
+                    var update = false;
+
+                    querySnapshot.forEach(function (doc) {
+                        console.log("Tries for level " + doc.data().level + ": " + doc.data().tries + " by: " + doc.data().nick);
+                        if (doc.data().tries < mts[1]) {
+                            mts = [level, doc.data().tries, doc.data().nick];
+                            update = true;
+                        }
+                    });
+
+                    if (update) updateMinTries(mts[0], mts[1], mts[2]);
+                });
+        }
+
+        function updateMinTries(level, tries, nick) {
+            console.log("New Min Tries for level " + level + ": " + tries + " by: " + nick);
+            minTries[level] = [level, tries, nick];
+
+            playSound();
+            drawChartTries();
+
+            unsubscribe_minTries.get(level)();
+            unsubscribe_minTries.set(level, listenForNewMinTries(level, tries));
+        }
+
+        // start max. tries query listener for specific level and return the unsubscribing function
+        function listenForNewMaxTries(level, maxTries) {
+            return db.collection("competition")
+                .where("level", "==", level)
+                .where("tries", ">", maxTries)
+                .onSnapshot(function (querySnapshot) {
+
+                    var mts = [level, maxTries];
+                    var update = false;
+
+                    querySnapshot.forEach(function (doc) {
+                        console.log("Tries for level " + doc.data().level + ": " + doc.data().tries + " by: " + doc.data().nick);
+                        if (doc.data().tries > mts[1]) {
+                            mts = [level, doc.data().tries];
+                            update = true;
+                        }
+                    });
+
+                    if (update) updateMaxTries(mts[0], mts[1]);
+                });
+        }
+
+        function updateMaxTries(level, tries) {
+            console.log("New Max Tries for level " + level + ": " + tries);
+            maxTries[level] = [level, tries];
+
+            playSound();
+            drawChartTries();
+
+            unsubscribe_maxTries.get(level)();
+            unsubscribe_maxTries.set(level, listenForNewMaxTries(level, tries));
+        }
+
+        function isString (value) {
+            return typeof value === 'string' || value instanceof String;
+        }
+        function isNumber (value) {
+            return typeof value === 'number' && isFinite(value);
+        }
+
+        function playSound() {
+            var audio = document.getElementById("audio");
+            audio.play();
+        }
+
+        // Visualisation
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChartHighscores);
+        google.charts.setOnLoadCallback(drawChartTries);
+
+        function drawChartHighscores() {
+            var data = google.visualization.arrayToDataTable(highscores.map((e) => [e[0].toString(), e[1]]));
+
+            var options = {
+                chart: {
+                    title: '',
+                },
+                legend: { position: "none" },
+                bar: { groupWidth: "95%" },
+                axes: {
+                    x: {
+                        0: {side: 'top', label: ''}
+                    },
+                },
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('highscores_chart'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+        function drawChartTries() {
+            var array = minTries.map((e) => {
+                if(e[0] === "Level") {
+                    return ["Level", "Min. Anzahl an Versuchen", "Max. Anzahl an Versuchen"];
+                } else {
+                    return [e[0].toString(), e[1], maxTries[e[0]][1] - e[1]];
+                }
+            });
+            var data = google.visualization.arrayToDataTable(array);
+
+            var options = {
+                chart: {
+                    title: '',
+                },
+                legend: { position: "none" },
+                isStacked: true,
+                bar: { groupWidth: "95%" },
+                axes: {
+                    x: {
+                        0: {side: 'top', label: ''}
+                    },
+                },
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('tries_chart'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+</head>
+<style>
+    #audio {display: none}
+</style>
+<body>
+    <div id="highscore_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 6vh;">
+        table here
+    </div>
+    <div id="highscores_chart" style="width: auto; height: 40vh;"></div>
+    <div id="tries_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 6vh;">
+        table here
+    </div>
+    <div id="tries_chart" style="width: auto; height: 40vh;"></div>
+    stream here
+    <audio id="audio" src="sound.mp3" preload="auto"></audio>
+</body>
+</html>

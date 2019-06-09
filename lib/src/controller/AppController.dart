@@ -304,10 +304,7 @@ class AppController {
       String body = "{'fields':{"
           "'userId':{'integerValue': '${this._userId}'},"
           "'nick':{'stringValue': '${this._nick}'},"
-          "'timestamp':{'timestampValue': '${DateTime.now()
-          .toUtc()
-          .toIso8601String()}'},"
-          "'reachedLevel': {'integerValue': '${this._reachedLevel}'},"
+          "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
           "'score': {'integerValue': '$score'},"
           "'level': {'integerValue': '$level'},"
           "'tries': {'integerValue': '$tries'}"
