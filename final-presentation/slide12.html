@@ -14,6 +14,9 @@
         const NR_LEVEL = 20;
         var nrEvents = 1;
         var lastThreeEvents = [];
+        const playlistQ = new Queue();
+        var playCounter = 0;
+        var isPlaying = false;
 
         // Initialise Cloud Firestore through Firebase
         firebase.initializeApp({
@@ -78,7 +81,9 @@
             unsubscribe_highscores.set(level, listenForNewHighscore(level, score));
 
             playSound();
-            printStream("► Neuer Highscore! 👑 " + nick + " hat den Highscore von Level " + level + " geknackt! 🏆 Wir spielen für dich Katy Perry - Hutablage 🎵");
+            // TODO look for right song name
+            let songname = "";
+            printStream("► Neuer Highscore! 👑 " + nick + " hat den Highscore von Level " + level + " geknackt! 🏆 ");
             drawChartHighscores();
         }
 
@@ -115,9 +120,8 @@
             unsubscribe_minTries.get(level)();
             unsubscribe_minTries.set(level, listenForNewMinTries(level, tries));
 
-            playSound();
             let out = tries > 1 ? tries + " Versuchen" : "einem Versuch";
-            printStream("► Neue Mindestanzahl an Versuchen! 👑 " + nick + " hat Level " + level + " in nur " + out + " geschafft! 🏆 Wir spielen für dich ABBA - Live once 🎵");
+            printStream("► Neue Mindestanzahl an Versuchen! 👑 " + nick + " hat Level " + level + " in nur " + out + " geschafft! 🏆");
             drawChartTries();
         }
 
@@ -189,9 +193,28 @@
             nrEvents++;
         }
 
-        function playSound() {
-            var audio = document.getElementById("audio");
-            audio.play();
+        async function playSound() {
+            playlistQ.add(playCounter);
+            //playCounter++;
+            if(!isPlaying) playSound_();
+        }
+
+        async function playSound_() {
+            if(playlistQ.size() > 0) {
+                isPlaying = true;
+                let id = playlistQ.last();
+                let audio = document.getElementById("audio" + id);
+                audio.play();
+                await sleep(4000);
+                playlistQ.remove();
+                playSound_();
+            } else {
+                isPlaying = false;
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
 
         // Visualisation
@@ -246,6 +269,30 @@
             var chart = new google.charts.Bar(document.getElementById('tries_chart'));
 
             chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+        function Queue() {
+            this.data = [];
+        }
+
+        Queue.prototype.add = function(record) {
+            this.data.unshift(record);
+        }
+
+        Queue.prototype.remove = function() {
+            this.data.pop();
+        }
+
+        Queue.prototype.first = function() {
+            return this.data[0];
+        }
+
+        Queue.prototype.last = function() {
+            return this.data[this.data.length - 1];
+        }
+
+        Queue.prototype.size = function() {
+            return this.data.length;
         }
 
         /*function tableHighscoresCreate() {
@@ -435,6 +482,6 @@
             <td class="tg-z-stream" id="tg-s-3"></td>
         </tr>
     </table>
-    <audio id="audio" src="sound.mp3" preload="auto"></audio>
+    <audio id="audio0" src="sound.mp3" preload="auto"></audio>
 </body>
 </html>
