@@ -17,6 +17,49 @@
         const playlistQ = new Queue();
         var playCounter = 0;
         var isPlaying = false;
+        var playlist = [
+            "It's Raining Men",
+            "Ice Ice Baby",
+            "Baby Girl",
+            "Captain Jack",
+            "I Like To Move It",
+            "Dragostea Din Tei",
+            "The Rythm of The Night",
+            "Boom, Boom, Boom, Boom!!",
+            "T.N.T.",
+            "Gimme! Gimme! Gimme!",
+            "For You!",
+            "Beat It!",
+            "Yeah!",
+            "Call On Me",
+            "Like A G6",
+            "Blue (Da Ba Dee)",
+            "I Want It All",
+            "Sweet Dreams",
+            "Eye Of The Tiger",
+            "Cotton Eye Joe",
+            "Scatman",
+            "Oops! I Did It Again",
+            "Gangnam Style",
+            "Looking For Freedom",
+            "Ding Dong Song",
+            "King Of My Castle",
+            "Around The World La La La",
+            "Never Gonna Give You Up",
+            "Jailhouse Rock",
+            "Man In Black",
+            "When The Rain Begins To Fall",
+            "Atlantis Is Calling",
+            "The Ketchup Song",
+            "The Riddle",
+            "Crying at The Discoteque",
+            "What is Love",
+            "Rythm Is A Dancer",
+            "Sexy And I Know It",
+            "Scream & Shout",
+            "Coco Jamboo",
+            "Mambo No. 5"
+        ];
 
         // Initialise Cloud Firestore through Firebase
         firebase.initializeApp({
@@ -80,10 +123,10 @@
             unsubscribe_highscores.get(level)();
             unsubscribe_highscores.set(level, listenForNewHighscore(level, score));
 
-            playSound();
-            // TODO look for right song name
-            let songname = "Wir spielen für dich " + "Katy Perry - Hutablage 🎵";
+            let songname = "Wir spielen für dich " + playlist[playCounter] + " 🎵";
             printStream("► Neuer Highscore! 👑 " + nick + " hat den Highscore von Level " + level + " geknackt! 🏆 " + songname);
+            playSound();
+
             drawChartHighscores();
         }
 
@@ -195,7 +238,7 @@
 
         async function playSound() {
             playlistQ.add(playCounter);
-            //playCounter++;
+            if(playCounter < 42) playCounter++;
             if(!isPlaying) playSound_();
         }
 
@@ -205,7 +248,7 @@
                 let id = playlistQ.last();
                 let audio = document.getElementById("audio" + id);
                 audio.play();
-                await sleep(4000);
+                await sleep(6000);
                 playlistQ.remove();
                 playSound_();
             } else {
@@ -482,6 +525,47 @@
             <td class="tg-z-stream" id="tg-s-3"></td>
         </tr>
     </table>
-    <audio id="audio0" src="sound.mp3" preload="auto"></audio>
+    <audio id="audio0" src="1.mp3" preload="auto"></audio>
+    <audio id="audio1" src="2.mp3" preload="auto"></audio>
+    <audio id="audio2" src="3.mp3" preload="auto"></audio>
+    <audio id="audio3" src="4.mp3" preload="auto"></audio>
+    <audio id="audio4" src="5.mp3" preload="auto"></audio>
+    <audio id="audio5" src="6.mp3" preload="auto"></audio>
+    <audio id="audio6" src="7.mp3" preload="auto"></audio>
+    <audio id="audio7" src="8.mp3" preload="auto"></audio>
+    <audio id="audio8" src="9.mp3" preload="auto"></audio>
+    <audio id="audio9" src="10.mp3" preload="auto"></audio>
+    <audio id="audio10" src="11.mp3" preload="auto"></audio>
+    <audio id="audio11" src="12.mp3" preload="auto"></audio>
+    <audio id="audio12" src="13.mp3" preload="auto"></audio>
+    <audio id="audio13" src="14.mp3" preload="auto"></audio>
+    <audio id="audio14" src="15.mp3" preload="auto"></audio>
+    <audio id="audio15" src="16.mp3" preload="auto"></audio>
+    <audio id="audio16" src="17.mp3" preload="auto"></audio>
+    <audio id="audio17" src="18.mp3" preload="auto"></audio>
+    <audio id="audio18" src="19.mp3" preload="auto"></audio>
+    <audio id="audio19" src="20.mp3" preload="auto"></audio>
+    <audio id="audio20" src="21.mp3" preload="auto"></audio>
+    <audio id="audio21" src="22.mp3" preload="auto"></audio>
+    <audio id="audio22" src="23.mp3" preload="auto"></audio>
+    <audio id="audio23" src="24.mp3" preload="auto"></audio>
+    <audio id="audio24" src="25.mp3" preload="auto"></audio>
+    <audio id="audio25" src="26.mp3" preload="auto"></audio>
+    <audio id="audio26" src="27.mp3" preload="auto"></audio>
+    <audio id="audio27" src="28.mp3" preload="auto"></audio>
+    <audio id="audio28" src="29.mp3" preload="auto"></audio>
+    <audio id="audio29" src="30.mp3" preload="auto"></audio>
+    <audio id="audio30" src="31.mp3" preload="auto"></audio>
+    <audio id="audio31" src="32.mp3" preload="auto"></audio>
+    <audio id="audio32" src="33.mp3" preload="auto"></audio>
+    <audio id="audio33" src="34.mp3" preload="auto"></audio>
+    <audio id="audio34" src="35.mp3" preload="auto"></audio>
+    <audio id="audio35" src="36.mp3" preload="auto"></audio>
+    <audio id="audio36" src="37.mp3" preload="auto"></audio>
+    <audio id="audio37" src="38.mp3" preload="auto"></audio>
+    <audio id="audio38" src="39.mp3" preload="auto"></audio>
+    <audio id="audio39" src="40.mp3" preload="auto"></audio>
+    <audio id="audio40" src="41.mp3" preload="auto"></audio>
+    <audio id="audio41" src="42.mp3" preload="auto"></audio>
 </body>
 </html>
