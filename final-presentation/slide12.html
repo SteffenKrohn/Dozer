@@ -9,7 +9,11 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
+        google.charts.load('current', {'packages':['bar']});
+
         const NR_LEVEL = 20;
+        var nrEvents = 1;
+        var lastThreeEvents = [];
 
         // Initialise Cloud Firestore through Firebase
         firebase.initializeApp({
@@ -74,6 +78,7 @@
             unsubscribe_highscores.set(level, listenForNewHighscore(level, score));
 
             playSound();
+            printStream("► Neuer Highscore! 👑 " + nick + " hat den Highscore von Level " + level + " geknackt! 🏆 Wir spielen für dich Katy Perry - Hutablage 🎵");
             drawChartHighscores();
         }
 
@@ -111,6 +116,8 @@
             unsubscribe_minTries.set(level, listenForNewMinTries(level, tries));
 
             playSound();
+            let out = tries > 1 ? tries + " Versuchen" : "einem Versuch";
+            printStream("► Neue Mindestanzahl an Versuchen! 👑 " + nick + " hat Level " + level + " in nur " + out + " geschafft! 🏆 Wir spielen für dich ABBA - Live once 🎵");
             drawChartTries();
         }
 
@@ -153,13 +160,41 @@
             return typeof value === 'number' && isFinite(value);
         }
 
+        function printStream(msg) {
+            if(nrEvents === 1) {
+                document.getElementById("tg-s-1").innerHTML = msg;
+                lastThreeEvents.push(msg);
+            } else if(nrEvents === 2) {
+                document.getElementById("tg-s-2").innerHTML = msg;
+                lastThreeEvents.push(msg);
+                document.getElementById("tg-s-1").setAttribute("style", "opacity:0.7");
+            } else if(nrEvents === 3) {
+                document.getElementById("tg-s-3").innerHTML = msg;
+                lastThreeEvents.push(msg);
+                document.getElementById("tg-s-1").setAttribute("style", "opacity:0.5");
+                document.getElementById("tg-s-2").setAttribute("style", "opacity:0.7");
+            } else {
+                lastThreeEvents[0] = lastThreeEvents[1];
+                lastThreeEvents[1] = lastThreeEvents[2];
+                lastThreeEvents[2] = msg;
+
+                let i = 0;
+                for(i; i < 3; i++) {
+                    var elem = document.getElementById("tg-s-" + (i + 1));
+                    elem.innerHTML = lastThreeEvents[i];
+                    if(i < 2) elem.setAttribute("style", "opacity:" + (i === 0 ? 0.5 : 0.7));
+                }
+            }
+
+            nrEvents++;
+        }
+
         function playSound() {
             var audio = document.getElementById("audio");
             audio.play();
         }
 
         // Visualisation
-        google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChartHighscores);
         google.charts.setOnLoadCallback(drawChartTries);
 
@@ -244,6 +279,7 @@
     .tg .tg-z{width: 4.75vw;text-align:center;vertical-align:middle;font-size:22pt}
     .tg .tg-z-name{width: 4.75vw;text-align:center;vertical-align:middle;font-weight: bold}
     .tg .tg-z-score{width: 4.75vw;text-align:center;vertical-align:middle}
+    .tg .tg-z-stream{width: 90vw;text-align:left;vertical-align:middle;font-weight: bold}
 </style>
 <body>
     <div id="highscore_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 10vh;">
@@ -388,7 +424,17 @@
         </table>
     </div>
     <div id="tries_chart" style="width: auto; height: 35vh;"></div>
-    stream here
+    <table class="tg" style="margin-left: 1vw;">
+        <tr>
+            <td class="tg-z-stream" id="tg-s-1"></td>
+        </tr>
+        <tr>
+            <td class="tg-z-stream" id="tg-s-2"></td>
+        </tr>
+        <tr>
+            <td class="tg-z-stream" id="tg-s-3"></td>
+        </tr>
+    </table>
     <audio id="audio" src="sound.mp3" preload="auto"></audio>
 </body>
 </html>
