@@ -33,7 +33,7 @@
             highscores[i] = [i, 0, ""];
             minTries[i] = [i, 0, ""];
             maxTries[i] = [i, 0];
-            //unsubscribe_highscores.set(i, listenForNewHighscore(i, 0));
+            unsubscribe_highscores.set(i, listenForNewHighscore(i, 0));
             unsubscribe_minTries.set(i, listenForNewMinTries(i, 100));
             unsubscribe_maxTries.set(i, listenForNewMaxTries(i, 0));
         }
@@ -66,11 +66,15 @@
             console.log("New Highscore for level " + level + ": " + score + " by: " + nick);
             highscores[level] = [level, score, nick];
 
-            playSound();
-            drawChartHighscores();
+            document.getElementById("tg-z-" + level.toString()).innerHTML = "👑";
+            document.getElementById("tg-z-name-" + level.toString()).innerHTML = nick.substring(0, 8); // TODO richtig abschneiden
+            document.getElementById("tg-z-score-" + level.toString()).innerHTML = score;
 
             unsubscribe_highscores.get(level)();
             unsubscribe_highscores.set(level, listenForNewHighscore(level, score));
+
+            playSound();
+            drawChartHighscores();
         }
 
         // start min. tries query listener for specific level and return the unsubscribing function
@@ -99,11 +103,15 @@
             console.log("New Min Tries for level " + level + ": " + tries + " by: " + nick);
             minTries[level] = [level, tries, nick];
 
-            playSound();
-            drawChartTries();
+            document.getElementById("tg-w-" + level.toString()).innerHTML = "👑";
+            document.getElementById("tg-w-name-" + level.toString()).innerHTML = nick.substring(0, 8); // TODO richtig abschneiden
+            document.getElementById("tg-w-tries-" + level.toString()).innerHTML = tries;
 
             unsubscribe_minTries.get(level)();
             unsubscribe_minTries.set(level, listenForNewMinTries(level, tries));
+
+            playSound();
+            drawChartTries();
         }
 
         // start max. tries query listener for specific level and return the unsubscribing function
@@ -132,11 +140,10 @@
             console.log("New Max Tries for level " + level + ": " + tries);
             maxTries[level] = [level, tries];
 
-            playSound();
-            drawChartTries();
-
             unsubscribe_maxTries.get(level)();
             unsubscribe_maxTries.set(level, listenForNewMaxTries(level, tries));
+
+            drawChartTries();
         }
 
         function isString (value) {
@@ -205,20 +212,182 @@
 
             chart.draw(data, google.charts.Bar.convertOptions(options));
         }
+
+        /*function tableHighscoresCreate() {
+            var div = document.getElementById('highscore_nicknames_table');
+            var tbl = document.createElement('table');
+            tbl.setAttribute("class", "tg");
+
+            for (var i = 0; i < 3; i++) {
+                var tr = document.createElement('tr');
+                for (var j = 0; j < 2; j++) {
+                    if (i == 2 && j == 1) {
+                        break
+                    } else {
+                        var td = document.createElement('td');
+                        td.appendChild(document.createTextNode('\u0020'))
+                        i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+                        tr.appendChild(td)
+                    }
+                }
+                tbdy.appendChild(tr);
+            }
+            tbl.appendChild(tbdy);
+            body.appendChild(tbl)
+        }*/
+
     </script>
 </head>
 <style>
     #audio {display: none}
+    .tg  {margin-left: 3vw; margin-right: 1vw;width: auto; height: auto; border-collapse:collapse;border-spacing:0;font-family:Arial, sans-serif;font-size:12pt}
+    .tg .tg-z{width: 4.75vw;text-align:center;vertical-align:middle;font-size:22pt}
+    .tg .tg-z-name{width: 4.75vw;text-align:center;vertical-align:middle;font-weight: bold}
+    .tg .tg-z-score{width: 4.75vw;text-align:center;vertical-align:middle}
 </style>
 <body>
-    <div id="highscore_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 6vh;">
-        table here
+    <div id="highscore_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 10vh;">
+        <table class="tg">
+            <tr>
+                <td class="tg-z" id="tg-z-1">tes</td>
+                <td class="tg-z" id="tg-z-2"></td>
+                <td class="tg-z" id="tg-z-3"></td>
+                <td class="tg-z" id="tg-z-4"></td>
+                <td class="tg-z" id="tg-z-5"></td>
+                <td class="tg-z" id="tg-z-6"></td>
+                <td class="tg-z" id="tg-z-7"></td>
+                <td class="tg-z" id="tg-z-8"></td>
+                <td class="tg-z" id="tg-z-9"></td>
+                <td class="tg-z" id="tg-z-10"></td>
+                <td class="tg-z" id="tg-z-11"></td>
+                <td class="tg-z" id="tg-z-12"></td>
+                <td class="tg-z" id="tg-z-13"></td>
+                <td class="tg-z" id="tg-z-14"></td>
+                <td class="tg-z" id="tg-z-15"></td>
+                <td class="tg-z" id="tg-z-16"></td>
+                <td class="tg-z" id="tg-z-17"></td>
+                <td class="tg-z" id="tg-z-18"></td>
+                <td class="tg-z" id="tg-z-19"></td>
+                <td class="tg-z" id="tg-z-20"></td>
+            </tr>
+            <tr>
+                <td class="tg-z-name" id="tg-z-name-1"></td>
+                <td class="tg-z-name" id="tg-z-name-2"></td>
+                <td class="tg-z-name" id="tg-z-name-3"></td>
+                <td class="tg-z-name" id="tg-z-name-4"></td>
+                <td class="tg-z-name" id="tg-z-name-5"></td>
+                <td class="tg-z-name" id="tg-z-name-6"></td>
+                <td class="tg-z-name" id="tg-z-name-7"></td>
+                <td class="tg-z-name" id="tg-z-name-8"></td>
+                <td class="tg-z-name" id="tg-z-name-9"></td>
+                <td class="tg-z-name" id="tg-z-name-10"></td>
+                <td class="tg-z-name" id="tg-z-name-11"></td>
+                <td class="tg-z-name" id="tg-z-name-12"></td>
+                <td class="tg-z-name" id="tg-z-name-13"></td>
+                <td class="tg-z-name" id="tg-z-name-14"></td>
+                <td class="tg-z-name" id="tg-z-name-15"></td>
+                <td class="tg-z-name" id="tg-z-name-16"></td>
+                <td class="tg-z-name" id="tg-z-name-17"></td>
+                <td class="tg-z-name" id="tg-z-name-18"></td>
+                <td class="tg-z-name" id="tg-z-name-19"></td>
+                <td class="tg-z-name" id="tg-z-name-20"></td>
+            </tr>
+            <tr>
+                <td class="tg-z-score" id="tg-z-score-1"></td>
+                <td class="tg-z-score" id="tg-z-score-2"></td>
+                <td class="tg-z-score" id="tg-z-score-3"></td>
+                <td class="tg-z-score" id="tg-z-score-4"></td>
+                <td class="tg-z-score" id="tg-z-score-5"></td>
+                <td class="tg-z-score" id="tg-z-score-6"></td>
+                <td class="tg-z-score" id="tg-z-score-7"></td>
+                <td class="tg-z-score" id="tg-z-score-8"></td>
+                <td class="tg-z-score" id="tg-z-score-9"></td>
+                <td class="tg-z-score" id="tg-z-score-10"></td>
+                <td class="tg-z-score" id="tg-z-score-11"></td>
+                <td class="tg-z-score" id="tg-z-score-12"></td>
+                <td class="tg-z-score" id="tg-z-score-13"></td>
+                <td class="tg-z-score" id="tg-z-score-14"></td>
+                <td class="tg-z-score" id="tg-z-score-15"></td>
+                <td class="tg-z-score" id="tg-z-score-16"></td>
+                <td class="tg-z-score" id="tg-z-score-17"></td>
+                <td class="tg-z-score" id="tg-z-score-18"></td>
+                <td class="tg-z-score" id="tg-z-score-19"></td>
+                <td class="tg-z-score" id="tg-z-score-20"></td>
+            </tr>
+        </table>
     </div>
-    <div id="highscores_chart" style="width: auto; height: 40vh;"></div>
-    <div id="tries_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 6vh;">
-        table here
+    <div id="highscores_chart" style="width: auto; height: 35vh;"></div>
+    <div id="tries_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 10vh;">
+        <table class="tg">
+            <tr>
+                <td class="tg-z" id="tg-w-1">tes</td>
+                <td class="tg-z" id="tg-w-2"></td>
+                <td class="tg-z" id="tg-w-3"></td>
+                <td class="tg-z" id="tg-w-4"></td>
+                <td class="tg-z" id="tg-w-5"></td>
+                <td class="tg-z" id="tg-w-6"></td>
+                <td class="tg-z" id="tg-w-7"></td>
+                <td class="tg-z" id="tg-w-8"></td>
+                <td class="tg-z" id="tg-w-9"></td>
+                <td class="tg-z" id="tg-w-10"></td>
+                <td class="tg-z" id="tg-w-11"></td>
+                <td class="tg-z" id="tg-w-12"></td>
+                <td class="tg-z" id="tg-w-13"></td>
+                <td class="tg-z" id="tg-w-14"></td>
+                <td class="tg-z" id="tg-w-15"></td>
+                <td class="tg-z" id="tg-w-16"></td>
+                <td class="tg-z" id="tg-w-17"></td>
+                <td class="tg-z" id="tg-w-18"></td>
+                <td class="tg-z" id="tg-w-19"></td>
+                <td class="tg-z" id="tg-w-20"></td>
+            </tr>
+            <tr>
+                <td class="tg-z-name" id="tg-w-name-1"></td>
+                <td class="tg-z-name" id="tg-w-name-2"></td>
+                <td class="tg-z-name" id="tg-w-name-3"></td>
+                <td class="tg-z-name" id="tg-w-name-4"></td>
+                <td class="tg-z-name" id="tg-w-name-5"></td>
+                <td class="tg-z-name" id="tg-w-name-6"></td>
+                <td class="tg-z-name" id="tg-w-name-7"></td>
+                <td class="tg-z-name" id="tg-w-name-8"></td>
+                <td class="tg-z-name" id="tg-w-name-9"></td>
+                <td class="tg-z-name" id="tg-w-name-10"></td>
+                <td class="tg-z-name" id="tg-w-name-11"></td>
+                <td class="tg-z-name" id="tg-w-name-12"></td>
+                <td class="tg-z-name" id="tg-w-name-13"></td>
+                <td class="tg-z-name" id="tg-w-name-14"></td>
+                <td class="tg-z-name" id="tg-w-name-15"></td>
+                <td class="tg-z-name" id="tg-w-name-16"></td>
+                <td class="tg-z-name" id="tg-w-name-17"></td>
+                <td class="tg-z-name" id="tg-w-name-18"></td>
+                <td class="tg-z-name" id="tg-w-name-19"></td>
+                <td class="tg-z-name" id="tg-w-name-20"></td>
+            </tr>
+            <tr>
+                <td class="tg-z-score" id="tg-w-tries-1"></td>
+                <td class="tg-z-score" id="tg-w-tries-2"></td>
+                <td class="tg-z-score" id="tg-w-tries-3"></td>
+                <td class="tg-z-score" id="tg-w-tries-4"></td>
+                <td class="tg-z-score" id="tg-w-tries-5"></td>
+                <td class="tg-z-score" id="tg-w-tries-6"></td>
+                <td class="tg-z-score" id="tg-w-tries-7"></td>
+                <td class="tg-z-score" id="tg-w-tries-8"></td>
+                <td class="tg-z-score" id="tg-w-tries-9"></td>
+                <td class="tg-z-score" id="tg-w-tries-10"></td>
+                <td class="tg-z-score" id="tg-w-tries-11"></td>
+                <td class="tg-z-score" id="tg-w-tries-12"></td>
+                <td class="tg-z-score" id="tg-w-tries-13"></td>
+                <td class="tg-z-score" id="tg-w-tries-14"></td>
+                <td class="tg-z-score" id="tg-w-tries-15"></td>
+                <td class="tg-z-score" id="tg-w-tries-16"></td>
+                <td class="tg-z-score" id="tg-w-tries-17"></td>
+                <td class="tg-z-score" id="tg-w-tries-18"></td>
+                <td class="tg-z-score" id="tg-w-tries-19"></td>
+                <td class="tg-z-score" id="tg-w-tries-20"></td>
+            </tr>
+        </table>
     </div>
-    <div id="tries_chart" style="width: auto; height: 40vh;"></div>
+    <div id="tries_chart" style="width: auto; height: 35vh;"></div>
     stream here
     <audio id="audio" src="sound.mp3" preload="auto"></audio>
 </body>
