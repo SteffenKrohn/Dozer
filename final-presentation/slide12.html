@@ -117,7 +117,7 @@
             highscores[level] = [level, score, nick];
 
             document.getElementById("tg-z-" + level.toString()).innerHTML = "👑";
-            document.getElementById("tg-z-name-" + level.toString()).innerHTML = nick.substring(0, 8); // TODO richtig abschneiden
+            document.getElementById("tg-z-name-" + level.toString()).innerHTML = nick.substring(0, 10); // TODO richtig abschneiden
             document.getElementById("tg-z-score-" + level.toString()).innerHTML = score;
 
             unsubscribe_highscores.get(level)();
@@ -157,7 +157,7 @@
             minTries[level] = [level, tries, nick];
 
             document.getElementById("tg-w-" + level.toString()).innerHTML = "👑";
-            document.getElementById("tg-w-name-" + level.toString()).innerHTML = nick.substring(0, 8); // TODO richtig abschneiden
+            document.getElementById("tg-w-name-" + level.toString()).innerHTML = nick.substring(0, 10); // TODO richtig abschneiden
             document.getElementById("tg-w-tries-" + level.toString()).innerHTML = tries;
 
             unsubscribe_minTries.get(level)();
@@ -385,6 +385,7 @@
     .tg .tg-z-stream{width: 90vw;text-align:left;vertical-align:middle;font-weight: bold}
 </style>
 <body>
+    <div style="width: auto; text-align: center; font-family: Roboto,serif; font-size: 16pt">Highscore je Level</div>
     <div id="highscore_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 10vh;">
         <table class="tg">
             <tr>
@@ -455,7 +456,8 @@
             </tr>
         </table>
     </div>
-    <div id="highscores_chart" style="width: auto; height: 33vh;"></div>
+    <div id="highscores_chart" style="width: auto; height: 31vh;"></div>
+    <div style="width: auto; text-align: center; font-family: Roboto,serif; font-size: 16pt">Minimale und Maximale Anzahl an Versuchen je Level</div>
     <div id="tries_nicknames_table" style="font-family: 'Roboto',serif; font-size: 9pt; width: auto; height: 10vh;">
         <table class="tg" style="margin-left: 1.5vw;">
             <tr>
@@ -526,7 +528,7 @@
             </tr>
         </table>
     </div>
-    <div id="tries_chart" style="width: auto; height: 33vh;"></div>
+    <div id="tries_chart" style="width: auto; height: 30vh;"></div>
     <table class="tg" style="margin-left: 1vw;">
         <tr>
             <td class="tg-z-stream" id="tg-s-1"></td>
