@@ -1,0 +1,106 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* idk */
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+}
+
+h1 {
+  margin: 30pt;
+  padding: 0;
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(50, 50, 50);
+  text-shadow: 0 1px 5px lightgrey;
+}
+
+h4 {
+    margin: 10pt;
+    display: none;
+    text-align: center;
+    color: black;
+    z-index: 100;
+    text-shadow: 0 1px 5px lightgrey;
+}
+
+#over {
+  position: relative;
+  margin: 50pt;
+  display: none;
+  text-align: center;
+  color: crimson;
+  font-size: 4em;
+  z-index: 100;
+  text-shadow: 0 1px 5px lightgrey;
+}
+
+#won {
+  position: relative;
+  margin: 50pt;
+  display: none;
+  text-align: center;
+  color: steelblue;
+  font-size: 4em;
+  z-index: 100;
+  text-shadow: 0 1px 5px lightgrey;
+}
+
+#congrats {
+    position: relative;
+    margin: 50pt;
+    display: none;
+    text-align: center;
+    color: gold;
+    font-size: 4em;
+    z-index: 100;
+    text-shadow: 0 1px 5px lightgrey;
+}
+
+#dot {
+  position: fixed;
+  background-color: lightskyblue;
+}
+
+#dot.out {
+  background-color: hotpink;
+}
+
+#dot.finish {
+  background-color: rgb(255, 200, 150);
+}
+
+#finish {
+  position: fixed;
+  background-color: gold;
+}
+
+#start {
+    position: relative;
+    padding: 5px 20px 5px 20px;
+    z-index: 100;
+    margin: 0.5em;
+    text-shadow: 0 1px 5px lightgrey;
+    text-align: center;
+    font-size: 2em;
+    color: darkslategrey;
+    background: palegreen;
+    border: 3px solid black;
+}
+
+#qr {
+  position: relative;
+  z-index: 100;
+  width: 220px;
+  margin: auto;
+  padding: 20pt;
+  border-radius: 10pt;
+  background-color: white;
+  text-align: center;
+}
+
+
+
