@@ -1,14 +1,14 @@
 part of generator;
 
+/// Generates a string representation of a [DoubleUp]
 class DoubleUpGenerator extends EntityGenerator {
 
   String type = "doubleup";
-  int value;
 
+  /// Constructor for this Generator takes the [time] and [x] coordinate
   DoubleUpGenerator(int time, double x) {
     this.time = time;
     this.x = x;
-    this.value = value;
   }
 
   String generate() {

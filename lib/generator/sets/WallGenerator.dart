@@ -1,7 +1,10 @@
 part of generator;
 
+/// Generates a wall of four [Brick]s next to each other, so the player
+/// cant´t avoid all of them and has to choose into which [Brick] he will crash
 class WallGenerator extends SetGenerator {
 
+  /// Constructor takes only the [time] as a parameter
   WallGenerator(int time) {
     this.time = time;
   }

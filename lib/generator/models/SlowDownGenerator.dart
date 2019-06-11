@@ -1,14 +1,14 @@
 part of generator;
 
+/// Generates a string representation of a [SlowDown]
 class SlowDownGenerator extends EntityGenerator {
 
   String type = "slowdown";
-  int value;
 
+  /// Constructor for this Generator takes the [time] and [x] coordinate
   SlowDownGenerator(int time, double x) {
     this.time = time;
     this.x = x;
-    this.value = value;
   }
 
   String generate() {
