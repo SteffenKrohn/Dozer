@@ -1,8 +1,10 @@
 name: dozergame
-description: The best new unicorn game called Dozer
-version: 0.1.2
+description: Snake but much better
+version: 1.0.0
 homepage: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/
-author: Jan Steffen Krohn <jan.steffen.krohn@stud.th-luebeck.de>, Tom Christopher Böttger <tom.böttger@stud.th-luebeck.de>
+authors:
+  - Jan Steffen Krohn <jan.steffen.krohn@stud.th-luebeck.de>
+  - Tom Christopher Böttger <tom.boettger@stud.th-luebeck.de>
 
 environment:
   sdk: '>=2.1.0 <3.0.0'

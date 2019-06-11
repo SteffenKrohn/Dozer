@@ -1,4 +1,7 @@
-part of dozergame;
+import 'dart:math';
+
+import 'package:dozergame/model.dart';
+import 'package:dozergame/controller.dart';
 
 /// The model representation of the Dozer, the game's main character.
 /// It extends the class [Entity].

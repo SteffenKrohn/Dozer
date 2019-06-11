@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The model representation of the Drill's used to give the player the
 /// ability to break through bricks without decreasing his score/length.

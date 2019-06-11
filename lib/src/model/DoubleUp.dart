@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The model representation of the Double Up's used to give the player the
 /// ability to increase his score by double the amount of the dot's values.

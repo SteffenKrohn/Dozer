@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The model representation of the dot's used to increase the dozer length and score
 class Dot extends Entity {

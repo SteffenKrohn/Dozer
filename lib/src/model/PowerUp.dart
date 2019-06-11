@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The [PowerUp]'s are like dots but give the player other functionality.
 /// Implementations of this abstract class are for instance the

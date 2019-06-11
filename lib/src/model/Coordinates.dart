@@ -1,5 +1,3 @@
-part of dozergame;
-
 /// A class which simply represents a horizontal and vertical coordinate.
 /// The class is primarily used for the [DozerTail] and could be easily extended.
 class Coordinates {
