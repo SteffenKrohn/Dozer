@@ -70,7 +70,7 @@ class Level {
 
   /// Returns the current score, which is ofc scientifically proved ;)
   int getScore() {
-    return (this.timeLimit * 1.357).floor() + this._dozer.score * 537;
+    return (100000 / this.initialTimeLimit * this.timeLimit).floor();
   }
 
   /// Return the current level
@@ -102,7 +102,7 @@ class Level {
   }
 
   /// Checks collision of all visible [Entity]'s with the [Dozer].
-  /// TODO make more performant by just checking the entities on the same height as the dozer
+  /// TODO make more performant by just checking the entities on the same height as the dozer which is difficult because of barriers
   void checkCollisions() async {
     this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {

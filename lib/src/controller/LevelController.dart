@@ -64,10 +64,6 @@ class LevelController {
       if (this.level.gameLost()) {
         this.timer.cancel();
 
-        // TODO will be deleted later
-        // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false, false);
-
         // show loose message
         this._appController.showMessageLoose(this.level.timeLimit <= 0);
         return;
@@ -90,7 +86,7 @@ class LevelController {
 
         // TODO will be deleted later
         // send score stats
-        this._appController.sendScoreStats(this.level._level, this.level.getScore(), this.level.tries, true, false);
+        this._appController.sendCompetitionStats(this.level._level, this.level.getScore(), this.level.tries);
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
@@ -142,10 +138,6 @@ class LevelController {
     querySelector("#button_back_in_level").onClick.listen((MouseEvent e) {
       this.timer.cancel();
       this._appController.showLevelOverview();
-
-      // TODO will be deleted later
-      // send score stats
-      this._appController.sendScoreStats(this.level._level, this.level.timeLimit.toInt(), this.level.tries, false, true);
     });
   }
 }

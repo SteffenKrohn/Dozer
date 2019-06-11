@@ -8,7 +8,6 @@ class ParameterGenerator {
   int initialScore;
   int targetScore;
   double laneSpeed;
-  String instructions;
 
   // Parameter used to generate final level parameter
   int minTimeLimit = 50000; // Default 50.000ms = 50s
