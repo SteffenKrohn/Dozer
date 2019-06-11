@@ -1,0 +1,485 @@
+{
+  "params": {
+    "level": 5,
+    "timelimit": 21000,
+    "initialscore": 15,
+    "targetscore": 50,
+    "lanespeed": 0.5
+  },
+  "entities": [
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 0.0,
+      "value": 2
+    },
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 0.3333333333333333,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 1000,
+      "x": 1.0,
+      "value": 5
+    },
+    {
+      "type": "barrier",
+      "time": 1000,
+      "x": 0.25,
+      "height": 1000
+    },
+    {
+      "type": "dot",
+      "time": 1500,
+      "x": 0.10,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 2000,
+      "x": 0.0,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 3000,
+      "x": 1.0,
+      "value": 4
+    },
+    {
+      "type": "brick",
+      "time": 3160,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 3320,
+      "x": 0.3333333333333333,
+      "value": 6
+    },
+    {
+      "type": "barrier",
+      "time": 3900,
+      "x": 0.25,
+      "height": 600
+    },
+    {
+      "type": "dot",
+      "time": 4000,
+      "x": 0.1,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 4500,
+      "x": 0.0,
+      "value": 10
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 0.0,
+      "value": 10
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 0.3333333333333333,
+      "value": 15
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 5000,
+      "x": 1.0,
+      "value": 15
+    },
+    {
+      "type": "dot",
+      "time": 5300,
+      "x": 0.35,
+      "value": 5
+    },
+    {
+      "type": "barrier",
+      "time": 5600,
+      "x": 0.5,
+      "height": 1500
+    },
+    {
+      "type": "brick",
+      "time": 6000,
+      "x": 0.6666666666666666,
+      "value": 8
+    },
+    {
+      "type": "dot",
+      "time": 5950,
+      "x": 0.9,
+      "value": 8
+    },
+    {
+      "type": "brick",
+      "time": 6200,
+      "x": 0.0,
+      "value": 3
+    },
+    {
+      "type": "brick",
+      "time": 6200,
+      "x": 0.3333333333333333,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 6400,
+      "x": 0.25,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 6700,
+      "x": 0.0,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 6700,
+      "x": 0.3333333333333333,
+      "value": 3
+    },
+    {
+      "type": "dot",
+      "time": 7400,
+      "x": 0.25,
+      "value": 9
+    },
+    {
+      "type": "dot",
+      "time": 7400,
+      "x": 0.75,
+      "value": 3
+    },
+    {
+      "type": "barrier",
+      "time": 7800,
+      "x": 0.25,
+      "height": 1200
+    },
+    {
+      "type": "barrier",
+      "time": 7800,
+      "x": 0.5,
+      "height": 1200
+    },
+    {
+      "type": "dot",
+      "time": 8000,
+      "x": 0.35,
+      "value": 8
+    },
+    {
+      "type": "brick",
+      "time": 9000,
+      "x": 0.3333333333333333,
+      "value": 15
+    },
+    {
+      "type": "barrier",
+      "time": 9000,
+      "x": 0.75,
+      "height": 1000
+    },
+    {
+      "type": "dot",
+      "time": 9200,
+      "x": 0.60,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 9500,
+      "x": 0.0,
+      "value": 4
+    },
+    {
+      "type": "brick",
+      "time": 9660,
+      "x": 0.3333333333333333,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 9820,
+      "x": 0.6666666666666666,
+      "value": 6
+    },
+    {
+      "type": "dot",
+      "time": 10200,
+      "x": 0.9,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 11000,
+      "x": 1.0,
+      "value": 4
+    },
+    {
+      "type": "brick",
+      "time": 11160,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 11320,
+      "x": 0.3333333333333333,
+      "value": 6
+    },
+    {
+      "type": "dot",
+      "time": 11500,
+      "x": 0.2,
+      "value": 5
+    },
+    {
+      "type": "drill",
+      "time": 12000,
+      "x": 0.5
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 0.0,
+      "value": 13
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 0.3333333333333333,
+      "value": 20
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 0.6666666666666666,
+      "value": 16
+    },
+    {
+      "type": "brick",
+      "time": 12500,
+      "x": 1.0,
+      "value": 15
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 0.0,
+      "value": 18
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 0.3333333333333333,
+      "value": 16
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 0.6666666666666666,
+      "value": 20
+    },
+    {
+      "type": "brick",
+      "time": 13100,
+      "x": 1.0,
+      "value": 17
+    },
+    {
+      "type": "barrier",
+      "time": 13400,
+      "x": 0.5,
+      "height": 2000
+    },
+    {
+      "type": "brick",
+      "time": 13600,
+      "x": 0.3333333333333333,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 13600,
+      "x": 0.6666666666666666,
+      "value": 5
+    },
+    {
+      "type": "dot",
+      "time": 13600,
+      "x": 0.1,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 13600,
+      "x": 0.9,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14100,
+      "x": 0.0,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14100,
+      "x": 1.0,
+      "value": 5
+    },
+    {
+      "type": "dot",
+      "time": 14100,
+      "x": 0.4,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 14100,
+      "x": 0.6,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14600,
+      "x": 0.3333333333333333,
+      "value": 7
+    },
+    {
+      "type": "brick",
+      "time": 14600,
+      "x": 0.6666666666666666,
+      "value": 10
+    },
+    {
+      "type": "dot",
+      "time": 14600,
+      "x": 0.1,
+      "value": 5
+    },
+    {
+      "type": "dot",
+      "time": 14600,
+      "x": 0.9,
+      "value": 5
+    },
+    {
+      "type": "brick",
+      "time": 15100,
+      "x": 0.0,
+      "value": 10
+    },
+    {
+      "type": "brick",
+      "time": 15100,
+      "x": 1.0,
+      "value": 3
+    },
+    {
+      "type": "dot",
+      "time": 15100,
+      "x": 0.4,
+      "value": 2
+    },
+    {
+      "type": "dot",
+      "time": 15100,
+      "x": 0.6,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 16500,
+      "x": 1.0,
+      "value": 3
+    },
+    {
+      "type": "brick",
+      "time": 16660,
+      "x": 0.6666666666666666,
+      "value": 6
+    },
+    {
+      "type": "brick",
+      "time": 16820,
+      "x": 0.3333333333333333,
+      "value": 20
+    },
+    {
+      "type": "dot",
+      "time": 17200,
+      "x": 0.4,
+      "value": 8
+    },
+    {
+      "type": "dot",
+      "time": 17200,
+      "x": 0.6,
+      "value": 6
+    },
+    {
+      "type": "barrier",
+      "time": 17600,
+      "x": 0.25,
+      "height": 1000
+    },
+    {
+      "type": "dot",
+      "time": 17700,
+      "x": 0.1,
+      "value": 9
+    },
+    {
+      "type": "brick",
+      "time": 18600,
+      "x": 0.0,
+      "value": 11
+    },
+    {
+      "type": "doubleup",
+      "time": 18200,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "time": 18500,
+      "x": 0.6,
+      "value": 7
+    },
+    {
+      "type": "dot",
+      "time": 18500,
+      "x": 0.8,
+      "value": 6
+    }
+  ]
+}
+
+

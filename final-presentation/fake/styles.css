@@ -1,106 +1,459 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
 html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* idk */
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: white;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    position: fixed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #003da0;
+}
+
+/* Menu styles */
+#menu {
+    height: 100%;
+    text-align: center;
+    color: white;
+}
+
+hr {
+    color: white;
+    margin: 0;
+}
+
+#menu > div {
+    height: 100%;
+}
+
+#menu > div > .message {
+    height: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 h1 {
-  margin: 30pt;
-  padding: 0;
-  font-size: 3em;
-  text-align: center;
-  font-weight: bold;
-  color: rgb(50, 50, 50);
-  text-shadow: 0 1px 5px lightgrey;
-}
-
-h4 {
-    margin: 10pt;
-    display: none;
+    height: 5vh;
+    margin: 30pt;
+    padding: 0pt;
+    font-size: 3em;
     text-align: center;
-    color: black;
-    z-index: 100;
-    text-shadow: 0 1px 5px lightgrey;
+    font-weight: bold;
 }
 
-#over {
-  position: relative;
-  margin: 50pt;
-  display: none;
-  text-align: center;
-  color: crimson;
-  font-size: 4em;
-  z-index: 100;
-  text-shadow: 0 1px 5px lightgrey;
-}
-
-#won {
-  position: relative;
-  margin: 50pt;
-  display: none;
-  text-align: center;
-  color: steelblue;
-  font-size: 4em;
-  z-index: 100;
-  text-shadow: 0 1px 5px lightgrey;
-}
-
-#congrats {
-    position: relative;
-    margin: 50pt;
-    display: none;
-    text-align: center;
-    color: gold;
+#dozer-logo {
+    height: 10vh;
+    margin-top: 2vh;
+    font-family: 'Pacifico', cursive;
     font-size: 4em;
-    z-index: 100;
-    text-shadow: 0 1px 5px lightgrey;
+    text-shadow: 0.06em 0.06em green;
 }
 
-#dot {
-  position: fixed;
-  background-color: lightskyblue;
+.button-box {
+    padding: 0px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
-#dot.out {
-  background-color: hotpink;
-}
-
-#dot.finish {
-  background-color: rgb(255, 200, 150);
-}
-
-#finish {
-  position: fixed;
-  background-color: gold;
-}
-
-#start {
+.button-box button {
+    width: 100%;
     position: relative;
-    padding: 5px 20px 5px 20px;
-    z-index: 100;
-    margin: 0.5em;
-    text-shadow: 0 1px 5px lightgrey;
+    float: left;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 0;
+    font-size: 3vh;
+    color: white;
+}
+
+.tap-me {
+    font-size: 5vh;
+    opacity: 0.3;
+}
+
+.button-box .lower-bottom-button {
+    background-color: #99ccff;
+}
+
+.button-box .upper-bottom-button {
+    background-color: #6666ff;
+}
+
+.highscore {
+    font-size: xx-large;
+}
+
+.choose-level-wrapper {
+    width: 100%;
+    height: 70vh;
+    float: none;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.choose-level-wrapper .choose-level {
+    float: left;
+    width: 20vw;
+    height: 20vw;
+    margin: 2vw;
+    border-radius: 3vw;
+
+    background-color: darkgrey;
+    color: white;
+    font-size: large;
+}
+
+.choose-level-wrapper .choose-level.reached {
+    background-color: green;
+}
+
+/* Donate Button */
+
+.donate-text {
+    bottom: 20vh;
+    position: absolute;
+    padding-right: 10%;
+}
+
+#donate-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5vh;
+}
+#donate-button img {
+    margin: 0;
+    height: 5vh;
+}
+
+/* Inside a level */
+#lane {
+    width: 100%;
+    height: 100%;
+    border: 0px solid black;
+}
+
+/* Visual Bar */
+.visual-bar {
+    display: flex;
+    align-items: center;
+    height: 5vh;
+}
+
+#button_back_in_level {
+    position: absolute;
+    width: 2em;
+    height: auto;
+    padding: 3vw;
+    margin-top: 0.5vh;
+    z-index: 2;
+}
+
+.visual-bar .progress-bar {
+    z-index: 1;
+    margin: auto;
+}
+
+.visual-bar .progress-bar .level {
+    height: 4vh;
+    width: 4vh;
+    float: left;
+    display: flex;
+    color: white;
+    align-items: center;
+    border-radius: 0.5vh;
+    background-color: green;
+    justify-content: center;
+    font-size: x-large;
+    border: 1px solid black;
+}
+
+.visual-bar .progress-bar progress {
+    width: 50vw;
+    background-color: grey;
+    color: green;
+    height: 3vh;
+    float: left;
+    margin-top: 0.5vh;
+    border: 0;
+
+    /* Disable default style */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* Color for the progress part of the progress element */
+.visual-bar .progress-bar progress::-moz-progress-bar { background: green; }
+.visual-bar .progress-bar progress::-webkit-progress-value { background: green; }
+
+.visual-bar .countdown {
+    position: absolute;
+    right: 0px;
+    color: white;
+    padding-right: 5vw;
+    font-size: 3vw;
+}
+
+.entity {
+    position: fixed;
     text-align: center;
-    font-size: 2em;
-    color: darkslategrey;
-    background: palegreen;
-    border: 3px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-#qr {
-  position: relative;
-  z-index: 100;
-  width: 220px;
-  margin: auto;
-  padding: 20pt;
-  border-radius: 10pt;
-  background-color: white;
-  text-align: center;
+.dozer {
+    color: white;
+    background-color: green;
+    border-radius: 50%;
 }
 
+.dozer.head .eye {
+    background-color: white;
+    height: 30%;
+    width: 30%;
+    border-radius: 50%;
+    position: absolute;
+    top: 30%;
+}
+.dozer.head .left-eye {
+    left: 15%;
+}
+.dozer.head .right-eye {
+    right: 15%;
+}
 
+.brick {
+    width: 24%;
+    height: 10%;
+    background-color: aquamarine;
+    border: 0px solid black;
+    font-size: 5vh;
+}
 
+.dot {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 3vh;
+}
+
+.barrier {
+    background-color: white;
+}
+
+/* Power Up Styles */
+.powerup {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    color: gold;
+    border-radius: 50%;
+}
+
+.doubleup:before {
+    content: "✌";
+}
+
+.drill:before {
+    content: "★";
+}
+
+.slowdown:before {
+    content: "⌛";
+}
+
+.doubleup {
+    -webkit-animation: blink-green 1s infinite;
+    -moz-animation:    blink-green 1s infinite;
+    animation:         blink-green 1s infinite;
+}
+
+.drill {
+    font-size: larger;
+    -webkit-animation: blink-yellow 1s infinite;
+    -moz-animation:    blink-yellow 1s infinite;
+    animation:         blink-yellow 1s infinite;
+}
+
+.slowdown {
+    font-size: small;
+    -webkit-animation: blink-white 1s infinite;
+    -moz-animation:    blink-white 1s infinite;
+    animation:         blink-white 1s infinite;
+}
+
+/* Brick colors */
+.c1 {
+    background-color: #99ccff;
+}
+
+.c2 {
+    background-color: #6699ff;
+}
+
+.c3 {
+    background-color: #6666ff;
+}
+
+.c4 {
+    background-color: #9966ff;
+}
+
+.c5 {
+    background-color: #9933ff;
+    -webkit-animation: pulse 1s ease infinite;
+    -z-animation: pulse 1s ease infinite;
+    -o-animation: pulse 1s ease infinite;
+    animation: pulse 1s ease infinite;
+}
+
+/* Power up styles for dozer and Animations */
+
+/* Rainbow Animation for Drill and DoubleUp */
+.has-drill {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+
+    -webkit-animation: rainbow 2s ease infinite;
+    -z-animation: rainbow 2s ease infinite;
+    -o-animation: rainbow 2s ease infinite;
+    animation: rainbow 2s ease infinite;
+}
+
+.has-doubleup {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 1800%;
+
+    -webkit-animation: rainbow 1s ease infinite;
+    -z-animation: rainbow 1s ease infinite;
+    -o-animation: rainbow 1s ease infinite;
+    animation: rainbow 1s ease infinite;
+}
+
+/*
+    Drill
+    Credit: https://code.sololearn.com/Wv54364U2VCg/#html
+ */
+@-webkit-keyframes blink-yellow {
+    0%   { background-color: red; }
+    100% { background-color: gold; }
+}
+@-moz-keyframes blink-yellow {
+    0%   { background-color: red; }
+    100% { background-color: gold; }
+}
+@keyframes blink-yellow {
+    0%   { background-color: red; }
+    100% { background-color: gold; }
+}
+
+/*
+    DoubleUp
+    Credit: https://code.sololearn.com/Wv54364U2VCg/#html
+ */
+@-webkit-keyframes blink-green {
+    0%   { background-color: red; }
+    100% { background-color: lawngreen; }
+}
+@-moz-keyframes blink-green {
+    0%   { background-color: red; }
+    100% { background-color: lawngreen; }
+}
+@keyframes blink-green {
+    0%   { background-color: red; }
+    100% { background-color: lawngreen; }
+}
+
+/*
+    SlowDown
+    Credit: https://code.sololearn.com/Wv54364U2VCg/#html
+ */
+@-webkit-keyframes blink-white {
+    0%   { background-color: red; }
+    100% { background-color: #1ddde8; }
+}
+@-moz-keyframes blink-white {
+    0%   { background-color: red; }
+    100% { background-color: #1ddde8; }
+}
+@keyframes blink-white {
+    0%   { background-color: red; }
+    100% { background-color: #1ddde8; }
+}
+
+/*
+    Rainbow Animation
+    Credit: https://codepen.io/nohoid/pen/kIfto
+ */
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+/*
+    Pulse Animation
+    Credit: https://codepen.io/igorsheg/pen/MBpwGw
+*/
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
+}
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+        box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+        box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+        box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    }
+}

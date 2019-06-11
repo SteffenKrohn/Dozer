@@ -1,0 +1,102 @@
+{
+  "params": {
+    "level": 1,
+    "timelimit": 21000,
+    "initialscore": 10,
+    "targetscore": 25,
+    "lanespeed": 0.4,
+    "instructions": "Get in Rhythm and catch all dots to win! "
+  },
+  "entities": [
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 1000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 2500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 4000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 5500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 7000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 8500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 10000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 11500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 13000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 14500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 16000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 17500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 19000,
+      "x": 0.3
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 20500,
+      "x": 0.7
+    },
+    {
+      "type": "dot",
+      "value": 2,
+      "time": 22000,
+      "x": 0.3
+    }
+  ]
+}
