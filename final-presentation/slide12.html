@@ -236,10 +236,12 @@
             } else {
                 lastThreeEvents[0] = lastThreeEvents[1];
                 lastThreeEvents[1] = lastThreeEvents[2];
-                lastThreeEvents[2] = msg;
+                lastThreeEvents[2] = lastThreeEvents[3];
+                lastThreeEvents[3] = lastThreeEvents[4];
+                lastThreeEvents[4] = msg;
 
                 let i = 0;
-                for(i; i < 3; i++) {
+                for(i; i < 5; i++) {
                     var elem = document.getElementById("tg-s-" + (i + 1));
                     elem.innerHTML = lastThreeEvents[i];
                     if(i < 5) elem.setAttribute("style", "opacity:" + (i === 0 ? 0.45 : i === 1 ? 0.55 : i === 2 ? 0.7 : 0.85));
