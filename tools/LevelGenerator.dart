@@ -1,5 +1,4 @@
 import '../bin/generator/generator_tools.dart';
-
 import 'dart:io';
 
 void main(List<String> args) {
