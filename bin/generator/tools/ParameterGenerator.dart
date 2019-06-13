@@ -1,4 +1,4 @@
-part of generator;
+import 'dart:math';
 
 class ParameterGenerator {
 

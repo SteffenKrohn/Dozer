@@ -1,4 +1,7 @@
-part of generator;
+import 'dart:math';
+
+import '../generator_model.dart';
+import '../generator_sets.dart';
 
 class TrapGenerator extends SetGenerator {
 

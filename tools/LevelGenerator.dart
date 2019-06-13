@@ -1,4 +1,4 @@
-import 'package:dozergame/generator/generator.dart';
+import '../bin/generator/generator_tools.dart';
 
 import 'dart:io';
 

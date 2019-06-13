@@ -1,4 +1,4 @@
-part of generator;
+
 
 abstract class EntityGenerator {
 

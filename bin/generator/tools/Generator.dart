@@ -1,4 +1,4 @@
-part of generator;
+import '../generator_tools.dart';
 
 class Generator {
 

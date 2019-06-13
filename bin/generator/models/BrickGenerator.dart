@@ -1,14 +1,15 @@
-part of generator;
+import 'dart:math';
+import '../generator_model.dart';
 
-class DotGenerator extends EntityGenerator {
+class BrickGenerator extends EntityGenerator {
 
-  String type = "dot";
+  String type = "brick";
   int value;
 
   int minValue = 1;
-  int maxValue = 10;
+  int maxValue = 21;
 
-  DotGenerator(int time, double x, {int value = null}) {
+  BrickGenerator(int time, double x, {int value = null}) {
     this.time = time;
     this.x = x;
     this.value = value;

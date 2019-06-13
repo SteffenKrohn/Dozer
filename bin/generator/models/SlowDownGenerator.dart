@@ -1,4 +1,4 @@
-part of generator;
+import '../generator_model.dart';
 
 class SlowDownGenerator extends EntityGenerator {
 

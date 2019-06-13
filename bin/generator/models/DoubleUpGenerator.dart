@@ -1,11 +1,11 @@
-part of generator;
+import '../generator_model.dart';
 
-class DrillGenerator extends EntityGenerator {
+class DoubleUpGenerator extends EntityGenerator {
 
-  String type = "drill";
+  String type = "doubleup";
   int value;
 
-  DrillGenerator(int time, double x) {
+  DoubleUpGenerator(int time, double x) {
     this.time = time;
     this.x = x;
     this.value = value;

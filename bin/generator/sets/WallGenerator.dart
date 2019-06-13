@@ -1,4 +1,5 @@
-part of generator;
+import '../generator_model.dart';
+import '../generator_sets.dart';
 
 class WallGenerator extends SetGenerator {
 

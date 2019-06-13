@@ -1,3 +1,7 @@
+/// The model library describes the whole game concept. It is used for the game
+/// logic and it contains all the game entities as specific classes. Every level
+/// level consists of a [Level] instance with its corresponding game entities
+/// saved as instances of [Entity].
 library dozer_model;
 
 export 'package:dozergame/src/model/Barrier.dart';

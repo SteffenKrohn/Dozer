@@ -1,4 +1,5 @@
-part of generator;
+import 'dart:math';
+import '../generator_model.dart';
 
 class BarrierGenerator extends EntityGenerator {
 
