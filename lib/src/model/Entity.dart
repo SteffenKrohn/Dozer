@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The model representation of all the game entities displayed on the screen
 /// when the user plays the game.

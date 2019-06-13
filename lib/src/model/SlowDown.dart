@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The model representation of the Slowdown's used to give the player the
 /// ability to move the dozer slower through the virtual earth.

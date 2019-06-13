@@ -1,4 +1,5 @@
-part of dozergame;
+import 'dart:math';
+import 'package:dozergame/model.dart';
 
 /// This class is used to check collisions between [Entity]'s and the [Dozer]
 class CollisionChecker {

@@ -1,4 +1,10 @@
-part of dozergame;
+import 'dart:async';
+import 'dart:html';
+
+import 'package:dozergame/controller.dart';
+import 'package:dozergame/model.dart';
+import 'package:dozergame/view.dart';
+import 'package:dozergame/file.dart';
 
 /// The [LevelController] can be instantiated to control a specific level
 /// It automatically calls methods of the [LevelLoader] and the [Level] to load
@@ -75,7 +81,7 @@ class LevelController {
         // check highscore from local storage
         int oldHighscore = 0;
         bool isNewHighscore = true;
-        String key = AppController.highscoreLevelKey + this.level._level.toString();
+        String key = AppController.highscoreLevelKey + this.level.level.toString();
         if(this._localStorage.containsKey(key)) {
           oldHighscore = int.parse(this._localStorage[key]);
           isNewHighscore = oldHighscore < this.level.getScore() ? true : false;
@@ -86,7 +92,7 @@ class LevelController {
 
         // TODO will be deleted later
         // send score stats
-        this._appController.sendCompetitionStats(this.level._level, this.level.getScore(), this.level.tries);
+        this._appController.sendCompetitionStats(this.level.level, this.level.getScore(), this.level.tries);
 
         // show win message
         this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
@@ -123,7 +129,7 @@ class LevelController {
   /// Increases the number of tries for the current level in the local storage
   Future _increaseNrOfTries() async {
     int tries = 0;
-    String key = AppController.triesLevelKey + this.level._level.toString();
+    String key = AppController.triesLevelKey + this.level.level.toString();
     if(this._localStorage.containsKey(key)) {
       tries = int.parse(this._localStorage[key]);
     }

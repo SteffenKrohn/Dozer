@@ -1,4 +1,5 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
+import 'package:dozergame/controller.dart';
 
 /// The model representation of a [Level]
 class Level {
@@ -7,15 +8,15 @@ class Level {
   Dozer _dozer;
 
   /// The number of this level
-  int _level;
+  final int level; // TODO hier hab ich mal auf public gesetzt und final getestet
   /// The remaining time to accomplish this level in ms
   double timeLimit;
   /// The initial time limit of this level
-  int initialTimeLimit;
+  final int initialTimeLimit;
   /// The initial score of this level
-  int initialScore;
+  final int initialScore;
   /// The target score a user has to reach to win this level
-  int targetScore;
+  final int targetScore;
   /// The number of tries a user already tried this level
   int tries;
   /// The lanespeed equals the percentage which [Entity]'s (such as [Brick], [Dot]) move per second
@@ -35,12 +36,8 @@ class Level {
   bool slowDownActive = false;
 
   /// Creates a new [Level]
-  Level(int timeLimit, int initialScore, int targetScore, double laneSpeed, int level, int height, int width) {
-    this._level = level;
-    this.timeLimit = timeLimit.toDouble();
-    this.initialTimeLimit = timeLimit;
-    this.initialScore = initialScore;
-    this.targetScore = targetScore;
+  Level(this.initialTimeLimit, this.initialScore, this.targetScore, double laneSpeed, this.level, int height, int width) {
+    this.timeLimit = this.initialTimeLimit.toDouble();
     this.laneSpeed = laneSpeed;
     this.viewHeight = height;
     this.viewWidth = width;
@@ -75,7 +72,7 @@ class Level {
 
   /// Return the current level
   int getLevel() {
-    return this._level;
+    return this.level;
   }
 
   /// Returns the [Dozer] object reference

@@ -1,4 +1,4 @@
-part of dozergame;
+import 'dart:html';
 
 /// This is the View representation of our app, but not the game itself.
 /// This class is used for the menu navigation.

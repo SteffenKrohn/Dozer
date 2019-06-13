@@ -1,4 +1,8 @@
-part of dozergame;
+import 'dart:html';
+import 'dart:math';
+
+import 'package:dozergame/controller.dart';
+import 'package:dozergame/view.dart';
 
 /// The [AppController] is the main controller of the app. It contains all the listeners
 /// for the buttons, can make the views switch and can start levels.

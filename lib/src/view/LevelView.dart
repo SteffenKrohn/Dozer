@@ -1,4 +1,6 @@
-part of dozergame;
+import 'dart:html';
+
+import 'package:dozergame/model.dart';
 
 /// This is the View representation of the game itself.
 /// It gives the ability to dynamically represent the model [Entity]'s and is

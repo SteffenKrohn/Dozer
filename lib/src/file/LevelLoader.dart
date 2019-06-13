@@ -1,4 +1,7 @@
-part of dozergame;
+import 'dart:convert';
+import 'dart:html';
+
+import 'package:dozergame/model.dart';
 
 /// The [LevelLoader] is responsible for loading the JSON files from the web server
 /// and deserialize them to [Level] objects with the corresponding [Entity]'s

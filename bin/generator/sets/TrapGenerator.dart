@@ -1,7 +1,14 @@
-part of generator;
+import 'dart:math';
 
+import '../generator_model.dart';
+import '../generator_sets.dart';
+
+/// Generator for a combination of a [Brick], [Barries]s and a [Dot]
+/// The [Dot] is flanked by two [Barrier]s and at ge end is a [Brick].
+/// So when the player decides to collect he [Dot] he will also crash into the [Brick]
 class TrapGenerator extends SetGenerator {
 
+  /// Constructor takes only the [time] as a parameter
   TrapGenerator(int time) {
     this.time = time;
   }
@@ -11,13 +18,15 @@ class TrapGenerator extends SetGenerator {
 
     String output = "";
     BarrierGenerator b;
-    if (lane != 1) {
+    // When the trap is on the left or right side of the screen, no barriers
+    // will be needed there
+    if (lane != 0) {
       double x = lane * 0.25;
       b = BarrierGenerator(time, x);
       b.height = 1000;
       output += b.generate() + ",";
     }
-    if (lane != 4) {
+    if (lane != 3) {
       double x = lane * 0.25 + 0.25;
        b = BarrierGenerator(time, x);
        b.height = 1000;

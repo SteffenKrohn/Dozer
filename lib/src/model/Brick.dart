@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// Model Representation of a [Brick].
 /// This is used to build obstacles for the player.

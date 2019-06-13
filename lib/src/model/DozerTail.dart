@@ -1,4 +1,4 @@
-part of dozergame;
+import 'package:dozergame/model.dart';
 
 /// The [DozerTail] is handled like a normal [Entity].
 /// It is seperate from the [Dozer] class because its much more simple and
