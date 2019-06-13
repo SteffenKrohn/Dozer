@@ -1,19 +1,24 @@
 import '../generator_model.dart';
 import '../generator_sets.dart';
 
+/// Generator for a combination of [Brick]s shaped like stairs
 class StairGenerator extends SetGenerator {
 
+  /// The direction the stairs will face. Only "left" and "right" are supported.
   String _direction;
 
+  /// Constructor takes only the [time] as a parameter
   StairGenerator(int time) {
     this.time = time;
   }
 
+  /// Sets the direction of the stairs to the right
   StairGenerator left() {
     _direction = "left";
     return this;
   }
 
+  /// Sets the direction of the stairs to the left
   StairGenerator right() {
     _direction = "right";
     return this;
@@ -21,7 +26,7 @@ class StairGenerator extends SetGenerator {
 
   String generate() {
     if (null == _direction) {
-      throw Exception("Direection for StairGenerator has to be set.");
+      throw Exception("Direction for StairGenerator has to be set.");
     }
     BrickGenerator g1;
     BrickGenerator g2;

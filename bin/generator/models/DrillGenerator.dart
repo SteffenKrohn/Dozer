@@ -1,14 +1,14 @@
 import '../generator_model.dart';
 
+/// Generates a string representation of a [Drill]
 class DrillGenerator extends EntityGenerator {
 
   String type = "drill";
-  int value;
 
+  /// Constructor for this Generator takes the [time] and [x] coordinate
   DrillGenerator(int time, double x) {
     this.time = time;
     this.x = x;
-    this.value = value;
   }
 
   String generate() {
