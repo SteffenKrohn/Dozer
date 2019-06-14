@@ -9,8 +9,10 @@ class Dozer extends Entity {
 
   /// The maximum possible height of the [Dozer] in percent of the viewport height
   static const double MAXIMUM_DOZER_HEIGHT = 0.7;
+  /// The gap between one [DozerTail] Entity and another in percent of one's height
+  static const double TAIL_GAP = 0.5;
 
-  /// The current score respectively length of the [Dozer]
+  /// The current score and length respectively of the [Dozer]
   int score;
   /// The route the [Dozer] went represented by [Coordinates]
   List<Coordinates> _tailRoute = new List<Coordinates>();
@@ -38,12 +40,12 @@ class Dozer extends Entity {
     this.x = this.level.viewWidth / 2 - this.width;
     this.y = this._getYAccordingToScore();
 
-    this._tailGap = this.height * 0.5;
+    this._tailGap = this.height * TAIL_GAP;
 
     for(int i = 0; i <= this.level.targetScore * AppController.framerate; i++) {
       this._tailRoute.add(Coordinates(this.x, this.y + (i * this._tailGap * this.level.laneSpeed)));
     }
-    // Add and remove the tail entities according to initial score
+    // Add the tail entities according to initial score
     this._removeAndAddTailEntities();
   }
 
@@ -229,7 +231,7 @@ class Dozer extends Entity {
     //TODO other hitBy behaviour
   }
 
-  /// Gets the height for the head of the [Dozer]
+  /// Gets the y height for the head of the [Dozer]
   double _getYAccordingToScore() {
     return max(this.level.viewHeight * (1 - (this.score * 1.5 / 100)) - 10, this.level.viewHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
   }

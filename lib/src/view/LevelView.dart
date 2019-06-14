@@ -98,12 +98,17 @@ class LevelView {
 
   /// Updates the default view values of a given Element
   /// corresponding to the model [Entity]
-  /// TODO make more performable
-  static void updateEntityElement(Element view, Entity model) async {
-    view.style.top = model.y.toString() + "px";
-    view.style.left = model.x.toString() + "px";
-    view.style.width = model.width.toString() + "px";
-    view.style.height = model.height.toString() + "px";
+  static void updateEntityElement(Element elem, Entity model) async {
+    /*elem.style.top = model.y.toString() + "px";
+    elem.style.left = model.x.toString() + "px";
+    elem.style.width = model.width.toString() + "px";
+    elem.style.height = model.height.toString() + "px";*/
+
+    // changed because of performance issues
+    elem.style.cssText = "top:" + model.y.toString() + "px;"
+        "left:" + model.x.toString() + "px;"
+        "width:" + model.width.toString() + "px;"
+        "height:" + model.height.toString() + "px;";
   }
 
   DivElement getEntityRepresentation(Entity entity) {
