@@ -308,13 +308,17 @@ class MenuView {
 
     InputElement textbox = InputElement()
       ..setAttribute("id", "nickInput")
-      ..placeholder = "Your Nickname"
       ..style.margin = "auto"
       ..style.marginTop = "4vh"
       ..style.height = "20pt"
       ..style.width = "120pt"
       ..maxLength = 12
       ..style.fontSize = "14pt";
+    if(window.localStorage.containsKey("nick")){
+      textbox.value = window.localStorage["nick"];
+    } else {
+      textbox.placeholder = "Your Nickname";
+    }
     div.append(textbox);
 
     ButtonElement button = ButtonElement()

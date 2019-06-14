@@ -22,7 +22,8 @@ class Level {
   /// The lanespeed equals the percentage which [Entity]'s (such as [Brick], [Dot]) move per second
   double laneSpeed;
 
-  /// The map which contains all the [Entity]'s which are visible within the screen
+  /// The map which contains all the [Entity]'s which are visible within the screen.
+  /// Key is the entity's id and value is the entity's object reference.
   Map<int, Entity> visibleEntities = new Map<int, Entity>();
   /// The List which contains all remaining [Entity]'s ordered ascending to the displayed time
   List<Entity> remainingEntities;

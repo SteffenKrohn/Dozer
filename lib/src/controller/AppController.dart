@@ -38,6 +38,7 @@ class AppController {
 
   /// TODO will be deleted later
   static const String _userIdKey = "userId";
+  static const String _nickKey = "nick";
   int _userId;
   String _nick = "";
 
@@ -107,6 +108,7 @@ class AppController {
       // TODO delete after final presentation
       InputElement nickInput = querySelector("#nickInput");
       this._nick = nickInput.value;
+      this._localStorage[AppController._nickKey] = nickInput.value;
       print(this._nick);
 
       this.showLevelOverview();
