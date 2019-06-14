@@ -5,7 +5,8 @@ import 'package:dozergame/controller.dart';
 import 'package:dozergame/view.dart';
 
 /// The [AppController] is the main controller of the app. It contains all the listeners
-/// for the buttons, can make the views switch and can start levels.
+/// for the buttons, can make the views switch and can call the load method of
+/// the [LevelController] for starting a level.
 class AppController {
 
   /// The Target Framerate of the application in hz
@@ -25,7 +26,7 @@ class AppController {
   /// The reference of the local storage
   final Storage _localStorage = window.localStorage;
 
-  /// This is the level the user would start on the main page 'levelOverview'.
+  /// This is the level the user would see on the main page 'levelOverview'.
   /// After the app startup it's set to the reached Level and after the click
   /// on one specific level in the 'chooseLevelView' it's set to the specific one.
   int _activeLevel = 1;
@@ -88,7 +89,7 @@ class AppController {
 
   /// Starts the [_activeLevel]
   void startNextLevel() {
-    LevelController.loadAndStart(this, this.getActiveLevel());
+    LevelController.loadAndStart(this, this._activeLevel);
   }
 
   /// Listens to the 'Go To Menu Button' which directs the user to the main
@@ -133,9 +134,9 @@ class AppController {
   /// and redirects the user to the 'levelOverview' if the new level is available.
   void listenNextLevelButton() {
     querySelector("#button_next_level").onClick.listen((MouseEvent e) {
-      this.setActiveLevel(this.getActiveLevel() + 1);
-      if (this.getActiveLevel() > this._nrAvailableLevels) {
-        this.showNoSuchLevel(this.getActiveLevel());
+      this.setActiveLevel(this._activeLevel + 1);
+      if (this._activeLevel > this._nrAvailableLevels) {
+        this.showNoSuchLevel(this._activeLevel);
       } else {
         this.showLevelOverview();
       }
@@ -146,7 +147,7 @@ class AppController {
   /// This method will only be called when the 'messageNoSuchLevel' was shown.
   void listenPreviousLevelButton() {
     querySelector("#button_pevious_level").onClick.listen((MouseEvent e) {
-      this.setActiveLevel(this.getActiveLevel() - 1);
+      this.setActiveLevel(this._activeLevel - 1);
       this.showLevelOverview();
     });
   }
@@ -191,7 +192,7 @@ class AppController {
   /// [listenChooseLevelButton]
   /// [listenCreditsButton]
   void showLevelOverview() {
-    MenuView.show().levelOverview(this.getActiveLevel(), _getLevelInstruction(this.getActiveLevel())).render();
+    MenuView.show().levelOverview(this._activeLevel, _getLevelInstruction(this._activeLevel)).render();
     this.listenStartLevelButton();
     this.listenChooseLevelButton();
     this.listenCreditsButton();
@@ -248,11 +249,6 @@ class AppController {
   void showNoSuchLevel(int level) {
     MenuView.show().messageNoSuchLevel(level).render();
     this.listenPreviousLevelButton();
-  }
-
-  /// Returns the [_activeLevel]
-  int getActiveLevel() {
-    return this._activeLevel;
   }
 
   /// Sets the [_activeLevel] to the passed integer value. If this value is bigger
