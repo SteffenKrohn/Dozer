@@ -8,15 +8,15 @@ import 'package:dozergame/model.dart';
 class LevelView {
 
   /// The reference to the level which is currently running
-  Level level;
+  Level _level;
   /// The main DOM Element in which all level [Entity]'s are displayed
-  Element lane;
+  Element _lane;
   /// A simple div which contains the visual bar for displaying the players
   /// score and remaining time and the back button.
   /// It's within the lane.
   DivElement _visualBar;
   /// A map with all Elements which are currently in the lane and so in the view
-  Map<String, Element> laneElements = Map<String, Element>();
+  Map<String, Element> _laneElements = Map<String, Element>();
 
   /// Boolean. true if the [PowerUp] - [Drill] is active
   bool _drillActive = false;
@@ -25,33 +25,33 @@ class LevelView {
 
   /// Constructor creates and returns new [LevelView] with a lane element
   LevelView(Level level) {
-    this.level = level;
+    this._level = level;
     
-    this.lane = DivElement()
+    this._lane = DivElement()
       ..setAttribute("id", "lane");
     querySelector("body")
         ..setInnerHtml("")
-        ..append(this.lane);
+        ..append(this._lane);
   }
 
-  /// The method will change the DOM-Tree according to the [lane] content
+  /// The method will change the DOM-Tree according to the [_lane] content
   void render() async {
     _updateVisualBar();
     _handlePowerUps();
 
-    Map<int, Entity> visibleElements = level.getVisibleEntities();
+    Map<int, Entity> visibleElements = _level.getVisibleEntities();
 
-    Map<String, Element>.from(this.laneElements).forEach((id, e) async {
+    Map<String, Element>.from(this._laneElements).forEach((id, e) async {
       int id = int.parse(e.id.substring(1));
       Entity entity;
 
       // update old DOM Element if its also in visibleElements
       if(visibleElements.containsKey(id)) {
         entity = visibleElements[id];
-        updateEntityElement(e, entity);
+        _updateEntityElement(e, entity);
       } else { // otherwise delete it from [laneElements]
         e.remove();
-        this.laneElements.remove(e.id);
+        this._laneElements.remove(e.id);
       }
       // Remove handled entries
       visibleElements.remove(id);
@@ -59,20 +59,20 @@ class LevelView {
 
     // add new DOM Elements
     visibleElements.forEach((id, value) async {
-      DivElement e = this.getEntityRepresentation(value);
-      this.lane.append(e);
-      this.laneElements.putIfAbsent("e" + id.toString(), () => e);
-      updateEntityElement(e, value);
+      DivElement e = this._getEntityRepresentation(value);
+      this._lane.append(e);
+      this._laneElements.putIfAbsent("e" + id.toString(), () => e);
+      _updateEntityElement(e, value);
     });
   }
 
   /// Handles all PowerUp Animations
   void _handlePowerUps() {
-    if (this._drillActive != this.level.getDozer().drillActive) {
+    if (this._drillActive != this._level.getDozer().drillActive) {
       this._drillActive = !this._drillActive;
       this._updateDozerEntityElement();
     }
-    if (this._doubleUpActive != this.level.getDozer().doubleUpActive) {
+    if (this._doubleUpActive != this._level.getDozer().doubleUpActive) {
       this._doubleUpActive = !this._doubleUpActive;
       this._updateDotEntityElement();
     }
@@ -80,7 +80,7 @@ class LevelView {
 
   /// Updates DoubleUp PowerUp Animation by toggling it on/off
   void  _updateDotEntityElement() async {
-    this.laneElements.forEach((id, e) async {
+    this._laneElements.forEach((id, e) async {
       if (e.classes.contains("dot")) {
         e.classes.toggle("has-doubleup");
       }
@@ -89,7 +89,7 @@ class LevelView {
 
   /// Updates Drill PowerUp Animation by toggling it on/off
   void _updateDozerEntityElement() async {
-    this.laneElements.forEach((id, e) async {
+    this._laneElements.forEach((id, e) async {
       if (e.classes.contains("dozer")) {
         e.classes.toggle("has-drill");
       }
@@ -98,21 +98,15 @@ class LevelView {
 
   /// Updates the default view values of a given Element
   /// corresponding to the model [Entity]
-  static void updateEntityElement(Element elem, Entity model) async {
-    /*elem.style.top = model.y.toString() + "px";
-    elem.style.left = model.x.toString() + "px";
-    elem.style.width = model.width.toString() + "px";
-    elem.style.height = model.height.toString() + "px";*/
-
-    // changed because of performance issues
+  static void _updateEntityElement(Element elem, Entity model) async {
     elem.style.cssText = "top:" + model.y.toString() + "px;"
         "left:" + model.x.toString() + "px;"
         "width:" + model.width.toString() + "px;"
         "height:" + model.height.toString() + "px;";
   }
 
-  DivElement getEntityRepresentation(Entity entity) {
-
+  /// Returns a [DivElement] with the correct css classes, ids and content
+  DivElement _getEntityRepresentation(Entity entity) {
     if(entity.toString() == "dozer"){
       return DivElement()
           ..setAttribute("class", "entity dozer head")
@@ -166,7 +160,8 @@ class LevelView {
     }
   }
 
-  /// Create the initial [_visualBar] and append it in the [lane]
+  /// Create the initial [_visualBar] and append it in the [_lane]
+  /// This is called in [LevelController]
   void createVisualBar() {
 
     _visualBar = DivElement()
@@ -180,20 +175,20 @@ class LevelView {
     
     DivElement currentLevel = DivElement()
       ..setAttribute("class", "level first-level")
-      ..appendText(level.getLevel().toString());
+      ..appendText(_level.getLevel().toString());
     
     ProgressElement scoreProgress = ProgressElement()
       ..setAttribute("class", "score-progress")
       ..setAttribute("min", "0")
-      ..setAttribute("max", level.targetScore.toString());
+      ..setAttribute("max", _level.targetScore.toString());
 
     DivElement nextLevel = DivElement()
       ..setAttribute("class", "level next-level")
-      ..appendText((level.getLevel() + 1).toString());
+      ..appendText((_level.getLevel() + 1).toString());
 
     SpanElement timer = SpanElement()
       ..setAttribute("class", "countdown")
-      ..appendText((level.timeLimit / 1000).toStringAsFixed(2));
+      ..appendText((_level.timeLimit / 1000).toStringAsFixed(2));
 
     progressBar.append(currentLevel);
     progressBar.append(scoreProgress);
@@ -204,14 +199,14 @@ class LevelView {
     _visualBar.append(timer);
     
 
-    lane.append(_visualBar);
+    _lane.append(_visualBar);
   }
 
-  /// Updates the visual bar with values taken from [level]
+  /// Updates the visual bar with values taken from [_level]
   void _updateVisualBar() async {
     // Score Progress
-    _visualBar.children.elementAt(1).children.elementAt(1).setAttribute("value", level.getDozer().score.toString());
+    _visualBar.children.elementAt(1).children.elementAt(1).setAttribute("value", _level.getDozer().score.toString());
     // Countdown
-    _visualBar.children.elementAt(2).setInnerHtml((level.timeLimit / 1000).toStringAsFixed(2));
+    _visualBar.children.elementAt(2).setInnerHtml((_level.timeLimit / 1000).toStringAsFixed(2));
   }
 }
