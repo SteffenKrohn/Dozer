@@ -8,15 +8,15 @@ import 'package:dozergame/model.dart';
 class LevelLoader {
 
   /// The path where the levels are stored
-  static const String levelBasePath = "resources/level/";
+  static const String _levelBasePath = "resources/level/";
 
   /// The reference to the newly loaded level
-  Level level;
+  Level _level;
 
   /// Returns a [Level] with the specific id which is loaded from the web server
   Future<Level> getLevel(int id) async {
 
-    Future<Map> jsonMap = LevelLoader.makeRequest(id);
+    Future<Map> jsonMap = LevelLoader._makeRequest(id);
 
     // initialise maps
     Map EntitiesMap = await jsonMap;
@@ -49,28 +49,28 @@ class LevelLoader {
       }
 
       if (model != null) {
-        model.dy = this.level.getVerticalMovementPerUpdate();
+        model.dy = this._level.getVerticalMovementPerUpdate();
         queuedEntities.add(model);
       }
       elementId++;
     });
-    this.level.remainingEntities = queuedEntities;
-    return this.level;
+    this._level.remainingEntities = queuedEntities;
+    return this._level;
   }
 
   /// Returns the loaded json object as a map with keys out of the level properties
-  static Future<Map> makeRequest(int id) async {
-    var path= levelBasePath + 'level' + id.toString() + '.json';
+  static Future<Map> _makeRequest(int id) async {
+    var path= _levelBasePath + 'level' + id.toString() + '.json';
     var r = HttpRequest.getString(path);
     String str = await r;
     return json.decode(str);
   }
 
-  /// Initialises the [level] of class [Level] with the basic and mandatory
+  /// Initialises the [_level] of class [Level] with the basic and mandatory
   /// parameters needed to start a level. This includes everything except for
   /// the game entities.
   void _createLevelStump(Map paramsMap) {
-    this.level = new Level(
+    this._level = new Level(
         paramsMap.putIfAbsent("timelimit", () => 100) as int,// Time limit
         paramsMap.putIfAbsent("initialscore", () => 100) as int, // Initial score
         paramsMap.putIfAbsent("targetscore", () => 100) as int, // target Score
@@ -84,87 +84,87 @@ class LevelLoader {
   /// Returns a new [Dot] object out of a distinct id and a Map with the
   /// keys and values which have to match with the [Dot]'s constructor.
   Dot _getDot(int eId, Map e) {
-    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    int width = this._level.viewWidth - (this._level.viewWidth * Dot.getStandardRadius()).floor();
     return Dot(
         eId,
         (width * e.putIfAbsent("x", () => 0)), // x
-        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
+        this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
         e.putIfAbsent("value", () => 1) as int,
-        (this.level.viewWidth * Dot.getStandardRadius()).floor(),
-        (this.level.viewWidth * Dot.getStandardRadius()).floor(),
-        this.level
+        (this._level.viewWidth * Dot.getStandardRadius()).floor(),
+        (this._level.viewWidth * Dot.getStandardRadius()).floor(),
+        this._level
     );
   }
 
   /// Returns a new [Brick] object out of a distinct id and a Map with the
   /// keys and values which have to match with the [Brick]'s constructor.
   Brick _getBrick(int eId, Map e) {
-    int width = this.level.viewWidth - (this.level.viewWidth * Brick.getStandardWidth()).floor();
+    int width = this._level.viewWidth - (this._level.viewWidth * Brick.getStandardWidth()).floor();
     return Brick(
         eId,
         (width * e.putIfAbsent("x", () => 0)), // x
-        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
+        this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int), // y
         e.putIfAbsent("value", () => 1) as int,
-        (this.level.viewWidth * Brick.getStandardWidth()).floor(),
-        (this.level.viewHeight * Brick.getStandardHeight()).floor(),
-        this.level
+        (this._level.viewWidth * Brick.getStandardWidth()).floor(),
+        (this._level.viewHeight * Brick.getStandardHeight()).floor(),
+        this._level
     );
   }
 
   /// Returns a new [Barrier] object out of a distinct id and a Map with the
   /// keys and values which have to match with the [Barrier]'s constructor.
   Barrier _getBarrier(int eId, Map e) {
-    int width = this.level.viewWidth - (this.level.viewWidth * Barrier.getStandardWidth()).floor();
-    int barrierHeight = -1 * this.level.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int).floor();
+    int width = this._level.viewWidth - (this._level.viewWidth * Barrier.getStandardWidth()).floor();
+    int barrierHeight = -1 * this._level.getRemainingYFromTime(e.putIfAbsent("height", () => 0) as int).floor();
     return Barrier(
         eId,
         width * e.putIfAbsent("x", () => 0),
-        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
-        (this.level.viewWidth * Barrier.getStandardWidth()).floor(),
+        this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
+        (this._level.viewWidth * Barrier.getStandardWidth()).floor(),
         barrierHeight,
-        this.level
+        this._level
     );
   }
 
   /// Returns a new [DoubleUp] object out of a distinct id and a Map with the
   /// keys and values which have to match with the [DoubleUp]'s constructor.
   DoubleUp _getDoubleUp(int eId, Map e) {
-    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    int width = this._level.viewWidth - (this._level.viewWidth * Dot.getStandardRadius()).floor();
     return DoubleUp(
         eId,
         width * e.putIfAbsent("x", () => 0),
-        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+        this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
         (width * Dot.getStandardRadius()).floor(),
         (width * Dot.getStandardRadius()).floor(),
-        this.level
+        this._level
     );
   }
 
   /// Returns a new [SlowDown] object out of a distinct id and a Map with the
   /// keys and values which have to match with the [SlowDown]'s constructor.
   SlowDown _getSlowDown(int eId, Map e) {
-    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    int width = this._level.viewWidth - (this._level.viewWidth * Dot.getStandardRadius()).floor();
     return SlowDown(
         eId,
         width * e.putIfAbsent("x", () => 0),
-        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+        this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
         (width * Dot.getStandardRadius()).floor(),
         (width * Dot.getStandardRadius()).floor(),
-        this.level
+        this._level
     );
   }
 
   /// Returns a new [Drill] object out of a distinct id and a Map with the
   /// keys and values which have to match with the [Drill]'s constructor.
   Drill _getDrill(int eId, Map e) {
-    int width = this.level.viewWidth - (this.level.viewWidth * Dot.getStandardRadius()).floor();
+    int width = this._level.viewWidth - (this._level.viewWidth * Dot.getStandardRadius()).floor();
     return Drill(
         eId,
         width * e.putIfAbsent("x", () => 0),
-        this.level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
+        this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
         (width * Dot.getStandardRadius()).floor(),
         (width * Dot.getStandardRadius()).floor(),
-        this.level
+        this._level
     );
   }
 }
