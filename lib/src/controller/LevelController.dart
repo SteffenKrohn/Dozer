@@ -24,31 +24,30 @@ class LevelController {
 
   /// Loads a new [LevelController] and starts the specific [level]
   static void loadAndStart(AppController ac, int level) async {
-    Future<LevelController> dlc = LevelController.load(ac, level);
+    Future<LevelController> dlc = LevelController._load(ac, level);
     LevelController lc = await dlc;
-    await lc.start();
+    await lc._start();
     lc._increaseNrOfTries();
   }
 
   /// Factory method of the [LevelController]
-  static Future<LevelController> load(AppController ac, int level) async {
-
+  static Future<LevelController> _load(AppController ac, int levelNr) async {
     LevelController lc = new LevelController();
-
     lc._appController = ac;
-    lc._levelView = new LevelView(lc.level);
 
     // get level from [LevelLoader] and initialise [lc]
-    Level lvl = await LevelLoader().getLevel(level);
+    Level lvl = await LevelLoader().getLevel(levelNr);
     lc.level = lvl;
-    lc._levelView.level = lvl;
-    lc._levelView.createVisualBar();
+
+    // create the [LevelView]
+    lc._levelView = new LevelView(lvl)
+      ..createVisualBar();
 
     return lc;
   }
 
   /// Starts the loaded level
-  void start() {
+  void _start() {
     // Enable the appropriate control
     if (this._appController.gyroAvailable) {
       this._enableOrientationControl();
@@ -67,6 +66,7 @@ class LevelController {
       this._levelView.render();
       this.level.update();
 
+      // check if player looses
       if (this.level.gameLost()) {
         this.timer.cancel();
 
@@ -75,27 +75,16 @@ class LevelController {
         return;
       }
 
+      // check if player wins
       if (this.level.gameWon()) {
         this.timer.cancel();
-
-        // check highscore from local storage
-        int oldHighscore = 0;
-        bool isNewHighscore = true;
-        String key = AppController.highscoreLevelKey + this.level.level.toString();
-        if(this._localStorage.containsKey(key)) {
-          oldHighscore = int.parse(this._localStorage[key]);
-          isNewHighscore = oldHighscore < this.level.getScore() ? true : false;
-        }
-        if(oldHighscore < this.level.getScore()){
-          this._localStorage[key] = this.level.getScore().toString();
-        }
 
         // TODO will be deleted later
         // send score stats
         this._appController.sendCompetitionStats(this.level.level, this.level.getScore(), this.level.tries);
 
         // show win message
-        this._appController.showMessageWin(this.level.getScore(), isNewHighscore, this.level.tries);
+        this._appController.showMessageWin(this.level.getScore(), this._updateHighscore(), this.level.tries);
         return;
       }
     });
@@ -145,5 +134,23 @@ class LevelController {
       this.timer.cancel();
       this._appController.showLevelOverview();
     });
+  }
+
+  /// Updates the highscore in local storage and returns true if the player
+  /// reached a new highscore. Else if no update took place it returns false.
+  bool _updateHighscore() {
+    int oldHighscore = 0;
+    bool isNewHighscore = true;
+    String key = AppController.highscoreLevelKey + this.level.level.toString();
+
+    if(this._localStorage.containsKey(key)) {
+      oldHighscore = int.parse(this._localStorage[key]);
+      isNewHighscore = oldHighscore < this.level.getScore() ? true : false;
+    }
+    if(oldHighscore < this.level.getScore()){
+      this._localStorage[key] = this.level.getScore().toString();
+    }
+
+    return isNewHighscore;
   }
 }
