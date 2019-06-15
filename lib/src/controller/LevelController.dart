@@ -11,6 +11,10 @@ import 'package:dozergame/file.dart';
 /// and start a level.
 class LevelController {
 
+  /// It is the sensitivity with which the Dozer is controlled.
+  /// High value means less sensitivity and faster movement and vice versa.
+  static const sensitivity = 4;
+
   /// Reference of the [AppController]
   AppController _appController;
   /// Reference to the model implementation of the level
@@ -111,7 +115,7 @@ class LevelController {
   /// Enables control of the dozer by tilting the phone
   void _enableOrientationControl() {
     window.onDeviceOrientation.listen((ev) {
-      this.level.getDozer().move(ev.gamma / 4, 0);
+      this.level.getDozer().move(ev.gamma / LevelController.sensitivity, 0);
     });
   }
 
