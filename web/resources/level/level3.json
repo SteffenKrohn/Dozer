@@ -10,20 +10,20 @@
   "entities": [
     {
       "type": "barrier",
-      "height": 2000,
-      "time": 1500,
+      "height": 1000,
+      "time": 2500,
       "x": 0.25
     },
     {
       "type": "barrier",
-      "height": 2000,
-      "time": 1500,
+      "height": 1000,
+      "time": 2500,
       "x": 0.5
     },
     {
       "type": "barrier",
-      "height": 2000,
-      "time": 1500,
+      "height": 1000,
+      "time": 2500,
       "x": 0.75
     },
     {
@@ -54,20 +54,20 @@
 
     {
       "type": "barrier",
-      "height": 2000,
-      "time": 5000,
+      "height": 1000,
+      "time": 6000,
       "x": 0.25
     },
     {
       "type": "barrier",
-      "height": 2000,
-      "time": 5000,
+      "height": 1000,
+      "time": 6000,
       "x": 0.5
     },
     {
       "type": "barrier",
-      "height": 2000,
-      "time": 5000,
+      "height": 1000,
+      "time": 6000,
       "x": 0.75
     },
     {
