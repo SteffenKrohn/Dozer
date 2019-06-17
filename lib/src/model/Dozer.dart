@@ -20,6 +20,10 @@ class Dozer extends Entity {
   List<DozerTail> tailEntities = new List<DozerTail>();
   /// The gap of one [DozerTail] Entity to the next one
   double _tailGap;
+  /// A scientifically correct calculated constant of the moved distance of
+  /// entities so the dozer tail entities go down with the other entities
+  /// that entities don't intersect with the dozer tail
+  double _movedDistance;
 
   /// Fields that track if a power up is active
   List<Future> drillFutures = List();
@@ -41,6 +45,7 @@ class Dozer extends Entity {
     this.y = this._getYAccordingToScore();
 
     this._tailGap = this.height * TAIL_GAP;
+    this._movedDistance = this.level.getVerticalMovementPerUpdate() / (1.15 * this.level.laneSpeed + 1.54);
 
     for(int i = 0; i <= this.level.targetScore * AppController.framerate; i++) {
       this._tailRoute.add(Coordinates(this.x, this.y + (i * this._tailGap * this.level.laneSpeed)));
@@ -64,7 +69,7 @@ class Dozer extends Entity {
 
     // Add new Route Coordinate to List and update existing ones
     this._tailRoute.removeLast();
-    this._tailRoute.forEach((c) => c.y += this.level.getVerticalMovementPerUpdate() / (1.15 * this.level.laneSpeed + 1.54));
+    this._tailRoute.forEach((c) => c.y += this._movedDistance);
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
 
 
