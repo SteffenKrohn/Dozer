@@ -45,7 +45,7 @@ class Dozer extends Entity {
     this.y = this._getYAccordingToScore();
 
     this._tailGap = this.height * TAIL_GAP;
-    this._movedDistance = this.level.getVerticalMovementPerUpdate() / (1.15 * this.level.laneSpeed + 1.54);
+    this._movedDistance = this.level.getVerticalMovementPerUpdate() / (0.96 * this.level.laneSpeed + 1.62);
 
     for(int i = 0; i <= this.level.targetScore * AppController.framerate; i++) {
       this._tailRoute.add(Coordinates(this.x, this.y + (i * this._tailGap * this.level.laneSpeed)));
