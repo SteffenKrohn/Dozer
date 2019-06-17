@@ -11,43 +11,43 @@
     {
       "type": "barrier",
       "height": 1000,
-      "time": 2500,
+      "time": 1500,
       "x": 0.25
     },
     {
       "type": "barrier",
       "height": 1000,
-      "time": 2500,
+      "time": 1500,
       "x": 0.5
     },
     {
       "type": "barrier",
       "height": 1000,
-      "time": 2500,
+      "time": 1500,
       "x": 0.75
     },
     {
       "type": "brick",
       "value": 6,
-      "time": 3500,
+      "time": 2500,
       "x": 0.0
     },
     {
       "type": "brick",
       "value": 3,
-      "time": 3500,
+      "time": 2500,
       "x": 0.3333333333333333
     },
     {
       "type": "brick",
       "value": 7,
-      "time": 3500,
+      "time": 2500,
       "x": 0.6666666666666666
     },
     {
       "type": "brick",
       "value": 4,
-      "time": 3500,
+      "time": 2500,
       "x": 1.0
     },
 
@@ -55,43 +55,43 @@
     {
       "type": "barrier",
       "height": 1000,
-      "time": 6000,
+      "time": 4500,
       "x": 0.25
     },
     {
       "type": "barrier",
       "height": 1000,
-      "time": 6000,
+      "time": 4500,
       "x": 0.5
     },
     {
       "type": "barrier",
       "height": 1000,
-      "time": 6000,
+      "time": 4500,
       "x": 0.75
     },
     {
       "type": "brick",
       "value": 16,
-      "time": 7000,
+      "time": 5500,
       "x": 0.0
     },
     {
       "type": "brick",
       "value": 19,
-      "time": 7000,
+      "time": 5500,
       "x": 0.3333333333333333
     },
     {
       "type": "brick",
       "value": 4,
-      "time": 7000,
+      "time": 5500,
       "x": 0.6666666666666666
     },
     {
       "type": "brick",
       "value": 11,
-      "time": 7000,
+      "time": 5500,
       "x": 1.0
     },
 
@@ -99,56 +99,56 @@
     {
       "type": "barrier",
       "height": 1000,
-      "time": 9000,
+      "time": 7500,
       "x": 0.25
     },
     {
       "type": "barrier",
       "height": 1000,
-      "time": 9000,
+      "time": 7500,
       "x": 0.5
     },
     {
       "type": "barrier",
       "height": 1000,
-      "time": 9000,
+      "time": 7500,
       "x": 0.75
     },
     {
       "type": "brick",
       "value": 6,
-      "time": 10000,
+      "time": 8500,
       "x": 0.0
     },
     {
       "type": "brick",
       "value": 17,
-      "time": 10000,
+      "time": 8500,
       "x": 0.3333333333333333
     },
     {
       "type": "brick",
       "value": 13,
-      "time": 10000,
+      "time": 8500,
       "x": 0.6666666666666666
     },
     {
       "type": "brick",
       "value": 8,
-      "time": 10000,
+      "time": 8500,
       "x": 1.0
     },
 
     {
       "type": "dot",
       "value": 20,
-      "time": 12000,
+      "time": 9500,
       "x": 0.3333333333333333
     },
     {
       "type": "dot",
       "value": 20,
-      "time": 12000,
+      "time": 9500,
       "x": 0.6666666666666666
     }
   ]
