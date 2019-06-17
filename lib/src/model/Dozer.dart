@@ -64,8 +64,7 @@ class Dozer extends Entity {
 
     // Add new Route Coordinate to List and update existing ones
     this._tailRoute.removeLast();
-    double movedDistance = this._tailRoute[1].y - this.y;
-    this._tailRoute.forEach((c) => c.y += movedDistance);
+    this._tailRoute.forEach((c) => c.y += this.level.getVerticalMovementPerUpdate() / (2 * this.level.laneSpeed + 1.2));
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
 
 
