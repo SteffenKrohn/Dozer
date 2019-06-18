@@ -4,7 +4,6 @@ import 'package:dozergame/model.dart';
 /// It is seperate from the [Dozer] class because its much more simple and
 /// the tail does not have to be checked for collisions
 class DozerTail extends Entity {
-
   /// Creates a simple [DozerTail] object
   DozerTail(int id, double x, double y, Level level) {
     this.id = id;

@@ -7,16 +7,17 @@ import 'package:dozergame/view.dart';
 /// for the buttons, can make the views switch and can call the load method of
 /// the [LevelController] for starting a level.
 class AppController {
-
   /// The Target Framerate of the application in hz
   static const int framerate = 40;
 
   /// The 'number of reached level' key for the local storage
   static const String _reachedLevelKey = "reachedLevel_v2";
+
   /// The 'highscore for level x' key for the local storage.
   /// Using this key alone is not sufficient.
   /// You have to append a String with the level number.
   static const String highscoreLevelKey = "highscore_level_v2_";
+
   /// The 'number of tries for level x' key for the local storage.
   /// Using this key alone is not sufficient.
   /// You have to append a String with the level number.
@@ -29,18 +30,20 @@ class AppController {
   /// After the app startup it's set to the reached Level and after the click
   /// on one specific level in the 'chooseLevelView' it's set to the specific one.
   int _activeLevel = 1;
+
   /// The reached Level of the user
   int _reachedLevel = 1;
+
   /// This is the number of all available level
   int _nrAvailableLevels = 500;
+
   /// Is the gyro sensor retrieval available
   bool gyroAvailable = false;
 
   /// This method initialises the app at startup
   void startup() {
-
     // get reached level from local storage
-    if(this._localStorage.containsKey(_reachedLevelKey)) {
+    if (this._localStorage.containsKey(_reachedLevelKey)) {
       this._reachedLevel = int.parse(this._localStorage[_reachedLevelKey]);
     }
     this._activeLevel = this.getReachedLevel();
@@ -48,10 +51,10 @@ class AppController {
     // Check gyro sensor support and show first screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
-      if(!this.gyroAvailable) {
+      if (!this.gyroAvailable) {
         // on desktop devices
         this.showMessageNoSupportForGyro();
-      } else if((window.innerHeight / window.screen.height) < 0.92) {
+      } else if ((window.innerHeight / window.screen.height) < 0.92) {
         // shown if not started in fullscreen (0.92 because on iphone fs is not
         // possible and with the notch it's even smaller)
         this.showWelcomeScreenOnMobileDevices();
@@ -80,7 +83,6 @@ class AppController {
   /// Will be called only if the 'messageWelcomeScreenOnMobile' was called before.
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
-
       this.showLevelOverview();
       try {
         document.body.requestFullscreen();
@@ -238,7 +240,7 @@ class AppController {
   int getHighscore(int level) {
     int hs = 0;
     String key = highscoreLevelKey + level.toString();
-    if(this._localStorage.containsKey(key)) {
+    if (this._localStorage.containsKey(key)) {
       hs = int.parse(this._localStorage[key]);
     }
     return hs;

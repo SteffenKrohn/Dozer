@@ -6,7 +6,6 @@ import 'package:dozergame/model.dart';
 /// The [LevelLoader] is responsible for loading the JSON files from the web server
 /// and deserialize them to [Level] objects with the corresponding [Entity]'s
 class LevelLoader {
-
   /// The path where the levels are stored
   static const String _levelBasePath = "resources/level/";
 
@@ -15,7 +14,6 @@ class LevelLoader {
 
   /// Returns a [Level] with the specific id which is loaded from the web server
   Future<Level> getLevel(int id) async {
-
     Future<Map> jsonMap = LevelLoader._makeRequest(id);
 
     // initialise maps
@@ -60,7 +58,7 @@ class LevelLoader {
 
   /// Returns the loaded json object as a map with keys out of the level properties
   static Future<Map> _makeRequest(int id) async {
-    var path= _levelBasePath + 'level' + id.toString() + '.json';
+    var path = _levelBasePath + 'level' + id.toString() + '.json';
     var r = HttpRequest.getString(path);
     String str = await r;
     return json.decode(str);
@@ -71,14 +69,13 @@ class LevelLoader {
   /// the game entities.
   void _createLevelStump(Map paramsMap) {
     this._level = new Level(
-        paramsMap.putIfAbsent("timelimit", () => 100) as int,// Time limit
+        paramsMap.putIfAbsent("timelimit", () => 100) as int, // Time limit
         paramsMap.putIfAbsent("initialscore", () => 100) as int, // Initial score
         paramsMap.putIfAbsent("targetscore", () => 100) as int, // target Score
         paramsMap.putIfAbsent("lanespeed", () => 100) as double, // lanespeed
-        paramsMap.putIfAbsent("level", () => 100) as int,  // level id
+        paramsMap.putIfAbsent("level", () => 100) as int, // level id
         window.innerHeight.floor(),
-        window.innerWidth.floor()
-    );
+        window.innerWidth.floor());
   }
 
   /// Returns a new [Dot] object out of a distinct id and a Map with the
@@ -92,8 +89,7 @@ class LevelLoader {
         e.putIfAbsent("value", () => 1) as int,
         (this._level.viewWidth * Dot.getStandardRadius()).floor(),
         (this._level.viewWidth * Dot.getStandardRadius()).floor(),
-        this._level
-    );
+        this._level);
   }
 
   /// Returns a new [Brick] object out of a distinct id and a Map with the
@@ -107,8 +103,7 @@ class LevelLoader {
         e.putIfAbsent("value", () => 1) as int,
         (this._level.viewWidth * Brick.getStandardWidth()).floor(),
         (this._level.viewHeight * Brick.getStandardHeight()).floor(),
-        this._level
-    );
+        this._level);
   }
 
   /// Returns a new [Barrier] object out of a distinct id and a Map with the
@@ -122,8 +117,7 @@ class LevelLoader {
         this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int) - barrierHeight,
         (this._level.viewWidth * Barrier.getStandardWidth()).floor(),
         barrierHeight,
-        this._level
-    );
+        this._level);
   }
 
   /// Returns a new [DoubleUp] object out of a distinct id and a Map with the
@@ -136,8 +130,7 @@ class LevelLoader {
         this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
         (width * Dot.getStandardRadius()).floor(),
         (width * Dot.getStandardRadius()).floor(),
-        this._level
-    );
+        this._level);
   }
 
   /// Returns a new [SlowDown] object out of a distinct id and a Map with the
@@ -150,8 +143,7 @@ class LevelLoader {
         this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
         (width * Dot.getStandardRadius()).floor(),
         (width * Dot.getStandardRadius()).floor(),
-        this._level
-    );
+        this._level);
   }
 
   /// Returns a new [Drill] object out of a distinct id and a Map with the
@@ -164,7 +156,6 @@ class LevelLoader {
         this._level.getRemainingYFromTime(e.putIfAbsent("time", () => 0) as int),
         (width * Dot.getStandardRadius()).floor(),
         (width * Dot.getStandardRadius()).floor(),
-        this._level
-    );
+        this._level);
   }
 }

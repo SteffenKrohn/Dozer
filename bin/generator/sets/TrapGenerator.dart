@@ -7,7 +7,6 @@ import '../generator_sets.dart';
 /// The [Dot] is flanked by two [Barrier]s and at ge end is a [Brick].
 /// So when the player decides to collect he [Dot] he will also crash into the [Brick]
 class TrapGenerator extends SetGenerator {
-
   /// Constructor takes only the [time] as a parameter
   TrapGenerator(int time) {
     this.time = time;
@@ -28,8 +27,8 @@ class TrapGenerator extends SetGenerator {
     }
     if (lane != 3) {
       double x = lane * 0.25 + 0.25;
-       b = BarrierGenerator(time, x);
-       b.height = 1000;
+      b = BarrierGenerator(time, x);
+      b.height = 1000;
       output += b.generate() + ",";
     }
     output += DotGenerator(time + 100, lane / 3 + 0.12).generate() + ",";

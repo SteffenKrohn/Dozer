@@ -4,7 +4,6 @@ import 'package:dozergame/model.dart';
 /// ability to break through bricks without decreasing his score/length.
 /// It extends of the [PowerUp] class.
 class Drill extends PowerUp {
-
   /// The constructor to create a [Drill]
   Drill(int id, double x, double y, int width, int height, Level level) {
     this.id = id;

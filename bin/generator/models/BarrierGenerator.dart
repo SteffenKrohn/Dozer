@@ -3,13 +3,14 @@ import '../generator_model.dart';
 
 /// Generates a string representation of a [Barrier]
 class BarrierGenerator extends EntityGenerator {
-
   String type = "barrier";
+
   /// The height of the generated [Barrier]
   int height;
 
   /// The minimum height of the [Barrier]
   int minHeight = 300;
+
   /// The maximum height of the [Barrier]
   int maxHeight = 3000;
 
@@ -31,13 +32,11 @@ class BarrierGenerator extends EntityGenerator {
   }
 
   String generate() {
-    return
-      '{' +
+    return '{' +
         '"type": "${this.type}",' +
         '"time": ${this.time},' +
         '"x": ${this.x},' +
         '"height": ${this.height}'
-      '}'
-    ;
+        '}';
   }
 }

@@ -10,19 +10,22 @@ import 'package:dozergame/file.dart';
 /// It automatically calls methods of the [LevelLoader] and the [Level] to load
 /// and start a level.
 class LevelController {
-
   /// It is the sensitivity with which the Dozer is controlled.
   /// High value means less sensitivity and faster movement and vice versa.
   static const sensitivity = 4;
 
   /// Reference of the [AppController]
   AppController _appController;
+
   /// Reference to the model implementation of the level
   Level level;
+
   /// Reference to the view implementation of the level
   LevelView _levelView;
+
   /// The reference of the local storage
   final Storage _localStorage = window.localStorage;
+
   /// A timer used for counting down the level duration
   Timer timer;
 
@@ -44,8 +47,7 @@ class LevelController {
     lc.level = lvl;
 
     // create the [LevelView]
-    lc._levelView = new LevelView(lvl)
-      ..createVisualBar();
+    lc._levelView = new LevelView(lvl)..createVisualBar();
 
     return lc;
   }
@@ -91,7 +93,7 @@ class LevelController {
   }
 
   /// Enables control of the dozer by keyboard namely the left, right and upper arrow keys
-  void _enableKeyboardControl(){
+  void _enableKeyboardControl() {
     window.onKeyDown.listen((KeyboardEvent e) {
       //Left pressed
       if (e.keyCode == 37) {
@@ -119,7 +121,7 @@ class LevelController {
   Future _increaseNrOfTries() async {
     int tries = 0;
     String key = AppController.triesLevelKey + this.level.level.toString();
-    if(this._localStorage.containsKey(key)) {
+    if (this._localStorage.containsKey(key)) {
       tries = int.parse(this._localStorage[key]);
     }
     tries += 1;
@@ -143,11 +145,11 @@ class LevelController {
     bool isNewHighscore = true;
     String key = AppController.highscoreLevelKey + this.level.level.toString();
 
-    if(this._localStorage.containsKey(key)) {
+    if (this._localStorage.containsKey(key)) {
       oldHighscore = int.parse(this._localStorage[key]);
       isNewHighscore = oldHighscore < this.level.getScore() ? true : false;
     }
-    if(oldHighscore < this.level.getScore()){
+    if (oldHighscore < this.level.getScore()) {
       this._localStorage[key] = this.level.getScore().toString();
     }
 

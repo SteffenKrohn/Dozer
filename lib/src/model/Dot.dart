@@ -2,7 +2,6 @@ import 'package:dozergame/model.dart';
 
 /// The model representation of the dot's used to increase the dozer length and score
 class Dot extends Entity {
-
   /// The value displayed in a dot and used to increase the score
   int value;
 

@@ -4,7 +4,6 @@ import 'package:dozergame/model.dart';
 /// ability to increase his score by double the amount of the dot's values.
 /// It extends of the [PowerUp] class.
 class DoubleUp extends PowerUp {
-
   /// The constructor to create a [DoubleUp]
   DoubleUp(int id, double x, double y, int width, int height, Level level) {
     this.id = id;

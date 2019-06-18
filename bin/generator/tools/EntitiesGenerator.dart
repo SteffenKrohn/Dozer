@@ -5,7 +5,6 @@ import '../generator_sets.dart';
 
 /// Generates an json array of all entities for a new level
 class EntitiesGenerator {
-
   /// Parameter that determine the placement in the level
   int time = 1000;
 
@@ -17,13 +16,13 @@ class EntitiesGenerator {
   EntitiesGenerator() {
     chances.add(20); // Brick
     chances.add(18); // Dot
-    chances.add(6);  // Barrier
-    chances.add(1);  // Drill
-    chances.add(1);  // DoubleUp
-    chances.add(0);  // SlowDown
-    chances.add(1);  // Wall
-    chances.add(1);  // Stair
-    chances.add(1);  // Trap
+    chances.add(6); // Barrier
+    chances.add(1); // Drill
+    chances.add(1); // DoubleUp
+    chances.add(0); // SlowDown
+    chances.add(1); // Wall
+    chances.add(1); // Stair
+    chances.add(1); // Trap
   }
 
   /// Generates the json array of the entities
@@ -32,7 +31,7 @@ class EntitiesGenerator {
   String generateEntities(int count, int gap) {
     String output = '"entities": [';
 
-    for(int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
       output += generateEntity();
       output += ",";
       time += gap;
@@ -151,6 +150,5 @@ class EntitiesGenerator {
     TrapGenerator t = TrapGenerator(time);
     time += 1000;
     return t.generate();
-
   }
 }

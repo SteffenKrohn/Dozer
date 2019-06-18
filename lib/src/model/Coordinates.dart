@@ -3,6 +3,7 @@
 class Coordinates {
   /// The horizontal coordinate of the [Entity]
   final double x;
+
   /// The vertical coordinate of the [Entity]
   double y;
 
@@ -10,5 +11,5 @@ class Coordinates {
   /// E.g. image direction, when the [Dozer] is displayed by an image.
   // final int dx;
 
-  Coordinates(this.x, this.y){}
+  Coordinates(this.x, this.y) {}
 }

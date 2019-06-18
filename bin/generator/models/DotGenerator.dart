@@ -3,13 +3,14 @@ import '../generator_model.dart';
 
 /// Generates a string representation of a [Dot]
 class DotGenerator extends EntityGenerator {
-
   String type = "dot";
+
   /// The value the generated [Dot] will have
   int value;
 
   /// The minimum value the [Dot] can have
   int minValue = 1;
+
   /// The maximum value the [Dot] can have
   int maxValue = 10;
 
@@ -31,13 +32,11 @@ class DotGenerator extends EntityGenerator {
   }
 
   String generate() {
-    return
-      '{' +
+    return '{' +
         '"type": "${this.type}",' +
         '"time": ${this.time},' +
         '"x": ${this.x},' +
         '"value": ${this.value}'
-      '}'
-    ;
+        '}';
   }
 }

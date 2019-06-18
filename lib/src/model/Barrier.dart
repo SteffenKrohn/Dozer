@@ -4,7 +4,6 @@ import 'package:dozergame/model.dart';
 /// This is used to build obstacles for the player.
 /// Upon hitting the Barrier, the [Dozer] can't move in this direction any further.
 class Barrier extends Entity {
-
   /// The constructor to create a [Barrier]
   Barrier(int id, double x, double y, int width, int height, Level level) {
     this.id = id;

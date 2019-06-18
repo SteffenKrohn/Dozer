@@ -2,7 +2,6 @@ import '../generator_model.dart';
 
 /// Generates a string representation of a [DoubleUp]
 class DoubleUpGenerator extends EntityGenerator {
-
   String type = "doubleup";
 
   /// Constructor for this Generator takes the [time] and [x] coordinate
@@ -12,12 +11,6 @@ class DoubleUpGenerator extends EntityGenerator {
   }
 
   String generate() {
-    return
-      '{' +
-        '"type": "${this.type}",' +
-        '"time": ${this.time},' +
-        '"x": ${this.x}' +
-      '}'
-    ;
+    return '{' + '"type": "${this.type}",' + '"time": ${this.time},' + '"x": ${this.x}' + '}';
   }
 }

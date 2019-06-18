@@ -3,13 +3,14 @@ import '../generator_model.dart';
 
 /// Generates a string representation of a [Brick]
 class BrickGenerator extends EntityGenerator {
-
   String type = "brick";
+
   /// The value the generated [Brick] will have
   int value;
 
   /// The minimum value the [Brick] can have
   int minValue = 1;
+
   /// The maximum value the [Brick] can have
   int maxValue = 21;
 
@@ -31,13 +32,11 @@ class BrickGenerator extends EntityGenerator {
   }
 
   String generate() {
-    return
-      '{' +
+    return '{' +
         '"type": "${this.type}",' +
         '"time": ${this.time},' +
         '"x": ${this.x},' +
         '"value": ${this.value}'
-      '}'
-    ;
+        '}';
   }
 }

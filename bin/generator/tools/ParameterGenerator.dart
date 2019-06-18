@@ -2,15 +2,18 @@ import 'dart:math';
 
 /// Generates a json block containing all necessary parameters for a level
 class ParameterGenerator {
-
   /// The ID of the level
   int levelId;
+
   /// The time the player has to finish the level
   int timeLimit;
+
   /// The score the player starts the level with
   int initialScore;
+
   /// The score the player has to reach to win the level
   int targetScore;
+
   /// The speed at which the elements move from the top of the screen to the bottom
   /// A speed of 1.0 results in the elements needing one seconds for that.
   /// A speed greater than 1.5 will result in a nearly impossible level
@@ -23,16 +26,19 @@ class ParameterGenerator {
 
   /// The minimum initial score that the level can have
   int minInitialScore = 10;
+
   /// The maximum initial score the level can have
   int maxInitialScore = 15;
 
   /// The minimum target score hat the level can have
   int minTargetScore = 40;
+
   /// The maximum target score the level can have
   int maxTargetScore = 50;
 
   /// The minimum speed that the level can have
   double minLaneSpeed = 0.6;
+
   /// The maximum speed the level can have
   double maxLaneSpeed = 1.0;
 
@@ -72,14 +78,12 @@ class ParameterGenerator {
 
   /// Puts all generated value for the parameters in a json block
   String toString() {
-    return
-      '"params": {' +
+    return '"params": {' +
         '"level": ${levelId},' +
         '"timelimit": ${this.timeLimit},' +
         '"initialscore": ${this.initialScore},' +
-        '"targetscore": ${this.targetScore},'+
+        '"targetscore": ${this.targetScore},' +
         '"lanespeed": ${this.laneSpeed}' +
-      '}'
-    ;
+        '}';
   }
 }

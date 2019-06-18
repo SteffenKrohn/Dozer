@@ -5,7 +5,6 @@ import 'dart:html';
 /// These [MenuView]'s are only rendered after click events or when a level is over.
 /// So they are static once they are called.
 class MenuView {
-
   /// This is the content what one [MenuView] will display when it's rendered
   HtmlElement content;
 
@@ -16,9 +15,7 @@ class MenuView {
 
   /// The method will change the DOM-Tree according to the [content]
   void render() {
-    querySelector("body").setInnerHtml(
-        "<div id='menu'></div>"
-    );
+    querySelector("body").setInnerHtml("<div id='menu'></div>");
     querySelector("#menu").insertAdjacentElement("afterbegin", this.content);
   }
 
@@ -42,7 +39,6 @@ class MenuView {
   /// active level can be started, the number of the active level is displayed,
   /// it's highscore, and the buttons to get to the credits and choose level view.
   MenuView levelOverview(int level, String levelInstruction) {
-
     DivElement div = DivElement();
     div.setAttribute("id", "button_start_level");
     div.setAttribute("class", "message");
@@ -83,7 +79,7 @@ class MenuView {
 
     DivElement outerDiv = DivElement();
     outerDiv.append(div);
-    
+
     DivElement buttonBox = getBottomButtonBox();
 
     buttonBox.setAttribute("style", "height: 20%");
@@ -91,7 +87,7 @@ class MenuView {
     credits.setAttribute("style", "height: 50%");
     buttonBox.append(chooseLevel);
     buttonBox.append(credits);
-    
+
     outerDiv.append(buttonBox);
 
     this.content = outerDiv;
@@ -103,7 +99,6 @@ class MenuView {
   /// displayed. Else just the score is displayed. This can be changed easily
   /// because the parameter 'tries' is mandatory.
   MenuView messageWin(int score, bool newHighscore, int tries) {
-
     String msgScore = newHighscore ? "New Highsore" : "Your Score";
 
     DivElement div = DivElement();
@@ -127,10 +122,9 @@ class MenuView {
       ..setAttribute("class", "highscore");
     div.append(scoreParagraph);
 
-    if(newHighscore) {
+    if (newHighscore) {
       String msgTries = tries > 1 ? "It took you $tries tries!" : "Unbelievable, with your first try!";
-      ParagraphElement triesParagraph = ParagraphElement()
-        ..appendText(msgTries);
+      ParagraphElement triesParagraph = ParagraphElement()..appendText(msgTries);
       div.append(triesParagraph);
     }
 
@@ -152,9 +146,8 @@ class MenuView {
   /// didn't make it in time, then a different loose message gets displayed as
   /// he would get if he looses because his dozer ran into a brick.
   MenuView messageLose(bool timeout) {
-
     String msg;
-    if(timeout) {
+    if (timeout) {
       msg = "Be faster and grow your dozer bigger next time!";
     } else {
       msg = "Your Dozer did not make it, avoid the dangerous bricks next time!";
@@ -291,8 +284,7 @@ class MenuView {
       ..appendText("Tap To Continue");
     div.append(tapToAdvance);
 
-    DivElement outerDiv = DivElement()
-      ..setAttribute("id", "button_to_menu");
+    DivElement outerDiv = DivElement()..setAttribute("id", "button_to_menu");
     outerDiv.append(div);
 
     this.content = outerDiv;
@@ -363,15 +355,14 @@ class MenuView {
       ..append(getLogo())
       ..append(HRElement());
 
-    DivElement chooseLevelWrapper = DivElement()
-      ..setAttribute("class", "choose-level-wrapper");
+    DivElement chooseLevelWrapper = DivElement()..setAttribute("class", "choose-level-wrapper");
 
     for (int i = 0; i < nrAvailableLevels; i++) {
       ButtonElement levelButton = ButtonElement()
-          ..setAttribute("value", (i + 1).toString())
-          ..setAttribute("class", "choose-level ${i < reachedLevel ? "reached" : ""}")
-          ..setAttribute("id", "level-${i + 1}")
-          ..appendText((i + 1).toString());
+        ..setAttribute("value", (i + 1).toString())
+        ..setAttribute("class", "choose-level ${i < reachedLevel ? "reached" : ""}")
+        ..setAttribute("id", "level-${i + 1}")
+        ..appendText((i + 1).toString());
 
       chooseLevelWrapper.append(levelButton);
     }

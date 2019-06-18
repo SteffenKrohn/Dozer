@@ -6,20 +6,24 @@ import 'package:dozergame/controller.dart';
 /// The model representation of the Dozer, the game's main character.
 /// It extends the class [Entity].
 class Dozer extends Entity {
-
   /// The maximum possible height of the [Dozer] in percent of the viewport height
   static const double MAXIMUM_DOZER_HEIGHT = 0.7;
+
   /// The gap between one [DozerTail] Entity and another in percent of one's height
   static const double TAIL_GAP = 0.5;
 
   /// The current score and length respectively of the [Dozer]
   int score;
+
   /// The route the [Dozer] went represented by [Coordinates]
   List<Coordinates> _tailRoute = new List<Coordinates>();
+
   /// A list of all [DozerTail] Entities
   List<DozerTail> tailEntities = new List<DozerTail>();
+
   /// The gap of one [DozerTail] Entity to the next one
   double _tailGap;
+
   /// A scientifically correct calculated constant of the moved distance of
   /// entities so the dozer tail entities go down with the other entities
   /// that entities don't intersect with the dozer tail
@@ -47,7 +51,7 @@ class Dozer extends Entity {
     this._tailGap = this.height * TAIL_GAP;
     this._movedDistance = this.level.getVerticalMovementPerUpdate() / (0.96 * this.level.laneSpeed + 1.62);
 
-    for(int i = 0; i <= this.level.targetScore * AppController.framerate; i++) {
+    for (int i = 0; i <= this.level.targetScore * AppController.framerate; i++) {
       this._tailRoute.add(Coordinates(this.x, this.y + (i * this._tailGap * this.level.laneSpeed)));
     }
     // Add the tail entities according to initial score
@@ -72,7 +76,6 @@ class Dozer extends Entity {
     this._tailRoute.forEach((c) => c.y += this._movedDistance);
     this._tailRoute.insert(0, Coordinates(this.x, this.y));
 
-
     this._updateExistingTailEntities();
     this._updateVerticalDozerPlacement();
   }
@@ -80,13 +83,13 @@ class Dozer extends Entity {
   /// Change vertical [Dozer] placement Y-Coordinate according to the score
   void _updateVerticalDozerPlacement() {
     // dozer grows in height
-    if(this._getYAccordingToScore() < this.y) {
+    if (this._getYAccordingToScore() < this.y) {
       this._tailRoute.forEach((c) => c.y -= 1);
       this.y -= 1;
       return;
     }
     // dozer shrinks in height
-    if(this._getYAccordingToScore() > this.y) {
+    if (this._getYAccordingToScore() > this.y) {
       this._tailRoute.forEach((c) => c.y += 1);
       this.y += 1;
       return;
@@ -96,12 +99,12 @@ class Dozer extends Entity {
   /// Adds or removes [DozerTail] according to the current score
   void _removeAndAddTailEntities() {
     // Remove Tail Entities after score decreases
-    while(this.tailEntities.length >= this.score && this.tailEntities.length > 0) {
+    while (this.tailEntities.length >= this.score && this.tailEntities.length > 0) {
       this.tailEntities.removeLast();
     }
 
     // Add Tail Entities after score increase
-    while(this.tailEntities.length + 1 < this.score) {
+    while (this.tailEntities.length + 1 < this.score) {
       this.tailEntities.add(DozerTail(-1 * (this.tailEntities.length + 1), this.x, this.y, this.level));
     }
   }
@@ -109,22 +112,19 @@ class Dozer extends Entity {
   /// Updates existing [DozerTail] entities
   void _updateExistingTailEntities() {
     Coordinates lastCoordinates = this._tailRoute.first;
-    for(int i = 0; i < this.tailEntities.length; i++) {
+    for (int i = 0; i < this.tailEntities.length; i++) {
       // theorem of pythagoras
-      Coordinates nextCoordinates = this._tailRoute.skip(i).firstWhere(
-        (c) =>
+      Coordinates nextCoordinates = this._tailRoute.skip(i).firstWhere((c) =>
           // Next Coordinate must be above old one
           c.y > lastCoordinates.y &&
-          sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap
-      );
+          sqrt(pow(lastCoordinates.y - c.y, 2) + pow(lastCoordinates.x - c.x, 2)) >= this._tailGap);
 
       this.tailEntities[i].x = nextCoordinates.x;
       this.tailEntities[i].y = nextCoordinates.y;
 
       lastCoordinates = nextCoordinates;
     }
-}
-
+  }
 
   /// Changes the score of the [Dozer].
   /// Depending on the power up´s behaviour it will be different.
@@ -236,7 +236,8 @@ class Dozer extends Entity {
 
   /// Gets the y height for the head of the [Dozer]
   double _getYAccordingToScore() {
-    return max(this.level.viewHeight * (1 - (this.score * 1.5 / 100)) - 10, this.level.viewHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
+    return max(this.level.viewHeight * (1 - (this.score * 1.5 / 100)) - 10,
+        this.level.viewHeight * Dozer.MAXIMUM_DOZER_HEIGHT);
   }
 
   @override

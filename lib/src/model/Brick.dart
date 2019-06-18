@@ -4,7 +4,6 @@ import 'package:dozergame/model.dart';
 /// This is used to build obstacles for the player.
 /// Upon hitting the Brick, the score will be decreased.
 class Brick extends Entity {
-
   /// The value is displayed and used to decrease the score
   int value;
 

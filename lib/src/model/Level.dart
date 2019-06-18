@@ -3,33 +3,40 @@ import 'package:dozergame/controller.dart';
 
 /// The model representation of a [Level]
 class Level {
-
   /// The always available entity reference of the [Dozer]
   Dozer _dozer;
 
   /// The number of this level
   final int level;
+
   /// The remaining time to accomplish this level in ms
   double timeLimit;
+
   /// The initial time limit of this level
   final int initialTimeLimit;
+
   /// The initial score of this level
   final int initialScore;
+
   /// The target score a user has to reach to win this level
   final int targetScore;
+
   /// The number of tries a user already tried this level
   int tries;
+
   /// The lanespeed equals the percentage which [Entity]'s (such as [Brick], [Dot]) move per second
   double laneSpeed;
 
   /// The map which contains all the [Entity]'s which are visible within the screen.
   /// Key is the entity's id and value is the entity's object reference.
   Map<int, Entity> visibleEntities = new Map<int, Entity>();
+
   /// The List which contains all remaining [Entity]'s ordered ascending to the displayed time
   List<Entity> remainingEntities;
 
   /// The view width in pixel
   final int viewWidth;
+
   /// The view height in pixel
   final int viewHeight;
 
@@ -38,7 +45,8 @@ class Level {
   bool slowDownActive = false;
 
   /// Creates a new [Level]
-  Level(this.initialTimeLimit, this.initialScore, this.targetScore, double laneSpeed, this.level, this.viewHeight, this.viewWidth) {
+  Level(this.initialTimeLimit, this.initialScore, this.targetScore, double laneSpeed, this.level, this.viewHeight,
+      this.viewWidth) {
     this.timeLimit = this.initialTimeLimit.toDouble();
     this.laneSpeed = laneSpeed;
 
@@ -102,7 +110,7 @@ class Level {
   void checkCollisions() async {
     this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {
-        if(CollisionChecker.recCir(e, this._dozer)) {
+        if (CollisionChecker.recCir(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
           if (e is Brick) {
@@ -110,7 +118,7 @@ class Level {
           }
         }
       } else if (e is Dot || e is PowerUp) {
-        if(CollisionChecker.circles(e, this._dozer)) {
+        if (CollisionChecker.circles(e, this._dozer)) {
           this._dozer.hitBy(e);
           e.hitBy(this._dozer);
           visibleEntities.remove(id);
@@ -184,8 +192,8 @@ class Level {
     });
 
     // remove
-    for(int i = this._dozer.tailEntities.length + 1; this.visibleEntities.containsKey(-1 * i); i++){
-      this.visibleEntities.remove(-1*i);
+    for (int i = this._dozer.tailEntities.length + 1; this.visibleEntities.containsKey(-1 * i); i++) {
+      this.visibleEntities.remove(-1 * i);
     }
   }
 }

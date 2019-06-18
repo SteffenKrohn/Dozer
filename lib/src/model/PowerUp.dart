@@ -6,7 +6,6 @@ import 'package:dozergame/model.dart';
 /// [Drill]
 /// [SlowDown]
 abstract class PowerUp extends Entity {
-
   /// Duration of the effect of the power up´s in ms
   final int duration = 5000;
 

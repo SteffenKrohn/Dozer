@@ -4,7 +4,6 @@ import 'package:dozergame/model.dart';
 /// ability to move the dozer slower through the virtual earth.
 /// It extends of the [PowerUp] class.
 class SlowDown extends PowerUp {
-
   /// The power of the effect of this power up
   /// 0.1 means a speed of 10%
   /// 0.5 means a speed of 50%

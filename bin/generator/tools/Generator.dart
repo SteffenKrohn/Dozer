@@ -2,11 +2,12 @@ import '../generator_tools.dart';
 
 /// Generates the json string for an entire level including the parameter and entities
 class Generator {
-
   /// The generator for the parameter
   ParameterGenerator pg;
+
   /// The ID of the generated level
   int levelId = 1;
+
   /// The generator for the entities
   EntitiesGenerator eg;
 
