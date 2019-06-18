@@ -9,6 +9,6 @@ authors.add("Tom Christopher Boettger");
 
 Game-URL: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/
 
-API-Doc: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/doc/2946548lolroflhash02351040235652250569/
+API-Doc: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/doc/api/
 
-Wiki-Doc: https://git.mylab.th-luebeck.de/webtech/ss2019/team-4a/wikis/home
+Wiki-Doc: https://git.mylab.th-luebeck.de/webtech/ss2019/team-4a/wikis/home/

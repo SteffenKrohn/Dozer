@@ -11,6 +11,5 @@ FROM nginx
 EXPOSE 80
 RUN sed -i -e 's,   location / {,   location /ss2019/team-4a {,g' /etc/nginx/conf.d/default.conf; \
 sed -i -e 's,        root   /usr/share/nginx/html;,        alias   /usr/share/nginx/html;,g' /etc/nginx/conf.d/default.conf
-COPY --from=builder /root/build-here/build /usr/share/nginx/html/final/competition/
-COPY --from=builder /root/build-here/doc /usr/share/nginx/html/doc/2946548lolroflhash02351040235652250569
-COPY --from=builder /root/build-here/final-presentation/fake /usr/share/nginx/html/
+COPY --from=builder /root/build-here/build /usr/share/nginx/html/
+COPY --from=builder /root/build-here/doc /usr/share/nginx/html/doc/api
