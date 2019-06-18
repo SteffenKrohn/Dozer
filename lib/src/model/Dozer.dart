@@ -232,7 +232,6 @@ class Dozer extends Entity {
       this.level.slowDownActive = true;
       return;
     }
-    //TODO other hitBy behaviour
   }
 
   /// Gets the y height for the head of the [Dozer]

@@ -83,10 +83,6 @@ class LevelController {
       if (this.level.gameWon()) {
         this.timer.cancel();
 
-        // TODO will be deleted later
-        // send score stats
-        this._appController.sendCompetitionStats(this.level.level, this.level.getScore(), this.level.tries);
-
         // show win message
         this._appController.showMessageWin(this.level.getScore(), this._updateHighscore(), this.level.tries);
         return;

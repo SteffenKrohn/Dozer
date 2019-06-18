@@ -1,5 +1,4 @@
 import 'dart:html';
-import 'dart:math';
 
 import 'package:dozergame/controller.dart';
 import 'package:dozergame/view.dart';
@@ -37,12 +36,6 @@ class AppController {
   /// Is the gyro sensor retrieval available
   bool gyroAvailable = false;
 
-  /// TODO will be deleted later
-  static const String _userIdKey = "userId";
-  static const String _nickKey = "nick";
-  int _userId;
-  String _nick = "";
-
   /// This method initialises the app at startup
   void startup() {
 
@@ -52,21 +45,11 @@ class AppController {
     }
     this._activeLevel = this.getReachedLevel();
 
-    // TODO will be deleted later
-    if(this._localStorage.containsKey(_userIdKey)) {
-      this._userId = int.parse(this._localStorage[_userIdKey]);
-    }
-    // in the very first start the used ID will be assigned and stored
-    if(this._userId == null) {
-      this._userId = Random.secure().nextInt(pow(2, 32));
-      this._localStorage[_userIdKey] = this._userId.toString();
-    }
-
-    // TODO change after final presentation
-    /*// Check gyro sensor support and show first screen
+    // Check gyro sensor support and show first screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
       if(!this.gyroAvailable) {
+        // on desktop devices
         this.showMessageNoSupportForGyro();
       } else if((window.innerHeight / window.screen.height) < 0.92) {
         // shown if not started in fullscreen (0.92 because on iphone fs is not
@@ -75,14 +58,6 @@ class AppController {
       } else {
         // shown if already in fullscreen, e.g. web app
         this.showLevelOverview();
-      }
-    });*/
-    window.onDeviceOrientation.first.then((e) {
-      this.gyroAvailable = e.gamma != null ? true : false;
-      if(!this.gyroAvailable) {
-        this.showMessageNoSupportForGyro();
-      } else {
-        this.showWelcomeScreenOnMobileDevices();
       }
     });
   }
@@ -105,12 +80,6 @@ class AppController {
   /// Will be called only if the 'messageWelcomeScreenOnMobile' was called before.
   void listenGoToMenuButtonAndRequestFullscreen() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
-
-      // TODO delete after final presentation
-      InputElement nickInput = querySelector("#nickInput");
-      this._nick = nickInput.value;
-      this._localStorage[AppController._nickKey] = nickInput.value;
-      print(this._nick);
 
       this.showLevelOverview();
       try {
@@ -299,30 +268,4 @@ class AppController {
         return hs > 0 ? "Highscore: $hs" : "No Highscore yet";
     }
   }
-
-  /// TODO will be deleted later
-  void sendCompetitionStats(int level, int score, int tries) {
-    if(this._nick != "") {
-      String body = "{'fields':{"
-          "'userId':{'integerValue': '${this._userId}'},"
-          "'nick':{'stringValue': '${this._nick}'},"
-          "'timestamp':{'timestampValue': '${DateTime.now().toUtc().toIso8601String()}'},"
-          "'score': {'integerValue': '$score'},"
-          "'level': {'integerValue': '$level'},"
-          "'tries': {'integerValue': '$tries'}"
-          "}}";
-
-      HttpRequest.request(
-          "https://firestore.googleapis.com/v1/projects/dozer-tcb-jsk/databases/(default)/documents/competition",
-          method: "POST",
-          sendData: body,
-          requestHeaders: {
-            'Content-Type': 'application/json; charset=UTF-8'
-          }).then((HttpRequest resp) {
-        // print(resp.responseText);
-        print("sent competition stats");
-      }).catchError((e) => print(e));
-    }
-  }
-
 }

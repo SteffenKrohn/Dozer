@@ -117,7 +117,7 @@
             highscores[level] = [level, score, nick];
 
             document.getElementById("tg-z-" + level.toString()).innerHTML = "👑";
-            document.getElementById("tg-z-name-" + level.toString()).innerHTML = nick.substring(0, 10); // TODO richtig abschneiden
+            document.getElementById("tg-z-name-" + level.toString()).innerHTML = nick.substring(0, 10);
             document.getElementById("tg-z-score-" + level.toString()).innerHTML = score;
 
             unsubscribe_highscores.get(level)();
@@ -157,7 +157,7 @@
             minTries[level] = [level, tries, nick];
 
             document.getElementById("tg-w-" + level.toString()).innerHTML = "👑";
-            document.getElementById("tg-w-name-" + level.toString()).innerHTML = nick.substring(0, 10); // TODO richtig abschneiden
+            document.getElementById("tg-w-name-" + level.toString()).innerHTML = nick.substring(0, 10);
             document.getElementById("tg-w-tries-" + level.toString()).innerHTML = tries;
 
             unsubscribe_minTries.get(level)();

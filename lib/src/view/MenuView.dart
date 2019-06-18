@@ -278,7 +278,7 @@ class MenuView {
     DivElement div = DivElement();
     div.setAttribute("class", "message");
     div.append(getLogo());
-    /*div.append(HRElement());
+    div.append(HRElement());
 
     ParagraphElement upperText = ParagraphElement();
     upperText.appendText("Welcome to Dozer - Have fun!");
@@ -293,48 +293,7 @@ class MenuView {
 
     DivElement outerDiv = DivElement()
       ..setAttribute("id", "button_to_menu");
-    outerDiv.append(div);*/
-
-    // TODO change back after final presentation
-    HRElement hr = HRElement()
-      ..style.marginTop = "50pt";
-    div.append(hr);
-
-    ParagraphElement upperText = ParagraphElement();
-    upperText.appendText("Enter your nickname to take part in the competition! Otherwise, leave it empty.");
-    div.append(upperText);
-
-    div.append(HRElement());
-
-    InputElement textbox = InputElement()
-      ..setAttribute("id", "nickInput")
-      ..style.margin = "auto"
-      ..style.marginTop = "4vh"
-      ..style.height = "20pt"
-      ..style.width = "120pt"
-      ..maxLength = 12
-      ..style.fontSize = "14pt";
-    if(window.localStorage.containsKey("nick")){
-      textbox.value = window.localStorage["nick"];
-    } else {
-      textbox.placeholder = "Your Nickname";
-    }
-    div.append(textbox);
-
-    ButtonElement button = ButtonElement()
-      ..setAttribute("id", "button_to_menu")
-      ..setAttribute("class", "lower-bottom-button")
-      ..appendText("Let's go!");
-
-    DivElement outerDiv = DivElement();
     outerDiv.append(div);
-
-    DivElement buttonBox = getBottomButtonBox();
-    buttonBox.setAttribute("style", "height: 10%");
-    button.setAttribute("style", "height: 100%");
-    buttonBox.append(button);
-
-    outerDiv.append(buttonBox);
 
     this.content = outerDiv;
     return this;

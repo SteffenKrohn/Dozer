@@ -8,7 +8,7 @@ class Level {
   Dozer _dozer;
 
   /// The number of this level
-  final int level; // TODO hier hab ich mal auf public gesetzt und final getestet
+  final int level;
   /// The remaining time to accomplish this level in ms
   double timeLimit;
   /// The initial time limit of this level
@@ -28,20 +28,19 @@ class Level {
   /// The List which contains all remaining [Entity]'s ordered ascending to the displayed time
   List<Entity> remainingEntities;
 
-  // TODO probably provisional
-  int viewWidth;
-  int viewHeight;
+  /// The view width in pixel
+  final int viewWidth;
+  /// The view height in pixel
+  final int viewHeight;
 
   /// Fields to keep track of power up´s
   List<Future> slowDownFutures = List();
   bool slowDownActive = false;
 
   /// Creates a new [Level]
-  Level(this.initialTimeLimit, this.initialScore, this.targetScore, double laneSpeed, this.level, int height, int width) {
+  Level(this.initialTimeLimit, this.initialScore, this.targetScore, double laneSpeed, this.level, this.viewHeight, this.viewWidth) {
     this.timeLimit = this.initialTimeLimit.toDouble();
     this.laneSpeed = laneSpeed;
-    this.viewHeight = height;
-    this.viewWidth = width;
 
     this._dozer = new Dozer(this);
     this.visibleEntities.putIfAbsent(this._dozer.id, () => this._dozer);
@@ -100,7 +99,6 @@ class Level {
   }
 
   /// Checks collision of all visible [Entity]'s with the [Dozer].
-  /// TODO make more performant by just checking the entities on the same height as the dozer which is difficult because of barriers
   void checkCollisions() async {
     this.getVisibleEntities().forEach((id, e) {
       if (e is Brick || e is Barrier) {
