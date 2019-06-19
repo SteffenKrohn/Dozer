@@ -48,6 +48,14 @@ class AppController {
     }
     this._activeLevel = this.getReachedLevel();
 
+    // [NK] Fix for the hall-of-fame.
+    // On devices with no device orientation the following
+    // event will never be fired :-(
+    // So, as default we show the no support, and may override it
+    // if device orientation is present with the mobile welcome
+    // screen variants.
+    this.showMessageNoSupportForGyro();
+
     // Check gyro sensor support and show first screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
