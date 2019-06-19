@@ -4,7 +4,7 @@
 - Das Spiel hat es in die Finalrunde auf Platz 2 (23%) geschafft.
 - Dokumentation auf englisch (+). Der Gesamteindruck aller Deliveries bestätigt insgesamt das Ergebnis in der Finalrunde.
 - Der Startbildschirm auf Desktop Devices wurde nicht dargestellt, da die Routine im Device Orientation Handler aufgerufen wurde.
-- Device Orientation Events gibt es Desktop Browsern aber nicht.
+- Device Orientation Events gibt es in Desktop Browsern aber nicht!
 - Für die Hall-of-Fame musste ich da einen Fix nachschieben!
 
 ## Projektnoten
