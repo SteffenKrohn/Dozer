@@ -25,10 +25,14 @@ The fullscreen mode works best on android paired with chrome. After you've opene
 <img src="documentation/uploads/qr-code.png" width="300" />
 
 ## Screenshots
+<p float="left">
 <img src="documentation/uploads/screenshots/lvl4.gif" width="270" />
 <img src="documentation/uploads/screenshots/lvl7.gif" width="270" />
 <img src="documentation/uploads/screenshots/lvl8.gif" width="270" />
+</p>
 
 #### 
+<p float="left">
 <img src="documentation/uploads/screenshots/home.jpg" width="270" />
 <img src="documentation/uploads/screenshots/credits.jpg" width="270" />
+</p>
