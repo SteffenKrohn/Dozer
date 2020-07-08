@@ -1,0 +1,416 @@
+@startuml
+set namespaceSeparator ::
+
+class "Controller::dozergame.dart::AppController" {
+  {static} +int framerate
+  {static} -String _reachedLevelKey
+  {static} +String highscoreLevelKey
+  {static} +String triesLevelKey
+  -Storage _localStorage
+  -int _activeLevel
+  -int _reachedLevel
+  -int _nrAvailableLevels
+  +bool gyroAvailable
+  +void startup()
+  +void startNextLevel()
+  +void listenGoToMenuButton()
+  +void listenGoToMenuButtonAndRequestFullscreen()
+  +void listenStartLevelButton()
+  +void listenNextLevelButton()
+  +void listenPreviousLevelButton()
+  +void listenChooseLevelButton()
+  +void listenAllLevelButtons()
+  +void listenCreditsButton()
+  +void listenDonateButton()
+  +void showLevelOverview()
+  +void showMessageWin()
+  +void showMessageLoose()
+  +void showMessageNoSupportForGyro()
+  +void showWelcomeScreenOnMobileDevices()
+  +void showChooseLevelsView()
+  +void showCreditsView()
+  +void showNoSuchLevel()
+  +int getActiveLevel()
+  +void setActiveLevel()
+  +int getReachedLevel()
+  +int getHighscore()
+  +void setReachedLevel()
+  -String _getLevelInstruction()
+}
+
+"Controller::dozergame.dart::AppController" o-- "dart::html::Storage"
+
+class "Controller::dozergame.dart::LevelController" {
+  -AppController _appController
+  +Level level
+  -LevelView _levelView
+  -Storage _localStorage
+  +Timer timer
+  {static} +void loadAndStart()
+  {static} +Future load()
+  +void start()
+  -void _enableKeyboardControl()
+  -void _enableOrientationControl()
+  -Future _increaseNrOfTries()
+  -void _listenBackButton()
+}
+
+"Controller::dozergame.dart::LevelController" o-- "Controller::dozergame.dart::AppController"
+"Controller::dozergame.dart::LevelController" o-- "Model::dozergame.dart::Level"
+"Controller::dozergame.dart::LevelController" o-- "View::dozergame.dart::LevelView"
+"Controller::dozergame.dart::LevelController" o-- "dart::html::Storage"
+"Controller::dozergame.dart::LevelController" o-- "dart::async::Timer"
+
+class "File::dozergame.dart::LevelLoader" {
+  {static} +String levelBasePath
+  +Level level
+  +Future getLevel()
+  {static} +Future makeRequest()
+  -void _createLevelStump()
+  -Dot _getDot()
+  -Brick _getBrick()
+  -Barrier _getBarrier()
+  -DoubleUp _getDoubleUp()
+  -SlowDown _getSlowDown()
+  -Drill _getDrill()
+}
+
+"File::dozergame.dart::LevelLoader" o-- "Model::dozergame.dart::Level"
+
+class "Model::dozergame.dart::Barrier" {
+  {static} +double getStandardWidth()
+  +String toString()
+  +void hitBy()
+}
+
+"Model::dozergame.dart::Entity" <|-- "Model::dozergame.dart::Barrier"
+
+class "Model::dozergame.dart::Brick" {
+  +int value
+  +String toString()
+  +void hitBy()
+  {static} +double getStandardWidth()
+  {static} +double getStandardHeight()
+}
+
+"Model::dozergame.dart::Entity" <|-- "Model::dozergame.dart::Brick"
+
+class "Model::dozergame.dart::Dozer" {
+  {static} +double MAXIMUM_DOZER_HEIGHT
+  +int score
+  -List<Coordinates> _tailRoute
+  +List<DozerTail> tailEntities
+  -double _tailGap
+  +List<Future> drillFutures
+  +List<Future> doubleUpFutures
+  +bool drillActive
+  +bool doubleUpActive
+  +void update()
+  -void _updateVerticalDozerPlacement()
+  -void _removeAndAddTailEntities()
+  -void _updateExistingTailEntities()
+  +void changeScore()
+  +String toString()
+  +void hitBy()
+  -double _getYAccordingToScore()
+  +double getDy()
+}
+
+"Model::dozergame.dart::Entity" <|-- "Model::dozergame.dart::Dozer"
+
+class "Model::dozergame.dart::DozerTail" {
+  +String toString()
+  +void hitBy()
+  +double getDy()
+}
+
+"Model::dozergame.dart::Entity" <|-- "Model::dozergame.dart::DozerTail"
+
+class "Model::dozergame.dart::Dot" {
+  +int value
+  +String toString()
+  +void hitBy()
+  {static} +double getStandardRadius()
+}
+
+"Model::dozergame.dart::Entity" <|-- "Model::dozergame.dart::Dot"
+
+abstract class "Model::dozergame.dart::PowerUp" {
+  +int duration
+  +int getDuration()
+}
+
+"Model::dozergame.dart::Entity" <|-- "Model::dozergame.dart::PowerUp"
+
+class "Model::dozergame.dart::SlowDown" {
+  {static} +double POWER
+  +void hitBy()
+  +String toString()
+}
+
+"Model::dozergame.dart::PowerUp" <|-- "Model::dozergame.dart::SlowDown"
+
+class "Model::dozergame.dart::DoubleUp" {
+  +void hitBy()
+  +String toString()
+}
+
+"Model::dozergame.dart::PowerUp" <|-- "Model::dozergame.dart::DoubleUp"
+
+class "Model::dozergame.dart::CollisionChecker" {
+  {static} +bool rectangles()
+  {static} +bool circles()
+  {static} +bool recCir()
+}
+
+class "Model::dozergame.dart::Drill" {
+  +void hitBy()
+  +String toString()
+}
+
+"Model::dozergame.dart::PowerUp" <|-- "Model::dozergame.dart::Drill"
+
+abstract class "Model::dozergame.dart::Entity" {
+  +Level level
+  +int id
+  +double dx
+  +double dy
+  +double x
+  +double y
+  +int width
+  +int height
+  +void move()
+  +void update()
+  +String toString()
+  +void hitBy()
+  +double getDy()
+  +double getDx()
+}
+
+"Model::dozergame.dart::Entity" o-- "Model::dozergame.dart::Level"
+
+class "Model::dozergame.dart::Level" {
+  -Dozer _dozer
+  -int _level
+  +double timeLimit
+  +int initialTimeLimit
+  +int initialScore
+  +int targetScore
+  +int tries
+  +double laneSpeed
+  +Map<int, Entity> visibleEntities
+  +List<Entity> remainingEntities
+  +int viewWidth
+  +int viewHeight
+  +List<Future> slowDownFutures
+  +bool slowDownActive
+  +void changeTimeLimit()
+  +void changeLaneSpeed()
+  +int getScore()
+  +int getLevel()
+  +Dozer getDozer()
+  +Map getVisibleEntities()
+  +void update()
+  +void checkCollisions()
+  +void addNewlyVisibleEntities()
+  +void removeInvisibleEntities()
+  +double getRemainingYFromTime()
+  +double getVerticalMovementPerUpdate()
+  +bool gameWon()
+  +bool gameLost()
+  +void updateDozerTailInVisibleEntities()
+}
+
+"Model::dozergame.dart::Level" o-- "Model::dozergame.dart::Dozer"
+
+class "Model::dozergame.dart::Coordinates" {
+  +double x
+  +double y
+}
+
+class "View::dozergame.dart::LevelView" {
+  +Level level
+  +Element lane
+  -DivElement _visualBar
+  +Map<String, Element> laneElements
+  -bool _drillActive
+  -bool _doubleUpActive
+  +void render()
+  -void _handlePowerUps()
+  -void _updateDotEntityElement()
+  -void _updateDozerEntityElement()
+  {static} +void updateEntityElement()
+  +DivElement getEntityRepresentation()
+  {static} -String _getBrickColorClass()
+  +void createVisualBar()
+  -void _updateVisualBar()
+}
+
+"View::dozergame.dart::LevelView" o-- "Model::dozergame.dart::Level"
+"View::dozergame.dart::LevelView" o-- "dart::html::Element"
+"View::dozergame.dart::LevelView" o-- "dart::html::DivElement"
+
+class "View::dozergame.dart::MenuView" {
+  +HtmlElement content
+  {static} +MenuView show()
+  +void render()
+  +HeadingElement getLogo()
+  +DivElement getBottomButtonBox()
+  +MenuView levelOverview()
+  +MenuView messageWin()
+  +MenuView messageLose()
+  +MenuView messageNoSupportForGyro()
+  +MenuView messageNoSuchLevel()
+  +MenuView messageWelcomeScreenOnMobile()
+  +MenuView creditsView()
+  +MenuView chooseLevelsView()
+}
+
+"View::dozergame.dart::MenuView" o-- "dart::html::HtmlElement"
+
+class "dozergame::generator::generator.dart::Generator" {
+  +ParameterGenerator pg
+  +int levelId
+  +EntitiesGenerator eg
+  +String create()
+  -String _createLevel()
+  -String _printParams()
+  -String _printEntities()
+}
+
+"dozergame::generator::generator.dart::Generator" o-- "dozergame::generator::generator.dart::ParameterGenerator"
+"dozergame::generator::generator.dart::Generator" o-- "dozergame::generator::generator.dart::EntitiesGenerator"
+
+class "dozergame::generator::generator.dart::ParameterGenerator" {
+  +int levelId
+  +int timeLimit
+  +int initialScore
+  +int targetScore
+  +double laneSpeed
+  +int minTimeLimit
+  +int maxTimeLimit
+  +int minInitialScore
+  +int maxInitialScore
+  +int minTargetScore
+  +int maxTargetScore
+  +double minLaneSpeed
+  +double maxLaneSpeed
+  +ParameterGenerator generateValues()
+  +void generateTimeLimit()
+  +void generateInitialScore()
+  +void generateTargetScore()
+  +void generateLaneSpeed()
+  +String toString()
+}
+
+class "dozergame::generator::generator.dart::EntitiesGenerator" {
+  +int time
+  +List<int> chances
+  +String generateEntities()
+  +String generateEntity()
+  +String generateBrick()
+  +String generateDot()
+  +String generateBarrier()
+  +String generateWall()
+  +double getX()
+  +double getXForBrick()
+  +double getXForBarrier()
+  +String generateDrill()
+  +String generateDoubleUp()
+  +String generateSlowDown()
+  +String generateStair()
+  +String generateTrap()
+}
+
+abstract class "dozergame::generator::generator.dart::EntityGenerator" {
+  +String type
+  +int time
+  +double x
+  +String generate()
+}
+
+class "dozergame::generator::generator.dart::BrickGenerator" {
+  +String type
+  +int value
+  +int minValue
+  +int maxValue
+  +void generateValue()
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::EntityGenerator" <|-- "dozergame::generator::generator.dart::BrickGenerator"
+
+class "dozergame::generator::generator.dart::BarrierGenerator" {
+  +String type
+  +int height
+  +int minHeight
+  +int maxHeight
+  +void generateHeight()
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::EntityGenerator" <|-- "dozergame::generator::generator.dart::BarrierGenerator"
+
+class "dozergame::generator::generator.dart::DotGenerator" {
+  +String type
+  +int value
+  +int minValue
+  +int maxValue
+  +void generateValue()
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::EntityGenerator" <|-- "dozergame::generator::generator.dart::DotGenerator"
+
+class "dozergame::generator::generator.dart::DrillGenerator" {
+  +String type
+  +int value
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::EntityGenerator" <|-- "dozergame::generator::generator.dart::DrillGenerator"
+
+class "dozergame::generator::generator.dart::DoubleUpGenerator" {
+  +String type
+  +int value
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::EntityGenerator" <|-- "dozergame::generator::generator.dart::DoubleUpGenerator"
+
+class "dozergame::generator::generator.dart::SlowDownGenerator" {
+  +String type
+  +int value
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::EntityGenerator" <|-- "dozergame::generator::generator.dart::SlowDownGenerator"
+
+abstract class "dozergame::generator::generator.dart::SetGenerator" {
+  +int time
+  +String generate()
+}
+
+class "dozergame::generator::generator.dart::StairGenerator" {
+  -String _direction
+  +StairGenerator left()
+  +StairGenerator right()
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::SetGenerator" <|-- "dozergame::generator::generator.dart::StairGenerator"
+
+class "dozergame::generator::generator.dart::TrapGenerator" {
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::SetGenerator" <|-- "dozergame::generator::generator.dart::TrapGenerator"
+
+class "dozergame::generator::generator.dart::WallGenerator" {
+  +String generate()
+}
+
+"dozergame::generator::generator.dart::SetGenerator" <|-- "dozergame::generator::generator.dart::WallGenerator"
+
+
+@enduml
