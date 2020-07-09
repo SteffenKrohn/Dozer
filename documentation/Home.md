@@ -7,9 +7,12 @@ authors.add("Jan Steffen Krohn");
 authors.add("Tom Christopher Boettger");
 ```
 
-Game-URL: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/
+Game URL: https://steffenkrohn.github.io/Dozer/ ([Alternative Link](https://webtech.mylab.th-luebeck.de/hall-of-fame/ss2019/dozer/))
 
-API-Doc: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/doc/api/
+API Docs: https://steffenkrohn.github.io/Dozer/doc/
+
+Hall of Fame: https://webtech.mylab.th-luebeck.de/hall-of-fame/
+
 # Outline
 **[1 Introduction](#1-introduction)**  
 **[2 Requirements and Game Concept](#2-requirements-and-game-concept)**  
