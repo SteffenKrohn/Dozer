@@ -11,20 +11,22 @@ jobs:
         uses: actions/checkout@v2
       - name: Build
         run: |
-          sudo apt-get update
-          sudo apt-get install apt-transport-https
-          sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
-          sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
-          sudo apt-get update
-          sudo apt-get install dart
+          wget https://storage.googleapis.com/dart-archive/channels/stable/release/2.1.0/linux_packages/dart_2.1.0-1_amd64.deb
+          sudo apt install ./dart_2.1.0-1_amd64.deb
           export PATH="$PATH:/usr/lib/dart/bin"
+          echo $PATH
+          export PATH="$PATH":"$HOME/.pub-cache/bin"
+          echo $PATH
           pub global activate webdev
+          echo $PATH
           pub get
           webdev build --output web:build
           dartdoc --output build/doc --exclude generator
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
         with:
+          target_branch: gh-pages
+          build_dir: build
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build

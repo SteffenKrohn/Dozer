@@ -11,55 +11,55 @@ Game-URL: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/
 
 API-Doc: https://webtech.mylab.th-luebeck.de/ss2019/team-4a/doc/api/
 # Outline
-**[1 Introduction](Home#1-introduction)**  
-**[2 Requirements and Game Concept](Home#2-requirements-and-game-concept)**  
-**[3 Organization of Work](Home#3-organization-of-work)**  
-**[4 Architecture and Implementation](Home#4-architecture-and-implementation)**  
-&nbsp;&nbsp;&nbsp; [4.1 Model](Home#41-model)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.1 Level](Home#411-level)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2 Entities](Home#412-entities)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.1 Dozer](Home#4121-dozer)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.2 Dot](Home#4122-dot)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.3 Brick](Home#4123-brick)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.4 Power Ups](Home#4124-power-ups)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.3 Collision Checker](Home#413-collision-checker)  
-&nbsp;&nbsp;&nbsp; [4.2 View](Home#42-view)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.2.1 Menu View](Home#421-menu-view)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.2.2 Level View](Home#422-level-view)  
-&nbsp;&nbsp;&nbsp; [4.3 Controller](Home#43-controller)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.3.1 App Controller](Home#431-app-controller)  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.3.2 Level Controller](Home#432-level-controller)  
-&nbsp;&nbsp;&nbsp; [4.4 File](Home#44-file)  
-**[5 Concept of Levels and Parameterization](Home#5-concept-of-levels-and-parameterization)**  
-&nbsp;&nbsp;&nbsp; [5.1 Level Concept](Home#51-level-concept)  
-&nbsp;&nbsp;&nbsp; [5.2 Parameterization Concept](Home#52-parameterization-concept)  
-**[6 Level Generator](Home#7-level-generator)**  
-&nbsp;&nbsp;&nbsp; [6.1 Level Generator Tools](Home#61-level-generator-tools)  
-&nbsp;&nbsp;&nbsp; [6.2 Level Generator Models](Home#62-level-generator-models)  
-&nbsp;&nbsp;&nbsp; [6.3 Level Generator Sets](Home#63-level-generator-sets)  
-**[7 Requirements Verification](Home#6-requirements-verification)**  
-&nbsp;&nbsp;&nbsp; [7.1 Verification of the Functional Requirements](Home#71-verification-of-the-functional-requirements)  
-&nbsp;&nbsp;&nbsp; [7.2 Verification of the Documentary Requirements](Home#72-verification-of-the-documentary-requirements)  
-&nbsp;&nbsp;&nbsp; [7.3 Verification of the Compliance to Technical Constraints](Home#73-verification-of-the-compliance-to-technical-constraints)  
-&nbsp;&nbsp;&nbsp; [7.4 Responsibilities of Team Members in the Project](Home#74-responsibilities-of-team-members-in-the-project)  
+**[1 Introduction](#1-introduction)**  
+**[2 Requirements and Game Concept](#2-requirements-and-game-concept)**  
+**[3 Organization of Work](#3-organization-of-work)**  
+**[4 Architecture and Implementation](#4-architecture-and-implementation)**  
+&nbsp;&nbsp;&nbsp; [4.1 Model](#41-model)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.1 Level](#411-level)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2 Entities](#412-entities)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.1 Dozer](#4121-dozer)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.2 Dot](#4122-dot)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.3 Brick](#4123-brick)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.2.4 Power Ups](#4124-power-ups)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.1.3 Collision Checker](#413-collision-checker)  
+&nbsp;&nbsp;&nbsp; [4.2 View](#42-view)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.2.1 Menu View](#421-menu-view)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.2.2 Level View](#422-level-view)  
+&nbsp;&nbsp;&nbsp; [4.3 Controller](#43-controller)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.3.1 App Controller](#431-app-controller)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [4.3.2 Level Controller](#432-level-controller)  
+&nbsp;&nbsp;&nbsp; [4.4 File](#44-file)  
+**[5 Concept of Levels and Parameterization](#5-concept-of-levels-and-parameterization)**  
+&nbsp;&nbsp;&nbsp; [5.1 Level Concept](#51-level-concept)  
+&nbsp;&nbsp;&nbsp; [5.2 Parameterization Concept](#52-parameterization-concept)  
+**[6 Level Generator](#7-level-generator)**  
+&nbsp;&nbsp;&nbsp; [6.1 Level Generator Tools](#61-level-generator-tools)  
+&nbsp;&nbsp;&nbsp; [6.2 Level Generator Models](#62-level-generator-models)  
+&nbsp;&nbsp;&nbsp; [6.3 Level Generator Sets](#63-level-generator-sets)  
+**[7 Requirements Verification](#6-requirements-verification)**  
+&nbsp;&nbsp;&nbsp; [7.1 Verification of the Functional Requirements](#71-verification-of-the-functional-requirements)  
+&nbsp;&nbsp;&nbsp; [7.2 Verification of the Documentary Requirements](#72-verification-of-the-documentary-requirements)  
+&nbsp;&nbsp;&nbsp; [7.3 Verification of the Compliance to Technical Constraints](#73-verification-of-the-compliance-to-technical-constraints)  
+&nbsp;&nbsp;&nbsp; [7.4 Responsibilities of Team Members in the Project](#74-responsibilities-of-team-members-in-the-project)  
 
 # List of Figures
-- [Figure 1: Summarizing the game concept visually](Home#2-requirements-and-game-concept)
-- [Figure 2: Architecture described by reference to the libraries](Home#4-architecture-and-implementation)
-- [Figure 3 and 4: Red area shows the tappable area that leads to starting or restarting a level](Home#421-menu-view)
-- [Figure 5: Menu Bar inside an active level](Home#422-level-view)
-- [Figure 6: View of a running level](Home#422-level-view)
+- [Figure 1: Summarizing the game concept visually](#2-requirements-and-game-concept)
+- [Figure 2: Architecture described by reference to the libraries](#4-architecture-and-implementation)
+- [Figure 3 and 4: Red area shows the tappable area that leads to starting or restarting a level](#421-menu-view)
+- [Figure 5: Menu Bar inside an active level](#422-level-view)
+- [Figure 6: View of a running level](#422-level-view)
 
 # List of Tables
-- [Verification of the Functional Requirements](Home#71-verification-of-the-functional-requirements)
-- [Verification of the Documentary Requirements](Home#72-verification-of-the-documentary-requirements)
-- [Verification of the Compliance to Technical Constraints](Home#73-verification-of-the-compliance-to-technical-constraints)
+- [Verification of the Functional Requirements](#71-verification-of-the-functional-requirements)
+- [Verification of the Documentary Requirements](#72-verification-of-the-documentary-requirements)
+- [Verification of the Compliance to Technical Constraints](#73-verification-of-the-compliance-to-technical-constraints)
 
 # Program Listings
-- [Listing 1: AppController's constants and variables](Home#431-app-controller)
-- [Listing 2: Generic example for showing a certain view and create button listeners](Home#431-app-controller)
-- [Listing 3: Factory method of the LevelController](Home#432-level-controller)
-- [Listing 4: Listeners for controlling the Dozer](Home#432-level-controller)
+- [Listing 1: AppController's constants and variables](#431-app-controller)
+- [Listing 2: Generic example for showing a certain view and create button listeners](#431-app-controller)
+- [Listing 3: Factory method of the LevelController](#432-level-controller)
+- [Listing 4: Listeners for controlling the Dozer](#432-level-controller)
 
 # 1 Introduction
 
@@ -73,7 +73,7 @@ are amazing to get hyped more and more.
 The goal with this project was, and still is, to build a nice and enjoyable single player game with the main focus on
 mobile devices and the motion control. To classify the things outlined in this documentation, it is helpful to have played the game at least until level four. Why level four? Just because then you have seen
 most of the game entities we use. Our purpose with the first levels is to give the player a progressive introduction to
-the game concept and it's components. [Click here for the QR-Code!](QR-Code)
+the game concept and it's components. [Click here for the QR-Code!](QR-Code.md)
 
 # 2 Requirements and Game Concept
 
@@ -288,9 +288,11 @@ The views are separated into two main components: the MenuView and the LevelView
 ### 4.2.1 Menu View
 
 There are eight different views used to guide the player through the game outside of playing a level.
-The menus are designed to let the player start or restart a level the fastest way possible, because our design objective was to get the player to actually play the game instead of navigating a complicated menu system, thats why nearly the entire screen leads the player to the level overview or to start a level.  
-![levelOverviewWithTapArea](/uploads/59af44170d65c299f288ac253eb0cbd9/levelOverviewWithTapArea.PNG)
-![loseWithTapArea](/uploads/fbba3f8fd911e5602b88d8012eeb89b8/loseWithTapArea.PNG)  
+The menus are designed to let the player start or restart a level the fastest way possible, because our design objective was to get the player to actually play the game instead of navigating a complicated menu system, thats why nearly the entire screen leads the player to the level overview or to start a level.
+
+![levelOverviewWithTapArea](uploads/levelOverviewWithTapArea.PNG)
+![loseWithTapArea](uploads/loseWithTapArea.PNG)
+
 _Figure 3 and 4: Red area shows the tappable area that leads to starting or restarting a level_  
 
 Above we see that the majority of the screen lets the player start a level or the level overview and then starting the level. At most the player is a double tap away from starting a level. This leads to minimal downtime, no waiting time and pulling the player into the game, because there is no point in the game where the player isn´t actively playing.  
@@ -318,13 +320,13 @@ When the player loses a level the lose message view is shown, that contains a te
 ### 4.2.2 Level View
 The LevelView renders the entities and user interfaces inside an active level. That includes rendering the bar at the top of the screen containing information about the level, the level progress and the remaining time as well as a button to stop the level.
 
-![visualBar](/uploads/e4f89ff99f7fb1d22a6f1157efffb5e2/visiualBar.PNG)  
+![visualBar](uploads/visualBar.PNG)  
 
 _Figure 5: Menu Bar inside an active level_  
 The LevelView does keep a list of the HTML elements present on the current view. This list is updated when new entities enter or leave the screen. The list is mainly used to check if entities have a corresponding element in the DOM and to update the elements depending on the changes in the model in the ```render()``` method. The list is kept because the alternative, looking up the elements in the DOM directly with the id, would be easier to implement but a lot worse performance wise. Additionally the view remembers if a power up effect is currently shown. This is compared to the state of the model to update the view if necessary in the ```render()``` method.
 While a level is running, the ```render()``` method is called recurringly to update the elements visible on the screen, remove elements that have moved outside from the screen from the DOM and to add elements to the DOM that have entered the visible space. Another important job of the method is to handle displaying the effect of power ups, which is done by adding or removing CSS classes from the affected elements.
 
-![activeLevel](/uploads/099ede1d33d63d1f24613850a624a4b0/activeLevel.jpeg)  
+![activeLevel](uploads/activeLevel.jpeg)  
 
 _Figure 6: View of a running level_  
 ## 4.3 Controller
@@ -711,9 +713,9 @@ The tools contain the three core classes:
 * Generator:  
 The Generator contains the level ID and calls the next two classes.
 * ParameterGenerator:  
-The ParameterGenerator creates the level parameter block (see [5.2 Parameterization Concept](Home#52-parameterization-concept))
+The ParameterGenerator creates the level parameter block (see [5.2 Parameterization Concept](#52-parameterization-concept))
 * EntitiesGenerator:  
-The EntitiesGenerator creates the entities array for the level (see [5.2 Parameterization Concept](Home#52-parameterization-concept)). 
+The EntitiesGenerator creates the entities array for the level (see [5.2 Parameterization Concept](#52-parameterization-concept)). 
 To create the single entities the EntitiesGenerator uses the following generators.
 
 ## 6.2 Level Generator Models
@@ -752,7 +754,7 @@ It is possible to create the the stair facing to the left and to the right.
 |------|--------------------------|----------|---------------|------------|-------------|
 | AF-1 | Single-Player Game       |    x     |               |            | The game is single player only. The only way to interract with other players is by comparing highscores offline. |
 | AF-2 | 2D Game                  |    x     |               |            | The entire game is two dimensional |
-| AF-3 | Level Concept            |    x     |               |            | A level concept is implemented (see **[5 Concept of Levels and Parameterization](Home#5-concept-of-levels-and-parameterization)**  |
+| AF-3 | Level Concept            |    x     |               |            | A level concept is implemented (see **[5 Concept of Levels and Parameterization](#5-concept-of-levels-and-parameterization)**  |
 | AF-4 | Parameterization Concept |          |       x       |            | The levels are entirely stored in json and it is possible to create new levels without touching the code base at all. But some properties are not meant to be changed and are therefore set in the code. |
 | AF-5 | Desktop Browser Support  |    x     |               |            | The game can be played using the arrow keys. This was tested for Android and iOS phones and Chrome, Firefox, Safari browsers. |
 | AF-6 | Mobile Browser Support   |    x     |               |            | The game can be played using the gyro controls of mobile phones. This was tested for Android and iOS phones and Chrome, Firefox, Safari browsers. |
@@ -780,7 +782,7 @@ _Table 2: Verification of the Documentary Requirements_
 | TF-4  | HTML + CSS          |    x     |               |            | All views are created with HTML and styled with CSS. |
 | TF-5  | Game Logic in Dart  |    x     |               |            | The only programming language used in this project is Dart.  |
 | TF-6  | Browser Support     |    x     |               |            | The game is tested for Chrome, Firefox, Safari. |
-| TF-7  | MVC Architecture    |    x     |               |            | MVC architecture was used for this project as described in **[4 Architecture and Implementation](Home#4-architecture-and-implementation)**   |
+| TF-7  | MVC Architecture    |    x     |               |            | MVC architecture was used for this project as described in **[4 Architecture and Implementation](#4-architecture-and-implementation)**   |
 | TF-8  | Allowed Libraries   |    x     |               |            | Only dart:core packages were used.                                  |
 | TF-9  | Forbidden Libraries |    x     |               |            | See above.                                                                                                                                                                                                                      |
 | TF-10 | No Sound            |    x     |               |            | The game contains no sound. |
@@ -790,5 +792,5 @@ _Table 3: Verification of the Compliance to Technical Constraints_
 ## 7.4 Responsibilities of Team Members in the Project
 
 Both of us were responsible for everything. Except for the level generator, which was mainly done by Jan Steffen Krohn, we both worked on every part of the architecture.
-That's because of how we worked, which was described in [the organization of work](Home#3-organization-of-work). Also the architectural design, the visual design and the documentation
+That's because of how we worked, which was described in [the organization of work](#3-organization-of-work). Also the architectural design, the visual design and the documentation
 was built together and in cooperation. If there are questions about who implemented a specific subpart, the work contributions are traceable in the version control and issues stored in gitlab.
