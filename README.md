@@ -7,6 +7,7 @@ List<String> authors = new List(2);
 authors.add("Jan Steffen Krohn");
 authors.add("Tom Christopher Boettger");
 ```
+
 The game was developed entirely with dart, without using any external libraries or frameworks. The goal was to understand the principles of web technologies and to be able to apply them correctly. During our development we gathered statistical data to improve the levels, which has been removed in the final version. Scroll down for impressions. :blush:
 
 Game URL: https://steffenkrohn.github.io/Dozer/ ([Alternative Link](https://webtech.mylab.th-luebeck.de/hall-of-fame/ss2019/dozer/))
