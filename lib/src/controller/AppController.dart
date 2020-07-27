@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:js';
 
 import 'package:dozergame/controller.dart';
 import 'package:dozergame/view.dart';
