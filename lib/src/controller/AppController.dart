@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:js';
 
 import 'package:dozergame/controller.dart';
 import 'package:dozergame/view.dart';
@@ -48,29 +49,22 @@ class AppController {
     }
     this._activeLevel = this.getReachedLevel();
 
-    // [NK] Fix for the hall-of-fame.
-    // On devices with no device orientation the following
-    // event will never be fired :-(
-    // So, as default we show the no support, and may override it
-    // if device orientation is present with the mobile welcome
-    // screen variants.
-    this.showMessageNoSupportForGyro();
-
-    // Check gyro sensor support and show first screen
-    window.onDeviceOrientation.first.then((e) {
-      this.gyroAvailable = e.gamma != null ? true : false;
-      if (!this.gyroAvailable) {
-        // on desktop devices
-        this.showMessageNoSupportForGyro();
-      } else if ((window.innerHeight / window.screen.height) < 0.92) {
-        // shown if not started in fullscreen (0.92 because on iphone fs is not
-        // possible and with the notch it's even smaller)
-        this.showWelcomeScreenOnMobileDevices();
-      } else {
-        // shown if already in fullscreen, e.g. web app
-        this.showLevelOverview();
-      }
-    });
+    // (07/2020) Changed the flow because on iOS 13+ the permission for gyro sensor needs to be requested
+    RegExp isMobileRegEx = new RegExp(r"(iPad)|(iPhone)|(iPod)|(android)|(webOS)|(ipad)|(iphone)|(Android)");
+    
+    if (!isMobileRegEx.hasMatch(window.navigator.userAgent)) {
+      // on desktop devices
+      this.showMessageNoSupportForGyro();
+    } else if ((window.innerHeight / window.screen.height) < 0.92) {
+      // shown if not started in fullscreen (0.92 because on iphone fs is not
+      // possible and with the notch it's even smaller)
+      this.showWelcomeScreenOnMobileDevices();
+      this.gyroAvailable = true;
+    } else {
+      // shown if already in fullscreen, e.g. web app
+      this.showLevelOverview();
+      this.gyroAvailable = true;
+    }
   }
 
   /// Starts the [_activeLevel]
@@ -83,6 +77,7 @@ class AppController {
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLevelOverview();
+      context.callMethod("requestiOSGyro");
     });
   }
 
@@ -98,6 +93,7 @@ class AppController {
       } catch (e) {
         print("You better use Chrome ;)");
       }
+      context.callMethod("requestiOSGyro");
     });
   }
 
