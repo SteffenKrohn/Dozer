@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the changeTimeLimit method from the Level class, for the Dart programming language.">
+  <title>changeTimeLimit method - Level class - dozer_model library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">dozergame</a></li>
+    <li><a href="dozer_model/dozer_model-library.html">dozer_model</a></li>
+    <li><a href="dozer_model/Level-class.html">Level</a></li>
+    <li class="self-crumb">changeTimeLimit method</li>
+  </ol>
+  <div class="self-name">changeTimeLimit</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>Level class</h5>
+    <ol>
+      <li class="section-title"><a href="dozer_model/Level-class.html#constructors">Constructors</a></li>
+      <li><a href="dozer_model/Level/Level.html">Level</a></li>
+    
+      <li class="section-title">
+        <a href="dozer_model/Level-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="dozer_model/Level/initialScore.html">initialScore</a></li>
+      <li><a href="dozer_model/Level/initialTimeLimit.html">initialTimeLimit</a></li>
+      <li><a href="dozer_model/Level/laneSpeed.html">laneSpeed</a></li>
+      <li><a href="dozer_model/Level/level.html">level</a></li>
+      <li><a href="dozer_model/Level/remainingEntities.html">remainingEntities</a></li>
+      <li><a href="dozer_model/Level/slowDownActive.html">slowDownActive</a></li>
+      <li><a href="dozer_model/Level/slowDownFutures.html">slowDownFutures</a></li>
+      <li><a href="dozer_model/Level/targetScore.html">targetScore</a></li>
+      <li><a href="dozer_model/Level/timeLimit.html">timeLimit</a></li>
+      <li><a href="dozer_model/Level/tries.html">tries</a></li>
+      <li><a href="dozer_model/Level/viewHeight.html">viewHeight</a></li>
+      <li><a href="dozer_model/Level/viewWidth.html">viewWidth</a></li>
+      <li><a href="dozer_model/Level/visibleEntities.html">visibleEntities</a></li>
+      <li class="inherited"><a href="dozer_model/Level/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="dozer_model/Level/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="dozer_model/Level-class.html#instance-methods">Methods</a></li>
+      <li><a href="dozer_model/Level/addNewlyVisibleEntities.html">addNewlyVisibleEntities</a></li>
+      <li><a href="dozer_model/Level/changeLaneSpeed.html">changeLaneSpeed</a></li>
+      <li><a href="dozer_model/Level/changeTimeLimit.html">changeTimeLimit</a></li>
+      <li><a href="dozer_model/Level/checkCollisions.html">checkCollisions</a></li>
+      <li><a href="dozer_model/Level/gameLost.html">gameLost</a></li>
+      <li><a href="dozer_model/Level/gameWon.html">gameWon</a></li>
+      <li><a href="dozer_model/Level/getDozer.html">getDozer</a></li>
+      <li><a href="dozer_model/Level/getLevel.html">getLevel</a></li>
+      <li><a href="dozer_model/Level/getRemainingYFromTime.html">getRemainingYFromTime</a></li>
+      <li><a href="dozer_model/Level/getScore.html">getScore</a></li>
+      <li><a href="dozer_model/Level/getVerticalMovementPerUpdate.html">getVerticalMovementPerUpdate</a></li>
+      <li><a href="dozer_model/Level/getVisibleEntities.html">getVisibleEntities</a></li>
+      <li><a href="dozer_model/Level/removeInvisibleEntities.html">removeInvisibleEntities</a></li>
+      <li><a href="dozer_model/Level/update.html">update</a></li>
+      <li><a href="dozer_model/Level/updateDozerTailInVisibleEntities.html">updateDozerTailInVisibleEntities</a></li>
+      <li class="inherited"><a href="dozer_model/Level/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="dozer_model/Level/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="dozer_model/Level-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="dozer_model/Level/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>changeTimeLimit method</h1>
+
+    <section class="multi-line-signature">
+      <span class="returntype">void</span>
+      <span class="name ">changeTimeLimit</span>
+(<wbr><span class="parameter" id="changeTimeLimit-param-change"><span class="type-annotation">double</span> <span class="parameter-name">change</span></span>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Changes the time limit of the level.
+The provided change is in seconds.
+Provide a positive change to increase the time limit,
+a negative change to decrease the time limit.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">void changeTimeLimit(double change) {
+  &#47;&#47; If the game is slowed the time is also slowed
+  if (this.slowDownActive) {
+    change = change * SlowDown.POWER;
+  }
+  this.timeLimit += change;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    dozergame 1.0.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

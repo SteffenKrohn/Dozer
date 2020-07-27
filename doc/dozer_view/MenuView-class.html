@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the MenuView class from the dozer_view library, for the Dart programming language.">
+  <title>MenuView class - dozer_view library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">dozergame</a></li>
+    <li><a href="dozer_view/dozer_view-library.html">dozer_view</a></li>
+    <li class="self-crumb">MenuView class</li>
+  </ol>
+  <div class="self-name">MenuView</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>dozer_view library</h5>
+    <ol>
+      <li class="section-title"><a href="dozer_view/dozer_view-library.html#classes">Classes</a></li>
+      <li><a href="dozer_view/LevelView-class.html">LevelView</a></li>
+      <li><a href="dozer_view/MenuView-class.html">MenuView</a></li>
+    
+    
+    
+    
+    
+    
+    
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <h1>MenuView class </h1>
+
+    <section class="desc markdown">
+      <p>This is the View representation of our app, but not the game itself.
+This class is used for the menu navigation.
+These <a href="dozer_view/MenuView-class.html">MenuView</a>'s are only rendered after click events or when a level is over.
+So they are static once they are called.</p>
+    </section>
+    
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="MenuView" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/MenuView.html">MenuView</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="content" class="property">
+          <span class="name"><a href="dozer_view/MenuView/content.html">content</a></span>
+          <span class="signature">&#8596; HtmlElement</span> 
+        </dt>
+        <dd>
+          This is the content what one <a href="dozer_view/MenuView-class.html">MenuView</a> will display when it's rendered
+          <div class="features">read / write</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="dozer_view/MenuView/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="dozer_view/MenuView/hashCode.html">[...]</a>
+          <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="dozer_view/MenuView/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span> 
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+          <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="chooseLevelsView" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/chooseLevelsView.html">chooseLevelsView</a></span><span class="signature">(<wbr><span class="parameter" id="chooseLevelsView-param-nrAvailableLevels"><span class="type-annotation">int</span> <span class="parameter-name">nrAvailableLevels</span>, </span> <span class="parameter" id="chooseLevelsView-param-reachedLevel"><span class="type-annotation">int</span> <span class="parameter-name">reachedLevel</span></span>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This is the view where the user can choose between all the levels he
+already unlocked by accomplishing the levels. All levels are displayed
+as a button with the corresponding level number in it.
+          
+</dd>
+        <dt id="creditsView" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/creditsView.html">creditsView</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This is the credits view to display the creators of the game and to give a
+donations opportunity.
+          
+</dd>
+        <dt id="getBottomButtonBox" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/getBottomButtonBox.html">getBottomButtonBox</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; DivElement</span>
+          </span>
+          </dt>
+        <dd>
+          Returns a Button Box for two Buttons on the bottom of the view
+          
+</dd>
+        <dt id="getLogo" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/getLogo.html">getLogo</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; HeadingElement</span>
+          </span>
+          </dt>
+        <dd>
+          Returns a new <code>HeadingElement</code> with the Dozer Title.
+This method is used on every MenuView, with corporate identity in mind ;)
+          
+</dd>
+        <dt id="levelOverview" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/levelOverview.html">levelOverview</a></span><span class="signature">(<wbr><span class="parameter" id="levelOverview-param-level"><span class="type-annotation">int</span> <span class="parameter-name">level</span>, </span> <span class="parameter" id="levelOverview-param-levelInstruction"><span class="type-annotation">String</span> <span class="parameter-name">levelInstruction</span></span>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          The <a href="dozer_view/MenuView/levelOverview.html">levelOverview</a> is the main view of all the <a href="dozer_view/MenuView-class.html">MenuView</a>'s. On it the
+active level can be started, the number of the active level is displayed,
+it's highscore, and the buttons to get to the credits and choose level view.
+          
+</dd>
+        <dt id="messageLose" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/messageLose.html">messageLose</a></span><span class="signature">(<wbr><span class="parameter" id="messageLose-param-timeout"><span class="type-annotation">bool</span> <span class="parameter-name">timeout</span></span>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This is the view which gets displayed when the user looses a level. If he
+didn't make it in time, then a different loose message gets displayed as
+he would get if he looses because his dozer ran into a brick.
+          
+</dd>
+        <dt id="messageNoSuchLevel" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/messageNoSuchLevel.html">messageNoSuchLevel</a></span><span class="signature">(<wbr><span class="parameter" id="messageNoSuchLevel-param-level"><span class="type-annotation">int</span> <span class="parameter-name">level</span></span>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This message will only be displayed if the user accomplishes the last
+available level. Which at the moment, with <code>AppController._nrAvailableLevels</code>
+levels, shouldn't happen.
+          
+</dd>
+        <dt id="messageNoSupportForGyro" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/messageNoSupportForGyro.html">messageNoSupportForGyro</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This message view will be displayed mainly on desktop devices without
+the gyro sensor support or on mobile devices where the device orientation
+is disabled. It displays the QR-Code to give the user the chance to play
+it on another device. Else he can also play it on the current device.
+          
+</dd>
+        <dt id="messageWelcomeScreenOnMobile" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/messageWelcomeScreenOnMobile.html">messageWelcomeScreenOnMobile</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This welcome view will only be displayed on mobile devices where the
+device orientation is available but the app was not started in fullscreen
+mode. This view is only used for a user interaction (namely a click event)
+to request the fullscreen mode. Since we give the opportunity to add the
+Webapp to the homescreen, this view should not be displayed often.
+          
+</dd>
+        <dt id="messageWin" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/messageWin.html">messageWin</a></span><span class="signature">(<wbr><span class="parameter" id="messageWin-param-score"><span class="type-annotation">int</span> <span class="parameter-name">score</span>, </span> <span class="parameter" id="messageWin-param-newHighscore"><span class="type-annotation">bool</span> <span class="parameter-name">newHighscore</span>, </span> <span class="parameter" id="messageWin-param-tries"><span class="type-annotation">int</span> <span class="parameter-name">tries</span></span>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          This is the view, which gets displayed when the user wins a level.
+If he reaches a new highscore, the highscore and the number of tries are
+displayed. Else just the score is displayed. This can be changed easily
+because the parameter 'tries' is mandatory.
+          
+</dd>
+        <dt id="render" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/render.html">render</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          The method will change the DOM-Tree according to the <a href="dozer_view/MenuView/content.html">content</a>
+          
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="dozer_view/MenuView/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="dozer_view/MenuView/noSuchMethod.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="dozer_view/MenuView/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="dozer_view/MenuView/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          The equality operator. <a href="dozer_view/MenuView/operator_equals.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+    <section class="summary offset-anchor" id="static-methods">
+      <h2>Static Methods</h2>
+      <dl class="callables">
+        <dt id="show" class="callable">
+          <span class="name"><a href="dozer_view/MenuView/show.html">show</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="dozer_view/MenuView-class.html">MenuView</a></span>
+          </span>
+          </dt>
+        <dd>
+          Factory method which returns a new <a href="dozer_view/MenuView-class.html">MenuView</a>.
+          
+</dd>
+      </dl>
+    </section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="dozer_view/MenuView-class.html#constructors">Constructors</a></li>
+      <li><a href="dozer_view/MenuView/MenuView.html">MenuView</a></li>
+    
+      <li class="section-title">
+        <a href="dozer_view/MenuView-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="dozer_view/MenuView/content.html">content</a></li>
+      <li class="inherited"><a href="dozer_view/MenuView/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="dozer_view/MenuView/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="dozer_view/MenuView-class.html#instance-methods">Methods</a></li>
+      <li><a href="dozer_view/MenuView/chooseLevelsView.html">chooseLevelsView</a></li>
+      <li><a href="dozer_view/MenuView/creditsView.html">creditsView</a></li>
+      <li><a href="dozer_view/MenuView/getBottomButtonBox.html">getBottomButtonBox</a></li>
+      <li><a href="dozer_view/MenuView/getLogo.html">getLogo</a></li>
+      <li><a href="dozer_view/MenuView/levelOverview.html">levelOverview</a></li>
+      <li><a href="dozer_view/MenuView/messageLose.html">messageLose</a></li>
+      <li><a href="dozer_view/MenuView/messageNoSuchLevel.html">messageNoSuchLevel</a></li>
+      <li><a href="dozer_view/MenuView/messageNoSupportForGyro.html">messageNoSupportForGyro</a></li>
+      <li><a href="dozer_view/MenuView/messageWelcomeScreenOnMobile.html">messageWelcomeScreenOnMobile</a></li>
+      <li><a href="dozer_view/MenuView/messageWin.html">messageWin</a></li>
+      <li><a href="dozer_view/MenuView/render.html">render</a></li>
+      <li class="inherited"><a href="dozer_view/MenuView/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="dozer_view/MenuView/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="dozer_view/MenuView-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="dozer_view/MenuView/operator_equals.html">operator ==</a></li>
+    
+    
+      <li class="section-title"><a href="dozer_view/MenuView-class.html#static-methods">Static methods</a></li>
+      <li><a href="dozer_view/MenuView/show.html">show</a></li>
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    dozergame 1.0.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="made with love by dartdoc 0.24.1">
+  <meta name="description" content="dozergame API docs, for the Dart programming language.">
+  <title>dozergame - Dart API docs</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://webtech.mylab.th-luebeck.de/ss2019/team-4a/">dozergame package</a></li>
+  </ol>
+  <div class="self-name">dozergame</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5><span class="package-name">dozergame</span> <span class="package-kind">package</span></h5>
+    <ol>
+          <li class="section-title">Libraries</li>
+          <li><a href="dozer_controller/dozer_controller-library.html">dozer_controller</a></li>
+          <li><a href="dozer_file/dozer_file-library.html">dozer_file</a></li>
+          <li><a href="dozer_model/dozer_model-library.html">dozer_model</a></li>
+          <li><a href="dozer_view/dozer_view-library.html">dozer_view</a></li>
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <section class="desc markdown">
+        <h1 id="dozer---the-game">Dozer - The Game</h1>
+<h4 id="_web-technology-project-at-the-technical-university-of-applied-sciences-lbeck---summer-semester-2019_"><em>Web Technology Project at the Technical University of Applied Sciences Lübeck - Summer Semester 2019</em></h4>
+<h4 id="_team-4a-dozer_"><em>Team 4A Dozer</em></h4>
+<pre class="language-dart"><code class="language-dart">List&lt;String&gt; authors = new List(2);
+authors.add("Jan Steffen Krohn");
+authors.add("Tom Christopher Boettger");
+</code></pre>
+<p>The game was developed entirely with dart, without using any external libraries or frameworks. The goal was to understand the principles of web technologies and to be able to apply them correctly. During our development we gathered statistical data to improve the levels, which has been removed in the final version. Scroll down for impressions. 😊</p>
+<p>Game URL: <a href="https://steffenkrohn.github.io/Dozer/">https://steffenkrohn.github.io/Dozer/</a> (<a href="https://webtech.mylab.th-luebeck.de/hall-of-fame/ss2019/dozer/">Alternative Link</a>)</p>
+<p>API Docs: <a href="https://steffenkrohn.github.io/Dozer/doc/">https://steffenkrohn.github.io/Dozer/doc/</a></p>
+<p>Wiki: <a href="https://github.com/SteffenKrohn/Dozer/blob/master/documentation/Home.md">https://github.com/SteffenKrohn/Dozer/blob/master/documentation/Home.md</a></p>
+<p>Hall of Fame: <a href="https://webtech.mylab.th-luebeck.de/hall-of-fame/">https://webtech.mylab.th-luebeck.de/hall-of-fame/</a></p>
+<h2 id="let-me-play">Let Me Play</h2>
+<p><strong>Scan the QR Code and start playing on your smartphone</strong> 🙌</p>
+<p>The fullscreen mode works best on android paired with chrome. After you've opened the app, you can also add the web app to your home screen from your browser's menu. 😉</p><img src="documentation/uploads/qr-code.png" width="300">
+<h2 id="screenshots">Screenshots</h2><p float="left">
+<img src="documentation/uploads/screenshots/lvl4.gif" width="270">
+<img src="documentation/uploads/screenshots/lvl7.gif" width="270">
+<img src="documentation/uploads/screenshots/lvl8.gif" width="270">
+</p>
+<h4 id=""></h4><p float="left">
+<img src="documentation/uploads/screenshots/home.jpg" width="270">
+<img src="documentation/uploads/screenshots/credits.jpg" width="270">
+</p>
+      </section>
+      
+        <section class="summary">
+            <h2>Libraries</h2>
+          <dl>
+            <dt id="dozer_controller">
+              <span class="name"><a href="dozer_controller/dozer_controller-library.html">dozer_controller</a></span> 
+            </dt>
+            <dd>
+              The controller library is responsible for the user interaction respectively
+the listeners for device sensors and buttons and for the time control with
+timers so the game entities are moved over time.
+The AppController is the main controller and the starting point within the
+app. The LevelController is the controller only used for controlling a
+specific level.
+            </dd>            <dt id="dozer_file">
+              <span class="name"><a href="dozer_file/dozer_file-library.html">dozer_file</a></span> 
+            </dt>
+            <dd>
+              The file library is used for loading json files and decoding them into a <a href="dozer_model/Level-class.html">Level</a>
+object. The scheme of the json files is described in the documentation.
+            </dd>            <dt id="dozer_model">
+              <span class="name"><a href="dozer_model/dozer_model-library.html">dozer_model</a></span> 
+            </dt>
+            <dd>
+              The model library describes the whole game concept. It is used for the game
+logic and it contains all the game entities as specific classes. Every level
+level consists of a <a href="dozer_model/Level-class.html">Level</a> instance with its corresponding game entities
+saved as instances of <a href="dozer_model/Entity-class.html">Entity</a>.
+            </dd>            <dt id="dozer_view">
+              <span class="name"><a href="dozer_view/dozer_view-library.html">dozer_view</a></span> 
+            </dt>
+            <dd>
+              The view library is only responsible for rendering the model. It manipulates
+the DOM-Tree.
+            </dd>          </dl>
+        </section>
+
+  </div> <!-- /.main-content -->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    dozergame 1.0.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

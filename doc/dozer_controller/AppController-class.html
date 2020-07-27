@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the AppController class from the dozer_controller library, for the Dart programming language.">
+  <title>AppController class - dozer_controller library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">dozergame</a></li>
+    <li><a href="dozer_controller/dozer_controller-library.html">dozer_controller</a></li>
+    <li class="self-crumb">AppController class</li>
+  </ol>
+  <div class="self-name">AppController</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>dozer_controller library</h5>
+    <ol>
+      <li class="section-title"><a href="dozer_controller/dozer_controller-library.html#classes">Classes</a></li>
+      <li><a href="dozer_controller/AppController-class.html">AppController</a></li>
+      <li><a href="dozer_controller/LevelController-class.html">LevelController</a></li>
+    
+    
+    
+    
+    
+    
+    
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <h1>AppController class </h1>
+
+    <section class="desc markdown">
+      <p>The <a href="dozer_controller/AppController-class.html">AppController</a> is the main controller of the app. It contains all the listeners
+for the buttons, can make the views switch and can call the load method of
+the <a href="dozer_controller/LevelController-class.html">LevelController</a> for starting a level.</p>
+    </section>
+    
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="AppController" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/AppController.html">AppController</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="gyroAvailable" class="property">
+          <span class="name"><a href="dozer_controller/AppController/gyroAvailable.html">gyroAvailable</a></span>
+          <span class="signature">&#8596; bool</span> 
+        </dt>
+        <dd>
+          Is the gyro sensor retrieval available
+          <div class="features">read / write</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="dozer_controller/AppController/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="dozer_controller/AppController/hashCode.html">[...]</a>
+          <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="dozer_controller/AppController/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span> 
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+          <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="getHighscore" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/getHighscore.html">getHighscore</a></span><span class="signature">(<wbr><span class="parameter" id="getHighscore-param-level"><span class="type-annotation">int</span> <span class="parameter-name">level</span></span>)
+            <span class="returntype parameter">&#8594; int</span>
+          </span>
+          </dt>
+        <dd>
+          Returns the level specific highscore.
+          
+</dd>
+        <dt id="getReachedLevel" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/getReachedLevel.html">getReachedLevel</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; int</span>
+          </span>
+          </dt>
+        <dd>
+          Returns the <code>_reachedLevel</code>
+          
+</dd>
+        <dt id="listenAllLevelButtons" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenAllLevelButtons.html">listenAllLevelButtons</a></span><span class="signature">(<wbr><span class="parameter" id="listenAllLevelButtons-param-reachedLevel"><span class="type-annotation">int</span> <span class="parameter-name">reachedLevel</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens for all the 'level buttons' click events,
+sets the new <code>_activeLevel</code> accordingly and shows the 'levelOverview'.
+          
+</dd>
+        <dt id="listenChooseLevelButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenChooseLevelButton.html">listenChooseLevelButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'choose level button' click events and shows the 'chooseLevelsView'
+          
+</dd>
+        <dt id="listenCreditsButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenCreditsButton.html">listenCreditsButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens for the 'credits button' click events and shows the credits view
+          
+</dd>
+        <dt id="listenDonateButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenDonateButton.html">listenDonateButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'donate button' click events and opens a new window
+directing to paypal
+          
+</dd>
+        <dt id="listenGoToMenuButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenGoToMenuButton.html">listenGoToMenuButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'Go To Menu Button' which directs the user to the main
+menu page 'Level Overview'
+          
+</dd>
+        <dt id="listenGoToMenuButtonAndRequestFullscreen" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenGoToMenuButtonAndRequestFullscreen.html">listenGoToMenuButtonAndRequestFullscreen</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'Go To Menu Button' which directs the user to the main page
+and requests the fullscreen on the mobile device.
+Will be called only if the 'messageWelcomeScreenOnMobile' was called before.
+          
+</dd>
+        <dt id="listenNextLevelButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenNextLevelButton.html">listenNextLevelButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'next level button' click events, increases the <code>_activeLevel</code>
+and redirects the user to the 'levelOverview' if the new level is available.
+          
+</dd>
+        <dt id="listenPreviousLevelButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenPreviousLevelButton.html">listenPreviousLevelButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'go to previous level button' click events and decreases the <code>_activeLevel</code>.
+This method will only be called when the 'messageNoSuchLevel' was shown.
+          
+</dd>
+        <dt id="listenStartLevelButton" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/listenStartLevelButton.html">listenStartLevelButton</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Listens to the 'start level button' click events and starts the next level
+according to <code>_activeLevel</code>
+          
+</dd>
+        <dt id="setActiveLevel" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/setActiveLevel.html">setActiveLevel</a></span><span class="signature">(<wbr><span class="parameter" id="setActiveLevel-param-activeLevel"><span class="type-annotation">int</span> <span class="parameter-name">activeLevel</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Sets the <code>_activeLevel</code> to the passed integer value. If this value is bigger
+than the <code>_reachedLevel</code> then the reached level will be increased accordingly.
+          
+</dd>
+        <dt id="setReachedLevel" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/setReachedLevel.html">setReachedLevel</a></span><span class="signature">(<wbr><span class="parameter" id="setReachedLevel-param-reachedLevel"><span class="type-annotation">int</span> <span class="parameter-name">reachedLevel</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Sets the <code>_reachedLevel</code> member variable and the according value in the
+local storage.
+          
+</dd>
+        <dt id="showChooseLevelsView" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showChooseLevelsView.html">showChooseLevelsView</a></span><span class="signature">(<wbr><span class="parameter" id="showChooseLevelsView-param-nrAvailableLevels"><span class="type-annotation">int</span> <span class="parameter-name">nrAvailableLevels</span>, </span> <span class="parameter" id="showChooseLevelsView-param-reachedLevel"><span class="type-annotation">int</span> <span class="parameter-name">reachedLevel</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'ChooseLevelsView' and activates the button click listener for
+<a href="dozer_controller/AppController/listenGoToMenuButton.html">listenGoToMenuButton</a>
+<a href="dozer_controller/AppController/listenAllLevelButtons.html">listenAllLevelButtons</a>
+          
+</dd>
+        <dt id="showCreditsView" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showCreditsView.html">showCreditsView</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'CreditsView' and activates the button click listener for
+<a href="dozer_controller/AppController/listenGoToMenuButton.html">listenGoToMenuButton</a>
+<a href="dozer_controller/AppController/listenDonateButton.html">listenDonateButton</a>
+          
+</dd>
+        <dt id="showLevelOverview" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showLevelOverview.html">showLevelOverview</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'levelOverview' and activates the button click listener for
+<a href="dozer_controller/AppController/listenStartLevelButton.html">listenStartLevelButton</a>
+<a href="dozer_controller/AppController/listenChooseLevelButton.html">listenChooseLevelButton</a>
+<a href="dozer_controller/AppController/listenCreditsButton.html">listenCreditsButton</a>
+          
+</dd>
+        <dt id="showMessageLoose" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showMessageLoose.html">showMessageLoose</a></span><span class="signature">(<wbr><span class="parameter" id="showMessageLoose-param-timeout"><span class="type-annotation">bool</span> <span class="parameter-name">timeout</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'MessageLoose' and activates the button click listener for
+<a href="dozer_controller/AppController/listenGoToMenuButton.html">listenGoToMenuButton</a>
+          
+</dd>
+        <dt id="showMessageNoSupportForGyro" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showMessageNoSupportForGyro.html">showMessageNoSupportForGyro</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'MessageNoSupportForGyro' on desktop devices and activates the
+button click listener for <a href="dozer_controller/AppController/listenGoToMenuButton.html">listenGoToMenuButton</a>
+          
+</dd>
+        <dt id="showMessageWin" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showMessageWin.html">showMessageWin</a></span><span class="signature">(<wbr><span class="parameter" id="showMessageWin-param-score"><span class="type-annotation">int</span> <span class="parameter-name">score</span>, </span> <span class="parameter" id="showMessageWin-param-newHighscore"><span class="type-annotation">bool</span> <span class="parameter-name">newHighscore</span>, </span> <span class="parameter" id="showMessageWin-param-tries"><span class="type-annotation">int</span> <span class="parameter-name">tries</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'MessageWin' and activates the button click listener for
+<a href="dozer_controller/AppController/listenNextLevelButton.html">listenNextLevelButton</a>
+          
+</dd>
+        <dt id="showNoSuchLevel" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showNoSuchLevel.html">showNoSuchLevel</a></span><span class="signature">(<wbr><span class="parameter" id="showNoSuchLevel-param-level"><span class="type-annotation">int</span> <span class="parameter-name">level</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'NoSuchLevelView' and activates the button click listener for
+<a href="dozer_controller/AppController/listenPreviousLevelButton.html">listenPreviousLevelButton</a>
+          
+</dd>
+        <dt id="showWelcomeScreenOnMobileDevices" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/showWelcomeScreenOnMobileDevices.html">showWelcomeScreenOnMobileDevices</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Shows the 'WelcomeScreenOnMobileDevices' and activates the button click
+listener for <a href="dozer_controller/AppController/listenGoToMenuButtonAndRequestFullscreen.html">listenGoToMenuButtonAndRequestFullscreen</a>
+          
+</dd>
+        <dt id="startNextLevel" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/startNextLevel.html">startNextLevel</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          Starts the <code>_activeLevel</code>
+          
+</dd>
+        <dt id="startup" class="callable">
+          <span class="name"><a href="dozer_controller/AppController/startup.html">startup</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          This method initialises the app at startup
+          
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="dozer_controller/AppController/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="dozer_controller/AppController/noSuchMethod.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="dozer_controller/AppController/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="dozer_controller/AppController/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          The equality operator. <a href="dozer_controller/AppController/operator_equals.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+    <section class="summary offset-anchor" id="constants">
+      <h2>Constants</h2>
+
+      <dl class="properties">
+        <dt id="framerate" class="constant">
+          <span class="name "><a href="dozer_controller/AppController/framerate-constant.html">framerate</a></span>
+          <span class="signature">&#8594; const int</span>
+          </dt>
+        <dd>
+          The Target Framerate of the application in hz
+          
+  <div>
+            <span class="signature"><code>40</code></span>
+          </div>
+        </dd>
+        <dt id="highscoreLevelKey" class="constant">
+          <span class="name "><a href="dozer_controller/AppController/highscoreLevelKey-constant.html">highscoreLevelKey</a></span>
+          <span class="signature">&#8594; const String</span>
+          </dt>
+        <dd>
+          The 'highscore for level x' key for the local storage.
+Using this key alone is not sufficient.
+You have to append a String with the level number.
+          
+  <div>
+            <span class="signature"><code>&quot;highscore_level_&quot;</code></span>
+          </div>
+        </dd>
+        <dt id="triesLevelKey" class="constant">
+          <span class="name "><a href="dozer_controller/AppController/triesLevelKey-constant.html">triesLevelKey</a></span>
+          <span class="signature">&#8594; const String</span>
+          </dt>
+        <dd>
+          The 'number of tries for level x' key for the local storage.
+Using this key alone is not sufficient.
+You have to append a String with the level number.
+          
+  <div>
+            <span class="signature"><code>&quot;tries_level_&quot;</code></span>
+          </div>
+        </dd>
+      </dl>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="dozer_controller/AppController-class.html#constructors">Constructors</a></li>
+      <li><a href="dozer_controller/AppController/AppController.html">AppController</a></li>
+    
+      <li class="section-title">
+        <a href="dozer_controller/AppController-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="dozer_controller/AppController/gyroAvailable.html">gyroAvailable</a></li>
+      <li class="inherited"><a href="dozer_controller/AppController/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="dozer_controller/AppController/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="dozer_controller/AppController-class.html#instance-methods">Methods</a></li>
+      <li><a href="dozer_controller/AppController/getHighscore.html">getHighscore</a></li>
+      <li><a href="dozer_controller/AppController/getReachedLevel.html">getReachedLevel</a></li>
+      <li><a href="dozer_controller/AppController/listenAllLevelButtons.html">listenAllLevelButtons</a></li>
+      <li><a href="dozer_controller/AppController/listenChooseLevelButton.html">listenChooseLevelButton</a></li>
+      <li><a href="dozer_controller/AppController/listenCreditsButton.html">listenCreditsButton</a></li>
+      <li><a href="dozer_controller/AppController/listenDonateButton.html">listenDonateButton</a></li>
+      <li><a href="dozer_controller/AppController/listenGoToMenuButton.html">listenGoToMenuButton</a></li>
+      <li><a href="dozer_controller/AppController/listenGoToMenuButtonAndRequestFullscreen.html">listenGoToMenuButtonAndRequestFullscreen</a></li>
+      <li><a href="dozer_controller/AppController/listenNextLevelButton.html">listenNextLevelButton</a></li>
+      <li><a href="dozer_controller/AppController/listenPreviousLevelButton.html">listenPreviousLevelButton</a></li>
+      <li><a href="dozer_controller/AppController/listenStartLevelButton.html">listenStartLevelButton</a></li>
+      <li><a href="dozer_controller/AppController/setActiveLevel.html">setActiveLevel</a></li>
+      <li><a href="dozer_controller/AppController/setReachedLevel.html">setReachedLevel</a></li>
+      <li><a href="dozer_controller/AppController/showChooseLevelsView.html">showChooseLevelsView</a></li>
+      <li><a href="dozer_controller/AppController/showCreditsView.html">showCreditsView</a></li>
+      <li><a href="dozer_controller/AppController/showLevelOverview.html">showLevelOverview</a></li>
+      <li><a href="dozer_controller/AppController/showMessageLoose.html">showMessageLoose</a></li>
+      <li><a href="dozer_controller/AppController/showMessageNoSupportForGyro.html">showMessageNoSupportForGyro</a></li>
+      <li><a href="dozer_controller/AppController/showMessageWin.html">showMessageWin</a></li>
+      <li><a href="dozer_controller/AppController/showNoSuchLevel.html">showNoSuchLevel</a></li>
+      <li><a href="dozer_controller/AppController/showWelcomeScreenOnMobileDevices.html">showWelcomeScreenOnMobileDevices</a></li>
+      <li><a href="dozer_controller/AppController/startNextLevel.html">startNextLevel</a></li>
+      <li><a href="dozer_controller/AppController/startup.html">startup</a></li>
+      <li class="inherited"><a href="dozer_controller/AppController/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="dozer_controller/AppController/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="dozer_controller/AppController-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="dozer_controller/AppController/operator_equals.html">operator ==</a></li>
+    
+    
+    
+      <li class="section-title"><a href="dozer_controller/AppController-class.html#constants">Constants</a></li>
+      <li><a href="dozer_controller/AppController/framerate-constant.html">framerate</a></li>
+      <li><a href="dozer_controller/AppController/highscoreLevelKey-constant.html">highscoreLevelKey</a></li>
+      <li><a href="dozer_controller/AppController/triesLevelKey-constant.html">triesLevelKey</a></li>
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    dozergame 1.0.0
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>
