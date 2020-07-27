@@ -77,7 +77,7 @@ class AppController {
   void listenGoToMenuButton() {
     querySelector("#button_to_menu").onClick.listen((MouseEvent e) {
       this.showLevelOverview();
-      this.gyroAvailable = context.callMethod("requestiOSGyro");
+      context.callMethod("requestiOSGyro");
     });
   }
 
@@ -93,7 +93,7 @@ class AppController {
       } catch (e) {
         print("You better use Chrome ;)");
       }
-      this.gyroAvailable = context.callMethod("requestiOSGyro");
+      context.callMethod("requestiOSGyro");
     });
   }
 
