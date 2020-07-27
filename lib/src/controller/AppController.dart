@@ -56,6 +56,8 @@ class AppController {
     // screen variants.
     this.showMessageNoSupportForGyro();
 
+    context.callMethod("requestiOSGyro");
+
     // Check gyro sensor support and show first screen
     window.onDeviceOrientation.first.then((e) {
       this.gyroAvailable = e.gamma != null ? true : false;
