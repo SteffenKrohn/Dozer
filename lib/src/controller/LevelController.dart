@@ -54,8 +54,13 @@ class LevelController {
 
   /// Starts the loaded level
   void _start() {
+    // check if gyro is available
+    bool gyroAvailable = false;
+    window.onDeviceOrientation.first.then((e) {
+      gyroAvailable = e.gamma != null;
+    }
     // Enable the appropriate control
-    if (this._appController.gyroAvailable) {
+    if (gyroAvailable) {
       this._enableOrientationControl();
     } else {
       this._enableKeyboardControl();
