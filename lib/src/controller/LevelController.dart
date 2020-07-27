@@ -58,7 +58,7 @@ class LevelController {
     bool gyroAvailable = false;
     window.onDeviceOrientation.first.then((e) {
       gyroAvailable = e.gamma != null;
-    }
+    });
     // Enable the appropriate control
     if (gyroAvailable) {
       this._enableOrientationControl();
